@@ -18,7 +18,7 @@ img, video {
 max-width: 100%;
 height: auto;
 }
-/* Penyesuaian layout grid PC/Laptop agar konsisten dengan struktur asli */
+/* Penyesuaian layout grid PC/Laptop agar konsisten */
 @media (min-width: 1024px) {
 .app-layout-wrapper {
 max-width: 1280px !important;
@@ -116,31 +116,31 @@ z-index: 40;
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
 <img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain">
 </div>
-<span class="text-xs">Registrasi</span>
+<span class="text-xs">Beranda & Layanan</span>
+</a>
+<a href="#" onclick="switchTab('edukasi', event)" id="nav-edukasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
+<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
+</div>
+<span class="text-xs">Informasi & Edukasi</span>
+</a>
+<a href="#" onclick="switchTab('kategori', event)" id="nav-kategori" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
+<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+<img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-full h-full object-contain">
+</div>
+<span class="text-xs">Kategori Obat & Program</span>
 </a>
 <a href="#" onclick="switchTab('maps', event)" id="nav-maps" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
 <img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain">
 </div>
-<span class="text-xs">Maps</span>
+<span class="text-xs">Maps Lokasi</span>
 </a>
 <a href="#" onclick="switchTab('tamu', event)" id="nav-tamu" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
 <img src="https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png" class="w-full h-full object-contain">
 </div>
-<span class="text-xs">Tamu</span>
-</a>
-<a href="#" onclick="switchTab('panduan', event)" id="nav-panduan" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
-<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
-</div>
-<span class="text-xs">Panduan</span>
-</a>
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
-<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png" class="w-full h-full object-contain">
-</div>
-<span class="text-xs">Survei</span>
+<span class="text-xs">Status Tamu & PDF</span>
 </a>
 </nav>
 </div>
@@ -150,7 +150,7 @@ z-index: 40;
 <div class="pc-main-content w-full">
 <main class="main-container lg:max-w-none space-y-4 pt-1 pb-3">
 
-<!-- ================= PAGE 1: INDEX (BERANDA / KONTEN) ================= -->
+<!-- ================= PAGE 1: INDEX (BERANDA & MENU) ================= -->
 <div id="page-index" class="page-content space-y-4">
 <!-- Header Khusus Desktop -->
 <div class="pc-header-desktop hidden bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-3">
@@ -164,18 +164,18 @@ z-index: 40;
 </div>
 
 <!-- Banner Utama -->
-<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-2">
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 text-center space-y-2">
 <div class="w-20 h-20 mx-auto flex items-center justify-center">
 <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="w-full h-full object-contain">
 </div>
 <div>
 <h2 class="text-sm font-extrabold text-blue-900 uppercase">Selamat Datang di UPTD Farmasi</h2>
-<p class="text-[11px] text-gray-500 mt-0.5 leading-relaxed">Silakan pilih menu layanan di bawah untuk registrasi, konsultasi, atau memantau status kunjungan Anda.</p>
+<p class="text-[11px] text-gray-500 mt-0.5 leading-relaxed">Pusat pengelolaan perbekalan kesehatan, distribusi obat, vaksin, serta layanan informasi terpadu untuk fasilitas pelayanan kesehatan di Kota Tangerang Selatan.</p>
 </div>
 </div>
 
 <!-- Menu Utama Grid -->
-<div class="grid grid-cols-2 gap-3">
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
 <!-- Registrasi -->
 <a href="#" onclick="switchTab('registrasi', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
@@ -184,6 +184,28 @@ z-index: 40;
 <div>
 <h3 class="font-bold text-xs text-blue-900">Registrasi</h3>
 <p class="text-[10px] text-gray-500">Form Kunjungan</p>
+</div>
+</a>
+
+<!-- Informasi & Edukasi (BARU) -->
+<a href="#" onclick="switchTab('edukasi', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-14 h-14 flex items-center justify-center">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
+</div>
+<div>
+<h3 class="font-bold text-xs text-blue-900">Info & Edukasi</h3>
+<p class="text-[10px] text-gray-500">Profil & Prosedur</p>
+</div>
+</a>
+
+<!-- Kategori Obat & Program (BARU) -->
+<a href="#" onclick="switchTab('kategori', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-14 h-14 flex items-center justify-center">
+<img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-full h-full object-contain">
+</div>
+<div>
+<h3 class="font-bold text-xs text-blue-900">Kategori Obat</h3>
+<p class="text-[10px] text-gray-500">Program & Logistik</p>
 </div>
 </a>
 
@@ -219,28 +241,6 @@ z-index: 40;
 <p class="text-[10px] text-gray-500">Pengaduan via WA</p>
 </div>
 </a>
-
-<!-- Maps / Lokasi -->
-<a href="#" onclick="switchTab('maps', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-14 h-14 flex items-center justify-center">
-<img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain">
-</div>
-<div>
-<h3 class="font-bold text-xs text-blue-900">Maps Lokasi</h3>
-<p class="text-[10px] text-gray-500">Panduan Rute GPS</p>
-</div>
-</a>
-
-<!-- Panduan -->
-<a href="#" onclick="switchTab('panduan', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-14 h-14 flex items-center justify-center">
-<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
-</div>
-<div>
-<h3 class="font-bold text-xs text-blue-900">Panduan</h3>
-<p class="text-[10px] text-gray-500">Cara Penggunaan</p>
-</div>
-</a>
 </div>
 
 <!-- Banner Survei Kepuasan -->
@@ -254,6 +254,133 @@ z-index: 40;
 <p class="text-[10px] text-emerald-700 mt-0.5">Berikan penilaian & masukan untuk peningkatan pelayanan UPTD Farmasi Tangsel.</p>
 </div>
 </a>
+</div>
+</div>
+
+<!-- ================= PAGE: INFORMASI & EDUKASI (BARU) ================= -->
+<div id="page-edukasi" class="page-content space-y-4 hidden-custom">
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-1">
+<h2 class="text-sm font-extrabold text-blue-900">ℹ️ Informasi & Edukasi Layanan Farmasi</h2>
+<p class="text-[11px] text-gray-500">Profil singkat, regulasi, dan tata cara pengelolaan logistik obat di UPTD Farmasi.</p>
+</div>
+
+<!-- Kartu Informasi 1: Tentang UPTD Farmasi -->
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-2">
+<h3 class="font-extrabold text-xs text-blue-900 border-b pb-1.5 flex items-center gap-2">
+<span>🏢</span> Sekilas Profil UPTD Farmasi Tangsel
+</h3>
+<p class="text-[11px] text-gray-700 leading-relaxed">
+UPTD Farmasi Kota Tangerang Selatan merupakan unit pelaksana teknis di bawah Dinas Kesehatan yang bertugas melaksanakan pengelolaan perbekalan kesehatan meliputi perencanaan, penerimaan, penyimpanan, pemeliharaan, pendistribusian obat, vaksin, bahan medis habis pakai (BMHP), serta reagensia ke Puskesmas dan jejaring fasilitas pelayanan kesehatan di wilayah Kota Tangerang Selatan.
+</p>
+</div>
+
+<!-- Kartu Informasi 2: Prosedur Pengambilan Logistik -->
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-2">
+<h3 class="font-extrabold text-xs text-blue-900 border-b pb-1.5 flex items-center gap-2">
+<span>📋</span> Alur & Prosedur Permintaan Obat
+</h3>
+<ul class="list-disc list-inside text-[11px] text-gray-700 space-y-1.5 leading-relaxed pl-1">
+<li><b>Penyusunan LPLPO:</b> Puskesmas menyusun Laporan Pemakaian dan Lembar Permintaan Obat (LPLPO) setiap bulan.</li>
+<li><b>Registrasi Kunjungan:</b> Petugas Puskesmas melakukan registrasi kunjungan secara digital melalui aplikasi ini saat tiba di lokasi.</li>
+<li><b>Verifikasi & Penyiapan:</b> Tim Penanggung Jawab Program di UPTD Farmasi memverifikasi dokumen dan menyiapkan barang.</li>
+<li><b>Serah Terima & Cetak Bukti:</b> Barang diserahterimakan disertai cetak dokumen bukti pengambilan sah bertandatangan.</li>
+</ul>
+</div>
+
+<!-- Kartu Informasi 3: Edukasi Penyimpanan Obat (Cara CDOB) -->
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-2">
+<h3 class="font-extrabold text-xs text-blue-900 border-b pb-1.5 flex items-center gap-2">
+<span>💊</span> Edukasi Pengelolaan & Penyimpanan Obat (CDOB)
+</h3>
+<p class="text-[11px] text-gray-700 leading-relaxed">
+Penerapan Cara Distribusi Obat yang Baik (CDOB) sangat penting untuk menjamin mutu obat tetap terjaga hingga ke tangan pasien:
+</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+<div class="bg-blue-50 p-2.5 rounded-xl border border-blue-100 text-[11px]">
+<p class="font-bold text-blue-900">Suhu Penyimpanan</p>
+<p class="text-gray-600 mt-0.5">Vaksin wajib disimpan pada suhu khusus (cold chain 2°C s.d 8°C), sementara obat umum pada suhu kamar terkontrol (15°C - 25°C).</p>
+</div>
+<div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-100 text-[11px]">
+<p class="font-bold text-emerald-900">Prinsip FEFO & FIFO</p>
+<p class="text-gray-600 mt-0.5">Barang dengan tanggal kedaluwarsa lebih cepat wajib dikeluarkan terlebih dahulu (First Expired First Out).</p>
+</div>
+</div>
+</div>
+
+<div class="flex justify-end pt-2">
+<button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
+← Kembali ke Beranda
+</button>
+</div>
+</div>
+
+<!-- ================= PAGE: KATEGORI OBAT & PROGRAM (BARU) ================= -->
+<div id="page-kategori" class="page-content space-y-4 hidden-custom">
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-1">
+<h2 class="text-sm font-extrabold text-blue-900">📦 Kategori Obat & Program Pelayanan</h2>
+<p class="text-[11px] text-gray-500">Daftar kategori logistik perbekalan kesehatan dan program kesehatan yang dikelola.</p>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<!-- Kategori A -->
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-blue-100 text-blue-900 font-extrabold text-xs flex items-center justify-center">A</span>
+<h3 class="font-extrabold text-xs text-blue-900 uppercase">Obat PKD (Pelayanan Kesehatan Dasar)</h3>
+</div>
+<p class="text-[11px] text-gray-600 leading-relaxed">Pengelolaan obat esensial untuk pelayanan rawat jalan di Puskesmas dan Pustu (seperti antibiotik dasar, analgesik, antipiretik, vitamin, dan obat kronis rujukan ringan).</p>
+</div>
+
+<!-- Kategori B -->
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-blue-100 text-blue-900 font-extrabold text-xs flex items-center justify-center">B</span>
+<h3 class="font-extrabold text-xs text-blue-900 uppercase">Vaksin Program</h3>
+</div>
+<p class="text-[11px] text-gray-600 leading-relaxed">Penyediaan dan distribusi rantai dingin (cold chain) untuk vaksin imunisasi wajib anak, balita, ibu hamil, serta vaksin program nasional lainnya secara ketat.</p>
+</div>
+
+<!-- Kategori C -->
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-blue-100 text-blue-900 font-extrabold text-xs flex items-center justify-center">C</span>
+<h3 class="font-extrabold text-xs text-blue-900 uppercase">Reagen Laboratorium</h3>
+</div>
+<p class="text-[11px] text-gray-600 leading-relaxed">Logistik bahan kimia pengujian laboratorium kesehatan puskesmas, termasuk reagen tes darah, urine, kimia klinik, dan alat pendukung diagnostik.</p>
+</div>
+
+<!-- Kategori D -->
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-blue-100 text-blue-900 font-extrabold text-xs flex items-center justify-center">D</span>
+<h3 class="font-extrabold text-xs text-blue-900 uppercase">TB dan Kusta</h3>
+</div>
+<p class="text-[11px] text-gray-600 leading-relaxed">Pengelolaan obat program khusus penanggulangan Tuberkulosis (OAT kategori dewasa & anak) serta obat kusta untuk memastikan kepatuhan pengobatan tuntas.</p>
+</div>
+
+<!-- Kategori E -->
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-blue-100 text-blue-900 font-extrabold text-xs flex items-center justify-center">E</span>
+<h3 class="font-extrabold text-xs text-blue-900 uppercase">HIV dan PKG</h3>
+</div>
+<p class="text-[11px] text-gray-600 leading-relaxed">Distribusi obat ARV (Antiretroviral) dan logistik penunjang program pencegahan serta penanggulangan HIV/AIDS di fasilitas kesehatan rujukan.</p>
+</div>
+
+<!-- Kategori F -->
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-blue-100 text-blue-900 font-extrabold text-xs flex items-center justify-center">F</span>
+<h3 class="font-extrabold text-xs text-blue-900 uppercase">DBD dan Malaria</h3>
+</div>
+<p class="text-[11px] text-gray-600 leading-relaxed">Penyediaan larvasida (abate), insektisida pengendali vektor, serta penunjang penanganan kasus demam berdarah dan malaria di wilayah Tangsel.</p>
+</div>
+</div>
+
+<div class="flex justify-end pt-2">
+<button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
+← Kembali ke Beranda
+</button>
 </div>
 </div>
 
@@ -300,7 +427,7 @@ Kirim Registrasi Kunjungan
 
 <div class="flex justify-end pt-2">
 <button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
-← Kembali ke Menu Utama
+← Kembali ke Beranda
 </button>
 </div>
 </div>
@@ -318,57 +445,7 @@ Kirim Registrasi Kunjungan
 
 <div class="flex justify-end pt-2">
 <button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
-← Kembali ke Menu Utama
-</button>
-</div>
-</div>
-
-<!-- ================= PAGE 4: PANDUAN ================= -->
-<div id="page-panduan" class="page-content space-y-4 hidden-custom">
-<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-1">
-<h2 class="text-sm font-extrabold text-blue-900">📖 Panduan & Tutorial Layanan</h2>
-<p class="text-[11px] text-gray-500 leading-relaxed">Pelajari langkah-langkah mudah menggunakan sistem layanan digital UPTD Farmasi Tangsel.</p>
-</div>
-
-<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-2">
-<div class="flex items-center gap-2.5 border-b pb-2">
-<div class="w-7 h-7 rounded-full bg-blue-100 text-blue-900 flex items-center justify-center font-extrabold text-xs">1</div>
-<h3 class="font-extrabold text-xs text-blue-900 uppercase">Cara Melakukan Registrasi & Validasi GPS</h3>
-</div>
-<ol class="list-decimal list-inside text-[11px] text-gray-700 space-y-1.5 leading-relaxed pl-1">
-<li>Buka halaman utama atau menu <b>Registrasi</b> saat Anda berada di area UPTD Farmasi.</li>
-<li>Isi formulir data diri dengan lengkap, meliputi: <b>Nama Lengkap / Tamu</b>, <b>Instansi / Asal Puskesmas</b>, dan nomor kontak.</li>
-<li>Sistem akan secara otomatis mendeteksi posisi koordinat GPS perangkat Anda (radius maksimal 100 meter). Pastikan izin akses lokasi aktif.</li>
-<li>Lampirkan dokumen/surat pendukung dengan ukuran maksimal <b>700 KB</b>.</li>
-<li>Klik tombol kirim untuk mendapatkan nomor antrian secara real-time.</li>
-</ol>
-</div>
-
-<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-2">
-<div class="flex items-center gap-2.5 border-b pb-2">
-<div class="w-7 h-7 rounded-full bg-blue-100 text-blue-900 flex items-center justify-center font-extrabold text-xs">2</div>
-<h3 class="font-extrabold text-xs text-blue-900 uppercase">Cek Status, Rincian Obat & Download Bukti PDF</h3>
-</div>
-<ul class="list-disc list-inside text-[11px] text-gray-700 space-y-1.5 leading-relaxed pl-1">
-<li>Masuk ke menu <b>Tamu</b> untuk memantau status pelayanan (<i>Menunggu</i>, <i>Diproses</i>, atau <i>Selesai</i>).</li>
-<li>Admin akan mengisi rincian obat serta memantau koordinat GPS kunjungan Anda.</li>
-<li>Jika status sudah <b>Selesai</b>, klik tombol <b>Download PDF 📥</b> untuk mengunduh tanda terima resmi Pemkot Tangsel.</li>
-</ul>
-</div>
-
-<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-2 border-l-4 border-l-amber-500">
-<div class="flex items-center gap-2.5 border-b pb-2">
-<div class="w-7 h-7 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-extrabold text-xs">⚠️</div>
-<h3 class="font-extrabold text-xs text-amber-900 uppercase">Wajib Mengisi Survei Kepuasan Pelanggan</h3>
-</div>
-<p class="text-[11px] text-gray-700 leading-relaxed">
-Setiap selesai mendapatkan layanan, pengunjung <b>diwajibkan</b> mengisi formulir <b>Survei Kepuasan</b> melalui menu survei yang tersedia.
-</p>
-</div>
-
-<div class="flex justify-end pt-2">
-<button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
-← Kembali ke Menu Utama
+← Kembali ke Beranda
 </button>
 </div>
 </div>
@@ -380,7 +457,7 @@ Setiap selesai mendapatkan layanan, pengunjung <b>diwajibkan</b> mengisi formuli
 <h2 class="text-sm font-extrabold text-blue-900">Membuka Navigasi Rute...</h2>
 <p class="text-xs text-gray-600">Anda sedang diarahkan ke rute perjalanan Google Maps menuju UPTD Farmasi Tangsel.</p>
 <div class="pt-2">
-<button onclick="switchTab('index', event)" class="text-xs font-bold text-blue-900 underline">← Batal / Kembali ke Menu Utama</button>
+<button onclick="switchTab('index', event)" class="text-xs font-bold text-blue-900 underline">← Batal / Kembali ke Beranda</button>
 </div>
 </div>
 </div>
@@ -473,30 +550,36 @@ Memuat data registrasi dari database...
 
 <!-- Bottom Navigation Bar (Hanya tampil di Mobile/HP) -->
 <div class="bottom-nav-wrapper">
-<nav class="bg-[#e3ede6] border border-emerald-200 shadow-lg py-2.5 px-6 flex justify-around items-center rounded-t-2xl">
+<nav class="bg-[#e3ede6] border border-emerald-200 shadow-lg py-2.5 px-4 flex justify-around items-center rounded-t-2xl">
 <a href="#" onclick="switchTab('index', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
 <div class="w-7 h-7 flex items-center justify-center overflow-visible">
 <img src="https://i.ibb.co.com/k2H9XQMH/Picsart-26-07-29-23-12-02-981.png" class="w-20 h-20 max-w-none object-contain scale-[1.35]">
 </div>
-<span class="text-[10px] mt-2 font-extrabold tracking-tight text-center">Registrasi</span>
+<span class="text-[9px] mt-2 font-extrabold tracking-tight text-center">Beranda</span>
+</a>
+<a href="#" onclick="switchTab('edukasi', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
+<div class="w-7 h-7 flex items-center justify-center overflow-visible">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-20 h-20 max-w-none object-contain scale-[1.35]">
+</div>
+<span class="text-[9px] mt-2 font-bold tracking-tight text-center">Edukasi</span>
+</a>
+<a href="#" onclick="switchTab('kategori', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
+<div class="w-7 h-7 flex items-center justify-center overflow-visible">
+<img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-20 h-20 max-w-none object-contain scale-[1.35]">
+</div>
+<span class="text-[9px] mt-2 font-bold tracking-tight text-center">Kategori</span>
 </a>
 <a href="#" onclick="switchTab('maps', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
 <div class="w-7 h-7 flex items-center justify-center overflow-visible">
 <img src="https://i.ibb.co.com/4RhdPmBn/Picsart-26-07-30-01-18-55-191.png" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
 </div>
-<span class="text-[10px] mt-2 font-bold tracking-tight text-center">Maps</span>
-</a>
-<a href="#" onclick="switchTab('tamu', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
-<div class="w-7 h-7 flex items-center justify-center overflow-visible">
-<img src="https://i.ibb.co.com/KcX3dhTq/Picsart-26-07-30-01-19-44-361.png" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
-</div>
-<span class="text-[10px] mt-2 font-bold tracking-tight text-center">Tamu</span>
+<span class="text-[9px] mt-2 font-bold tracking-tight text-center">Maps</span>
 </a>
 <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
 <div class="w-7 h-7 flex items-center justify-center overflow-visible">
 <img src="https://i.ibb.co.com/WpFvvtry/Picsart-26-07-29-23-12-41-517.png" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
 </div>
-<span class="text-[10px] mt-2 font-bold tracking-tight text-center">Survei</span>
+<span class="text-[9px] mt-2 font-bold tracking-tight text-center">Survei</span>
 </a>
 </nav>
 </div>
@@ -546,14 +629,17 @@ if(mTitle && mSub) {
 if(tabName === 'index') {
 mTitle.innerText = "UPTD FARMASI KOTA TANGERANG SELATAN";
 mSub.innerText = "Sistem Layanan Digital Terpadu";
+} else if(tabName === 'edukasi') {
+mTitle.innerText = "INFORMASI & EDUKASI";
+mSub.innerText = "UPTD Farmasi Tangsel";
+} else if(tabName === 'kategori') {
+mTitle.innerText = "KATEGORI OBAT & PROGRAM";
+mSub.innerText = "UPTD Farmasi Tangsel";
 } else if(tabName === 'registrasi') {
 mTitle.innerText = "REGISTRASI KUNJUNGAN";
 mSub.innerText = "UPTD Farmasi Tangsel";
 } else if(tabName === 'profil') {
 mTitle.innerText = "PROFIL PEGAWAI";
-mSub.innerText = "UPTD Farmasi Tangsel";
-} else if(tabName === 'panduan') {
-mTitle.innerText = "PANDUAN APLIKASI";
 mSub.innerText = "UPTD Farmasi Tangsel";
 } else if(tabName === 'tamu') {
 mTitle.innerText = "STATUS & BUKTI TAMU";
@@ -590,7 +676,7 @@ isWithinRadius = true;
 statusBox.className = "bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-[11px] text-emerald-900 font-bold";
 statusBox.innerText = `✅ Lokasi Valid! Anda berada dalam radius kantor (${Math.round(userDistance)} meter dari UPTD Farmasi).`;
 } else {
-isWithinRadius = true; // Tetap diizinkan agar tidak menghalangi jika GPS meleset sedikit, namun diberi peringatan
+isWithinRadius = true;
 statusBox.className = "bg-amber-50 border border-amber-200 p-3 rounded-xl text-[11px] text-amber-900 font-bold";
 statusBox.innerText = `⚠️ Perhatian: Jarak Anda sekitar ${Math.round(userDistance)} meter dari UPTD Farmasi (di luar radius standar 100m).`;
 }
@@ -598,7 +684,7 @@ statusBox.innerText = `⚠️ Perhatian: Jarak Anda sekitar ${Math.round(userDis
 },
 (error) => {
 console.warn("Gagal mendapatkan GPS:", error.message);
-isWithinRadius = true; // Bypass jika izin GPS ditolak agar user tetap bisa submit
+isWithinRadius = true;
 if(statusBox) {
 statusBox.className = "bg-blue-50 border border-blue-200 p-3 rounded-xl text-[11px] text-blue-900";
 statusBox.innerText = "ℹ️ Akses GPS dilewati atau tidak diaktifkan. Anda tetap dapat melanjutkan registrasi.";
@@ -619,7 +705,6 @@ const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 return R * c;
 }
 
-// Jalankan deteksi GPS saat halaman dimuat
 initGPS();
 
 // --- FORM SUBMIT REGISTRASI KE FIRESTORE ---
@@ -956,4 +1041,3 @@ btn.innerHTML = `<span>Kirim Konsultasi & Keluhan via WhatsApp</span> <span>→<
 </script>
 </body>
 </html>
-
