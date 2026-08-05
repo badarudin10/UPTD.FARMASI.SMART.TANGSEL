@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+<script src="https://cdn.tailwindcss.com"></script>
 <!-- Library html2pdf untuk cetak bukti PDF -->
-<script src="[https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js](https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js)"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 .hidden-custom { opacity: 0; visibility: hidden; pointer-events: none; display: none !important; }
 .visible-custom { opacity: 1; visibility: visible; pointer-events: auto; display: block !important; }
-​body {
+body {
 overflow-x: hidden;
 width: 100%;
 position: relative;
 }
-​img, video {
+img, video {
 max-width: 100%;
 height: auto;
 }
-​/* Penyesuaian layout grid PC/Laptop agar konsisten dengan struktur asli */
+/* Penyesuaian layout grid PC/Laptop agar konsisten dengan struktur asli */
 @media (min-width: 1024px) {
 .app-layout-wrapper {
 max-width: 1280px !important;
@@ -48,7 +48,7 @@ display: block !important;
 display: none !important;
 }
 }
-​@media (max-width: 1023px) {
+@media (max-width: 1023px) {
 .pc-sidebar {
 display: none !important;
 }
@@ -82,22 +82,25 @@ z-index: 40;
 <title>UPTD Farmasi - Kota Tangerang Selatan</title>
 </head>
 <body class="bg-[#e3ede6] font-sans min-h-screen pb-24 lg:pb-6">
-​<!-- Header Atas (Hanya tampil di Mobile/HP) -->
+
+<!-- Header Atas (Hanya tampil di Mobile/HP) -->
 <header class="mobile-header-bar bg-[#e3ede6] px-4 py-3.5 shadow-sm sticky top-0 z-30 border-b border-emerald-200">
 <div class="max-w-md mx-auto text-center">
 <h1 id="mobileHeaderTitle" class="font-extrabold text-blue-900 text-xs tracking-wider leading-tight uppercase">UPTD FARMASI KOTA TANGERANG SELATAN</h1>
 <p id="mobileHeaderSub" class="text-[9px] text-gray-600 font-semibold uppercase tracking-widest mt-0.5">Sistem Layanan Digital Terpadu</p>
 </div>
 </header>
-​<!-- KONTROL UTAMA LAYOUT RESPONSIF -->
+
+<!-- KONTROL UTAMA LAYOUT RESPONSIF -->
 <div class="app-layout-wrapper">
-​<!-- SIDEBAR KIRI KHUSUS PC -->
+
+<!-- SIDEBAR KIRI KHUSUS PC -->
 <aside class="pc-sidebar space-y-4">
 <!-- Kartu Profil Pegawai -->
 <a href="#" onclick="switchTab('profil', event)" class="block bg-white p-4 rounded-2xl shadow-sm border border-gray-100 relative hover:border-blue-300 transition text-center">
 <div class="flex flex-col items-center gap-2">
 <div class="h-28 w-28 flex items-center justify-center flex-shrink-0 bg-transparent">
-<img src="[https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png](https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png)" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png" class="w-full h-full object-contain">
 </div>
 <div>
 <h2 class="text-xs font-extrabold text-gray-800">Profil Pegawai</h2>
@@ -105,123 +108,133 @@ z-index: 40;
 </div>
 </div>
 </a>
-​<!-- Menu Navigasi Samping -->
+
+<!-- Menu Navigasi Samping -->
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
 <nav class="space-y-1.5">
 <a href="#" onclick="switchTab('index', event)" id="nav-index" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="[https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png](https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png)" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain">
 </div>
 <span class="text-xs">Registrasi</span>
 </a>
 <a href="#" onclick="switchTab('maps', event)" id="nav-maps" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="[https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png](https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png)" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain">
 </div>
 <span class="text-xs">Maps</span>
 </a>
 <a href="#" onclick="switchTab('tamu', event)" id="nav-tamu" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="[https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png](https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png)" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png" class="w-full h-full object-contain">
 </div>
 <span class="text-xs">Tamu</span>
 </a>
 <a href="#" onclick="switchTab('panduan', event)" id="nav-panduan" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="[https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png](https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png)" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
 </div>
 <span class="text-xs">Panduan</span>
 </a>
-<a href="[https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform](https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform)" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="[https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png](https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png)" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png" class="w-full h-full object-contain">
 </div>
 <span class="text-xs">Survei</span>
 </a>
 </nav>
 </div>
 </aside>
-​<!-- KONTEN UTAMA YANG BERGANTI-GANTI HALAMAN (SPA) -->
+
+<!-- KONTEN UTAMA YANG BERGANTI-GANTI HALAMAN (SPA) -->
 <div class="pc-main-content w-full">
 <main class="main-container lg:max-w-none space-y-4 pt-1 pb-3">
-​<!-- ================= PAGE 1: INDEX (BERANDA / KONTEN) ================= -->
+
+<!-- ================= PAGE 1: INDEX (BERANDA / KONTEN) ================= -->
 <div id="page-index" class="page-content space-y-4">
 <!-- Header Khusus Desktop -->
 <div class="pc-header-desktop hidden bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-3">
 <div class="flex items-center gap-3">
-<img src="[https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png](https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png)" alt="Logo" class="h-12 w-12 object-contain">
+<img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo" class="h-12 w-12 object-contain">
 <div>
 <h1 class="font-extrabold text-blue-900 text-base tracking-wide leading-tight">UPTD FARMASI KOTA TANGERANG SELATAN</h1>
 <p class="text-xs text-gray-600 font-semibold uppercase tracking-wider">Sistem Layanan Digital Terpadu</p>
 </div>
 </div>
 </div>
-​<!-- Banner Utama -->
+
+<!-- Banner Utama -->
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-2">
 <div class="w-20 h-20 mx-auto flex items-center justify-center">
-<img src="[https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png](https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png)" alt="Logo Tangsel" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="w-full h-full object-contain">
 </div>
 <div>
 <h2 class="text-sm font-extrabold text-blue-900 uppercase">Selamat Datang di UPTD Farmasi</h2>
 <p class="text-[11px] text-gray-500 mt-0.5 leading-relaxed">Silakan pilih menu layanan di bawah untuk registrasi, konsultasi, atau memantau status kunjungan Anda.</p>
 </div>
 </div>
-​<!-- Menu Utama Grid -->
+
+<!-- Menu Utama Grid -->
 <div class="grid grid-cols-2 gap-3">
 <!-- Registrasi -->
 <a href="#" onclick="switchTab('registrasi', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="[https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png](https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png)" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Registrasi</h3>
 <p class="text-[10px] text-gray-500">Form Kunjungan</p>
 </div>
 </a>
-​<!-- Status Tamu -->
+
+<!-- Status Tamu -->
 <a href="#" onclick="switchTab('tamu', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="[https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png](https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png)" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png" class="w-full h-full object-contain">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Status Tamu</h3>
 <p class="text-[10px] text-gray-500">Cek & Unduh PDF</p>
 </div>
 </a>
-​<!-- Profil Pegawai -->
+
+<!-- Profil Pegawai -->
 <a href="#" onclick="switchTab('profil', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="[https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png](https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png)" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png" class="w-full h-full object-contain">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Profil Pegawai</h3>
 <p class="text-[10px] text-gray-500">Daftar PJ Program</p>
 </div>
 </a>
-​<!-- Konsultasi & Pengaduan -->
+
+<!-- Konsultasi & Pengaduan -->
 <a href="#" onclick="switchTab('konsultasi', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="[https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png](https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png)" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-full h-full object-contain">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Konsultasi</h3>
 <p class="text-[10px] text-gray-500">Pengaduan via WA</p>
 </div>
 </a>
-​<!-- Maps / Lokasi -->
+
+<!-- Maps / Lokasi -->
 <a href="#" onclick="switchTab('maps', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="[https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png](https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png)" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Maps Lokasi</h3>
 <p class="text-[10px] text-gray-500">Panduan Rute GPS</p>
 </div>
 </a>
-​<!-- Panduan -->
+
+<!-- Panduan -->
 <a href="#" onclick="switchTab('panduan', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="[https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png](https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png)" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Panduan</h3>
@@ -229,11 +242,12 @@ z-index: 40;
 </div>
 </a>
 </div>
-​<!-- Banner Survei Kepuasan -->
+
+<!-- Banner Survei Kepuasan -->
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
-<a href="[https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform](https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform)" target="_blank" class="flex items-center gap-4 bg-emerald-50 hover:bg-emerald-100 p-3.5 rounded-xl border border-emerald-200 transition">
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-4 bg-emerald-50 hover:bg-emerald-100 p-3.5 rounded-xl border border-emerald-200 transition">
 <div class="w-12 h-12 flex items-center justify-center flex-shrink-0">
-<img src="[https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png](https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png)" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png" class="w-full h-full object-contain">
 </div>
 <div>
 <h3 class="font-extrabold text-xs text-emerald-900">Survei Kepuasan Pelanggan</h3>
@@ -242,13 +256,15 @@ z-index: 40;
 </a>
 </div>
 </div>
-​<!-- ================= PAGE 2: REGISTRASI ================= -->
+
+<!-- ================= PAGE 2: REGISTRASI ================= -->
 <div id="page-registrasi" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-1">
 <h2 class="text-sm font-extrabold text-blue-900">📝 Formulir Registrasi Kunjungan</h2>
 <p class="text-[11px] text-gray-500">Silakan lengkapi data kunjungan Anda. Sistem akan memvalidasi posisi GPS.</p>
 </div>
-​<div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
+
+<div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
 <form id="formRegistrasi" class="space-y-3">
 <div>
 <label class="block text-xs font-extrabold text-gray-700 mb-1">Nama Lengkap / Tamu</label>
@@ -270,43 +286,51 @@ z-index: 40;
 <label class="block text-xs font-extrabold text-gray-700 mb-1">Lampirkan Surat / Dokumen Pendukung (Maks. 700 KB)</label>
 <input type="file" id="regFile" accept=".pdf,image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
 </div>
-​<!-- Informasi Status GPS -->
+
+<!-- Informasi Status GPS -->
 <div id="gpsStatusBox" class="bg-blue-50 border border-blue-200 p-3 rounded-xl text-[11px] text-blue-900">
 📍 Mendeteksi posisi koordinat GPS perangkat Anda...
 </div>
-​<button type="submit" id="btnSubmitReg" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-extrabold py-2.5 rounded-xl text-xs transition shadow-md">
+
+<button type="submit" id="btnSubmitReg" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-extrabold py-2.5 rounded-xl text-xs transition shadow-md">
 Kirim Registrasi Kunjungan
 </button>
 </form>
 </div>
-​<div class="flex justify-end pt-2">
+
+<div class="flex justify-end pt-2">
 <button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
 ← Kembali ke Menu Utama
 </button>
 </div>
 </div>
-​<!-- ================= PAGE 3: PROFIL PEGAWAI ================= -->
+
+<!-- ================= PAGE 3: PROFIL PEGAWAI ================= -->
 <div id="page-profil" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
 <h1 class="text-2xl font-bold text-blue-900">PROFIL PEGAWAI UPTD FARMASI</h1>
 <p class="text-xs text-gray-500 mt-1">Daftar Pegawai & Penanggung Jawab Program</p>
 </div>
-​<div id="containerProfilPegawai" class="space-y-4">
+
+<div id="containerProfilPegawai" class="space-y-4">
 <div class="bg-white p-6 rounded-2xl shadow-lg text-center text-gray-500 border-2 border-blue-400">Memuat data pegawai...</div>
 </div>
-​<div class="flex justify-end pt-2">
+
+<div class="flex justify-end pt-2">
 <button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
 ← Kembali ke Menu Utama
 </button>
 </div>
 </div>
-​<!-- ================= PAGE 4: PANDUAN ================= -->
+
+<!-- ================= PAGE 4: PANDUAN ================= -->
 <div id="page-panduan" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-1">
 <h2 class="text-sm font-extrabold text-blue-900">📖 Panduan & Tutorial Layanan</h2>
 <p class="text-[11px] text-gray-500 leading-relaxed">Pelajari langkah-langkah mudah menggunakan sistem layanan digital UPTD Farmasi Tangsel.</p>
 </div>
-​<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-2">
+
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-2">
 <div class="flex items-center gap-2.5 border-b pb-2">
 <div class="w-7 h-7 rounded-full bg-blue-100 text-blue-900 flex items-center justify-center font-extrabold text-xs">1</div>
 <h3 class="font-extrabold text-xs text-blue-900 uppercase">Cara Melakukan Registrasi & Validasi GPS</h3>
@@ -319,7 +343,8 @@ Kirim Registrasi Kunjungan
 <li>Klik tombol kirim untuk mendapatkan nomor antrian secara real-time.</li>
 </ol>
 </div>
-​<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-2">
+
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-2">
 <div class="flex items-center gap-2.5 border-b pb-2">
 <div class="w-7 h-7 rounded-full bg-blue-100 text-blue-900 flex items-center justify-center font-extrabold text-xs">2</div>
 <h3 class="font-extrabold text-xs text-blue-900 uppercase">Cek Status, Rincian Obat & Download Bukti PDF</h3>
@@ -330,7 +355,8 @@ Kirim Registrasi Kunjungan
 <li>Jika status sudah <b>Selesai</b>, klik tombol <b>Download PDF 📥</b> untuk mengunduh tanda terima resmi Pemkot Tangsel.</li>
 </ul>
 </div>
-​<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-2 border-l-4 border-l-amber-500">
+
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-2 border-l-4 border-l-amber-500">
 <div class="flex items-center gap-2.5 border-b pb-2">
 <div class="w-7 h-7 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-extrabold text-xs">⚠️</div>
 <h3 class="font-extrabold text-xs text-amber-900 uppercase">Wajib Mengisi Survei Kepuasan Pelanggan</h3>
@@ -339,13 +365,15 @@ Kirim Registrasi Kunjungan
 Setiap selesai mendapatkan layanan, pengunjung <b>diwajibkan</b> mengisi formulir <b>Survei Kepuasan</b> melalui menu survei yang tersedia.
 </p>
 </div>
-​<div class="flex justify-end pt-2">
+
+<div class="flex justify-end pt-2">
 <button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
 ← Kembali ke Menu Utama
 </button>
 </div>
 </div>
-​<!-- ================= PAGE 5: MAPS ================= -->
+
+<!-- ================= PAGE 5: MAPS ================= -->
 <div id="page-maps" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-6 rounded-2xl shadow-sm text-center max-w-sm mx-auto space-y-4">
 <div class="text-3xl">📍</div>
@@ -356,35 +384,40 @@ Setiap selesai mendapatkan layanan, pengunjung <b>diwajibkan</b> mengisi formuli
 </div>
 </div>
 </div>
-​<!-- ================= PAGE 6: TAMU ================= -->
+
+<!-- ================= PAGE 6: TAMU ================= -->
 <div id="page-tamu" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-4 rounded-2xl shadow-sm border-2 border-blue-400 text-center space-y-1 mb-5">
 <h2 class="text-sm font-extrabold text-blue-900">Daftar Tamu & Pengambilan Obat</h2>
 <p class="text-[11px] text-gray-500 leading-relaxed">Cek status registrasi Anda secara real-time dan download bukti PDF pengambilan obat.</p>
 </div>
-​<div id="containerTamu" class="space-y-3">
+
+<div id="containerTamu" class="space-y-3">
 <div class="bg-white p-6 rounded-2xl shadow-sm border-2 border-blue-400 text-center text-xs text-gray-400">
 Memuat data registrasi dari database...
 </div>
 </div>
-​<div class="flex justify-end pt-2">
+
+<div class="flex justify-end pt-2">
 <button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
 ← Kembali
 </button>
 </div>
 </div>
-​<!-- ================= PAGE 7: KONSULTASI ================= -->
+
+<!-- ================= PAGE 7: KONSULTASI ================= -->
 <div id="page-konsultasi" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-4 rounded-2xl shadow-sm border-2 border-blue-400 flex items-center gap-4">
 <div class="w-24 h-24 flex items-center justify-center flex-shrink-0 bg-blue-50 rounded-2xl p-2 border border-blue-400 overflow-hidden">
-<img src="[https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png](https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png)" class="w-full h-full object-contain transform scale-[2.0]">
+<img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-full h-full object-contain transform scale-[2.0]">
 </div>
 <div>
 <h2 class="text-sm font-extrabold text-blue-900 uppercase">Layanan Konsultasi & Pengaduan</h2>
 <p class="text-[11px] text-gray-600 mt-0.5">Sampaikan pertanyaan teknis, kendala layanan, atau masukan Anda. Data tercatat di sistem dan otomatis terkirim via WhatsApp penanggung jawab.</p>
 </div>
 </div>
-​<div class="bg-white p-5 rounded-2xl shadow-sm border-2 border-blue-400">
+
+<div class="bg-white p-5 rounded-2xl shadow-sm border-2 border-blue-400">
 <form id="formKonsultasi" class="space-y-3">
 <div>
 <label class="block text-xs font-extrabold text-gray-700 mb-1">Nama Lengkap</label>
@@ -416,83 +449,97 @@ Memuat data registrasi dari database...
 <label class="block text-xs font-extrabold text-gray-700 mb-1">Isi Konsultasi / Keluhan</label>
 <textarea id="isiKonsultasi" rows="4" required placeholder="Tuliskan detail pertanyaan atau keluhan Anda..." class="w-full px-3 py-2 text-xs border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></textarea>
 </div>
-​<button type="submit" id="btnKirimKonsul" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-extrabold py-2.5 rounded-xl text-xs transition shadow-md flex items-center justify-center gap-2">
+
+<button type="submit" id="btnKirimKonsul" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-extrabold py-2.5 rounded-xl text-xs transition shadow-md flex items-center justify-center gap-2">
 <span>Kirim Konsultasi & Keluhan via WhatsApp</span>
 <span>→</span>
 </button>
 </form>
 </div>
-​<div class="flex justify-end">
+
+<div class="flex justify-end">
 <button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-extrabold px-5 py-2.5 rounded-xl text-xs transition shadow-md inline-flex items-center justify-center gap-2">
 <span>← Kembali</span>
 </button>
 </div>
 </div>
-​</main>
+
+</main>
 </div>
 </div>
-​<!-- Area Tersembunyi untuk Format Cetak PDF Bukti Pengambilan Obat -->
+
+<!-- Area Tersembunyi untuk Format Cetak PDF Bukti Pengambilan Obat -->
 <div id="areaCetakPdf" style="display: none;"></div>
-​<!-- Bottom Navigation Bar (Hanya tampil di Mobile/HP) -->
+
+<!-- Bottom Navigation Bar (Hanya tampil di Mobile/HP) -->
 <div class="bottom-nav-wrapper">
 <nav class="bg-[#e3ede6] border border-emerald-200 shadow-lg py-2.5 px-6 flex justify-around items-center rounded-t-2xl">
 <a href="#" onclick="switchTab('index', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
 <div class="w-7 h-7 flex items-center justify-center overflow-visible">
-<img src="[https://i.ibb.co.com/k2H9XQMH/Picsart-26-07-29-23-12-02-981.png](https://i.ibb.co.com/k2H9XQMH/Picsart-26-07-29-23-12-02-981.png)" class="w-20 h-20 max-w-none object-contain scale-[1.35]">
+<img src="https://i.ibb.co.com/k2H9XQMH/Picsart-26-07-29-23-12-02-981.png" class="w-20 h-20 max-w-none object-contain scale-[1.35]">
 </div>
 <span class="text-[10px] mt-2 font-extrabold tracking-tight text-center">Registrasi</span>
 </a>
 <a href="#" onclick="switchTab('maps', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
 <div class="w-7 h-7 flex items-center justify-center overflow-visible">
-<img src="[https://i.ibb.co.com/4RhdPmBn/Picsart-26-07-30-01-18-55-191.png](https://i.ibb.co.com/4RhdPmBn/Picsart-26-07-30-01-18-55-191.png)" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
+<img src="https://i.ibb.co.com/4RhdPmBn/Picsart-26-07-30-01-18-55-191.png" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
 </div>
 <span class="text-[10px] mt-2 font-bold tracking-tight text-center">Maps</span>
 </a>
 <a href="#" onclick="switchTab('tamu', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
 <div class="w-7 h-7 flex items-center justify-center overflow-visible">
-<img src="[https://i.ibb.co.com/KcX3dhTq/Picsart-26-07-30-01-19-44-361.png](https://i.ibb.co.com/KcX3dhTq/Picsart-26-07-30-01-19-44-361.png)" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
+<img src="https://i.ibb.co.com/KcX3dhTq/Picsart-26-07-30-01-19-44-361.png" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
 </div>
 <span class="text-[10px] mt-2 font-bold tracking-tight text-center">Tamu</span>
 </a>
-<a href="[https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform](https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform)" target="_blank" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
 <div class="w-7 h-7 flex items-center justify-center overflow-visible">
-<img src="[https://i.ibb.co.com/WpFvvtry/Picsart-26-07-29-23-12-41-517.png](https://i.ibb.co.com/WpFvvtry/Picsart-26-07-29-23-12-41-517.png)" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
+<img src="https://i.ibb.co.com/WpFvvtry/Picsart-26-07-29-23-12-41-517.png" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
 </div>
 <span class="text-[10px] mt-2 font-bold tracking-tight text-center">Survei</span>
 </a>
 </nav>
 </div>
-​<!-- FIREBASE & LOGIKA APLIKASI -->
+
+<!-- FIREBASE & LOGIKA APLIKASI -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-​const firebaseConfig = { apiKey: "AIzaSyA6B5MysWIMi4weR3Wgo3HuaIl-aaZpChw", authDomain: "digital-books-d22c9.firebaseapp.com", projectId: "digital-books-d22c9", storageBucket: "digital-books-d22c9.firebasestorage.app", messagingSenderId: "905407530155", appId: "1:905407530155:web:dd90e18d4158ce42fae3ee", measurementId: "G-LL7GF2RMF8" };
+
+const firebaseConfig = { apiKey: "AIzaSyA6B5MysWIMi4weR3Wgo3HuaIl-aaZpChw", authDomain: "digital-books-d22c9.firebaseapp.com", projectId: "digital-books-d22c9", storageBucket: "digital-books-d22c9.firebasestorage.app", messagingSenderId: "905407530155", appId: "1:905407530155:web:dd90e18d4158ce42fae3ee", measurementId: "G-LL7GF2RMF8" };
 const db = getFirestore(initializeApp(firebaseConfig));
-​// Koordinat UPTD Farmasi Tangsel & Batas Radius (100 Meter)
+
+// Koordinat UPTD Farmasi Tangsel & Batas Radius (100 Meter)
 const OFFICE_LAT = -6.292850;
 const OFFICE_LNG = 106.671500;
 const MAX_RADIUS = 100; // meter
-​let userLat = null;
+
+let userLat = null;
 let userLng = null;
 let userDistance = null;
 let isWithinRadius = false;
-​// Fungsi Navigasi Antar Tab (SPA Switcher)
+
+// Fungsi Navigasi Antar Tab (SPA Switcher)
 window.switchTab = function(tabName, event) {
 if(event) event.preventDefault();
-​// Sembunyikan semua page
+
+// Sembunyikan semua page
 document.querySelectorAll('.page-content').forEach(el => {
 el.classList.add('hidden-custom');
 });
-​// Tampilkan page tujuan
-const targetPage = document.getElementById(page-${tabName});
+
+// Tampilkan page tujuan
+const targetPage = document.getElementById(`page-${tabName}`);
 if(targetPage) {
 targetPage.classList.remove('hidden-custom');
 }
-​// Khusus tab maps, langsung arahkan ke link Google Maps
+
+// Khusus tab maps, langsung arahkan ke link Google Maps
 if(tabName === 'maps') {
 window.open("https://maps.app.goo.gl/1jmY2uEya56V83uA9?g_st=ac", "_blank");
 }
-​// Update Header Mobile
+
+// Update Header Mobile
 const mTitle = document.getElementById('mobileHeaderTitle');
 const mSub = document.getElementById('mobileHeaderSub');
 if(mTitle && mSub) {
@@ -516,9 +563,11 @@ mTitle.innerText = "KONSULTASI & PENGADUAN";
 mSub.innerText = "UPTD Farmasi Tangsel";
 }
 }
-​window.scrollTo({ top: 0, behavior: 'smooth' });
+
+window.scrollTo({ top: 0, behavior: 'smooth' });
 };
-​// --- GEOLOKASI GPS UNTUK REGISTRASI ---
+
+// --- GEOLOKASI GPS UNTUK REGISTRASI ---
 function initGPS() {
 const statusBox = document.getElementById('gpsStatusBox');
 if (!navigator.geolocation) {
@@ -528,20 +577,22 @@ statusBox.innerText = "❌ Geolokasi tidak didukung oleh browser Anda.";
 }
 return;
 }
-​navigator.geolocation.getCurrentPosition(
+
+navigator.geolocation.getCurrentPosition(
 (position) => {
 userLat = position.coords.latitude;
 userLng = position.coords.longitude;
 userDistance = calculateDistance(userLat, userLng, OFFICE_LAT, OFFICE_LNG);
-​if(statusBox) {
+
+if(statusBox) {
 if (userDistance <= MAX_RADIUS) {
 isWithinRadius = true;
 statusBox.className = "bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-[11px] text-emerald-900 font-bold";
-statusBox.innerText = ✅ Lokasi Valid! Anda berada dalam radius kantor (${Math.round(userDistance)} meter dari UPTD Farmasi).;
+statusBox.innerText = `✅ Lokasi Valid! Anda berada dalam radius kantor (${Math.round(userDistance)} meter dari UPTD Farmasi).`;
 } else {
 isWithinRadius = true; // Tetap diizinkan agar tidak menghalangi jika GPS meleset sedikit, namun diberi peringatan
 statusBox.className = "bg-amber-50 border border-amber-200 p-3 rounded-xl text-[11px] text-amber-900 font-bold";
-statusBox.innerText = ⚠️ Perhatian: Jarak Anda sekitar ${Math.round(userDistance)} meter dari UPTD Farmasi (di luar radius standar 100m).;
+statusBox.innerText = `⚠️ Perhatian: Jarak Anda sekitar ${Math.round(userDistance)} meter dari UPTD Farmasi (di luar radius standar 100m).`;
 }
 }
 },
@@ -556,7 +607,8 @@ statusBox.innerText = "ℹ️ Akses GPS dilewati atau tidak diaktifkan. Anda tet
 { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
 );
 }
-​function calculateDistance(lat1, lon1, lat2, lon2) {
+
+function calculateDistance(lat1, lon1, lat2, lon2) {
 const R = 6371e3; // meter
 const dLat = (lat2 - lat1) * Math.PI / 180;
 const dLon = (lon2 - lon1) * Math.PI / 180;
@@ -566,9 +618,11 @@ Math.sin(dLon/2) * Math.sin(dLon/2);
 const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 return R * c;
 }
-​// Jalankan deteksi GPS saat halaman dimuat
+
+// Jalankan deteksi GPS saat halaman dimuat
 initGPS();
-​// --- FORM SUBMIT REGISTRASI KE FIRESTORE ---
+
+// --- FORM SUBMIT REGISTRASI KE FIRESTORE ---
 const formReg = document.getElementById('formRegistrasi');
 if(formReg) {
 formReg.addEventListener('submit', async (e) => {
@@ -576,12 +630,14 @@ e.preventDefault();
 const btn = document.getElementById('btnSubmitReg');
 btn.disabled = true;
 btn.innerText = "Mengirim Registrasi...";
-​const nama = document.getElementById('regNama').value;
+
+const nama = document.getElementById('regNama').value;
 const instansi = document.getElementById('regInstansi').value;
 const keperluan = document.getElementById('regKeperluan').value;
 const kontak = document.getElementById('regKontak').value;
 const fileInput = document.getElementById('regFile');
-​let fileUrlVal = "";
+
+let fileUrlVal = "";
 if (fileInput.files && fileInput.files[0]) {
 const file = fileInput.files[0];
 if (file.size > 700 * 1024) {
@@ -592,7 +648,8 @@ return;
 }
 fileUrlVal = await toBase64(file);
 }
-​try {
+
+try {
 const antrianNo = "ANT-" + Math.floor(100 + Math.random() * 900);
 await addDoc(collection(db, "tamu"), {
 nama: nama,
@@ -607,7 +664,8 @@ lat: userLat || 0,
 lng: userLng || 0,
 jarak: userDistance ? Math.round(userDistance) : 0
 });
-​alert(Registrasi berhasil dikirim!\nNomor Antrian Anda: ${antrianNo});
+
+alert(`Registrasi berhasil dikirim!\nNomor Antrian Anda: ${antrianNo}`);
 formReg.reset();
 switchTab('tamu');
 } catch (err) {
@@ -619,7 +677,8 @@ btn.innerText = "Kirim Registrasi Kunjungan";
 }
 });
 }
-​function toBase64(file) {
+
+function toBase64(file) {
 return new Promise((resolve, reject) => {
 const reader = new FileReader();
 reader.readAsDataURL(file);
@@ -627,33 +686,41 @@ reader.onload = () => resolve(reader.result);
 reader.onerror = error => reject(error);
 });
 }
-​// --- REAL-TIME FIRESTORE LISTENER UNTUK PROFIL PEGAWAI ---
+
+// --- REAL-TIME FIRESTORE LISTENER UNTUK PROFIL PEGAWAI ---
 onSnapshot(query(collection(db, "pegawai"), orderBy("waktuInput", "desc")), (snap) => {
 const container = document.getElementById("containerProfilPegawai");
 if(!container) return;
 container.innerHTML = "";
-​if (snap.empty) {
-container.innerHTML = <div class="bg-white p-6 rounded-2xl shadow-lg text-center text-gray-500 border-2 border-blue-400">Belum ada data pegawai yang ditambahkan oleh admin.</div>;
+
+if (snap.empty) {
+container.innerHTML = `<div class="bg-white p-6 rounded-2xl shadow-lg text-center text-gray-500 border-2 border-blue-400">Belum ada data pegawai yang ditambahkan oleh admin.</div>`;
 return;
 }
-​snap.forEach(d => {
+
+snap.forEach(d => {
 const item = d.data();
 const fotoUrl = item.url ? item.url : "https://via.placeholder.com/150?text=No+Photo";
-​container.innerHTML += <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col md:flex-row items-center gap-6 border-2 border-blue-400"> <div class="w-32 h-32 md:w-36 md:h-36 shrink-0 rounded-2xl overflow-hidden border-2 border-blue-900 shadow-md bg-gray-100"> <img src="${fotoUrl}" alt="Foto Pegawai" class="w-full h-full object-cover"> </div> <div class="flex-1 w-full text-center md:text-left space-y-2"> <div> <h3 class="font-bold text-xl text-blue-900">${item.nama}</h3> <p class="text-sm text-gray-600 font-semibold">${item.jabatan}</p> </div> <div class="border-t pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 bg-gray-50 p-3 rounded-xl"> <p><b>Golongan:</b> ${item.golongan || '-'}</p> <p><b>PJ Program:</b> ${item.pj || '-'}</p> </div> </div> </div>;
+
+container.innerHTML += `<div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col md:flex-row items-center gap-6 border-2 border-blue-400"> <div class="w-32 h-32 md:w-36 md:h-36 shrink-0 rounded-2xl overflow-hidden border-2 border-blue-900 shadow-md bg-gray-100"> <img src="${fotoUrl}" alt="Foto Pegawai" class="w-full h-full object-cover"> </div> <div class="flex-1 w-full text-center md:text-left space-y-2"> <div> <h3 class="font-bold text-xl text-blue-900">${item.nama}</h3> <p class="text-sm text-gray-600 font-semibold">${item.jabatan}</p> </div> <div class="border-t pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 bg-gray-50 p-3 rounded-xl"> <p><b>Golongan:</b> ${item.golongan || '-'}</p> <p><b>PJ Program:</b> ${item.pj || '-'}</p> </div> </div> </div>`;
 });
 });
-​// --- REAL-TIME FIRESTORE LISTENER UNTUK TAB TAMU & PDF ---
+
+// --- REAL-TIME FIRESTORE LISTENER UNTUK TAB TAMU & PDF ---
 onSnapshot(query(collection(db, "tamu"), orderBy("waktu", "desc")), (snapshot) => {
 const container = document.getElementById("containerTamu");
 if(!container) return;
 container.innerHTML = "";
-​if (snapshot.empty) {
-container.innerHTML = <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center text-xs text-gray-400"> Belum ada riwayat registrasi yang tercatat di sistem. </div>;
+
+if (snapshot.empty) {
+container.innerHTML = `<div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center text-xs text-gray-400"> Belum ada riwayat registrasi yang tercatat di sistem. </div>`;
 return;
 }
-​snapshot.forEach((docSnap) => {
+
+snapshot.forEach((docSnap) => {
 const item = docSnap.data();
-​let waktuStr = '-';
+
+let waktuStr = '-';
 if (item.waktu) {
 if (typeof item.waktu.toDate === 'function') {
 waktuStr = item.waktu.toDate().toLocaleString('id-ID');
@@ -663,11 +730,13 @@ waktuStr = item.waktu;
 } else if (item.tanggal || item.createdAt) {
 waktuStr = item.tanggal || item.createdAt;
 }
-​let durasi = "-";
+
+let durasi = "-";
 if (item.status === 'selesai' && item.waktuSelesai && item.waktuProses) {
 durasi = Math.round((item.waktuSelesai.toDate() - item.waktuProses.toDate()) / 60000) + " Menit";
 }
-​let statusColor = "bg-amber-50 text-amber-800 border-amber-200";
+
+let statusColor = "bg-amber-50 text-amber-800 border-amber-200";
 let statusText = item.status || item.statusPelayanan || "Selesai";
 const statusLower = String(statusText).toLowerCase();
 if (statusLower.includes("proses")) {
@@ -675,14 +744,17 @@ statusColor = "bg-blue-50 text-blue-800 border-blue-200";
 } else if (statusLower.includes("selesai")) {
 statusColor = "bg-emerald-50 text-emerald-800 border-emerald-200";
 }
-​let itemsObatArr = [];
+
+let itemsObatArr = [];
 if (Array.isArray(item.itemsObat) && item.itemsObat.length > 0) {
 itemsObatArr = item.itemsObat;
 }
-​const obatTerima = item.obatDiterima || item.daftarObat || item.obat || item.keteranganObat || '-';
+
+const obatTerima = item.obatDiterima || item.daftarObat || item.obat || item.keteranganObat || '-';
 const namaPetugasVal = item.petugas || item.namaPetugas || item.petugasProgram || '-';
 const fileLink = item.suratUrl || item.fileUrl || item.fileLampiran || '';
-​const normalizedData = {
+
+const normalizedData = {
 nama: item.nama || item.namaTamu || item.namaLengkap || 'Tanpa Nama',
 instansi: item.instansi || item.asal || item.instansiAsal || '-',
 keperluan: item.keperluan || item.tujuan || '-',
@@ -695,56 +767,50 @@ itemsObat: itemsObatArr,
 nomorAntrian: item.nomorAntrian || item.noAntrian || '',
 fileUrl: fileLink
 };
-​const card = document.createElement("div");
+
+const card = document.createElement("div");
 card.className = "bg-white p-4 rounded-2xl shadow-sm border border-blue-400 space-y-3";
-​let bagianObatHtml = '';
+
+let bagianObatHtml = '';
 if (normalizedData.itemsObat.length > 0) {
 let rowsHtml = '';
 normalizedData.itemsObat.forEach((ob, idx) => {
-rowsHtml += <tr class="border-b text-[10px]"> <td class="border p-1 text-center">${idx + 1}</td> <td class="border p-1 font-bold">${ob.nama || '-'}</td> <td class="border p-1 text-center">${ob.tahun || '-'}</td> <td class="border p-1 text-center">${ob.satuan || '-'}</td> <td class="border p-1 text-center">${ob.volume || '-'}</td> <td class="border p-1 text-center">${ob.ed || '-'}</td> <td class="border p-1 text-center font-mono">${ob.batch || '-'}</td> </tr>;
+rowsHtml += `<tr class="border-b text-[10px]"> <td class="border p-1 text-center">${idx + 1}</td> <td class="border p-1 font-bold">${ob.nama || '-'}</td> <td class="border p-1 text-center">${ob.tahun || '-'}</td> <td class="border p-1 text-center">${ob.satuan || '-'}</td> <td class="border p-1 text-center">${ob.volume || '-'}</td> <td class="border p-1 text-center">${ob.ed || '-'}</td> <td class="border p-1 text-center font-mono">${ob.batch || '-'}</td> </tr>`;
 });
-bagianObatHtml = <div class="border-t pt-2 space-y-1.5"> <p class="text-[10px] text-blue-900 font-bold">Tabel Rincian Obat / Barang:</p> <div class="overflow-x-auto"> <table class="w-full text-left border-collapse text-[10px] bg-white"> <thead> <tr class="bg-gray-100 text-center font-bold text-[9px] uppercase"> <th class="border p-1 w-6">No</th> <th class="border p-1">Nama Barang</th> <th class="border p-1 w-12">Tahun</th> <th class="border p-1 w-12">Satuan</th> <th class="border p-1 w-10">Vol</th> <th class="border p-1 w-12">Ed</th> <th class="border p-1 w-16">No Batch</th> </tr> </thead> <tbody> ${rowsHtml} </tbody> </table> </div> </div>;
+bagianObatHtml = `<div class="border-t pt-2 space-y-1.5"> <p class="text-[10px] text-blue-900 font-bold">Tabel Rincian Obat / Barang:</p> <div class="overflow-x-auto"> <table class="w-full text-left border-collapse text-[10px] bg-white"> <thead> <tr class="bg-gray-100 text-center font-bold text-[9px] uppercase"> <th class="border p-1 w-6">No</th> <th class="border p-1">Nama Barang</th> <th class="border p-1 w-12">Tahun</th> <th class="border p-1 w-12">Satuan</th> <th class="border p-1 w-10">Vol</th> <th class="border p-1 w-12">Ed</th> <th class="border p-1 w-16">No Batch</th> </tr> </thead> <tbody> ${rowsHtml} </tbody> </table> </div> </div>`;
 } else {
-bagianObatHtml = <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-100 text-[10px] space-y-1"> <p class="text-blue-900 font-bold">Obat yang Diterima:</p> <p class="text-gray-700 whitespace-pre-line">${normalizedData.obatTerimaFormatted}</p> </div>;
+bagianObatHtml = `<div class="bg-gray-50 p-2.5 rounded-xl border border-gray-100 text-[10px] space-y-1"> <p class="text-blue-900 font-bold">Obat yang Diterima:</p> <p class="text-gray-700 whitespace-pre-line">${normalizedData.obatTerimaFormatted}</p> </div>`;
 }
-​let fileLampiranHtml = '';
+
+let fileLampiranHtml = '';
 if (fileLink && fileLink.length > 0) {
-fileLampiranHtml = <div class="pt-1"> <a href="${fileLink}" download="Surat_Permintaan_${normalizedData.nama}" target="_blank" class="inline-block bg-blue-100 text-blue-800 px-2.5 py-1 rounded text-[10px] font-bold hover:bg-blue-200 transition">📥 Lihat/Unduh File Lampiran</a> </div>;
+fileLampiranHtml = `<div class="pt-1"> <a href="${fileLink}" download="Surat_Permintaan_${normalizedData.nama}" target="_blank" class="inline-block bg-blue-100 text-blue-800 px-2.5 py-1 rounded text-[10px] font-bold hover:bg-blue-200 transition">📥 Lihat/Unduh File Lampiran</a> </div>`;
 }
-​card.innerHTML = <div class="flex justify-between items-start gap-2"> <div class="space-y-0.5"> <h3 class="font-extrabold text-xs text-blue-900">${normalizedData.nama}</h3> <p class="text-[10px] text-gray-600"><b>Instansi:</b> ${normalizedData.instansi}</p> <p class="text-[10px] text-gray-600"><b>Keperluan:</b> ${normalizedData.keperluan}</p> <p class="text-[10px] text-gray-600"><b>Petugas:</b> ${normalizedData.petugas}</p> <p class="text-[10px] text-gray-600"><b>Durasi:</b> ${normalizedData.durasi}</p> ${normalizedData.nomorAntrian ?<p class="text-[10px] text-blue-700 font-bold">No. Antrian: ${normalizedData.nomorAntrian}</p>` : ''}
-</div>
-<span class="px-2.5 py-1 rounded-full text-[10px] font-bold border shrink-0 ${statusColor}">
-${normalizedData.status}
-</span>
-</div>
-​${fileLampiranHtml}
-${bagianObatHtml}
-​<div class="border-t pt-2 flex justify-between items-center text-[10px] text-gray-500">
-<span><b>Waktu:</b> ${normalizedData.waktuFormatted}</span>
-<button onclick='downloadPdf(${JSON.stringify(normalizedData)})' class="bg-blue-900 hover:bg-blue-800 text-white px-3 py-1.5 rounded-xl font-bold transition shadow-sm inline-flex items-center gap-1">
-Download PDF 📥
-</button>
-</div>
-`;
+
+card.innerHTML = `<div class="flex justify-between items-start gap-2"> <div class="space-y-0.5"> <h3 class="font-extrabold text-xs text-blue-900">${normalizedData.nama}</h3> <p class="text-[10px] text-gray-600"><b>Instansi:</b> ${normalizedData.instansi}</p> <p class="text-[10px] text-gray-600"><b>Keperluan:</b> ${normalizedData.keperluan}</p> <p class="text-[10px] text-gray-600"><b>Petugas:</b> ${normalizedData.petugas}</p> <p class="text-[10px] text-gray-600"><b>Durasi:</b> ${normalizedData.durasi}</p> ${normalizedData.nomorAntrian ? `<p class="text-[10px] text-blue-700 font-bold">No. Antrian: ${normalizedData.nomorAntrian}</p>` : ''} </div> <span class="px-2.5 py-1 rounded-full text-[10px] font-bold border shrink-0 ${statusColor}"> ${normalizedData.status} </span> </div> ${fileLampiranHtml} ${bagianObatHtml} <div class="border-t pt-2 flex justify-between items-center text-[10px] text-gray-500"> <span><b>Waktu:</b> ${normalizedData.waktuFormatted}</span> <button onclick='downloadPdf(${JSON.stringify(normalizedData)})' class="bg-blue-900 hover:bg-blue-800 text-white px-3 py-1.5 rounded-xl font-bold transition shadow-sm inline-flex items-center gap-1"> Download PDF 📥 </button> </div>`;
 container.appendChild(card);
 });
 });
-​window.downloadPdf = (data) => {
+
+window.downloadPdf = (data) => {
 const areaCetak = document.getElementById("areaCetakPdf");
 areaCetak.style.display = "block";
-​const items = (data.itemsObat && data.itemsObat.length > 0) ? data.itemsObat : [];
-​let rowsHtml = '';
+
+const items = (data.itemsObat && data.itemsObat.length > 0) ? data.itemsObat : [];
+
+let rowsHtml = '';
 if (items.length > 0) {
-rowsHtml = items.map((item, i) => <tr> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; height: 18px;">${i + 1}</td> <td style="border: 1px solid #000; padding: 5px; font-size: 9px; font-weight: bold;">${item.nama || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.tahun || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.satuan || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.volume || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.ed || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; font-family: monospace;">${item.batch || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;"></td> </tr>).join('');
+rowsHtml = items.map((item, i) => `<tr> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; height: 18px;">${i + 1}</td> <td style="border: 1px solid #000; padding: 5px; font-size: 9px; font-weight: bold;">${item.nama || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.tahun || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.satuan || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.volume || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.ed || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; font-family: monospace;">${item.batch || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;"></td> </tr>`).join('');
 } else {
-rowsHtml = <tr> <td style="border: 1px solid #000; text-align: center; padding: 6px; font-size: 9px;">1</td> <td style="border: 1px solid #000; padding: 6px; font-size: 9px; text-align: center; font-style: italic;" colspan="7">Belum ada rincian barang/obat yang dimasukkan.</td> </tr>;
+rowsHtml = `<tr> <td style="border: 1px solid #000; text-align: center; padding: 6px; font-size: 9px;">1</td> <td style="border: 1px solid #000; padding: 6px; font-size: 9px; text-align: center; font-style: italic;" colspan="7">Belum ada rincian barang/obat yang dimasukkan.</td> </tr>`;
 }
-​areaCetak.innerHTML = `
+
+areaCetak.innerHTML = `
 <div style="padding: 15px 20px; font-family: Arial, sans-serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
 <table style="width: 100%; border-collapse: collapse; border-bottom: 3.5px double #000; padding-bottom: 8px; margin-bottom: 12px;">
 <tr>
 <td style="width: 85px; vertical-align: middle; text-align: left; padding-left: 5px;">
-<img src="[https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png](https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png)" style="width: 72px; height: auto;" crossorigin="anonymous">
+<img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 72px; height: auto;" crossorigin="anonymous">
 </td>
 <td style="text-align: center; vertical-align: middle; padding-right: 35px;">
 <h2 style="font-size: 13.5px; margin: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
@@ -755,44 +821,47 @@ rowsHtml = <tr> <td style="border: 1px solid #000; text-align: center; padding: 
 </td>
 </tr>
 </table>
-​<div style="text-align: center; margin-bottom: 12px;">
+
+<div style="text-align: center; margin-bottom: 12px;">
 <div style="font-size: 11.5px; font-weight: bold; text-decoration: underline; display: inline-block; padding-bottom: 1px;">BUKTI PENGAMBILAN OBAT/PELAYANAN</div>
 </div>
-​<table style="width: 100%; font-size: 9.5px; margin-bottom: 12px; border-collapse: collapse;">
+
+<table style="width: 100%; font-size: 9.5px; margin-bottom: 12px; border-collapse: collapse;">
 <tr>
 <td style="width: 120px; font-weight: bold;">Nama</td>
 <td style="width: 10px;">:</td>
-<td style="font-weight: bold; text-transform: uppercase;">{data.nama || '-'}</td>
+<td style="font-weight: bold; text-transform: uppercase;">${data.nama || '-'}</td>
 <td style="width: 110px; font-weight: bold;">No Antrian</td>
 <td style="width: 10px; text-align: center;">:</td>
-<td style="font-weight: bold;">{data.nomorAntrian || '-'}</td>
+<td style="font-weight: bold;">${data.nomorAntrian || '-'}</td>
 </tr>
 <tr>
 <td style="font-weight: bold;">Instansi</td>
 <td>:</td>
-<td style="text-transform: uppercase;">{data.instansi || '-'}</td>
+<td style="text-transform: uppercase;">${data.instansi || '-'}</td>
 <td style="font-weight: bold;">Status Pelayanan</td>
 <td style="text-align: center;">:</td>
-<td style="font-weight: bold; text-transform: uppercase;">{data.status || '-'}</td>
+<td style="font-weight: bold; text-transform: uppercase;">${data.status || '-'}</td>
 </tr>
 <tr>
 <td style="font-weight: bold;">Keperluan</td>
 <td>:</td>
-<td>{data.keperluan || '-'}</td>
+<td>${data.keperluan || '-'}</td>
 <td style="font-weight: bold;">Durasi</td>
 <td style="text-align: center;">:</td>
-<td>{data.durasi || '-'}</td>
+<td>${data.durasi || '-'}</td>
 </tr>
 <tr>
 <td style="font-weight: bold;">Petugas Program</td>
 <td>:</td>
-<td>{data.petugas || '-'}</td>
+<td>${data.petugas || '-'}</td>
 <td style="font-weight: bold;">Waktu Kunjungan</td>
 <td style="text-align: center;">:</td>
-<td>{data.waktuFormatted || '-'}</td>
+<td>${data.waktuFormatted || '-'}</td>
 </tr>
 </table>
-​<table style="width: 100%; border-collapse: collapse; margin-bottom: 15px;">
+
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 15px;">
 <thead>
 <tr style="background-color: #f3f4f6; text-align: center; font-size: 9px; font-weight: bold;">
 <th style="border: 1px solid #000; padding: 5px; width: 30px;">No</th>
@@ -809,40 +878,41 @@ rowsHtml = <tr> <td style="border: 1px solid #000; text-align: center; padding: 
 ${rowsHtml}
 </tbody>
 </table>
-​<table style="width: 100%; margin-top: 20px; font-size: 9.5px; border-collapse: collapse;">
+
+<table style="width: 100%; margin-top: 20px; font-size: 9.5px; border-collapse: collapse;">
 <tr>
 <td style="width: 50%; text-align: center; vertical-align: top;">
 <p style="margin: 0; font-weight: bold;">Petugas</p>
-
-
-
-
-<p style="margin: 0; font-weight: bold; text-decoration: underline;">{data.petugas && data.petugas !== '-' ? data.petugas : '......................................'}</p>
+<br><br><br>
+<p style="margin: 0; font-weight: bold; text-decoration: underline;">${data.petugas && data.petugas !== '-' ? data.petugas : '......................................'}</p>
 </td>
 <td style="width: 50%; text-align: center; vertical-align: top;">
 <p style="margin: 0; font-weight: bold;">Penerima</p>
 <br><br><br>
-<p style="margin: 0; font-weight: bold; text-decoration: underline;">{data.nama || '......................................'}</p>
+<p style="margin: 0; font-weight: bold; text-decoration: underline;">${data.nama || '......................................'}</p>
 </td>
 </tr>
 </table>
 </div>
 `;
-​setTimeout(() => {
+
+setTimeout(() => {
 const opt = {
 margin:       [5, 5, 5, 5],
-filename:     Bukti_Pengambilan_Obat_${data.nama || 'Tamu'}.pdf,
+filename:     `Bukti_Pengambilan_Obat_${data.nama || 'Tamu'}.pdf`,
 image:        { type: 'jpeg', quality: 0.98 },
 html2canvas:  { scale: 2, useCORS: true, letterRendering: true, scrollX: 0, scrollY: 0 },
 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
 };
-​html2pdf().from(areaCetak).set(opt).save().then(() => {
+
+html2pdf().from(areaCetak).set(opt).save().then(() => {
 areaCetak.style.display = "none";
 areaCetak.innerHTML = "";
 });
 }, 300);
 };
-​// --- FORM SUBMIT KONSULTASI KE FIRESTORE & WHATSAPP ---
+
+// --- FORM SUBMIT KONSULTASI KE FIRESTORE & WHATSAPP ---
 const formKonsultasi = document.getElementById('formKonsultasi');
 if(formKonsultasi) {
 const NOMOR_WA_ADMIN = "6285716842806";
@@ -851,12 +921,14 @@ e.preventDefault();
 const btn = document.getElementById('btnKirimKonsul');
 btn.disabled = true;
 btn.innerText = "Mengirim...";
-​const nama = document.getElementById('namaPengirim').value;
+
+const nama = document.getElementById('namaPengirim').value;
 const instansi = document.getElementById('instansiPengirim').value;
 const kontak = document.getElementById('kontakPengirim').value;
 const kategori = document.getElementById('kategoriKonsultasi').value;
 const isi = document.getElementById('isiKonsultasi').value;
-​try {
+
+try {
 await addDoc(collection(db, "konsultasi"), {
 nama: nama,
 instansi: instansi,
@@ -865,19 +937,23 @@ kategori: kategori,
 isi: isi,
 waktuInput: serverTimestamp()
 });
-​const pesanWA = Halo Admin / Penanggung Jawab UPTD Farmasi Tangsel,%0A%0ASaya ingin menyampaikan konsultasi / keluhan baru:%0A%0A*Nama:* ${encodeURIComponent(nama)}%0A*Instansi:* ${encodeURIComponent(instansi)}%0A*No. WhatsApp:* ${encodeURIComponent(kontak)}%0A*Kategori:* ${encodeURIComponent(kategori)}%0A*Isi Keluhan:*%0A${encodeURIComponent(isi)}%0A%0ATerima kasih.;
-​window.open([https://wa.me/$](https://wa.me/$){NOMOR_WA_ADMIN}?text=${pesanWA}, '_blank');
-​alert("Konsultasi berhasil disimpan ke sistem dan WhatsApp penanggung jawab akan segera dibuka.");
+
+const pesanWA = `Halo Admin / Penanggung Jawab UPTD Farmasi Tangsel,%0A%0ASaya ingin menyampaikan konsultasi / keluhan baru:%0A%0A*Nama:* ${encodeURIComponent(nama)}%0A*Instansi:* ${encodeURIComponent(instansi)}%0A*No. WhatsApp:* ${encodeURIComponent(kontak)}%0A*Kategori:* ${encodeURIComponent(kategori)}%0A*Isi Keluhan:*%0A${encodeURIComponent(isi)}%0A%0ATerima kasih.`;
+
+window.open(`https://wa.me/${NOMOR_WA_ADMIN}?text=${pesanWA}`, '_blank');
+
+alert("Konsultasi berhasil disimpan ke sistem dan WhatsApp penanggung jawab akan segera dibuka.");
 formKonsultasi.reset();
 } catch (err) {
 console.error("Gagal mengirim konsultasi:", err);
 alert("Gagal mengirim konsultasi. Silakan coba lagi.");
 } finally {
 btn.disabled = false;
-btn.innerHTML = <span>Kirim Konsultasi & Keluhan via WhatsApp</span> <span>→</span>;
+btn.innerHTML = `<span>Kirim Konsultasi & Keluhan via WhatsApp</span> <span>→</span>`;
 }
 });
 }
 </script>
 </body>
 </html>
+
