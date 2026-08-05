@@ -17,8 +17,13 @@ position: relative;
 img, video {
 max-width: 100%;
 height: auto;
+cursor: pointer;
 }
-/* Penyesuaian layout grid PC/Laptop agar konsisten dengan struktur asli */
+/* Modal Zoom Gambar */
+#imageModal {
+transition: opacity 0.2s ease-in-out;
+}
+/* Penyesuaian layout grid PC/Laptop */
 @media (min-width: 1024px) {
 .app-layout-wrapper {
 max-width: 1280px !important;
@@ -37,9 +42,6 @@ gap: 16px;
 }
 .pc-main-content {
 grid-column: span 9 / span 9;
-}
-.bottom-nav-wrapper {
-display: none !important;
 }
 .pc-header-desktop {
 display: block !important;
@@ -67,21 +69,11 @@ padding-left: 16px;
 padding-right: 16px;
 box-sizing: border-box;
 }
-.bottom-nav-wrapper {
-max-width: 448px;
-margin-left: auto;
-margin-right: auto;
-left: 0;
-right: 0;
-bottom: 0;
-position: fixed;
-z-index: 40;
-}
 }
 </style>
 <title>UPTD Farmasi - Kota Tangerang Selatan</title>
 </head>
-<body class="bg-[#e3ede6] font-sans min-h-screen pb-24 lg:pb-6">
+<body class="bg-[#e3ede6] font-sans min-h-screen pb-6">
 
 <!-- Header Atas (Hanya tampil di Mobile/HP) -->
 <header class="mobile-header-bar bg-[#e3ede6] px-4 py-3.5 shadow-sm sticky top-0 z-30 border-b border-emerald-200">
@@ -116,6 +108,12 @@ z-index: 40;
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
 <img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain">
 </div>
+<span class="text-xs">Beranda / Dashboard</span>
+</a>
+<a href="#" onclick="switchTab('registrasi', event)" id="nav-registrasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
+<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+<img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain">
+</div>
 <span class="text-xs">Registrasi</span>
 </a>
 <a href="#" onclick="switchTab('informasi', event)" id="nav-informasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
@@ -123,6 +121,12 @@ z-index: 40;
 <img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
 </div>
 <span class="text-xs">Informasi & Layanan</span>
+</a>
+<a href="#" onclick="switchTab('galeri', event)" id="nav-galeri" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
+<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
+</div>
+<span class="text-xs">Galeri Kegiatan</span>
 </a>
 <a href="#" onclick="switchTab('maps', event)" id="nav-maps" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
@@ -156,7 +160,7 @@ z-index: 40;
 <div class="pc-main-content w-full">
 <main class="main-container lg:max-w-none space-y-4 pt-1 pb-3">
 
-<!-- ================= PAGE 1: INDEX (BERANDA / KONTEN) ================= -->
+<!-- ================= PAGE 1: INDEX (BERANDA / DASHBOARD) ================= -->
 <div id="page-index" class="page-content space-y-4">
 <!-- Header Khusus Desktop -->
 <div class="pc-header-desktop hidden bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-3">
@@ -180,7 +184,7 @@ z-index: 40;
 </div>
 </div>
 
-<!-- Menu Utama Grid -->
+<!-- Menu Utama Grid Lengkap -->
 <div class="grid grid-cols-2 gap-3">
 <!-- Registrasi -->
 <a href="#" onclick="switchTab('registrasi', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
@@ -193,7 +197,7 @@ z-index: 40;
 </div>
 </a>
 
-<!-- Informasi & Layanan (Menu Baru Sesuai Permintaan) -->
+<!-- Informasi & Layanan -->
 <a href="#" onclick="switchTab('informasi', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
 <img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
@@ -201,6 +205,17 @@ z-index: 40;
 <div>
 <h3 class="font-bold text-xs text-blue-900">Informasi & Layanan</h3>
 <p class="text-[10px] text-gray-500">Edukasi & Obat</p>
+</div>
+</a>
+
+<!-- Galeri Kegiatan (Dipisah dari Informasi) -->
+<a href="#" onclick="switchTab('galeri', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-14 h-14 flex items-center justify-center">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
+</div>
+<div>
+<h3 class="font-bold text-xs text-blue-900">Galeri Kegiatan</h3>
+<p class="text-[10px] text-gray-500">Dokumentasi Foto</p>
 </div>
 </a>
 
@@ -245,6 +260,17 @@ z-index: 40;
 <div>
 <h3 class="font-bold text-xs text-blue-900">Maps Lokasi</h3>
 <p class="text-[10px] text-gray-500">Panduan Rute GPS</p>
+</div>
+</a>
+
+<!-- Panduan -->
+<a href="#" onclick="switchTab('panduan', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-14 h-14 flex items-center justify-center">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
+</div>
+<div>
+<h3 class="font-bold text-xs text-blue-900">Panduan</h3>
+<p class="text-[10px] text-gray-500">Petunjuk Sistem</p>
 </div>
 </a>
 </div>
@@ -311,14 +337,14 @@ Kirim Registrasi Kunjungan
 </div>
 </div>
 
-<!-- ================= PAGE TERINTEGRASI ADMIN: INFORMASI, EDUKASI, LAYANAN, KATEGORI OBAT & GALERI ================= -->
+<!-- ================= PAGE 3: INFORMASI, EDUKASI, LAYANAN & KATEGORI OBAT ================= -->
 <div id="page-informasi" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-1">
 <h2 class="text-sm font-extrabold text-blue-900">📢 Pusat Informasi, Edukasi & Layanan</h2>
 <p class="text-[11px] text-gray-500">Pilih kategori sub-menu di bawah untuk melihat informasi terbaru yang dikelola oleh admin.</p>
 </div>
 
-<!-- Tombol Sub-Kategori Sesuai Permintaan (Terintegrasi Admin) -->
+<!-- Tombol Sub-Kategori -->
 <div class="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex flex-wrap gap-2 justify-center">
 <button onclick="filterKategoriPublik('Informasi')" id="btnKatPublikInformasi" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-blue-900 text-white transition shadow">Informasi</button>
 <button onclick="filterKategoriPublik('Edukasi')" id="btnKatPublikEdukasi" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Edukasi</button>
@@ -331,11 +357,23 @@ Kirim Registrasi Kunjungan
 <div class="bg-white p-6 rounded-2xl shadow-sm border text-center text-xs text-gray-400">Memuat data informasi...</div>
 </div>
 
-<!-- Galeri Kegiatan UPTD Farmasi -->
-<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-3 mt-6">
-<h3 class="font-extrabold text-xs text-blue-900 uppercase border-b pb-2">📸 Galeri Kegiatan UPTD Farmasi</h3>
+<div class="flex justify-end pt-2">
+<button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
+← Kembali ke Menu Utama
+</button>
+</div>
+</div>
+
+<!-- ================= PAGE 4: GALERI KEGIATAN TERPISAH ================= -->
+<div id="page-galeri" class="page-content space-y-4 hidden-custom">
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-1">
+<h2 class="text-sm font-extrabold text-blue-900">📸 Galeri Kegiatan UPTD Farmasi</h2>
+<p class="text-[11px] text-gray-500">Dokumentasi foto kegiatan dan operasional UPTD Farmasi Kota Tangerang Selatan.</p>
+</div>
+
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
 <div id="gridGaleriPublik" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-<div class="text-xs text-gray-400 col-span-full text-center py-4">Memuat galeri kegiatan...</div>
+<div class="text-xs text-gray-400 col-span-full text-center py-6">Memuat galeri kegiatan...</div>
 </div>
 </div>
 
@@ -346,7 +384,7 @@ Kirim Registrasi Kunjungan
 </div>
 </div>
 
-<!-- ================= PAGE 3: PROFIL PEGAWAI ================= -->
+<!-- ================= PAGE 5: PROFIL PEGAWAI ================= -->
 <div id="page-profil" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
 <h1 class="text-2xl font-bold text-blue-900">PROFIL PEGAWAI UPTD FARMASI</h1>
@@ -364,7 +402,7 @@ Kirim Registrasi Kunjungan
 </div>
 </div>
 
-<!-- ================= PAGE 4: PANDUAN ================= -->
+<!-- ================= PAGE 6: PANDUAN ================= -->
 <div id="page-panduan" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-1">
 <h2 class="text-sm font-extrabold text-blue-900">📖 Panduan & Tutorial Layanan</h2>
@@ -414,7 +452,7 @@ Setiap selesai mendapatkan layanan, pengunjung <b>diwajibkan</b> mengisi formuli
 </div>
 </div>
 
-<!-- ================= PAGE 5: MAPS ================= -->
+<!-- ================= PAGE 7: MAPS ================= -->
 <div id="page-maps" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-6 rounded-2xl shadow-sm text-center max-w-sm mx-auto space-y-4">
 <div class="text-3xl">📍</div>
@@ -426,7 +464,7 @@ Setiap selesai mendapatkan layanan, pengunjung <b>diwajibkan</b> mengisi formuli
 </div>
 </div>
 
-<!-- ================= PAGE 6: TAMU ================= -->
+<!-- ================= PAGE 8: TAMU ================= -->
 <div id="page-tamu" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-4 rounded-2xl shadow-sm border-2 border-blue-400 text-center space-y-1 mb-5">
 <h2 class="text-sm font-extrabold text-blue-900">Daftar Tamu & Pengambilan Obat</h2>
@@ -446,7 +484,7 @@ Memuat data registrasi dari database...
 </div>
 </div>
 
-<!-- ================= PAGE 7: KONSULTASI ================= -->
+<!-- ================= PAGE 9: KONSULTASI ================= -->
 <div id="page-konsultasi" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-4 rounded-2xl shadow-sm border-2 border-blue-400 flex items-center gap-4">
 <div class="w-24 h-24 flex items-center justify-center flex-shrink-0 bg-blue-50 rounded-2xl p-2 border border-blue-400 overflow-hidden">
@@ -509,38 +547,16 @@ Memuat data registrasi dari database...
 </div>
 </div>
 
+<!-- Modal Zoom Gambar Interaktif -->
+<div id="imageModal" class="hidden-custom fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onclick="closeImageModal()">
+<div class="relative max-w-4xl max-h-[90vh] overflow-hidden flex items-center justify-center">
+<img id="modalImageSrc" src="" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl transition-transform duration-300 transform scale-100">
+<button onclick="closeImageModal()" class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-900 rounded-full w-8 h-8 font-extrabold flex items-center justify-center shadow">✕</button>
+</div>
+</div>
+
 <!-- Area Tersembunyi untuk Format Cetak PDF Bukti Pengambilan Obat -->
 <div id="areaCetakPdf" style="display: none;"></div>
-
-<!-- Bottom Navigation Bar (Hanya tampil di Mobile/HP) -->
-<div class="bottom-nav-wrapper">
-<nav class="bg-[#e3ede6] border border-emerald-200 shadow-lg py-2.5 px-6 flex justify-around items-center rounded-t-2xl">
-<a href="#" onclick="switchTab('index', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
-<div class="w-7 h-7 flex items-center justify-center overflow-visible">
-<img src="https://i.ibb.co.com/k2H9XQMH/Picsart-26-07-29-23-12-02-981.png" class="w-20 h-20 max-w-none object-contain scale-[1.35]">
-</div>
-<span class="text-[10px] mt-2 font-extrabold tracking-tight text-center">Registrasi</span>
-</a>
-<a href="#" onclick="switchTab('informasi', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
-<div class="w-7 h-7 flex items-center justify-center overflow-visible">
-<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-20 h-20 max-w-none object-contain scale-[1.35]">
-</div>
-<span class="text-[10px] mt-2 font-extrabold tracking-tight text-center">Info</span>
-</a>
-<a href="#" onclick="switchTab('maps', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
-<div class="w-7 h-7 flex items-center justify-center overflow-visible">
-<img src="https://i.ibb.co.com/4RhdPmBn/Picsart-26-07-30-01-18-55-191.png" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
-</div>
-<span class="text-[10px] mt-2 font-bold tracking-tight text-center">Maps</span>
-</a>
-<a href="#" onclick="switchTab('tamu', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
-<div class="w-7 h-7 flex items-center justify-center overflow-visible">
-<img src="https://i.ibb.co.com/KcX3dhTq/Picsart-26-07-30-01-19-44-361.png" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
-</div>
-<span class="text-[10px] mt-2 font-bold tracking-tight text-center">Tamu</span>
-</a>
-</nav>
-</div>
 
 <!-- FIREBASE & LOGIKA APLIKASI -->
 <script type="module">
@@ -564,23 +580,19 @@ let isWithinRadius = false;
 window.switchTab = function(tabName, event) {
 if(event) event.preventDefault();
 
-// Sembunyikan semua page
 document.querySelectorAll('.page-content').forEach(el => {
 el.classList.add('hidden-custom');
 });
 
-// Tampilkan page tujuan
 const targetPage = document.getElementById(`page-${tabName}`);
 if(targetPage) {
 targetPage.classList.remove('hidden-custom');
 }
 
-// Khusus tab maps, langsung arahkan ke link Google Maps
 if(tabName === 'maps') {
 window.open("https://maps.app.goo.gl/1jmY2uEya56V83uA9?g_st=ac", "_blank");
 }
 
-// Update Header Mobile
 const mTitle = document.getElementById('mobileHeaderTitle');
 const mSub = document.getElementById('mobileHeaderSub');
 if(mTitle && mSub) {
@@ -592,6 +604,9 @@ mTitle.innerText = "REGISTRASI KUNJUNGAN";
 mSub.innerText = "UPTD Farmasi Tangsel";
 } else if(tabName === 'informasi') {
 mTitle.innerText = "INFORMASI & LAYANAN";
+mSub.innerText = "UPTD Farmasi Tangsel";
+} else if(tabName === 'galeri') {
+mTitle.innerText = "GALERI KEGIATAN";
 mSub.innerText = "UPTD Farmasi Tangsel";
 } else if(tabName === 'profil') {
 mTitle.innerText = "PROFIL PEGAWAI";
@@ -611,7 +626,35 @@ mSub.innerText = "UPTD Farmasi Tangsel";
 window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-// --- LOGIKA FILTER KATEGORI INFORMASI & LAYANAN TERINTEGRASI ADMIN ---
+// --- FUNGSI ZOOM GAMBAR INTERAKTIF ---
+window.openImageModal = function(imgSrc) {
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImageSrc');
+if(modal && modalImg) {
+modalImg.src = imgSrc;
+modal.classList.remove('hidden-custom');
+modal.classList.add('visible-custom');
+}
+};
+
+window.closeImageModal = function() {
+const modal = document.getElementById('imageModal');
+if(modal) {
+modal.classList.remove('visible-custom');
+modal.classList.add('hidden-custom');
+}
+};
+
+// Delegasi klik gambar otomatis di seluruh konten agar bisa zoom
+document.addEventListener('click', function(e) {
+if(e.target.tagName === 'IMG' && e.target.closest('.page-content')) {
+// Abaikan jika gambar adalah ikon navigasi kecil atau logo header agar tidak mengganggu
+if(e.target.classList.contains('no-zoom')) return;
+openImageModal(e.target.src);
+}
+});
+
+// --- LOGIKA FILTER KATEGORI INFORMASI & LAYANAN ---
 let kategoriPublikAktif = "Informasi";
 window.filterKategoriPublik = function(kat) {
 kategoriPublikAktif = kat;
@@ -643,7 +686,7 @@ snap.forEach(d => {
 const item = d.data();
 container.innerHTML += `
 <div class="bg-white p-4 rounded-2xl shadow-sm border space-y-2">
-${item.url ? `<img src="${item.url}" class="w-full h-40 object-cover rounded-xl mb-2">` : ''}
+${item.url ? `<div class="overflow-hidden rounded-xl mb-2"><img src="${item.url}" class="w-full h-40 object-cover cursor-pointer hover:scale-105 transition duration-300"></div>` : ''}
 <span class="bg-blue-100 text-blue-900 text-[10px] font-bold px-2 py-0.5 rounded">${kat}</span>
 <h3 class="font-bold text-sm text-blue-900 mt-1">${item.judul || 'Tanpa Judul'}</h3>
 <p class="text-xs text-gray-600 whitespace-pre-line">${item.isi || ''}</p>
@@ -653,25 +696,24 @@ ${item.url ? `<img src="${item.url}" class="w-full h-40 object-cover rounded-xl 
 });
 }
 
-// Muat default awal kategori Informasi
 muatArtikelPublik("Informasi");
 
-// --- REAL-TIME FIRESTORE LISTENER UNTUK GALERI PUBLIK ---
+// --- REAL-TIME FIRESTORE LISTENER UNTUK GALERI TERPISAH ---
 onSnapshot(query(collection(db, "galeri"), orderBy("waktuInput", "desc")), (snap) => {
 const grid = document.getElementById("gridGaleriPublik");
 if(!grid) return;
 grid.innerHTML = "";
 
 if(snap.empty) {
-grid.innerHTML = `<div class="text-xs text-gray-400 col-span-full text-center py-4">Belum ada foto galeri kegiatan.</div>`;
+grid.innerHTML = `<div class="text-xs text-gray-400 col-span-full text-center py-6">Belum ada foto galeri kegiatan.</div>`;
 return;
 }
 
 snap.forEach(d => {
 const item = d.data();
 grid.innerHTML += `
-<div class="h-28 rounded-xl overflow-hidden shadow-sm border bg-gray-50">
-<img src="${item.url}" class="w-full h-full object-cover">
+<div class="h-32 rounded-xl overflow-hidden shadow-sm border bg-gray-50 cursor-pointer group">
+<img src="${item.url}" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
 </div>
 `;
 });
@@ -811,7 +853,7 @@ snap.forEach(d => {
 const item = d.data();
 const fotoUrl = item.url ? item.url : "https://via.placeholder.com/150?text=No+Photo";
 
-container.innerHTML += `<div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col md:flex-row items-center gap-6 border-2 border-blue-400"> <div class="w-32 h-32 md:w-36 md:h-36 shrink-0 rounded-2xl overflow-hidden border-2 border-blue-900 shadow-md bg-gray-100"> <img src="${fotoUrl}" alt="Foto Pegawai" class="w-full h-full object-cover"> </div> <div class="flex-1 w-full text-center md:text-left space-y-2"> <div> <h3 class="font-bold text-xl text-blue-900">${item.nama}</h3> <p class="text-sm text-gray-600 font-semibold">${item.jabatan}</p> </div> <div class="border-t pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 bg-gray-50 p-3 rounded-xl"> <p><b>Golongan:</b> ${item.golongan || '-'}</p> <p><b>PJ Program:</b> ${item.pj || '-'}</p> </div> </div> </div>`;
+container.innerHTML += `<div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col md:flex-row items-center gap-6 border-2 border-blue-400"> <div class="w-32 h-32 md:w-36 md:h-36 shrink-0 rounded-2xl overflow-hidden border-2 border-blue-900 shadow-md bg-gray-100"> <img src="${fotoUrl}" alt="Foto Pegawai" class="w-full h-full object-cover cursor-pointer"> </div> <div class="flex-1 w-full text-center md:text-left space-y-2"> <div> <h3 class="font-bold text-xl text-blue-900">${item.nama}</h3> <p class="text-sm text-gray-600 font-semibold">${item.jabatan}</p> </div> <div class="border-t pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 bg-gray-50 p-3 rounded-xl"> <p><b>Golongan:</b> ${item.golongan || '-'}</p> <p><b>PJ Program:</b> ${item.pj || '-'}</p> </div> </div> </div>`;
 });
 });
 
@@ -1065,3 +1107,4 @@ btn.innerHTML = `<span>Kirim Konsultasi & Keluhan via WhatsApp</span> <span>→<
 </script>
 </body>
 </html>
+
