@@ -118,6 +118,12 @@ z-index: 40;
 </div>
 <span class="text-xs">Registrasi</span>
 </a>
+<a href="#" onclick="switchTab('informasi', event)" id="nav-informasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
+<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
+</div>
+<span class="text-xs">Informasi & Layanan</span>
+</a>
 <a href="#" onclick="switchTab('maps', event)" id="nav-maps" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
 <img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain">
@@ -170,7 +176,7 @@ z-index: 40;
 </div>
 <div>
 <h2 class="text-sm font-extrabold text-blue-900 uppercase">Selamat Datang di UPTD Farmasi</h2>
-<p class="text-[11px] text-gray-500 mt-0.5 leading-relaxed">Silakan pilih menu layanan di bawah untuk registrasi, konsultasi, atau memantau status kunjungan Anda.</p>
+<p class="text-[11px] text-gray-500 mt-0.5 leading-relaxed">Silakan pilih menu layanan di bawah untuk registrasi, informasi, konsultasi, atau memantau status kunjungan Anda.</p>
 </div>
 </div>
 
@@ -184,6 +190,17 @@ z-index: 40;
 <div>
 <h3 class="font-bold text-xs text-blue-900">Registrasi</h3>
 <p class="text-[10px] text-gray-500">Form Kunjungan</p>
+</div>
+</a>
+
+<!-- Informasi & Layanan (Menu Baru Sesuai Permintaan) -->
+<a href="#" onclick="switchTab('informasi', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-14 h-14 flex items-center justify-center">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
+</div>
+<div>
+<h3 class="font-bold text-xs text-blue-900">Informasi & Layanan</h3>
+<p class="text-[10px] text-gray-500">Edukasi & Obat</p>
 </div>
 </a>
 
@@ -228,17 +245,6 @@ z-index: 40;
 <div>
 <h3 class="font-bold text-xs text-blue-900">Maps Lokasi</h3>
 <p class="text-[10px] text-gray-500">Panduan Rute GPS</p>
-</div>
-</a>
-
-<!-- Panduan -->
-<a href="#" onclick="switchTab('panduan', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-14 h-14 flex items-center justify-center">
-<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
-</div>
-<div>
-<h3 class="font-bold text-xs text-blue-900">Panduan</h3>
-<p class="text-[10px] text-gray-500">Cara Penggunaan</p>
 </div>
 </a>
 </div>
@@ -296,6 +302,41 @@ z-index: 40;
 Kirim Registrasi Kunjungan
 </button>
 </form>
+</div>
+
+<div class="flex justify-end pt-2">
+<button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
+← Kembali ke Menu Utama
+</button>
+</div>
+</div>
+
+<!-- ================= PAGE TERINTEGRASI ADMIN: INFORMASI, EDUKASI, LAYANAN, KATEGORI OBAT & GALERI ================= -->
+<div id="page-informasi" class="page-content space-y-4 hidden-custom">
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-1">
+<h2 class="text-sm font-extrabold text-blue-900">📢 Pusat Informasi, Edukasi & Layanan</h2>
+<p class="text-[11px] text-gray-500">Pilih kategori sub-menu di bawah untuk melihat informasi terbaru yang dikelola oleh admin.</p>
+</div>
+
+<!-- Tombol Sub-Kategori Sesuai Permintaan (Terintegrasi Admin) -->
+<div class="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex flex-wrap gap-2 justify-center">
+<button onclick="filterKategoriPublik('Informasi')" id="btnKatPublikInformasi" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-blue-900 text-white transition shadow">Informasi</button>
+<button onclick="filterKategoriPublik('Edukasi')" id="btnKatPublikEdukasi" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Edukasi</button>
+<button onclick="filterKategoriPublik('Pelayanan')" id="btnKatPublikPelayanan" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Layanan</button>
+<button onclick="filterKategoriPublik('Obat')" id="btnKatPublikObat" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Kategori Obat</button>
+</div>
+
+<!-- Kontainer Daftar Artikel / Konten Berdasarkan Kategori -->
+<div id="containerArtikelPublik" class="space-y-3">
+<div class="bg-white p-6 rounded-2xl shadow-sm border text-center text-xs text-gray-400">Memuat data informasi...</div>
+</div>
+
+<!-- Galeri Kegiatan UPTD Farmasi -->
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-3 mt-6">
+<h3 class="font-extrabold text-xs text-blue-900 uppercase border-b pb-2">📸 Galeri Kegiatan UPTD Farmasi</h3>
+<div id="gridGaleriPublik" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+<div class="text-xs text-gray-400 col-span-full text-center py-4">Memuat galeri kegiatan...</div>
+</div>
 </div>
 
 <div class="flex justify-end pt-2">
@@ -480,6 +521,12 @@ Memuat data registrasi dari database...
 </div>
 <span class="text-[10px] mt-2 font-extrabold tracking-tight text-center">Registrasi</span>
 </a>
+<a href="#" onclick="switchTab('informasi', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
+<div class="w-7 h-7 flex items-center justify-center overflow-visible">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-20 h-20 max-w-none object-contain scale-[1.35]">
+</div>
+<span class="text-[10px] mt-2 font-extrabold tracking-tight text-center">Info</span>
+</a>
 <a href="#" onclick="switchTab('maps', event)" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
 <div class="w-7 h-7 flex items-center justify-center overflow-visible">
 <img src="https://i.ibb.co.com/4RhdPmBn/Picsart-26-07-30-01-18-55-191.png" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
@@ -491,12 +538,6 @@ Memuat data registrasi dari database...
 <img src="https://i.ibb.co.com/KcX3dhTq/Picsart-26-07-30-01-19-44-361.png" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
 </div>
 <span class="text-[10px] mt-2 font-bold tracking-tight text-center">Tamu</span>
-</a>
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex flex-col items-center justify-center text-emerald-900 font-bold">
-<div class="w-7 h-7 flex items-center justify-center overflow-visible">
-<img src="https://i.ibb.co.com/WpFvvtry/Picsart-26-07-29-23-12-41-517.png" class="w-24 h-24 max-w-none object-contain scale-[1.35]">
-</div>
-<span class="text-[10px] mt-2 font-bold tracking-tight text-center">Survei</span>
 </a>
 </nav>
 </div>
@@ -549,6 +590,9 @@ mSub.innerText = "Sistem Layanan Digital Terpadu";
 } else if(tabName === 'registrasi') {
 mTitle.innerText = "REGISTRASI KUNJUNGAN";
 mSub.innerText = "UPTD Farmasi Tangsel";
+} else if(tabName === 'informasi') {
+mTitle.innerText = "INFORMASI & LAYANAN";
+mSub.innerText = "UPTD Farmasi Tangsel";
 } else if(tabName === 'profil') {
 mTitle.innerText = "PROFIL PEGAWAI";
 mSub.innerText = "UPTD Farmasi Tangsel";
@@ -566,6 +610,72 @@ mSub.innerText = "UPTD Farmasi Tangsel";
 
 window.scrollTo({ top: 0, behavior: 'smooth' });
 };
+
+// --- LOGIKA FILTER KATEGORI INFORMASI & LAYANAN TERINTEGRASI ADMIN ---
+let kategoriPublikAktif = "Informasi";
+window.filterKategoriPublik = function(kat) {
+kategoriPublikAktif = kat;
+['Informasi', 'Edukasi', 'Pelayanan', 'Obat'].forEach(k => {
+const btn = document.getElementById(`btnKatPublik${k}`);
+if(btn) {
+if(k === kat) {
+btn.className = "px-3 py-2 rounded-xl text-xs font-extrabold bg-blue-900 text-white transition shadow";
+} else {
+btn.className = "px-3 py-2 rounded-xl text-xs font-extrabold bg-gray-100 text-gray-700 hover:bg-gray-200 transition";
+}
+}
+});
+muatArtikelPublik(kat);
+};
+
+function muatArtikelPublik(kat) {
+onSnapshot(query(collection(db, kat), orderBy("waktuInput", "desc")), (snap) => {
+const container = document.getElementById("containerArtikelPublik");
+if(!container) return;
+container.innerHTML = "";
+
+if(snap.empty) {
+container.innerHTML = `<div class="bg-white p-6 rounded-2xl shadow-sm border text-center text-xs text-gray-400">Belum ada konten untuk kategori ${kat}.</div>`;
+return;
+}
+
+snap.forEach(d => {
+const item = d.data();
+container.innerHTML += `
+<div class="bg-white p-4 rounded-2xl shadow-sm border space-y-2">
+${item.url ? `<img src="${item.url}" class="w-full h-40 object-cover rounded-xl mb-2">` : ''}
+<span class="bg-blue-100 text-blue-900 text-[10px] font-bold px-2 py-0.5 rounded">${kat}</span>
+<h3 class="font-bold text-sm text-blue-900 mt-1">${item.judul || 'Tanpa Judul'}</h3>
+<p class="text-xs text-gray-600 whitespace-pre-line">${item.isi || ''}</p>
+</div>
+`;
+});
+});
+}
+
+// Muat default awal kategori Informasi
+muatArtikelPublik("Informasi");
+
+// --- REAL-TIME FIRESTORE LISTENER UNTUK GALERI PUBLIK ---
+onSnapshot(query(collection(db, "galeri"), orderBy("waktuInput", "desc")), (snap) => {
+const grid = document.getElementById("gridGaleriPublik");
+if(!grid) return;
+grid.innerHTML = "";
+
+if(snap.empty) {
+grid.innerHTML = `<div class="text-xs text-gray-400 col-span-full text-center py-4">Belum ada foto galeri kegiatan.</div>`;
+return;
+}
+
+snap.forEach(d => {
+const item = d.data();
+grid.innerHTML += `
+<div class="h-28 rounded-xl overflow-hidden shadow-sm border bg-gray-50">
+<img src="${item.url}" class="w-full h-full object-cover">
+</div>
+`;
+});
+});
 
 // --- GEOLOKASI GPS UNTUK REGISTRASI ---
 function initGPS() {
@@ -590,7 +700,7 @@ isWithinRadius = true;
 statusBox.className = "bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-[11px] text-emerald-900 font-bold";
 statusBox.innerText = `✅ Lokasi Valid! Anda berada dalam radius kantor (${Math.round(userDistance)} meter dari UPTD Farmasi).`;
 } else {
-isWithinRadius = true; // Tetap diizinkan agar tidak menghalangi jika GPS meleset sedikit, namun diberi peringatan
+isWithinRadius = true; 
 statusBox.className = "bg-amber-50 border border-amber-200 p-3 rounded-xl text-[11px] text-amber-900 font-bold";
 statusBox.innerText = `⚠️ Perhatian: Jarak Anda sekitar ${Math.round(userDistance)} meter dari UPTD Farmasi (di luar radius standar 100m).`;
 }
@@ -598,7 +708,7 @@ statusBox.innerText = `⚠️ Perhatian: Jarak Anda sekitar ${Math.round(userDis
 },
 (error) => {
 console.warn("Gagal mendapatkan GPS:", error.message);
-isWithinRadius = true; // Bypass jika izin GPS ditolak agar user tetap bisa submit
+isWithinRadius = true; 
 if(statusBox) {
 statusBox.className = "bg-blue-50 border border-blue-200 p-3 rounded-xl text-[11px] text-blue-900";
 statusBox.innerText = "ℹ️ Akses GPS dilewati atau tidak diaktifkan. Anda tetap dapat melanjutkan registrasi.";
@@ -609,7 +719,7 @@ statusBox.innerText = "ℹ️ Akses GPS dilewati atau tidak diaktifkan. Anda tet
 }
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
-const R = 6371e3; // meter
+const R = 6371e3; 
 const dLat = (lat2 - lat1) * Math.PI / 180;
 const dLon = (lon2 - lon1) * Math.PI / 180;
 const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
@@ -619,7 +729,6 @@ const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 return R * c;
 }
 
-// Jalankan deteksi GPS saat halaman dimuat
 initGPS();
 
 // --- FORM SUBMIT REGISTRASI KE FIRESTORE ---
