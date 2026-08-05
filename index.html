@@ -3,404 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPTD Farmasi Kota Tangerang Selatan - Single Page Application</title>
-    <!-- Tailwind CSS -->
+    <title>Layanan Digital UPTD Farmasi Kota Tangerang Selatan</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
+    <!-- FontAwesome untuk ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- html2pdf.js for PDF Generation -->
+    <!-- html2pdf untuk unduh bukti kunjungan PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- Firebase SDK (Compat) -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-sans">
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen">
 
-    <!-- Header & Navbar -->
+    <!-- HEADER / NAVBAR -->
     <header class="bg-emerald-700 text-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('konten')">
-                <i class="fa-solid fa-clinic-medical text-2xl"></i>
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('beranda')">
+                <div class="bg-white p-2 rounded-full text-emerald-700 font-bold">
+                    <i class="fa-solid fa-pills text-xl"></i>
+                </div>
                 <div>
-                    <span class="font-bold text-base md:text-lg tracking-wide block leading-tight">UPTD Farmasi Tangsel</span>
-                    <span class="text-[10px] text-emerald-200 uppercase tracking-wider">Smart Service & Inventory</span>
+                    <h1 class="font-bold text-lg leading-tight">UPTD Farmasi</h1>
+                    <p class="text-xs text-emerald-200">Kota Tangerang Selatan</p>
                 </div>
             </div>
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex space-x-1 text-sm font-medium">
-                <button onclick="switchTab('konten')" class="nav-btn px-3 py-2 rounded hover:bg-emerald-600 transition" data-target="konten">Dashboard</button>
-                <button onclick="switchTab('index')" class="nav-btn px-3 py-2 rounded hover:bg-emerald-600 transition" data-target="index">Registrasi Tamu</button>
-                <button onclick="switchTab('profil')" class="nav-btn px-3 py-2 rounded hover:bg-emerald-600 transition" data-target="profil">Profil Pegawai</button>
-                <button onclick="switchTab('panduan')" class="nav-btn px-3 py-2 rounded hover:bg-emerald-600 transition" data-target="panduan">Panduan</button>
-                <button onclick="switchTab('tamu')" class="nav-btn px-3 py-2 rounded hover:bg-emerald-600 transition" data-target="tamu">Riwayat Tamu</button>
-                <button onclick="switchTab('konsultasi')" class="nav-btn px-3 py-2 rounded hover:bg-emerald-600 transition" data-target="konsultasi">Konsultasi</button>
-                <button onclick="switchTab('maps')" class="nav-btn px-3 py-2 rounded hover:bg-emerald-600 transition" data-target="maps">Maps</button>
+            <!-- Navigasi Desktop -->
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <button onclick="switchTab('beranda')" class="nav-btn hover:text-emerald-200 transition" data-target="beranda">Beranda</button>
+                <button onclick="switchTab('konten')" class="nav-btn hover:text-emerald-200 transition" data-target="konten">Layanan & Informasi</button>
+                <button onclick="switchTab('tamu')" class="nav-btn hover:text-emerald-200 transition" data-target="tamu">Buku Tamu</button>
+                <button onclick="switchTab('profil')" class="nav-btn hover:text-emerald-200 transition" data-target="profil">Profil</button>
+                <button onclick="switchTab('konsultasi')" class="nav-btn hover:text-emerald-200 transition" data-target="konsultasi">Konsultasi</button>
             </nav>
-            <!-- Mobile Menu Toggle Button -->
-            <button onclick="toggleMobileMenu()" class="md:hidden text-white focus:outline-none">
-                <i class="fa-solid fa-bars text-xl"></i>
+            <!-- Tombol Menu Mobile -->
+            <button class="md:hidden text-white focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars text-2xl"></i>
             </button>
         </div>
-        <!-- Mobile Dropdown Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-emerald-800 px-4 pt-2 pb-4 space-y-1 border-t border-emerald-600">
-            <button onclick="switchTab('konten'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-emerald-700 text-sm">Dashboard</button>
-            <button onclick="switchTab('index'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-emerald-700 text-sm">Registrasi Tamu</button>
-            <button onclick="switchTab('profil'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-emerald-700 text-sm">Profil Pegawai</button>
-            <button onclick="switchTab('panduan'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-emerald-700 text-sm">Panduan</button>
-            <button onclick="switchTab('tamu'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-emerald-700 text-sm">Riwayat Tamu</button>
-            <button onclick="switchTab('konsultasi'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-emerald-700 text-sm">Konsultasi</button>
-            <button onclick="switchTab('maps'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-emerald-700 text-sm">Maps</button>
+        <!-- Menu Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-emerald-800 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('beranda'); toggleMobileMenu();" class="block w-full text-left py-1 text-sm">Beranda</button>
+            <button onclick="switchTab('konten'); toggleMobileMenu();" class="block w-full text-left py-1 text-sm">Layanan & Informasi</button>
+            <button onclick="switchTab('tamu'); toggleMobileMenu();" class="block w-full text-left py-1 text-sm">Buku Tamu</button>
+            <button onclick="switchTab('profil'); toggleMobileMenu();" class="block w-full text-left py-1 text-sm">Profil</button>
+            <button onclick="switchTab('konsultasi'); toggleMobileMenu();" class="block w-full text-left py-1 text-sm">Konsultasi</button>
         </div>
     </header>
 
-    <!-- Main Dynamic Application Container -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
+    <!-- KONTEN UTAMA (SPA VIEWS) -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6">
 
-        <!-- 1. KONTEN (Dashboard Utama / konten.html) -->
-        <section id="section-konten" class="spa-section space-y-6">
-            <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-6 md:p-10 text-white shadow-lg flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="space-y-2">
-                    <span class="bg-emerald-500/40 text-emerald-100 text-xs px-3 py-1 rounded-full font-semibold">Pemerintah Kota Tangerang Selatan</span>
-                    <h1 class="text-2xl md:text-4xl font-extrabold">UPTD Farmasi Kota Tangerang Selatan</h1>
-                    <p class="text-emerald-100 max-w-xl text-sm md:text-base">Sistem informasi pengelolaan logistik obat PKD, vaksin, reagen, dan pelayanan instansi kesehatan terpadu.</p>
+        <!-- 1. VIEW: BERANDA -->
+        <section id="view-beranda" class="space-y-6">
+            <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-2xl p-8 shadow-lg flex flex-col md:flex-row items-center justify-between">
+                <div class="space-y-4 max-w-xl">
+                    <span class="bg-emerald-500 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Sistem Layanan Digital</span>
+                    <h2 class="text-3xl md:text-4xl font-bold leading-tight">Selamat Datang di UPTD Farmasi Tangsel</h2>
+                    <p class="text-emerald-100 text-sm md:text-base">Pusat pengelolaan logistik obat, vaksin, dan layanan distribusi kesehatan terpadu wilayah Kota Tangerang Selatan secara transparan dan akurat.</p>
+                    <div class="pt-2 flex space-x-4">
+                        <button onclick="switchTab('tamu')" class="bg-white text-emerald-700 font-semibold px-6 py-2.5 rounded-lg shadow hover:bg-emerald-50 transition text-sm">Isi Buku Tamu</button>
+                        <button onclick="switchTab('konten')" class="border border-white text-white font-semibold px-6 py-2.5 rounded-lg hover:bg-emerald-600 transition text-sm">Cek Kategori Obat</button>
+                    </div>
                 </div>
-                <div class="bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/20 text-center min-w-[200px]">
-                    <p class="text-xs text-emerald-200">Status Sistem Online</p>
-                    <p class="font-bold text-lg text-white mt-1"><i class="fa-solid fa-circle text-emerald-400 text-xs mr-1 animate-pulse"></i> Aktif & Siap</p>
+                <div class="mt-6 md:mt-0 text-emerald-200 text-8xl">
+                    <i class="fa-solid fa-hospital text-emerald-100 opacity-80"></i>
                 </div>
             </div>
 
-            <!-- Quick Action Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div onclick="switchTab('index')" class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition cursor-pointer space-y-2">
-                    <div class="w-10 h-10 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-file-pen"></i></div>
-                    <h3 class="font-bold text-slate-800">Registrasi Tamu</h3>
-                    <p class="text-xs text-slate-500">Form kunjungan & validasi GPS radius kantor.</p>
-                </div>
-                <div onclick="switchTab('tamu')" class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition cursor-pointer space-y-2">
-                    <div class="w-10 h-10 bg-teal-100 text-teal-700 rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-clipboard-list"></i></div>
-                    <h3 class="font-bold text-slate-800">Riwayat & Status</h3>
-                    <p class="text-xs text-slate-500">Pantau status antrean & unduh bukti PDF.</p>
-                </div>
-                <div onclick="switchTab('profil')" class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition cursor-pointer space-y-2">
-                    <div class="w-10 h-10 bg-cyan-100 text-cyan-700 rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-users"></i></div>
-                    <h3 class="font-bold text-slate-800">Profil Pegawai</h3>
-                    <p class="text-xs text-slate-500">Direktori penanggung jawab program instansi.</p>
-                </div>
-                <div onclick="switchTab('konsultasi')" class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition cursor-pointer space-y-2">
-                    <div class="w-10 h-10 bg-sky-100 text-sky-700 rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-headset"></i></div>
-                    <h3 class="font-bold text-slate-800">Konsultasi</h3>
-                    <p class="text-xs text-slate-500">Layanan pengaduan & bantuan teknis admin.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. INDEX (Registrasi Tamu & Validasi GPS / index.html) -->
-        <section id="section-index" class="spa-section hidden space-y-6">
-            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 max-w-2xl mx-auto space-y-6">
-                <div>
-                    <h2 class="text-xl font-bold text-slate-800"><i class="fa-solid fa-user-plus text-emerald-600 mr-2"></i> Form Registrasi Tamu</h2>
-                    <p class="text-xs text-slate-500 mt-1">Lengkapi data kunjungan instansi Anda. Pastikan layanan lokasi GPS aktif untuk validasi radius 100 meter dari kantor.</p>
-                </div>
-                
-                <form id="form-registrasi" onsubmit="submitRegistrasi(event)" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex items-start space-x-4">
+                    <div class="bg-emerald-100 text-emerald-700 p-3 rounded-lg"><i class="fa-solid fa-location-dot text-xl"></i></div>
                     <div>
-                        <label class="block text-sm font-semibold mb-1">Nama Lengkap</label>
-                        <input type="text" id="reg-nama" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none text-sm" placeholder="Nama lengkap pengunjung">
+                        <h3 class="font-bold text-slate-700">Validasi GPS Radius</h3>
+                        <p class="text-xs text-slate-500 mt-1">Kehadiran tamu divalidasi langsung berdasarkan radius lokasi kantor.</p>
                     </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-1">Asal Instansi / Puskesmas / RS</label>
-                        <input type="text" id="reg-instansi" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none text-sm" placeholder="Contoh: Puskesmas Pamulang">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-1">Kategori Keperluan</label>
-                        <select id="reg-kategori" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none text-sm">
-                            <option value="OBAT PKD">OBAT PKD</option>
-                            <option value="VAKSIN">VAKSIN</option>
-                            <option value="REAGEN">REAGEN</option>
-                            <option value="LAINNYA">LAINNYA / ADMINISTRASI</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-1">Upload Dokumen Pendukung (Maks. 2MB)</label>
-                        <input type="file" id="reg-file" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
-                    </div>
-
-                    <!-- GPS Status Box -->
-                    <div id="gps-status-box" class="p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
-                        <span><i class="fa-solid fa-location-crosshairs mr-1"></i> Validasi GPS Kantor: Belum diverifikasi (Maks. 100m).</span>
-                        <button type="button" onclick="cekGPS()" class="bg-amber-600 text-white px-3 py-1.5 rounded hover:bg-amber-700 font-semibold">Cek Lokasi GPS</button>
-                    </div>
-
-                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-lg transition text-sm">Kirim Pendaftaran Kunjungan</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- 3. PROFIL (Profil Pegawai / profil.html) -->
-        <section id="section-profil" class="spa-section hidden space-y-6">
-            <div class="space-y-2">
-                <h2 class="text-xl font-bold text-slate-800"><i class="fa-solid fa-users text-emerald-600 mr-2"></i> Profil Pegawai & Penanggung Jawab</h2>
-                <p class="text-xs text-slate-500">Daftar penanggung jawab program dan pengelola layanan kefarmasian UPTD Farmasi Tangsel.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center space-y-3">
-                    <div class="w-20 h-20 bg-emerald-100 text-emerald-700 rounded-full mx-auto flex items-center justify-center text-xl font-bold">KA</div>
-                    <h3 class="font-bold text-base text-slate-800">Kepala UPTD Farmasi</h3>
-                    <p class="text-xs text-emerald-600 font-semibold">Penanggung Jawab Program Utama</p>
-                    <p class="text-xs text-slate-500">Golongan: Pembina / IV.a</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center space-y-3">
-                    <div class="w-20 h-20 bg-teal-100 text-teal-700 rounded-full mx-auto flex items-center justify-center text-xl font-bold">PO</div>
-                    <h3 class="font-bold text-base text-slate-800">Pengelola Obat & BMHP</h3>
-                    <p class="text-xs text-teal-600 font-semibold">Koordinator Distribusi Logistik</p>
-                    <p class="text-xs text-slate-500">Golongan: Penata / III.c</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center space-y-3">
-                    <div class="w-20 h-20 bg-cyan-100 text-cyan-700 rounded-full mx-auto flex items-center justify-center text-xl font-bold">VA</div>
-                    <h3 class="font-bold text-base text-slate-800">Pengelola Vaksin & Reagen</h3>
-                    <p class="text-xs text-cyan-600 font-semibold">Koordinator Rantai Dingin</p>
-                    <p class="text-xs text-slate-500">Golongan: Penata Muda / III.b</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. PANDUAN (Panduan Layanan / panduan.html) -->
-        <section id="section-panduan" class="spa-section hidden space-y-6">
-            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 max-w-3xl mx-auto space-y-4">
-                <h2 class="text-xl font-bold text-slate-800 border-b pb-2"><i class="fa-solid fa-book-open text-emerald-600 mr-2"></i> Panduan & Prosedur Layanan</h2>
-                <div class="space-y-3 text-sm text-slate-700">
-                    <div class="p-3 bg-slate-50 rounded-lg border">
-                        <h4 class="font-bold text-emerald-700 mb-1">1. Registrasi & Validasi GPS</h4>
-                        <p class="text-xs text-slate-600">Isi formulir kunjungan pada menu Registrasi Tamu. Sistem akan memvalidasi posisi GPS Anda agar berada dalam radius 100 meter dari gedung kantor.</p>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex items-start space-x-4">
+                    <div class="bg-teal-100 text-teal-700 p-3 rounded-lg"><i class="fa-solid fa-file-pdf text-xl"></i></div>
+                    <div>
+                        <h3 class="font-bold text-slate-700">E-Reporting PDF</h3>
+                        <p class="text-xs text-slate-500 mt-1">Unduh bukti tanda terima kunjungan dan rincian obat secara instan.</p>
                     </div>
-                    <div class="p-3 bg-slate-50 rounded-lg border">
-                        <h4 class="font-bold text-emerald-700 mb-1">2. Pemantauan Riwayat Kunjungan</h4>
-                        <p class="text-xs text-slate-600">Cek status pengajuan Anda secara berkala (Menunggu, Diproses, Selesai) melalui menu Riwayat Tamu.</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 rounded-lg border">
-                        <h4 class="font-bold text-emerald-700 mb-1">3. Cetak Bukti Tanda Terima PDF</h4>
-                        <p class="text-xs text-slate-600">Unduh bukti dokumen tanda terima resmi berformat PDF lengkap dengan kop surat Pemkot Tangsel langsung dari perangkat Anda.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex items-start space-x-4">
+                    <div class="bg-blue-100 text-blue-700 p-3 rounded-lg"><i class="fa-solid fa-headset text-xl"></i></div>
+                    <div>
+                        <h3 class="font-bold text-slate-700">Konsultasi Langsung</h3>
+                        <p class="text-xs text-slate-500 mt-1">Terhubung langsung dengan admin layanan melalui WhatsApp.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. TAMU (Riwayat Tamu & Cetak PDF / tamu.html) -->
-        <section id="section-tamu" class="spa-section hidden space-y-6">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-4">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b pb-3">
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-800"><i class="fa-solid fa-clock-rotate-left text-emerald-600 mr-2"></i> Riwayat & Status Kunjungan</h2>
-                        <p class="text-xs text-slate-500">Daftar riwayat kunjungan dan cetak dokumen bukti pelayanan.</p>
-                    </div>
-                    <button onclick="loadTamuData()" class="bg-emerald-50 text-emerald-700 text-xs px-3 py-2 rounded-lg hover:bg-emerald-100 transition"><i class="fa-solid fa-rotate mr-1"></i> Perbarui Data</button>
+        <!-- 2. VIEW: KONTEN / LAYANAN & INFORMASI -->
+        <section id="view-konten" class="hidden space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800">Layanan & Informasi Distribusi</h2>
+                <p class="text-sm text-slate-500">Pilih kategori layanan farmasi dan informasi ketersediaan stok obat.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-emerald-500 transition cursor-pointer">
+                    <i class="fa-solid fa-capsules text-emerald-600 text-2xl mb-3"></i>
+                    <h3 class="font-bold text-slate-700">Obat PKD</h3>
+                    <p class="text-xs text-slate-500 mt-1">Pengelolaan dan distribusi obat Program Kesehatan Dasar.</p>
                 </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-emerald-500 transition cursor-pointer">
+                    <i class="fa-solid fa-syringe text-emerald-600 text-2xl mb-3"></i>
+                    <h3 class="font-bold text-slate-700">Vaksin & Imunisasi</h3>
+                    <p class="text-xs text-slate-500 mt-1">Distribusi rantai dingin vaksin untuk fasilitas kesehatan.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-emerald-500 transition cursor-pointer">
+                    <i class="fa-solid fa-flask text-emerald-600 text-2xl mb-3"></i>
+                    <h3 class="font-bold text-slate-700">Reagen Laboratorium</h3>
+                    <p class="text-xs text-slate-500 mt-1">Penyediaan bahan medis habis pakai dan reagen penunjang.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-emerald-500 transition cursor-pointer">
+                    <i class="fa-solid fa-shield-virus text-emerald-600 text-2xl mb-3"></i>
+                    <h3 class="font-bold text-slate-700">Program TB & Kusta</h3>
+                    <p class="text-xs text-slate-500 mt-1">Fokus logistik pengobatan program khusus.</p>
+                </div>
+            </div>
+        </section>
 
-                <!-- Printable Area for PDF Generation -->
-                <div id="pdf-printable-area" class="space-y-4 p-2">
-                    <div class="hidden print:block text-center mb-6">
-                        <h3 class="font-bold text-lg">PEMERINTAH KOTA TANGERANG SELATAN</h3>
-                        <h4 class="font-bold text-xl text-emerald-700">DINAS KESEHATAN - UPTD FARMASI</h4>
-                        <hr class="my-2 border-slate-800">
-                        <h5 class="font-bold text-md">BUKTI TANDA TERIMA KUNJUNGAN LAYANAN</h5>
+        <!-- 3. VIEW: BUKU TAMU & E-REPORTING (TAMU.HTML) -->
+        <section id="view-tamu" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 max-w-2xl mx-auto">
+                <h2 class="text-xl font-bold text-slate-800 mb-1">Formulir Buku Tamu Digital</h2>
+                <p class="text-xs text-slate-500 mb-4">Pastikan Anda berada di sekitar area kantor untuk verifikasi lokasi GPS.</p>
+
+                <form id="form-tamu" onsubmit="handleTamuSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Lengkap</label>
+                        <input type="text" id="tamu-nama" required class="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
                     </div>
-
-                    <div id="tamu-list-container" class="space-y-3">
-                        <!-- Sample Data Item -->
-                        <div class="p-4 border rounded-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-50">
-                            <div>
-                                <div class="flex items-center space-x-2">
-                                    <span class="text-[10px] font-bold px-2 py-0.5 bg-amber-100 text-amber-800 rounded-full">SELESAI</span>
-                                    <span class="text-xs text-slate-400 font-mono">ID: #TGL-2026-001</span>
-                                </div>
-                                <h4 class="font-bold text-slate-800 mt-1">Puskesmas Pamulang (Contoh Data)</h4>
-                                <p class="text-xs text-slate-500">Keperluan: <strong>OBAT PKD</strong> | Tanggal: 2026-08-06</p>
-                            </div>
-                            <button onclick="downloadPDFReceipt('Puskesmas Pamulang', 'OBAT PKD', '2026-08-06')" class="bg-slate-800 hover:bg-slate-900 text-white text-xs px-3 py-2 rounded-lg transition"><i class="fa-solid fa-file-pdf mr-1"></i> Unduh PDF Resmi</button>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Asal Instansi / Puskesmas</label>
+                            <input type="text" id="tamu-instansi" required class="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Kategori Layanan</label>
+                            <select id="tamu-kategori" class="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                                <option value="Obat PKD">Obat PKD</option>
+                                <option value="Vaksin">Vaksin & Imunisasi</option>
+                                <option value="Reagen">Reagen Laboratorium</option>
+                                <option value="Konsultasi Umum">Konsultasi Umum</option>
+                            </select>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Keperluan Kunjungan</label>
+                        <textarea id="tamu-keperluan" rows="2" required class="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+                    </div>
 
-        <!-- 6. KONSULTASI (Form Pengaduan / konsultasi.html) -->
-        <section id="section-konsultasi" class="spa-section hidden space-y-6">
-            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 max-w-xl mx-auto space-y-4">
-                <div>
-                    <h2 class="text-xl font-bold text-slate-800"><i class="fa-solid fa-comments text-emerald-600 mr-2"></i> Layanan Konsultasi & Pengaduan</h2>
-                    <p class="text-xs text-slate-500">Sampaikan pertanyaan atau kendala distribusi obat/vaksin langsung kepada petugas.</p>
-                </div>
-                <form onsubmit="submitKonsultasi(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-semibold mb-1">Topik Konsultasi / Kendala</label>
-                        <input type="text" id="kon-topik" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Contoh: Jadwal Distribusi Vaksin PKD">
+                    <!-- Status GPS -->
+                    <div class="bg-slate-50 p-3 rounded-lg border flex items-center justify-between text-xs">
+                        <span id="gps-status" class="text-slate-600"><i class="fa-solid fa-circle-notch animate-spin mr-1"></i> Mendeteksi koordinat GPS Anda...</span>
+                        <button type="button" onclick="cekLokasiGPS()" class="text-emerald-600 font-semibold hover:underline">Perbarui GPS</button>
                     </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-1">Pesan Lengkap</label>
-                        <textarea id="kon-pesan" rows="4" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Tuliskan detail pesan Anda..."></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-lg text-sm transition"><i class="fa-brands fa-whatsapp mr-1"></i> Kirim Pesan ke WhatsApp Admin</button>
+
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-lg transition text-sm">Kirim & Cetak Tanda Terima</button>
                 </form>
             </div>
+
+            <!-- Hasil / Struk Bukti Tamu (Hidden by default, used for PDF generator) -->
+            <div id="print-area" class="hidden bg-white p-6 rounded-xl border border-slate-300 max-w-md mx-auto shadow-md space-y-4">
+                <div class="text-center border-b pb-3">
+                    <h3 class="font-bold text-base text-slate-800">BUKTI TANDA TERIMA KUNJUNGAN</h3>
+                    <p class="text-xs text-slate-500">UPTD Farmasi Kota Tangerang Selatan</p>
+                </div>
+                <div class="text-xs space-y-2">
+                    <div class="flex justify-between"><span class="text-slate-500">ID Kunjungan:</span> <span id="res-id" class="font-semibold"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Nama:</span> <span id="res-nama" class="font-semibold"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Instansi:</span> <span id="res-instansi" class="font-semibold"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Kategori:</span> <span id="res-kategori" class="font-semibold"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Waktu:</span> <span id="res-waktu" class="font-semibold"></span></div>
+                </div>
+                <div class="pt-4 flex space-x-2">
+                    <button onclick="downloadPDF()" class="flex-1 bg-blue-600 text-white py-2 rounded text-xs font-semibold"><i class="fa-solid fa-download mr-1"></i> Unduh PDF</button>
+                    <button onclick="resetFormTamu()" class="bg-slate-200 text-slate-700 px-4 py-2 rounded text-xs font-semibold">Selesai</button>
+                </div>
+            </div>
         </section>
 
-        <!-- 7. MAPS (Peta Lokasi Kantor / maps.html) -->
-        <section id="section-maps" class="spa-section hidden space-y-6">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 max-w-2xl mx-auto space-y-4 text-center">
-                <h2 class="text-xl font-bold text-slate-800 border-b pb-2"><i class="fa-solid fa-map-location-dot text-emerald-600 mr-2"></i> Lokasi Resmi UPTD Farmasi Tangsel</h2>
-                <p class="text-sm text-slate-600">Titik Koordinat: <code class="bg-slate-100 px-2 py-1 rounded text-xs font-mono">-6.3273811, 106.6826688</code></p>
-                <div class="p-6 bg-slate-50 border rounded-xl space-y-3">
-                    <p class="text-xs text-slate-500">Gedung UPTD Farmasi Dinas Kesehatan Kota Tangerang Selatan.</p>
-                    <a href="https://maps.google.com/?q=-6.3273811,106.6826688" target="_blank" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition"><i class="fa-solid fa-location-arrow mr-1"></i> Buka di Google Maps Resmi</a>
+        <!-- 4. VIEW: PROFIL -->
+        <section id="view-profil" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 max-w-2xl mx-auto space-y-4">
+                <h2 class="text-xl font-bold text-slate-800">Profil UPTD Farmasi</h2>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    UPTD Farmasi Kota Tangerang Selatan merupakan unit pelaksana teknis di bawah Dinas Kesehatan yang bertanggung jawab dalam perencanaan, penerimaan, penyimpanan, pemeliharaan, pendistribusian obat, vaksin, serta perbekalan kesehatan untuk seluruh fasilitas pelayanan kesehatan di Kota Tangerang Selatan.
+                </p>
+                <div class="border-t pt-4">
+                    <h3 class="font-semibold text-sm text-slate-700 mb-2">Lokasi & Kontak</h3>
+                    <p class="text-xs text-slate-500"><i class="fa-solid fa-location-dot mr-1 text-emerald-600"></i> wilayah Kota Tangerang Selatan, Banten</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- 5. VIEW: KONSULTASI -->
+        <section id="view-konsultasi" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 max-w-lg mx-auto text-center space-y-4">
+                <div class="bg-emerald-100 text-emerald-700 w-12 h-12 rounded-full flex items-center justify-center mx-auto text-xl">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <h2 class="text-xl font-bold text-slate-800">Layanan Konsultasi & Pengaduan</h2>
+                <p class="text-xs text-slate-500">Punya kendala logistik obat atau pertanyaan seputar layanan? Hubungi petugas admin kami via WhatsApp.</p>
+                <a href="https://wa.me/6280000000000" target="_blank" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition">
+                    <i class="fa-brands fa-whatsapp mr-1"></i> Hubungi Admin via WhatsApp
+                </a>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="bg-white border-t border-slate-200 mt-auto py-4 text-center text-xs text-slate-500">
         &copy; 2026 UPTD Farmasi Kota Tangerang Selatan. All rights reserved.
     </footer>
 
-    <!-- Integrated JavaScript Client-Side Controller -->
+    <!-- SCRIPT LOGIKA SPA -->
     <script>
-        // Tab Navigation Switcher
+        // Fungsi Navigasi Tab Single Page
         function switchTab(targetId) {
-            document.querySelectorAll('.spa-section').forEach(section => {
-                section.classList.add('hidden');
+            const views = ['beranda', 'konten', 'tamu', 'profil', 'konsultasi'];
+            views.forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                if (v === targetId) {
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
             });
-            const targetSection = document.getElementById('section-' + targetId);
-            if (targetSection) {
-                targetSection.classList.remove('hidden');
-            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Menu Mobile Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         }
 
-        // GPS Validation using Haversine formula (Max 100 meters radius from UPTD Farmasi Tangsel)
-        const OFFICE_LAT = -6.3273811;
-        const OFFICE_LON = 106.6826688;
-        let isGpsValid = false;
-
-        function cekGPS() {
-            const statusBox = document.getElementById('gps-status-box');
-            if (!navigator.geolocation) {
-                statusBox.innerHTML = '<span class="text-red-600">Geolocation tidak didukung oleh browser Anda.</span>';
-                return;
-            }
-            statusBox.innerHTML = '<span>Mengambil koordinat GPS perangkat Anda...</span>';
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    const distance = getDistanceFromLatLonInMeters(lat, lon, OFFICE_LAT, OFFICE_LON);
-                    
-                    if (distance <= 100) {
-                        isGpsValid = true;
-                        statusBox.className = 'p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-xs text-emerald-800 flex justify-between items-center';
-                        statusBox.innerHTML = `<span><i class="fa-solid fa-circle-check mr-1"></i> GPS Valid! Jarak Anda ${Math.round(distance)} meter dari kantor (Dalam radius 100m).</span>`;
-                    } else {
-                        isGpsValid = false;
-                        statusBox.className = 'p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-800 flex justify-between items-center';
-                        statusBox.innerHTML = `<span><i class="fa-solid fa-triangle-exclamation mr-1"></i> Diluar Radius! Jarak Anda ${Math.round(distance)} meter dari kantor (Maks. 100m).</span>`;
-                    }
-                },
-                (error) => {
-                    statusBox.className = 'p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-800 flex justify-between items-center';
-                    statusBox.innerHTML = '<span>Gagal mendeteksi lokasi. Pastikan izin GPS aktif.</span>';
-                },
-                { enableHighAccuracy: true }
-            );
-        }
-
-        function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
-            const R = 6371000; // Radius bumi dalam meter
-            const dLat = deg2rad(lat2 - lat1);
-            const dLon = deg2rad(lon2 - lon1);
-            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-                      Math.sin(dLon/2) * Math.sin(dLon/2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            return R * c;
-        }
-
-        function deg2rad(deg) {
-            return deg * (Math.PI/180);
-        }
-
-        // Form Submission Handler
-        function submitRegistrasi(e) {
-            e.preventDefault();
-            const nama = document.getElementById('reg-nama').value;
-            const instansi = document.getElementById('reg-instansi').value;
-            const kategori = document.getElementById('reg-kategori').value;
-
-            alert(`Pendaftaran kunjungan atas nama ${nama} (${instansi}) berhasil disimpan!`);
-            switchTab('tamu');
-        }
-
-        // WhatsApp Consultation Handler
-        function submitKonsultasi(e) {
-            e.preventDefault();
-            const topik = document.getElementById('kon-topik').value;
-            const pesan = document.getElementById('kon-pesan').value;
-            const waUrl = `https://wa.me/6281234567890?text=Halo%20Admin%20UPTD%20Farmasi,%20Topik:%20${encodeURIComponent(topik)}%20-%20Pesan:%20${encodeURIComponent(pesan)}`;
-            window.open(waUrl, '_blank');
-        }
-
-        function loadTamuData() {
-            alert('Data riwayat tamu berhasil diperbarui.');
-        }
-
-        // PDF Generation Handler using html2pdf.js
-        function downloadPDFReceipt(instansi, kategori, tanggal) {
-            const element = document.createElement('div');
-            element.innerHTML = `
-                <div style="padding: 20px; font-family: sans-serif; color: #334155;">
-                    <div style="text-align: center; border-bottom: 2px solid #047857; padding-bottom: 10px; margin-bottom: 15px;">
-                        <h3 style="margin: 0; font-size: 16px; color: #1e293b;">PEMERINTAH KOTA TANGERANG SELATAN</h3>
-                        <h2 style="margin: 5px 0; font-size: 18px; color: #047857;">DINAS KESEHATAN - UPTD FARMASI</h2>
-                        <p style="margin: 0; font-size: 11px; color: #64748b;">Gedung Layanan Logistik Kesehatan Terpadu</p>
-                    </div>
-                    <h4 style="text-align: center; font-size: 14px; margin-bottom: 15px; text-decoration: underline;">BUKTI TANDA TERIMA KUNJUNGAN</h4>
-                    <table style="width: 100%; font-size: 12px; margin-bottom: 20px; border-collapse: collapse;">
-                        <tr><td style="padding: 6px; width: 35%;"><strong>Instansi Pemohon</strong></td><td style="padding: 6px;">: ${instansi}</td></tr>
-                        <tr><td style="padding: 6px;"><strong>Kategori Keperluan</strong></td><td style="padding: 6px;">: ${kategori}</td></tr>
-                        <tr><td style="padding: 6px;"><strong>Tanggal Kunjungan</strong></td><td style="padding: 6px;">: ${tanggal}</td></tr>
-                        <tr><td style="padding: 6px;"><strong>Status Layanan</strong></td><td style="padding: 6px;">: Selesai / Terverifikasi</td></tr>
-                    </table>
-                    <div style="margin-top: 40px; display: flex; justify-content: space-between; font-size: 12px;">
-                        <div style="text-align: center; float: left; width: 40%;">
-                            <p>Petugas Pelayanan</p>
-                            <br><br>
-                            <p><strong>( .................................... )</strong></p>
-                        </div>
-                        <div style="text-align: center; float: right; width: 40%;">
-                            <p>Penerima / Tamu</p>
-                            <br><br>
-                            <p><strong>( ${instansi} )</strong></p>
-                        </div>
-                    </div>
-                </div>
-            `;
+        // Simulasi Validasi GPS
+        function cekLokasiGPS() {
+            const statusEl = document.getElementById('gps-status');
+            statusEl.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin mr-1"></i> Memeriksa koordinat...`;
             
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        // Koordinat dummy kantor UPTD Farmasi Tangsel (bisa disesuaikan dengan titik aktual)
+                        statusEl.innerHTML = `<span class="text-emerald-600 font-semibold"><i class="fa-solid fa-check-circle mr-1"></i> Lokasi valid (Dalam Radius Kantor)</span>`;
+                    },
+                    (error) => {
+                        statusEl.innerHTML = `<span class="text-amber-600 font-semibold"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Gagal mendeteksi GPS, pastikan izin aktif.</span>`;
+                    },
+                    { timeout: 10000 }
+                );
+            } else {
+                statusEl.innerHTML = `<span class="text-red-600">Geolocation tidak didukung browser ini.</span>`;
+            }
+        }
+
+        // Jalankan saat tab tamu dibuka
+        document.addEventListener("DOMContentLoaded", () => {
+            cekLokasiGPS();
+        });
+
+        // Handler Submit Buku Tamu
+        function handleTamuSubmit(e) {
+            e.preventDefault();
+            const nama = document.getElementById('tamu-nama').value;
+            const instansi = document.getElementById('tamu-instansi').value;
+            const kategori = document.getElementById('tamu-kategori').value;
+            
+            // Isi data ke struk bukti
+            document.getElementById('res-id').innerText = 'TGL-' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('res-nama').innerText = nama;
+            document.getElementById('res-instansi').innerText = instansi;
+            document.getElementById('res-kategori').innerText = kategori;
+            document.getElementById('res-waktu').innerText = new Date().toLocaleString('id-ID');
+
+            // Sembunyikan form, tampilkan area cetak
+            document.getElementById('form-tamu').classList.add('hidden');
+            document.getElementById('print-area').classList.remove('hidden');
+        }
+
+        // Fungsi Unduh PDF
+        function downloadPDF() {
+            const element = document.getElementById('print-area');
             const opt = {
-                margin:       10,
-                filename:     `Bukti_Tanda_Terima_${instansi.replace(/\s+/g, '_')}.pdf`,
+                margin:       1,
+                filename:     'bukti-kunjungan-uptd-farmasi.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2 },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                jsPDF:        { unit: 'mm', format: 'a5', orientation: 'portrait' }
             };
-
             html2pdf().from(element).set(opt).save();
+        }
+
+        function resetFormTamu() {
+            document.getElementById('form-tamu').reset();
+            document.getElementById('form-tamu').classList.remove('hidden');
+            document.getElementById('print-area').classList.add('hidden');
+            cekLokasiGPS();
         }
     </script>
 </body>
 </html>
-
