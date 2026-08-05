@@ -1,286 +1,402 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <title>UPTD Farmasi Kota Tangerang Selatan</title>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-
-    const firebaseConfig = { apiKey: "AIzaSyA6B5MysWIMi4weR3Wgo3HuaIl-aaZpChw", authDomain: "digital-books-d22c9.firebaseapp.com", projectId: "digital-books-d22c9", storageBucket: "digital-books-d22c9.firebasestorage.app", messagingSenderId: "905407530155", appId: "1:905407530155:web:dd90e18d4158ce42fae3ee", measurementId: "G-LL7GF2RMF8" };
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    window.switchTab = function(tabId) {
-      document.querySelectorAll('.app-section').forEach(el => el.classList.add('hidden'));
-      document.getElementById(tabId).classList.remove('hidden');
-      window.scrollTo(0, 0);
-    }
-
-    // Load Tamu Live
-    document.addEventListener("DOMContentLoaded", () => {
-      const container = document.getElementById("containerTamu");
-      if(container) {
-        onSnapshot(query(collection(db, "tamu"), orderBy("waktu", "desc")), (snapshot) => {
-          container.innerHTML = "";
-          if (snapshot.empty) {
-            container.innerHTML = `<div class="text-center py-6 text-xs text-gray-400">Belum ada riwayat kunjungan tamu.</div>`;
-            return;
-          }
-          snapshot.forEach(docSnap => {
-            const d = docSnap.data();
-            container.innerHTML += `
-              <div class="p-4 rounded-xl border border-blue-100 bg-gray-50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                <div>
-                  <div class="flex items-center gap-2">
-                    <span class="font-extrabold text-blue-900 text-sm">${d.nomorAntrian || 'A-000'}</span>
-                    <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-bold">${d.keperluan || '-'}</span>
-                  </div>
-                  <p class="font-bold text-xs text-gray-800 mt-1">${d.nama} (${d.instansi || '-'})</p>
-                  <p class="text-[10px] text-gray-500 mt-0.5">Status: <span class="font-semibold text-emerald-700">${d.status || 'menunggu'}</span></p>
-                </div>
-                ${d.suratUrl ? `<a href="${d.suratUrl}" target="_blank" class="text-xs bg-emerald-600 text-white px-3 py-1.5 rounded-lg font-bold hover:bg-emerald-700 transition">Lihat Dokumen</a>` : ''}
-              </div>
-            `;
-          });
-        });
-      }
-
-      // Checkin Form Handler
-      const checkinForm = document.getElementById("formCheckin");
-      if(checkinForm) {
-        checkinForm.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const nama = document.getElementById("nama").value;
-          const instansi = document.getElementById("instansi").value;
-          const hp = document.getElementById("hp").value;
-          const keperluan = document.getElementById("keperluan").value;
-          
-          const noAntrian = "ANT-" + Math.floor(100 + Math.random() * 900);
-          try {
-            await addDoc(collection(db, "tamu"), {
-              nama, instansi, hp, keperluan, nomorAntrian: noAntrian, status: "Menunggu", waktu: new Date().toISOString()
-            });
-            alert("Check-in Berhasil! Nomor Antrean Anda: " + noAntrian);
-            checkinForm.reset();
-            switchTab('section-konten');
-          } catch(err) {
-            alert("Gagal menyimpan data: " + err.message);
-          }
-        });
-      }
-
-      // Konsultasi Handler
-      const btnKirim = document.getElementById("btnKirimKonsultasi");
-      if(btnKirim) {
-        btnKirim.addEventListener("click", () => {
-          const nama = document.getElementById("namaPengadu").value.trim();
-          const instansi = document.getElementById("instansiPengadu").value.trim();
-          const hp = document.getElementById("hpPengadu").value.trim();
-          const pesan = document.getElementById("pesanPengadu").value.trim();
-
-          if (!nama || !hp || !pesan) {
-            alert("Mohon lengkapi Nama, No. WhatsApp, dan Pesan Konsultasi!");
-            return;
-          }
-          const nomorAdmin = "62881080698977";
-          const textWA = `Halo Admin UPTD Farmasi Tangsel,%0ASaya ingin menyampaikan konsultasi/pengaduan:%0A%0ANama: ${nama}%0AInstansi: ${instansi || '-'}%0ANo. HP: ${hp}%0APesan:%0A${pesan}`;
-          window.open(`https://wa.me/${nomorAdmin}?text=${textWA}`, '_blank');
-        });
-      }
-    });
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+<title>UPTD Farmasi Kota Tangerang Selatan - Sistem Layanan Terpadu</title>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+​const firebaseConfig = { apiKey: "AIzaSyA6B5MysWIMi4weR3Wgo3HuaIl-aaZpChw", authDomain: "digital-books-d22c9.firebaseapp.com", projectId: "digital-books-d22c9", storageBucket: "digital-books-d22c9.firebasestorage.app", messagingSenderId: "905407530155", appId: "1:905407530155:web:dd90e18d4158ce42fae3ee", measurementId: "G-LL7GF2RMF8" };
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+​window.switchTab = function(tabId) {
+document.querySelectorAll('.app-section').forEach(el => el.classList.add('hidden'));
+document.getElementById(tabId).classList.remove('hidden');
+window.scrollTo(0, 0);
+}
+​const initialDrugs = [
+{ kode: "OBT-001", nama: "Paracetamol 500mg Tablet", kategori: "PKD", stok: "12,500 Box", satuan: "Box", status: "Tersedia" },
+{ kode: "OBT-002", nama: "Amoxicillin 500mg Kaplet", kategori: "PKD", stok: "8,200 Box", satuan: "Box", status: "Tersedia" },
+{ kode: "OBT-003", nama: "Vaksin Polio bOPV", kategori: "Vaksin", stok: "1,450 Vial", satuan: "Vial", status: "Tersedia" },
+{ kode: "OBT-004", nama: "Vaksin BCG 20 Dosis", kategori: "Vaksin", stok: "890 Vial", satuan: "Vial", status: "Terbatas" },
+{ kode: "OBT-005", nama: "Reagen Antigen COVID-19", kategori: "Reagen", stok: "3,000 Test", satuan: "Kit", status: "Tersedia" },
+{ kode: "OBT-006", nama: "OAT Kategori 1 (Paket TB Dewasa)", kategori: "TB & Kusta", stok: "450 Paket", satuan: "Paket", status: "Tersedia" },
+{ kode: "OBT-007", nama: "Tenofovir 300mg (ARV)", kategori: "HIV & PKG", stok: "1,200 Botol", satuan: "Botol", status: "Tersedia" },
+{ kode: "OBT-008", nama: "RDT Malaria Pf/Pv", kategori: "DBD & Malaria", stok: "600 Test", satuan: "Box", status: "Tersedia" },
+{ kode: "OBT-009", nama: "Hepatitis B Vaccine 0.5ml", kategori: "Hepatitis", stok: "2,100 Vial", satuan: "Vial", status: "Tersedia" }
+];
+​const staffList = [
+{ nama: "H. Ahmad Zaki, S.Si., Apt.", nip: "19820512 200801 1 004", jabatan: "Kepala UPTD Farmasi", golongan: "Pembina / IV/a" },
+{ nama: "Siti Rahmawati, S.Farm., Apt.", nip: "19880324 201402 2 001", jabatan: "Kasubbag Tata Usaha", golongan: "Penata Tk.I / III/d" },
+{ nama: "Badarudin, A.Md.", nip: "19891010 201101 1 002", jabatan: "Pranata Komputer / Pengelola Sistem", golongan: "Penata Muda / III/a" },
+{ nama: "Dr. Dian Permata", nip: "19901205 201903 2 003", jabatan: "Penanggung Jawab Program Vaksin & Imunisasi", golongan: "Penata Muda Tk.I / III/b" },
+{ nama: "Eko Prasetyo, S.K.M.", nip: "19850718 201001 1 005", jabatan: "Pengelola Distribusi Obat & Perbekalan", golongan: "Penata / III/c" }
+];
+​document.addEventListener("DOMContentLoaded", () => {
+renderDrugTable('tamu', initialDrugs);
+renderDrugTable('admin', initialDrugs);
+renderStaffTable();
+​const containerTamu = document.getElementById("containerTamu");
+if(containerTamu) {
+onSnapshot(query(collection(db, "tamu"), orderBy("waktu", "desc")), (snapshot) => {
+containerTamu.innerHTML = "";
+if (snapshot.empty) {
+containerTamu.innerHTML = <div class="text-center py-6 text-xs text-gray-400">Belum ada riwayat kunjungan tamu.</div>;
+return;
+}
+snapshot.forEach(docSnap => {
+const d = docSnap.data();
+containerTamu.innerHTML += <div class="p-4 rounded-xl border border-blue-100 bg-gray-50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3"> <div> <div class="flex items-center gap-2"> <span class="font-extrabold text-blue-900 text-sm">${d.nomorAntrian || 'A-000'}</span> <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-bold">${d.keperluan || '-'}</span> </div> <p class="font-bold text-xs text-gray-800 mt-1">${d.nama} (${d.instansi || '-'})</p> <p class="text-[10px] text-gray-500 mt-0.5">Status: <span class="font-semibold text-emerald-700">${d.status || 'Menunggu'}</span></p> </div> </div>;
+});
+});
+}
+​const checkinForm = document.getElementById("formCheckin");
+if(checkinForm) {
+checkinForm.addEventListener("submit", async (e) => {
+e.preventDefault();
+const nama = document.getElementById("nama").value;
+const instansi = document.getElementById("instansi").value;
+const hp = document.getElementById("hp").value;
+const keperluan = document.getElementById("keperluan").value;
+​const noAntrian = "ANT-" + Math.floor(100 + Math.random() * 900);
+try {
+await addDoc(collection(db, "tamu"), {
+nama, instansi, hp, keperluan, nomorAntrian: noAntrian, status: "Menunggu", waktu: new Date().toISOString()
+});
+alert("Check-in Berhasil! Nomor Antrean Anda: " + noAntrian);
+checkinForm.reset();
+switchTab('section-konten');
+} catch(err) {
+alert("Gagal menyimpan data: " + err.message);
+}
+});
+}
+​const btnKirim = document.getElementById("btnKirimKonsultasi");
+if(btnKirim) {
+btnKirim.addEventListener("click", () => {
+const nama = document.getElementById("namaPengadu").value.trim();
+const instansi = document.getElementById("instansiPengadu").value.trim();
+const hp = document.getElementById("hpPengadu").value.trim();
+const pesan = document.getElementById("pesanPengadu").value.trim();
+​if (!nama || !hp || !pesan) {
+alert("Mohon lengkapi Nama, No. WhatsApp, dan Pesan Konsultasi!");
+return;
+}
+const nomorAdmin = "62881080698977";
+const textWA = Halo Admin UPTD Farmasi Tangsel,%0ASaya ingin menyampaikan konsultasi/pengaduan:%0A%0ANama: ${nama}%0AInstansi: ${instansi || '-'}%0ANo. HP: ${hp}%0APesan:%0A${pesan};
+window.open([https://wa.me/$](https://wa.me/$){nomorAdmin}?text=${textWA}, '_blank');
+});
+}
+});
+​function renderDrugTable(mode, data) {
+const tbody = document.getElementById(mode === 'admin' ? 'tbodyAdmin' : 'tbodyGuest');
+if(!tbody) return;
+tbody.innerHTML = "";
+data.forEach((item) => {
+tbody.innerHTML += <tr class="border-b hover:bg-gray-50 text-xs"> <td class="p-3 font-bold text-blue-900">${item.kode}</td> <td class="p-3 font-semibold text-gray-800">${item.nama}</td> <td class="p-3"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-bold text-[10px]">${item.kategori}</span></td> <td class="p-3 font-bold text-emerald-700">${item.stok}</td> <td class="p-3"><span class="px-2 py-0.5 rounded font-bold text-[10px] ${item.status === 'Tersedia' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">${item.status}</span></td> ${mode === 'admin' ?<td class="p-3 text-center"><button onclick="alert('Fitur edit stok obat')" class="bg-blue-600 text-white px-2 py-1 rounded text-[10px] font-bold">Edit</button></td>: ''} </tr>;
+});
+}
+​function renderStaffTable() {
+const tbody = document.getElementById('tbodyStaff');
+if(!tbody) return;
+tbody.innerHTML = "";
+staffList.forEach((staff, i) => {
+tbody.innerHTML += <tr class="border-b hover:bg-gray-50 text-xs"> <td class="p-3 font-bold text-gray-800">${i+1}</td> <td class="p-3 font-bold text-blue-900">${staff.nama}</td> <td class="p-3 text-gray-600">${staff.nip}</td> <td class="p-3 font-semibold text-gray-700">${staff.jabatan}</td> <td class="p-3 text-gray-600">${staff.golongan}</td> </tr>;
+});
+}
+​window.filterObat = function(kategori) {
+const filtered = kategori === 'Semua' ? initialDrugs : initialDrugs.filter(d => d.kategori === kategori);
+renderDrugTable('tamu', filtered);
+renderDrugTable('admin', filtered);
+}
+</script>
 </head>
 <body class="bg-[#d1e7dd] font-sans p-4 md:p-8 min-h-screen flex flex-col justify-between">
-
-  <!-- 1. SECTION UTAMA / HOME (CHECK-IN) -->
-  <div id="section-home" class="app-section max-w-4xl mx-auto space-y-6 w-full">
-    <div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
-      <h1 class="text-2xl font-bold text-blue-900">UPTD FARMASI KOTA TANGERANG SELATAN</h1>
-      <p class="text-xs text-gray-500 mt-1">Sistem Layanan Digital & Check-In Tamu Terintegrasi</p>
-    </div>
-
-    <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-400 space-y-4">
-      <h3 class="font-bold text-sm text-blue-900 border-b pb-2">Formulir Registrasi & Check-In Tamu</h3>
-      <form id="formCheckin" class="space-y-3">
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Nama Lengkap</label>
-          <input id="nama" required placeholder="Masukkan nama lengkap" class="w-full p-3 border rounded-xl text-xs">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Instansi / Puskesmas / Rumah Sakit</label>
-          <input id="instansi" required placeholder="Masukkan asal instansi" class="w-full p-3 border rounded-xl text-xs">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Nomor WhatsApp Aktif</label>
-          <input id="hp" required placeholder="08xxxxxxxxxx" class="w-full p-3 border rounded-xl text-xs">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Keperluan Layanan</label>
-          <select id="keperluan" class="w-full p-3 border rounded-xl text-xs">
-            <option value="Permintaan Obat & Perbekalan Kesehatan">Permintaan Obat & Perbekalan Kesehatan</option>
-            <option value="Konsultasi & Koordinasi Teknis">Konsultasi & Koordinasi Teknis</option>
-            <option value="Pengembalian / Pelaporan Logistik">Pengembalian / Pelaporan Logistik</option>
-            <option value="Lainnya">Lainnya</option>
-          </select>
-        </div>
-        <button type="submit" class="w-full bg-blue-900 text-white p-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition shadow">
-          Check-In & Ambil Antrean 🚀
-        </button>
-      </form>
-
-      <div class="pt-4 text-center border-t">
-        <button onclick="switchTab('section-konten')" class="text-xs font-bold text-blue-900 hover:underline">
-          Lewati ke Menu Utama & Layanan Informasi ➔
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 2. SECTION KONTEN / BERANDA UTAMA -->
-  <div id="section-konten" class="app-section hidden max-w-4xl mx-auto space-y-6 w-full">
-    <div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
-      <h1 class="text-2xl font-bold text-blue-900">MENU UTAMA & LAYANAN</h1>
-      <p class="text-xs text-gray-500 mt-1">Pilih menu layanan digital UPTD Farmasi Tangsel</p>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <button onclick="switchTab('section-tamu')" class="bg-white p-5 rounded-2xl shadow border-2 border-blue-400 text-left hover:bg-blue-50 transition">
-        <h3 class="font-bold text-blue-900 text-sm">📋 Daftar Tamu & Antrean</h3>
-        <p class="text-xs text-gray-500 mt-1">Lihat status antrean dan riwayat kunjungan.</p>
-      </button>
-      <button onclick="switchTab('section-maps')" class="bg-white p-5 rounded-2xl shadow border-2 border-blue-400 text-left hover:bg-blue-50 transition">
-        <h3 class="font-bold text-blue-900 text-sm">📍 Peta & Lokasi Kantor</h3>
-        <p class="text-xs text-gray-500 mt-1">Lihat peta lokasi dan rute ke UPTD Farmasi.</p>
-      </button>
-      <button onclick="switchTab('section-konsultasi')" class="bg-white p-5 rounded-2xl shadow border-2 border-blue-400 text-left hover:bg-blue-50 transition">
-        <h3 class="font-bold text-blue-900 text-sm">💬 Konsultasi & Pengaduan</h3>
-        <p class="text-xs text-gray-500 mt-1">Kirim pesan kendala atau tanya langsung via WA.</p>
-      </button>
-      <button onclick="switchTab('section-panduan')" class="bg-white p-5 rounded-2xl shadow border-2 border-blue-400 text-left hover:bg-blue-50 transition">
-        <h3 class="font-bold text-blue-900 text-sm">📖 Panduan Penggunaan</h3>
-        <p class="text-xs text-gray-500 mt-1">Petunjuk lengkap cara menggunakan aplikasi.</p>
-      </button>
-    </div>
-
-    <div class="text-center pt-2">
-      <button onclick="switchTab('section-home')" class="bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">
-        ← Kembali ke Form Check-In
-      </button>
-    </div>
-  </div>
-
-  <!-- 3. SECTION TAMU & ANTREAN -->
-  <div id="section-tamu" class="app-section hidden max-w-4xl mx-auto space-y-6 w-full">
-    <div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
-      <h1 class="text-2xl font-bold text-blue-900">RIWAYAT & STATUS KUNJUNGAN</h1>
-      <p class="text-xs text-gray-500 mt-1">Daftar Tamu & Antrean Aktif di UPTD Farmasi</p>
-    </div>
-    <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-400 space-y-4">
-      <h3 class="font-bold text-sm text-blue-900 mb-2">Daftar Antrean Hari Ini</h3>
-      <div id="containerTamu" class="space-y-3">
-        <div class="text-center py-6 text-xs text-gray-500">Memuat data antrean tamu...</div>
-      </div>
-    </div>
-    <div class="text-center">
-      <button onclick="switchTab('section-konten')" class="bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">
-        ← Kembali ke Menu Utama
-      </button>
-    </div>
-  </div>
-
-  <!-- 4. SECTION MAPS & LOKASI -->
-  <div id="section-maps" class="app-section hidden max-w-4xl mx-auto space-y-6 w-full">
-    <div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
-      <h1 class="text-2xl font-bold text-blue-900">LOKASI UPTD FARMASI</h1>
-      <p class="text-xs text-gray-500 mt-1">Kota Tangerang Selatan - Banten</p>
-    </div>
-    <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-400 space-y-4">
-      <div class="aspect-video w-full rounded-xl overflow-hidden border shadow-inner">
-        <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.656822941916!2d106.6804741!3d-6.3273811!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTkmMzguNiJTIDEwNsKwNDAnNTcuNyJF!5e0!3m2!1sid!2sid!4v1710000000000!5m2!1sid!2sid"></iframe>
-      </div>
-      <div class="text-center space-y-2">
-        <h3 class="font-bold text-lg text-blue-900">Alamat Kantor</h3>
-        <p class="text-xs text-gray-700">Jalan Cendekia, Ciater, Serpong, Kota Tangerang Selatan - Banten</p>
-        <div class="pt-2">
-          <a href="https://maps.app.goo.gl/1jmY2uEya56V83uA9?g_st=ac" target="_blank" class="inline-block bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition shadow">
-            Buka di Google Maps Langsung ↗
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="text-center">
-      <button onclick="switchTab('section-konten')" class="bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">
-        ← Kembali ke Menu Utama
-      </button>
-    </div>
-  </div>
-
-  <!-- 5. SECTION KONSULTASI & PENGADUAN -->
-  <div id="section-konsultasi" class="app-section hidden max-w-4xl mx-auto space-y-6 w-full">
-    <div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
-      <h1 class="text-2xl font-bold text-blue-900">KONSULTASI & PENGADUAN KELUHAN</h1>
-      <p class="text-xs text-gray-500 mt-1">Sampaikan pertanyaan teknis atau kendala layanan</p>
-    </div>
-    <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-400 space-y-4">
-      <div class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Nama Lengkap / Pemohon</label>
-          <input id="namaPengadu" placeholder="Masukkan nama lengkap" class="w-full p-3 border rounded-xl text-xs">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Asal Instansi / Puskesmas / Klinik</label>
-          <input id="instansiPengadu" placeholder="Masukkan instansi" class="w-full p-3 border rounded-xl text-xs">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Nomor WhatsApp Aktif</label>
-          <input id="hpPengadu" placeholder="Contoh: 08123456789" class="w-full p-3 border rounded-xl text-xs">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Isi Pesan / Pertanyaan / Kendala</label>
-          <textarea id="pesanPengadu" rows="4" placeholder="Tuliskan konsultasi atau pengaduan Anda secara detail..." class="w-full p-3 border rounded-xl text-xs"></textarea>
-        </div>
-        <button id="btnKirimKonsultasi" class="w-full bg-blue-900 text-white p-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition shadow">
-          Kirim via WhatsApp ke Admin UPTD Farmasi
-        </button>
-      </div>
-    </div>
-    <div class="text-center">
-      <button onclick="switchTab('section-konten')" class="bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">
-        ← Kembali ke Menu Utama
-      </button>
-    </div>
-  </div>
-
-  <!-- 6. SECTION PANDUAN PENGGUNAAN -->
-  <div id="section-panduan" class="app-section hidden max-w-4xl mx-auto space-y-6 w-full">
-    <div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
-      <h1 class="text-2xl font-bold text-blue-900">PANDUAN PENGGUNAAN APLIKASI</h1>
-      <p class="text-xs text-gray-500 mt-1">Petunjuk Praktis Layanan Digital UPTD Farmasi Tangsel</p>
-    </div>
-    <div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-400 space-y-4 text-xs text-gray-700 leading-relaxed">
-      <div class="space-y-3">
-        <h3 class="font-extrabold text-sm text-blue-900 border-b pb-1">1. Cara Melakukan Check-In & Ambil Antrian</h3>
-        <p>Isi formulir Registrasi Tamu di halaman awal meliputi Nama Lengkap, Instansi, No. Telepon, dan Keperluan Layanan. Klik tombol <b>Check-In & Ambil Antrian</b>. Sistem akan menyimpan data ke database dan memberikan nomor antrean.</p>
-
-        <h3 class="font-extrabold text-sm text-blue-900 border-b pb-1 pt-2">2. Akses Menu Informasi & Layanan</h3>
-        <p>Melalui menu utama, Anda dapat mengakses fitur Daftar Tamu, Peta Lokasi, Konsultasi WhatsApp, serta Panduan secara terpadu dalam satu halaman tanpa perlu berpindah-pindah file.</p>
-      </div>
-    </div>
-    <div class="text-center">
-      <button onclick="switchTab('section-konten')" class="bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">
-        ← Kembali ke Menu Utama
-      </button>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="max-w-4xl mx-auto w-full mt-8 text-center text-xs text-gray-600">
-    &copy; 2026 UPTD Farmasi Kota Tangerang Selatan. All rights reserved.
-  </footer>
-
-</body>
-</html>
-
+​<!-- 1. HOME / CHECK-IN SECTION -->
+<div id="section-home" class="app-section max-w-4xl mx-auto space-y-6 w-full">
+<div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
+<h1 class="text-2xl font-bold text-blue-900">UPTD FARMASI KOTA TANGERANG SELATAN</h1>
+<p class="text-xs text-gray-500 mt-1">Sistem Layanan Digital & Check-In Tamu Terintegrasi</p>
+</div>
+​<div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-400 space-y-4">
+<h3 class="font-bold text-sm text-blue-900 border-b pb-2">Formulir Registrasi & Check-In Tamu</h3>
+<form id="formCheckin" class="space-y-3">
+<div>
+<label class="block text-xs font-bold text-gray-700 mb-1">Nama Lengkap</label>
+<input id="nama" required placeholder="Masukkan nama lengkap" class="w-full p-3 border rounded-xl text-xs">
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-700 mb-1">Instansi / Puskesmas / Rumah Sakit</label>
+<input id="instansi" required placeholder="Masukkan asal instansi" class="w-full p-3 border rounded-xl text-xs">
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-700 mb-1">Nomor WhatsApp Aktif</label>
+<input id="hp" required placeholder="08xxxxxxxxxx" class="w-full p-3 border rounded-xl text-xs">
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-700 mb-1">Keperluan Layanan</label>
+<select id="keperluan" class="w-full p-3 border rounded-xl text-xs">
+<option value="Permintaan Obat & Perbekalan Kesehatan">Permintaan Obat & Perbekalan Kesehatan</option>
+<option value="Konsultasi & Koordinasi Teknis">Konsultasi & Koordinasi Teknis</option>
+<option value="Pengembalian / Pelaporan Logistik">Pengembalian / Pelaporan Logistik</option>
+<option value="Lainnya">Lainnya</option>
+</select>
+</div>
+<button type="submit" class="w-full bg-blue-900 text-white p-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition shadow">
+Check-In & Ambil Antrean 🚀
+</button>
+</form>
+​<div class="pt-4 text-center border-t flex justify-center gap-4">
+<button onclick="switchTab('section-konten')" class="text-xs font-bold text-blue-900 hover:underline">
+Buka Menu Utama & Layanan ➔
+</button>
+<button onclick="switchTab('section-admin')" class="text-xs font-bold text-emerald-800 hover:underline">
+🔒 Masuk Panel Admin ➔
+</button>
+</div>
+</div>
+</div>
+​<!-- 2. KONTEN / BERANDA UTAMA -->
+<div id="section-konten" class="app-section hidden max-w-4xl mx-auto space-y-6 w-full">
+<div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
+<h1 class="text-2xl font-bold text-blue-900">MENU UTAMA & LAYANAN DIGITAL</h1>
+<p class="text-xs text-gray-500 mt-1">Pilih menu layanan UPTD Farmasi Kota Tangerang Selatan</p>
+</div>
+​<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+<button onclick="switchTab('section-tamu')" class="bg-white p-5 rounded-2xl shadow border-2 border-blue-400 text-left hover:bg-blue-50 transition">
+<h3 class="font-bold text-blue-900 text-sm">📋 Daftar Tamu & Antrean</h3>
+<p class="text-xs text-gray-500 mt-1">Status antrean kunjungan secara real-time.</p>
+</button>
+<button onclick="switchTab('section-obat')" class="bg-white p-5 rounded-2xl shadow border-2 border-blue-400 text-left hover:bg-blue-50 transition">
+<h3 class="font-bold text-blue-900 text-sm">💊 Data Ketersediaan Obat</h3>
+<p class="text-xs text-gray-500 mt-1">Stok obat program dan perbekalan kesehatan.</p>
+</button>
+<button onclick="switchTab('section-staff')" class="bg-white p-5 rounded-2xl shadow border-2 border-blue-400 text-left hover:bg-blue-50 transition">
+<h3 class="font-bold text-blue-900 text-sm">👥 Profil Pegawai</h3>
+<p class="text-xs text-gray-500 mt-1">Daftar aparatur dan penanggung jawab.</p>
+</button>
+<button onclick="switchTab('section-maps')" class="bg-white p-5 rounded-2xl shadow border-2 border-blue-400 text-left hover:bg-blue-50 transition">
+<h3 class="font-bold text-blue-900 text-sm">📍 Peta & Lokasi Kantor</h3>
+<p class="text-xs text-gray-500 mt-1">Alamat dan rute peta lokasi kantor.</p>
+</button>
+<button onclick="switchTab('section-konsultasi')" class="bg-white p-5 rounded-2xl shadow border-2 border-blue-400 text-left hover:bg-blue-50 transition">
+<h3 class="font-bold text-blue-900 text-sm">💬 Konsultasi & Pengaduan</h3>
+<p class="text-xs text-gray-500 mt-1">Kirim pesan kendala via WhatsApp.</p>
+</button>
+<button onclick="switchTab('section-panduan')" class="bg-white p-5 rounded-2xl shadow border-2 border-blue-400 text-left hover:bg-blue-50 transition">
+<h3 class="font-bold text-blue-900 text-sm">📖 Panduan Aplikasi</h3>
+<p class="text-xs text-gray-500 mt-1">Petunjuk operasional layanan digital.</p>
+</button>
+</div>
+​<div class="text-center pt-2">
+<button onclick="switchTab('section-home')" class="bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">
+← Kembali ke Form Check-In
+</button>
+</div>
+</div>
+​<!-- 3. DAFTAR TAMU & ANTREAN (tamu.html) -->
+<div id="section-tamu" class="app-section hidden max-w-4xl mx-auto space-y-6 w-full">
+<div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
+<h1 class="text-2xl font-bold text-blue-900">RIWAYAT & STATUS KUNJUNGAN TAMU</h1>
+<p class="text-xs text-gray-500 mt-1">Antrean Aktif Terhubung Firebase Firestore</p>
+</div>
+<div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-400 space-y-4">
+<h3 class="font-bold text-sm text-blue-900 mb-2">Daftar Antrean Hari Ini</h3>
+<div id="containerTamu" class="space-y-3">
+<div class="text-center py-6 text-xs text-gray-500">Memuat data antrean tamu...</div>
+</div>
+</div>
+<div class="text-center">
+<button onclick="switchTab('section-konten')" class="bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">
+← Kembali ke Menu Utama
+</button>
+</div>
+</div>
+​<!-- 4. DATA KETERSEDIAAN OBAT -->
+<div id="section-obat" class="app-section hidden max-w-4xl mx-auto space-y-6 w-full">
+<div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
+<h1 class="text-2xl font-bold text-blue-900">KETERSEDIAAN OBAT & PERBEKALAN KESEHATAN</h1>
+<p class="text-xs text-gray-500 mt-1">Data Stok Program UPTD Farmasi Tangsel</p>
+</div>
+<div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-400 space-y-4">
+<div class="flex flex-wrap gap-2 pb-2 border-b">
+<button onclick="filterObat('Semua')" class="px-3 py-1 bg-blue-900 text-white rounded-lg text-xs font-bold">Semua</button>
+<button onclick="filterObat('PKD')" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg text-xs font-bold hover:bg-blue-100">PKD</button>
+<button onclick="filterObat('Vaksin')" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg text-xs font-bold hover:bg-blue-100">Vaksin</button>
+<button onclick="filterObat('Reagen')" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg text-xs font-bold hover:bg-blue-100">Reagen</button>
+<button onclick="filterObat('TB & Kusta')" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg text-xs font-bold hover:bg-blue-100">TB & Kusta</button>
+<button onclick="filterObat('HIV & PKG')" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg text-xs font-bold hover:bg-blue-100">HIV & PKG</button>
+<button onclick="filterObat('DBD & Malaria')" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg text-xs font-bold hover:bg-blue-100">DBD & Malaria</button>
+<button onclick="filterObat('Hepatitis')" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg text-xs font-bold hover:bg-blue-100">Hepatitis</button>
+</div>
+​<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-blue-50 border-b text-xs text-blue-900 font-bold">
+<th class="p-3">Kode</th>
+<th class="p-3">Nama Obat / Logistik</th>
+<th class="p-3">Kategori</th>
+<th class="p-3">Stok Tersedia</th>
+<th class="p-3">Status</th>
+</tr>
+</thead>
+<tbody id="tbodyGuest"></tbody>
+</table>
+</div>
+<div class="text-center pt-2">
+<button onclick="window.print()" class="bg-emerald-700 text-white px-4 py-2 rounded-xl font-bold text-xs hover:bg-emerald-800 transition">🖨️ Cetak / Unduh Laporan PDF</button>
+</div>
+</div>
+<div class="text-center">
+<button onclick="switchTab('section-konten')" class="bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">
+← Kembali ke Menu Utama
+</button>
+</div>
+</div>
+​<!-- 5. PROFIL PEGAWAI -->
+<div id="section-staff" class="app-section hidden max-w-4xl mx-auto space-y-6 w-full">
+<div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
+<h1 class="text-2xl font-bold text-blue-900">PROFIL PEGAWAI & STRUKTUR ORGANISASI</h1>
+<p class="text-xs text-gray-500 mt-1">Daftar Aparatur Sipil Negara UPTD Farmasi Tangsel</p>
+</div>
+<div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-400 space-y-4">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-blue-50 border-b text-xs text-blue-900 font-bold">
+<th class="p-3">No</th>
+<th class="p-3">Nama & Gelar</th>
+<th class="p-3">NIP</th>
+<th class="p-3">Jabatan / Tanggung Jawab</th>
+<th class="p-3">Golongan</th>
+</tr>
+</thead>
+<tbody id="tbodyStaff"></tbody>
+</table>
+</div>
+</div>
+<div class="text-center">
+<button onclick="switchTab('section-konten')" class="bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">
+← Kembali ke Menu Utama
+</button>
+</div>
+</div>
+​<!-- 6. MAPS & LOKASI (maps.html) -->
+<div id="section-maps" class="app-section hidden max-w-4xl mx-auto space-y-6 w-full">
+<div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
+<h1 class="text-2xl font-bold text-blue-900">LOKASI UPTD FARMASI</h1>
+<p class="text-xs text-gray-500 mt-1">Kota Tangerang Selatan - Banten</p>
+</div>
+<div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-400 space-y-4">
+<div class="aspect-video w-full rounded-xl overflow-hidden border shadow-inner">
+<iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="[https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.656822941916!2d106.6804741!3d-6.3273811!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTkmMzguNiJTIDEwNsKwNDAnNTcuNyJF!5e0!3m2!1sid!2sid!4v1710000000000!5m2!1sid!2sid](https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.656822941916!2d106.6804741!3d-6.3273811!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTkmMzguNiJTIDEwNsKwNDAnNTcuNyJF!5e0!3m2!1sid!2sid!4v1710000000000!5m2!1sid!2sid)"></iframe>
+</div>
+<div class="text-center space-y-2">
+<h3 class="font-bold text-lg text-blue-900">Alamat Kantor</h3>
+<p class="text-xs text-gray-700">Jalan Cendekia, Ciater, Serpong, Kota Tangerang Selatan - Banten</p>
+<div class="pt-2">
+<a href="[https://maps.app.goo.gl/1jmY2uEya56V83uA9?g_st=ac](https://maps.app.goo.gl/1jmY2uEya56V83uA9?g_st=ac)" target="_blank" class="inline-block bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition shadow">
+Buka di Google Maps Langsung ↗
+</a>
+</div>
+</div>
+</div>
+<div class="text-center">
+<button onclick="switchTab('section-konten')" class="bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">
+← Kembali ke Menu Utama
+</button>
+</div>
+</div>
+​<!-- 7. KONSULTASI & PENGADUAN (konsultasi.html) -->
+<div id="section-konsultasi" class="app-section hidden max-w-4xl mx-auto space-y-6 w-full">
+<div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
+<h1 class="text-2xl font-bold text-blue-900">KONSULTASI & PENGADUAN KELUHAN</h1>
+<p class="text-xs text-gray-500 mt-1">Sampaikan pertanyaan teknis atau kendala layanan</p>
+</div>
+<div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-400 space-y-4">
+<div class="space-y-4">
+<div>
+<label class="block text-xs font-bold text-gray-700 mb-1">Nama Lengkap / Pemohon</label>
+<input id="namaPengadu" placeholder="Masukkan nama lengkap" class="w-full p-3 border rounded-xl text-xs">
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-700 mb-1">Asal Instansi / Puskesmas / Klinik</label>
+<input id="instansiPengadu" placeholder="Masukkan instansi" class="w-full p-3 border rounded-xl text-xs">
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-700 mb-1">Nomor WhatsApp Aktif</label>
+<input id="hpPengadu" placeholder="Contoh: 08123456789" class="w-full p-3 border rounded-xl text-xs">
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-700 mb-1">Isi Pesan / Pertanyaan / Kendala</label>
+<textarea id="pesanPengadu" rows="4" placeholder="Tuliskan konsultasi atau pengaduan Anda secara detail..." class="w-full p-3 border rounded-xl text-xs"></textarea>
+</div>
+<button id="btnKirimKonsultasi" class="w-full bg-blue-900 text-white p-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition shadow">
+Kirim via WhatsApp ke Admin UPTD Farmasi
+</button>
+</div>
+</div>
+<div class="text-center">
+<button onclick="switchTab('section-konten')" class="bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">
+← Kembali ke Menu Utama
+</button>
+</div>
+</div>
+​<!-- 8. PANDUAN PENGGUNAAN (panduan.html) -->
+<div id="section-panduan" class="app-section hidden max-w-4xl mx-auto space-y-6 w-full">
+<div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
+<h1 class="text-2xl font-bold text-blue-900">PANDUAN PENGGUNAAN APLIKASI</h1>
+<p class="text-xs text-gray-500 mt-1">Petunjuk Praktis Layanan Digital UPTD Farmasi Tangsel</p>
+</div>
+<div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-400 space-y-4 text-xs text-gray-700 leading-relaxed">
+<div class="space-y-3">
+<h3 class="font-extrabold text-sm text-blue-900 border-b pb-1">1. Cara Melakukan Check-In & Ambil Antrian</h3>
+<p>Isi formulir Registrasi Tamu di halaman awal meliputi Nama Lengkap, Instansi, No. Telepon, dan Keperluan Layanan. Klik tombol <b>Check-In & Ambil Antrian</b>. Sistem akan menyimpan data ke database dan memberikan nomor antrean.</p>
+​<h3 class="font-extrabold text-sm text-blue-900 border-b pb-1 pt-2">2. Akses Menu Informasi & Layanan</h3>
+<p>Melalui menu utama, Anda dapat mengakses fitur Daftar Tamu, Data Stok Obat, Profil Pegawai, Peta Lokasi, Konsultasi WhatsApp, serta Panduan secara terpadu dalam satu halaman.</p>
+</div>
+</div>
+<div class="text-center">
+<button onclick="switchTab('section-konten')" class="bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">
+← Kembali ke Menu Utama
+</button>
+</div>
+</div>
+​<!-- 9. PANEL ADMIN (admin.html integrated) -->
+<div id="section-admin" class="app-section hidden max-w-5xl mx-auto space-y-6 w-full">
+<div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-900">
+<h1 class="text-2xl font-bold text-blue-900">PANEL ADMINISTRATOR UPTD FARMASI</h1>
+<p class="text-xs text-gray-500 mt-1">Pengelolaan Data Stok Obat, Antrean, dan Validasi Sistem</p>
+</div>
+​<div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-400 space-y-4">
+<h3 class="font-bold text-sm text-blue-900 border-b pb-2">Manajemen Stok Obat & Logistik (Admin View)</h3>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-blue-50 border-b text-xs text-blue-900 font-bold">
+<th class="p-3">Kode</th>
+<th class="p-3">Nama Obat</th>
+<th class="p-3">Kategori</th>
+<th class="p-3">Stok</th>
+<th class="p-3">Status</th>
+<th class="p-3 text-center">Aksi</th>
+</tr>
+</thead>
+<tbody id="tbodyAdmin"></tbody>
+</table>
+</div>
+</div>
+​<div class="text-center">
+<button onclick="switchTab('section-home')" class="bg-blue-900 text-white px-6 py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">
+← Kembali ke Beranda / Logout
+</button>
+</div>
+</div>
+​<!-- Footer -->
+<footer class="max-w-4xl mx-auto w-full mt-8 text-center text-xs text-gray-600">
+© 2026 UPTD Farmasi Kota Tangerang Selatan. All rights reserved.
+</footer>
+​</body>
+  </html>
