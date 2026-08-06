@@ -19,6 +19,10 @@ max-width: 100%;
 height: auto;
 cursor: pointer;
 }
+/* Pengecualian agar ikon navigasi, logo, dan thumbnail kecil tidak ikut memiliki cursor zoom */
+nav img, header img, aside img, .no-zoom {
+cursor: default !important;
+}
 /* Modal Zoom Gambar */
 #imageModal {
 transition: opacity 0.2s ease-in-out;
@@ -92,7 +96,7 @@ box-sizing: border-box;
 <a href="#" onclick="switchTab('profil', event)" class="block bg-white p-4 rounded-2xl shadow-sm border border-gray-100 relative hover:border-blue-300 transition text-center">
 <div class="flex flex-col items-center gap-2">
 <div class="h-28 w-28 flex items-center justify-center flex-shrink-0 bg-transparent">
-<img src="https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png" class="w-full h-full object-contain no-zoom">
 </div>
 <div>
 <h2 class="text-xs font-extrabold text-gray-800">Profil Pegawai</h2>
@@ -106,49 +110,49 @@ box-sizing: border-box;
 <nav class="space-y-1.5">
 <a href="#" onclick="switchTab('index', event)" id="nav-index" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Beranda / Dashboard</span>
 </a>
 <a href="#" onclick="switchTab('registrasi', event)" id="nav-registrasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Registrasi</span>
 </a>
 <a href="#" onclick="switchTab('informasi', event)" id="nav-informasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Informasi & Layanan</span>
 </a>
 <a href="#" onclick="switchTab('galeri', event)" id="nav-galeri" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Galeri Kegiatan</span>
 </a>
 <a href="#" onclick="switchTab('maps', event)" id="nav-maps" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Maps</span>
 </a>
 <a href="#" onclick="switchTab('tamu', event)" id="nav-tamu" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Tamu</span>
 </a>
 <a href="#" onclick="switchTab('panduan', event)" id="nav-panduan" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Panduan</span>
 </a>
 <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
-<img src="https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Survei</span>
 </a>
@@ -165,7 +169,7 @@ box-sizing: border-box;
 <!-- Header Khusus Desktop -->
 <div class="pc-header-desktop hidden bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-3">
 <div class="flex items-center gap-3">
-<img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo" class="h-12 w-12 object-contain">
+<img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo" class="h-12 w-12 object-contain no-zoom">
 <div>
 <h1 class="font-extrabold text-blue-900 text-base tracking-wide leading-tight">UPTD FARMASI KOTA TANGERANG SELATAN</h1>
 <p class="text-xs text-gray-600 font-semibold uppercase tracking-wider">Sistem Layanan Digital Terpadu</p>
@@ -176,7 +180,7 @@ box-sizing: border-box;
 <!-- Banner Utama -->
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-2">
 <div class="w-20 h-20 mx-auto flex items-center justify-center">
-<img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="w-full h-full object-contain no-zoom">
 </div>
 <div>
 <h2 class="text-sm font-extrabold text-blue-900 uppercase">Selamat Datang di UPTD Farmasi</h2>
@@ -189,7 +193,7 @@ box-sizing: border-box;
 <!-- Registrasi -->
 <a href="#" onclick="switchTab('registrasi', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain no-zoom">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Registrasi</h3>
@@ -200,7 +204,7 @@ box-sizing: border-box;
 <!-- Informasi & Layanan -->
 <a href="#" onclick="switchTab('informasi', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain no-zoom">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Informasi & Layanan</h3>
@@ -211,7 +215,7 @@ box-sizing: border-box;
 <!-- Galeri Kegiatan (Dipisah dari Informasi) -->
 <a href="#" onclick="switchTab('galeri', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain no-zoom">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Galeri Kegiatan</h3>
@@ -222,7 +226,7 @@ box-sizing: border-box;
 <!-- Status Tamu -->
 <a href="#" onclick="switchTab('tamu', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png" class="w-full h-full object-contain no-zoom">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Status Tamu</h3>
@@ -233,7 +237,7 @@ box-sizing: border-box;
 <!-- Profil Pegawai -->
 <a href="#" onclick="switchTab('profil', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png" class="w-full h-full object-contain no-zoom">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Profil Pegawai</h3>
@@ -244,7 +248,7 @@ box-sizing: border-box;
 <!-- Konsultasi & Pengaduan -->
 <a href="#" onclick="switchTab('konsultasi', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-full h-full object-contain no-zoom">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Konsultasi</h3>
@@ -255,7 +259,7 @@ box-sizing: border-box;
 <!-- Maps / Lokasi -->
 <a href="#" onclick="switchTab('maps', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain no-zoom">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Maps Lokasi</h3>
@@ -266,7 +270,7 @@ box-sizing: border-box;
 <!-- Panduan -->
 <a href="#" onclick="switchTab('panduan', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-14 h-14 flex items-center justify-center">
-<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain no-zoom">
 </div>
 <div>
 <h3 class="font-bold text-xs text-blue-900">Panduan</h3>
@@ -279,7 +283,7 @@ box-sizing: border-box;
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
 <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-4 bg-emerald-50 hover:bg-emerald-100 p-3.5 rounded-xl border border-emerald-200 transition">
 <div class="w-12 h-12 flex items-center justify-center flex-shrink-0">
-<img src="https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png" class="w-full h-full object-contain">
+<img src="https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png" class="w-full h-full object-contain no-zoom">
 </div>
 <div>
 <h3 class="font-extrabold text-xs text-emerald-900">Survei Kepuasan Pelanggan</h3>
@@ -488,7 +492,7 @@ Memuat data registrasi dari database...
 <div id="page-konsultasi" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-4 rounded-2xl shadow-sm border-2 border-blue-400 flex items-center gap-4">
 <div class="w-24 h-24 flex items-center justify-center flex-shrink-0 bg-blue-50 rounded-2xl p-2 border border-blue-400 overflow-hidden">
-<img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-full h-full object-contain transform scale-[2.0]">
+<img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-full h-full object-contain transform scale-[2.0] no-zoom">
 </div>
 <div>
 <h2 class="text-sm font-extrabold text-blue-900 uppercase">Layanan Konsultasi & Pengaduan</h2>
@@ -645,11 +649,10 @@ modal.classList.add('hidden-custom');
 }
 };
 
-// Delegasi klik gambar otomatis di seluruh konten agar bisa zoom
+// Delegasi klik gambar otomatis di seluruh konten agar bisa zoom (dengan proteksi no-zoom)
 document.addEventListener('click', function(e) {
 if(e.target.tagName === 'IMG' && e.target.closest('.page-content')) {
-// Abaikan jika gambar adalah ikon navigasi kecil atau logo header agar tidak mengganggu
-if(e.target.classList.contains('no-zoom')) return;
+if(e.target.classList.contains('no-zoom') || e.target.closest('nav') || e.target.closest('header') || e.target.closest('aside')) return;
 openImageModal(e.target.src);
 }
 });
@@ -1107,4 +1110,3 @@ btn.innerHTML = `<span>Kirim Konsultasi & Keluhan via WhatsApp</span> <span>→<
 </script>
 </body>
 </html>
-
