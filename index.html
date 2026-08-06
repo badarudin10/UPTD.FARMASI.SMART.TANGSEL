@@ -79,6 +79,79 @@ box-sizing: border-box;
 </head>
 <body class="bg-[#e3ede6] font-sans min-h-screen pb-6">
 
+  <!-- HALAMAN GERBANG UTAMA (GATE PAGE - WAJIB SURVEI DULU) -->
+<div id="gatePage" class="min-h-screen bg-gradient-to-br from-blue-50 via-emerald-50 to-white flex items-center justify-center p-4">
+  <div class="max-w-md w-full bg-white rounded-3xl shadow-xl border border-blue-100 p-8 text-center space-y-6">
+    
+    <!-- Logo Instansi / Identitas -->
+    <div class="flex justify-center">
+      <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang- Selatan-1.png" alt="Logo Tangsel" class="h-20 w-20 object-contain drop-shadow-md">
+    </div>
+
+    <!-- Ucapan Selamat Datang Modern -->
+    <div class="space-y-2">
+      <span class="px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest bg-blue-100 text-blue-800 rounded-full">
+        Sistem Layanan Digital Terpadu
+      </span>
+      <h1 class="text-2xl font-black text-blue-900 tracking-tight leading-snug">
+        Selamat Datang di <span class="text-emerald-600">UPTD Farmasi</span>
+      </h1>
+      <p class="text-xs text-gray-500 font-medium leading-relaxed">
+        Kota Tangerang Selatan • Melayani dengan Sepenuh Hati
+      </p>
+    </div>
+
+    <!-- Kotak Informasi Akses -->
+    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-left space-y-1">
+      <p class="text-xs font-bold text-amber-900 flex items-center gap-1.5">
+        <span>⚠️</span> Langkah Akses Layanan:
+      </p>
+      <p class="text-[11px] text-amber-800 leading-normal">
+        Silakan isi <b>Survei Kepuasan Pelanggan</b> terlebih dahulu sebagai kunci akses untuk membuka menu utama dan form registrasi kunjungan.
+      </p>
+    </div>
+
+    <!-- Tombol Kunci Utama (Menuju Google Form Survei) -->
+    <!-- Tambahkan event listener / target untuk melacak atau mengarahkan user -->
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" 
+       target="_blank" 
+       onclick="bukaMenuUtama()"
+       class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold py-4 px-6 rounded-2xl shadow-lg shadow-emerald-600/30 transition transform active:scale-95 flex items-center justify-center gap-3 text-sm">
+      <i class="fas fa-key text-yellow-300"></i>
+      <span>ISI SURVEI KEPUASAN (BUKA MENU)</span>
+    </a>
+
+    <p class="text-[10px] text-gray-400">
+      Setelah mengisi survei, halaman akan otomatis memberikan akses ke menu layanan lengkap.
+    </p>
+
+  </div>
+</div>
+
+<!-- KONTEN MENU UTAMA (Disembunyikan dulu menggunakan kelas 'hidden' sampai survei/tombol diklik) -->
+<div id="mainMenuContent" class="hidden">
+  <!-- Di sinilah seluruh grid menu utama (Registrasi, Galeri, Profil, dll) Anda letakkan -->
+</div>
+
+<script>
+  // Fungsi simulasi membuka menu setelah tombol survei diklik
+  function bukaMenuUtama() {
+    // Anda bisa menambahkan logika penyimpanan sesi (localStorage) agar user tidak perlu klik survei ulang jika sudah masuk
+    localStorage.setItem('akses_survei', 'true');
+    
+    // Contoh transisi: Sembunyikan gate page, tampilkan menu utama
+    // (Atau biarkan mengarah ke Google Form, lalu sediakan tombol kembali/akses setelah selesai)
+  }
+
+  // Pengecekan otomatis jika user sudah pernah mengisi/klik
+  window.onload = function() {
+    if(localStorage.getItem('akses_survei') === 'true') {
+      // document.getElementById('gatePage').style.display = 'none';
+      // document.getElementById('mainMenuContent').classList.remove('hidden');
+    }
+  }
+</script>
+
 <!-- Header Atas (Hanya tampil di Mobile/HP) -->
 <header class="mobile-header-bar bg-[#e3ede6] px-4 py-3.5 shadow-sm sticky top-0 z-30 border-b border-emerald-200">
 <div class="max-w-md mx-auto text-center">
