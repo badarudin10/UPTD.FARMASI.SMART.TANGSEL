@@ -612,7 +612,7 @@ Memuat data registrasi dari database...
 <!-- FIREBASE & LOGIKA APLIKASI -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
 const firebaseConfig = { apiKey: "AIzaSyA6B5MysWIMi4weR3Wgo3HuaIl-aaZpChw", authDomain: "digital-books-d22c9.firebaseapp.com", projectId: "digital-books-d22c9", storageBucket: "digital-books-d22c9.firebasestorage.app", messagingSenderId: "905407530155", appId: "1:905407530155:web:dd90e18d4158ce42fae3ee", measurementId: "G-LL7GF2RMF8" };
 const db = getFirestore(initializeApp(firebaseConfig));
@@ -788,7 +788,7 @@ if(!grid) return;
 grid.innerHTML = "";
 
 if(snap.empty) {
-grid.innerHTML = `<div class="text-xs text-gray-400 col-span-full text-center py-6">Belum ada foto galeri kegiatan.</div>`;
+grid.innerHTML = `<div class="text-xs text-gray-400 col-span-full text-center py-6">Memuat galeri kegiatan...</div>`;
 return;
 }
 
@@ -881,7 +881,39 @@ fileUrlVal = await toBase64(file);
 }
 
 try {
-const antrianNo = "ANT-" + Math.floor(100 + Math.random() * 900);
+// Tentukan Prefiks Huruf Berdasarkan Keperluan
+let prefix = "L";
+const lkep = keperluan.toLowerCase();
+if (lkep.includes("obat pkd")) prefix = "O";
+else if (lkep.includes("vaksin")) prefix = "V";
+else if (lkep.includes("reagen")) prefix = "R";
+else if (lkep.includes("tb")) prefix = "T";
+else if (lkep.includes("hiv")) prefix = "H";
+else if (lkep.includes("dbd")) prefix = "D";
+else if (lkep.includes("hepatitis")) prefix = "P";
+
+// Hitung nomor urut berdasarkan kategori & tanggal hari yang sama (reset harian)
+const todayStr = new Date().toISOString().split('T')[0];
+const qCek = query(collection(db, "tamu"), where("keperluan", "==", keperluan));
+const snapCek = await getDocs(qCek);
+let countHariIni = 0;
+snapCek.forEach(doc => {
+const d = doc.data();
+if (d.waktu) {
+let dDate = "";
+if (typeof d.waktu.toDate === 'function') {
+dDate = d.waktu.toDate().toISOString().split('T')[0];
+} else if (typeof d.waktu === 'string') {
+dDate = d.waktu.split('T')[0];
+}
+if (dDate === todayStr) {
+countHariIni++;
+}
+}
+});
+const nextNum = countHariIni + 1;
+const antrianNo = `${prefix}-${String(nextNum).padStart(3, '0')}`;
+
 await addDoc(collection(db, "tamu"), {
 nama: nama,
 instansi: instansi,
@@ -995,7 +1027,8 @@ fileUrl: fileLink
 };
 
 const card = document.createElement("div");
-card.className = "bg-white p-4 rounded-2xl shadow-sm border border-blue-400 space-y-3";
+// Desain Profesional untuk Kartu/Notif Antrian selaras dengan tema aplikasi (#e3ede6 / blue-emerald harmony)
+card.className = "bg-gradient-to-br from-white via-blue-50/30 to-emerald-50/30 p-5 rounded-2xl shadow-md border-2 border-emerald-200 space-y-3.5 transition hover:shadow-lg";
 
 let bagianObatHtml = '';
 if (normalizedData.itemsObat.length > 0) {
@@ -1003,17 +1036,48 @@ let rowsHtml = '';
 normalizedData.itemsObat.forEach((ob, idx) => {
 rowsHtml += `<tr class="border-b text-[10px]"> <td class="border p-1 text-center">${idx + 1}</td> <td class="border p-1 font-bold">${ob.nama || '-'}</td> <td class="border p-1 text-center">${ob.tahun || '-'}</td> <td class="border p-1 text-center">${ob.satuan || '-'}</td> <td class="border p-1 text-center">${ob.volume || '-'}</td> <td class="border p-1 text-center">${ob.ed || '-'}</td> <td class="border p-1 text-center font-mono">${ob.batch || '-'}</td> </tr>`;
 });
-bagianObatHtml = `<div class="border-t pt-2 space-y-1.5"> <p class="text-[10px] text-blue-900 font-bold">Tabel Rincian Obat / Barang:</p> <div class="overflow-x-auto"> <table class="w-full text-left border-collapse text-[10px] bg-white"> <thead> <tr class="bg-gray-100 text-center font-bold text-[9px] uppercase"> <th class="border p-1 w-6">No</th> <th class="border p-1">Nama Barang</th> <th class="border p-1 w-12">Tahun</th> <th class="border p-1 w-12">Satuan</th> <th class="border p-1 w-10">Vol</th> <th class="border p-1 w-12">Ed</th> <th class="border p-1 w-16">No Batch</th> </tr> </thead> <tbody> ${rowsHtml} </tbody> </table> </div> </div>`;
+bagianObatHtml = `<div class="border-t pt-2.5 space-y-1.5"> <p class="text-[11px] text-blue-900 font-extrabold flex items-center gap-1.5"><span>📦</span> Tabel Rincian Obat / Barang:</p> <div class="overflow-x-auto rounded-xl border border-emerald-100"> <table class="w-full text-left border-collapse text-[10px] bg-white"> <thead> <tr class="bg-emerald-50 text-center font-bold text-[9px] uppercase text-emerald-900"> <th class="border p-1 w-6">No</th> <th class="border p-1">Nama Barang</th> <th class="border p-1 w-12">Tahun</th> <th class="border p-1 w-12">Satuan</th> <th class="border p-1 w-10">Vol</th> <th class="border p-1 w-12">Ed</th> <th class="border p-1 w-16">No Batch</th> </tr> </thead> <tbody> ${rowsHtml} </tbody> </table> </div> </div>`;
 } else {
-bagianObatHtml = `<div class="bg-gray-50 p-2.5 rounded-xl border border-gray-100 text-[10px] space-y-1"> <p class="text-blue-900 font-bold">Obat yang Diterima:</p> <p class="text-gray-700 whitespace-pre-line">${normalizedData.obatTerimaFormatted}</p> </div>`;
+bagianObatHtml = `<div class="bg-emerald-50/60 p-3 rounded-xl border border-emerald-100 text-[10px] space-y-1"> <p class="text-blue-900 font-extrabold flex items-center gap-1.5"><span>💊</span> Obat yang Diterima:</p> <p class="text-gray-700 whitespace-pre-line font-medium">${normalizedData.obatTerimaFormatted}</p> </div>`;
 }
 
 let fileLampiranHtml = '';
 if (fileLink && fileLink.length > 0) {
-fileLampiranHtml = `<div class="pt-1"> <a href="${fileLink}" download target="_blank" class="inline-block bg-blue-100 text-blue-800 px-2.5 py-1 rounded text-[10px] font-bold hover:bg-blue-200 transition">📥 Lihat/Unduh File Lampiran</a> </div>`;
+fileLampiranHtml = `<div class="pt-1"> <a href="${fileLink}" download target="_blank" class="inline-flex items-center gap-1 bg-blue-100 text-blue-900 px-3 py-1.5 rounded-xl text-[10px] font-bold hover:bg-blue-200 transition shadow-sm">📥 Lihat/Unduh File Lampiran</a> </div>`;
 }
 
-card.innerHTML = `<div class="flex justify-between items-start gap-2"> <div class="space-y-0.5"> <h3 class="font-extrabold text-xs text-blue-900">${normalizedData.nama}</h3> <p class="text-[10px] text-gray-600"><b>Instansi:</b> ${normalizedData.instansi}</p> <p class="text-[10px] text-gray-600"><b>Keperluan:</b> ${normalizedData.keperluan}</p> <p class="text-[10px] text-gray-600"><b>Petugas:</b> ${normalizedData.petugas}</p> <p class="text-[10px] text-gray-600"><b>Durasi:</b> ${normalizedData.durasi}</p> ${normalizedData.nomorAntrian ? `<p class="text-[10px] text-blue-700 font-bold">No. Antrian: ${normalizedData.nomorAntrian}</p>` : ''} </div> <span class="px-2.5 py-1 rounded-full text-[10px] font-bold border shrink-0 ${statusColor}"> ${normalizedData.status} </span> </div> ${fileLampiranHtml} ${bagianObatHtml} <div class="border-t pt-2 flex justify-between items-center text-[10px] text-gray-500"> <span><b>Waktu:</b> ${normalizedData.waktuFormatted}</span> <button onclick='downloadPdf(${JSON.stringify(normalizedData)})' class="bg-blue-900 hover:bg-blue-800 text-white px-3 py-1.5 rounded-xl font-bold transition shadow-sm inline-flex items-center gap-1"> Download PDF 📥 </button> </div>`;
+card.innerHTML = `
+<div class="flex justify-between items-start gap-3 border-b border-gray-100 pb-3">
+  <div class="space-y-1">
+    <div class="flex items-center gap-2">
+      <span class="bg-emerald-600 text-white text-[11px] font-black px-2.5 py-1 rounded-xl shadow-sm tracking-wider">
+        🎫 ${normalizedData.nomorAntrian || '-'}
+      </span>
+      <h3 class="font-black text-sm text-blue-900 uppercase tracking-tight">${normalizedData.nama}</h3>
+    </div>
+    <p class="text-[11px] text-gray-600 font-medium"><b>Instansi:</b> ${normalizedData.instansi}</p>
+    <p class="text-[11px] text-gray-600 font-medium"><b>Keperluan:</b> <span class="text-emerald-700 font-bold">${normalizedData.keperluan}</span></p>
+  </div>
+  <span class="px-3 py-1 rounded-full text-[10px] font-black border uppercase tracking-wider shrink-0 shadow-sm ${statusColor}">
+    ${normalizedData.status}
+  </span>
+</div>
+
+<div class="grid grid-cols-2 gap-2 text-[11px] text-gray-600 bg-white/80 p-2.5 rounded-xl border border-emerald-100">
+  <p><b>Petugas:</b> ${normalizedData.petugas}</p>
+  <p><b>Durasi:</b> ${normalizedData.durasi}</p>
+</div>
+
+${fileLampiranHtml} 
+${bagianObatHtml} 
+
+<div class="border-t pt-2.5 flex justify-between items-center text-[10px] text-gray-500 font-medium">
+  <span><b>Waktu:</b> ${normalizedData.waktuFormatted}</span> 
+  <button onclick='downloadPdf(${JSON.stringify(normalizedData)})' class="bg-blue-900 hover:bg-blue-800 text-white px-3.5 py-2 rounded-xl font-bold transition shadow-md inline-flex items-center gap-1.5 text-xs">
+    <span>Download PDF</span> <span>📥</span>
+  </button>
+</div>`;
+
 container.appendChild(card);
 });
 });
