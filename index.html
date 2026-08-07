@@ -628,13 +628,10 @@ let isWithinRadius = false;
 
 // --- LOGIKA GERBANG SURVEI & SESI (HANYA 1 TOMBOL & OTOMATIS MASUK SAAT KEMBALI DARI TAB SURVEY) ---
 window.mulaiIsiSurvey = function(event) {
-  // Tandai bahwa user sedang dalam proses mengisi survei pada sesi ini
   sessionStorage.setItem('sedang_isi_survei', 'true');
-  // Buka Google Form di tab baru
   window.open("https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform", "_blank");
 }
 
-// Begitu user kembali/fokus lagi ke halaman web UPTD Farmasi setelah dari tab Google Form, otomatis buka menu utama
 window.addEventListener('focus', function() {
   if (sessionStorage.getItem('sedang_isi_survei') === 'true') {
     sessionStorage.setItem('survei_terisi_sesi_ini', 'true');
@@ -655,7 +652,6 @@ window.resetAkses = function() {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  // Menggunakan sessionStorage: Jika browser/tab ditutup lalu dibuka kembali, status terhapus sehingga wajib mengisi survei lagi dari awal
   if (sessionStorage.getItem('survei_terisi_sesi_ini') === 'true') {
     const gatePage = document.getElementById('gatePage');
     if (gatePage) gatePage.style.display = 'none';
@@ -1182,3 +1178,4 @@ btn.innerHTML = `<span>Kirim Konsultasi & Keluhan via WhatsApp</span> <span>→<
 </script>
 </body>
 </html>
+
