@@ -639,15 +639,18 @@ let userLng = null;
 let userDistance = null;
 let isWithinRadius = false;
 
-// --- LOGIKA GERBANG SURVEI & AKSES UTAMA ---
+// --- LOGIKA GERBANG SURVEI & AKSES UTAMA (OTOMATIS BUKA MENU SETELAH KLIK SURVEI) ---
 window.bukaMenuUtama = function(event) {
+  // Simpan status akses ke localStorage agar otomatis terbuka
   localStorage.setItem('akses_survei_farmasi', 'true');
   
+  // Sembunyikan halaman gerbang utama
   const gatePage = document.getElementById('gatePage');
   if (gatePage) {
     gatePage.style.display = 'none';
   }
   
+  // Tampilkan konten menu utama secara otomatis
   const mainMenuContent = document.getElementById('mainMenuContent');
   if (mainMenuContent) {
     mainMenuContent.classList.remove('hidden');
@@ -1202,4 +1205,3 @@ btn.innerHTML = `<span>Kirim Konsultasi & Keluhan via WhatsApp</span> <span>→<
 </script>
 </body>
 </html>
-
