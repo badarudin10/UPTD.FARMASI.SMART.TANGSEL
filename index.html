@@ -79,7 +79,7 @@ box-sizing: border-box;
 </head>
 <body class="bg-[#e3ede6] font-sans min-h-screen pb-6">
 
-  <!-- HALAMAN GERBANG UTAMA (GATE PAGE - WAJIB SURVEI DULU) -->
+  <!-- HALAMAN GERBANG UTAMA (GATE PAGE - WAJIB SURVEY SETIAP KALI SESI BARU / KELUAR WEB) -->
 <div id="gatePage" class="min-h-screen bg-gradient-to-br from-blue-50 via-emerald-50 to-white flex items-center justify-center p-4" style="position: fixed; inset: 0; z-index: 9999; overflow-y: auto;">
   <div class="max-w-md w-full bg-white rounded-3xl shadow-xl border border-blue-100 p-8 text-center space-y-6 my-auto">
     
@@ -104,30 +104,39 @@ box-sizing: border-box;
     <!-- Kotak Informasi Akses -->
     <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-left space-y-1">
       <p class="text-xs font-bold text-amber-900 flex items-center gap-1.5">
-        <span>⚠️</span> Langkah Akses Layanan:
+        <span>⚠️</span> Target Survei Kepuasan 100%:
       </p>
       <p class="text-[11px] text-amber-800 leading-normal">
-        Silakan isi <b>Survei Kepuasan Pelanggan</b> terlebih dahulu sebagai kunci akses untuk membuka menu utama dan form registrasi kunjungan.
+        Silakan isi <b>Survei Kepuasan Pelanggan</b> terlebih dahulu pada setiap kunjungan/sesi baru untuk membuka menu utama.
       </p>
     </div>
 
-    <!-- Tombol Kunci Utama (Menuju Google Form Survei) -->
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" 
-       target="_blank" 
-       onclick="bukaMenuUtama(event)"
-       class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold py-4 px-6 rounded-2xl shadow-lg shadow-emerald-600/30 transition transform active:scale-95 flex items-center justify-center gap-3 text-sm">
-      <i class="fas fa-key text-yellow-300"></i>
-      <span>ISI SURVEI KEPUASAN (BUKA MENU)</span>
-    </a>
+    <!-- Formulir Google Embed / Tombol Interaktif Kirim Survey -->
+    <div class="space-y-3">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" 
+         target="_blank" 
+         onclick="bukaSurveyForm(event)"
+         class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-lg shadow-emerald-600/30 transition transform active:scale-95 flex items-center justify-center gap-2 text-xs">
+        <i class="fas fa-external-link-alt"></i>
+        <span>1. ISI SURVEI DI TAB BARU</span>
+      </a>
 
-    <p class="text-[10px] text-gray-400">
-      Setelah tombol diklik, survei akan terbuka di tab baru dan halaman menu utama ini akan otomatis terbuka.
+      <!-- Tombol Konfirmasi Otomatis Masuk Menu Setelah Kirim Survei -->
+      <button onclick="selesaiKirimSurvey()" 
+              class="w-full bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-800 hover:to-blue-700 text-white font-extrabold py-4 px-6 rounded-2xl shadow-lg shadow-blue-900/30 transition transform active:scale-95 flex items-center justify-center gap-3 text-sm">
+        <i class="fas fa-check-circle text-emerald-400"></i>
+        <span>2. SAYA SUDAH ISI & KIRIM (MASUK MENU)</span>
+      </button>
+    </div>
+
+    <p class="text-[10px] text-gray-400 leading-normal">
+      Klik tombol 1 untuk mengisi survei di Google Form, lalu klik tombol 2 untuk langsung masuk ke halaman menu utama.
     </p>
 
   </div>
 </div>
 
-<!-- KONTEN MENU UTAMA (Disembunyikan menggunakan kelas 'hidden' sampai survei diklik) -->
+<!-- KONTEN MENU UTAMA (Disembunyikan menggunakan kelas 'hidden' sampai survei dikonfirmasi) -->
 <div id="mainMenuContent" class="hidden">
 
 <!-- Header Atas (Hanya tampil di Mobile/HP) -->
@@ -504,7 +513,7 @@ Kirim Registrasi Kunjungan
 <h3 class="font-extrabold text-xs text-amber-900 uppercase">Wajib Mengisi Survei Kepuasan Pelanggan</h3>
 </div>
 <p class="text-[11px] text-gray-700 leading-relaxed">
-Setiap selesai mendapatkan layanan, pengunjung <b>diwajibkan</b> mengisi formulir <b>Survei Kepuasan</b> melalui menu survei yang tersedia.
+Setiap selesai mendapatkan layanan atau setiap kali membuka kembali halaman web, pengunjung <b>diwajibkan</b> mengisi formulir <b>Survei Kepuasan</b> demi mencapai target 100%.
 </p>
 </div>
 
@@ -639,10 +648,14 @@ let userLng = null;
 let userDistance = null;
 let isWithinRadius = false;
 
-// --- LOGIKA GERBANG SURVEI & AKSES UTAMA (OTOMATIS BUKA MENU SETELAH KLIK SURVEI) ---
-window.bukaMenuUtama = function(event) {
-  // Simpan status akses ke localStorage agar otomatis terbuka
-  localStorage.setItem('akses_survei_farmasi', 'true');
+// --- LOGIKA GERBANG SURVEI & SESI (MENGGUNAKAN sessionStorage AGAR KELUAR WEB / TUTUP TAB / REFRESH WAJIB ISI ULANG) ---
+window.bukaSurveyForm = function(event) {
+  window.open("https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform", "_blank");
+}
+
+window.selesaiKirimSurvey = function() {
+  // Simpan status bahwa user sudah mengisi survei HANYA untuk sesi aktif ini
+  sessionStorage.setItem('survei_terisi_sesi_ini', 'true');
   
   // Sembunyikan halaman gerbang utama
   const gatePage = document.getElementById('gatePage');
@@ -658,12 +671,13 @@ window.bukaMenuUtama = function(event) {
 }
 
 window.resetAkses = function() {
-  localStorage.removeItem('akses_survei_farmasi');
+  sessionStorage.removeItem('survei_terisi_sesi_ini');
   location.reload();
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  if (localStorage.getItem('akses_survei_farmasi') === 'true') {
+  // Menggunakan sessionStorage: Ketika tab/browser ditutup lalu dibuka kembali, status terhapus sehingga wajib mengisi survei lagi (100% Target Tercapai)
+  if (sessionStorage.getItem('survei_terisi_sesi_ini') === 'true') {
     const gatePage = document.getElementById('gatePage');
     if (gatePage) {
       gatePage.style.display = 'none';
@@ -671,6 +685,15 @@ window.addEventListener('DOMContentLoaded', function() {
     const mainMenuContent = document.getElementById('mainMenuContent');
     if (mainMenuContent) {
       mainMenuContent.classList.remove('hidden');
+    }
+  } else {
+    const gatePage = document.getElementById('gatePage');
+    if (gatePage) {
+      gatePage.style.display = 'flex';
+    }
+    const mainMenuContent = document.getElementById('mainMenuContent');
+    if (mainMenuContent) {
+      mainMenuContent.classList.add('hidden');
     }
   }
 });
