@@ -19,15 +19,12 @@ max-width: 100%;
 height: auto;
 cursor: pointer;
 }
-/* Pengecualian agar ikon navigasi, logo, dan thumbnail kecil tidak ikut memiliki cursor zoom */
 nav img, header img, aside img, .no-zoom {
 cursor: default !important;
 }
-/* Modal Zoom Gambar */
 #imageModal {
 transition: opacity 0.2s ease-in-out;
 }
-/* Penyesuaian layout grid PC/Laptop */
 @media (min-width: 1024px) {
 .app-layout-wrapper {
 max-width: 1280px !important;
@@ -79,7 +76,7 @@ box-sizing: border-box;
 </head>
 <body class="bg-[#e3ede6] font-sans min-h-screen pb-6">
 
-  <!-- HALAMAN GERBANG UTAMA (GATE PAGE - WAJIB SURVEY SETIAP KALI SESI BARU / KELUAR WEB) -->
+  <!-- HALAMAN GERBANG UTAMA (HANYA SATU TOMBOL SURVEY & REDIRECT OTOMATIS) -->
 <div id="gatePage" class="min-h-screen bg-gradient-to-br from-blue-50 via-emerald-50 to-white flex items-center justify-center p-4" style="position: fixed; inset: 0; z-index: 9999; overflow-y: auto;">
   <div class="max-w-md w-full bg-white rounded-3xl shadow-xl border border-blue-100 p-8 text-center space-y-6 my-auto">
     
@@ -107,36 +104,29 @@ box-sizing: border-box;
         <span>⚠️</span> Target Survei Kepuasan 100%:
       </p>
       <p class="text-[11px] text-amber-800 leading-normal">
-        Silakan isi <b>Survei Kepuasan Pelanggan</b> terlebih dahulu pada setiap kunjungan/sesi baru untuk membuka menu utama.
+        Silakan isi <b>Survei Kepuasan Pelanggan</b> terlebih dahulu. Ketika Anda menekan tombol kirim pada Google Form, sistem akan otomatis membuka menu utama. Setiap kali Anda keluar/menutup web ini, Anda wajib mengisi survei kembali saat berkunjung berikutnya.
       </p>
     </div>
 
-    <!-- Formulir Google Embed / Tombol Interaktif Kirim Survey -->
+    <!-- SATU TOMBOL TUNGGAL MENUJU GOOGLE FORM SURVEY -->
     <div class="space-y-3">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" 
          target="_blank" 
-         onclick="bukaSurveyForm(event)"
-         class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-lg shadow-emerald-600/30 transition transform active:scale-95 flex items-center justify-center gap-2 text-xs">
+         onclick="mulaiIsiSurvey(event)"
+         class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold py-4 px-6 rounded-2xl shadow-lg shadow-emerald-600/30 transition transform active:scale-95 flex items-center justify-center gap-2.5 text-sm">
         <i class="fas fa-external-link-alt"></i>
-        <span>1. ISI SURVEI DI TAB BARU</span>
+        <span>ISI SURVEI KEPUASAN & MASUK MENU</span>
       </a>
-
-      <!-- Tombol Konfirmasi Otomatis Masuk Menu Setelah Kirim Survei -->
-      <button onclick="selesaiKirimSurvey()" 
-              class="w-full bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-800 hover:to-blue-700 text-white font-extrabold py-4 px-6 rounded-2xl shadow-lg shadow-blue-900/30 transition transform active:scale-95 flex items-center justify-center gap-3 text-sm">
-        <i class="fas fa-check-circle text-emerald-400"></i>
-        <span>2. SAYA SUDAH ISI & KIRIM (MASUK MENU)</span>
-      </button>
     </div>
 
     <p class="text-[10px] text-gray-400 leading-normal">
-      Klik tombol 1 untuk mengisi survei di Google Form, lalu klik tombol 2 untuk langsung masuk ke halaman menu utama.
+      Tombol di atas akan mengarahkan Anda ke survei. Setelah selesai mengisi dan mengirim, sistem akan otomatis membuka akses masuk ke halaman menu utama.
     </p>
 
   </div>
 </div>
 
-<!-- KONTEN MENU UTAMA (Disembunyikan menggunakan kelas 'hidden' sampai survei dikonfirmasi) -->
+<!-- KONTEN MENU UTAMA -->
 <div id="mainMenuContent" class="hidden">
 
 <!-- Header Atas (Hanya tampil di Mobile/HP) -->
@@ -147,12 +137,10 @@ box-sizing: border-box;
 </div>
 </header>
 
-<!-- KONTROL UTAMA LAYOUT RESPONSIF -->
 <div class="app-layout-wrapper">
 
 <!-- SIDEBAR KIRI KHUSUS PC -->
 <aside class="pc-sidebar space-y-4">
-<!-- Kartu Profil Pegawai -->
 <a href="#" onclick="switchTab('profil', event)" class="block bg-white p-4 rounded-2xl shadow-sm border border-gray-100 relative hover:border-blue-300 transition text-center">
 <div class="flex flex-col items-center gap-2">
 <div class="h-28 w-28 flex items-center justify-center flex-shrink-0 bg-transparent">
@@ -165,7 +153,6 @@ box-sizing: border-box;
 </div>
 </a>
 
-<!-- Menu Navigasi Samping -->
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
 <nav class="space-y-1.5">
 <a href="#" onclick="switchTab('index', event)" id="nav-index" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-900 font-bold text-xs transition">
@@ -223,13 +210,11 @@ box-sizing: border-box;
 </div>
 </aside>
 
-<!-- KONTEN UTAMA YANG BERGANTI-GANTI HALAMAN (SPA) -->
 <div class="pc-main-content w-full">
 <main class="main-container lg:max-w-none space-y-4 pt-1 pb-3">
 
-<!-- ================= PAGE 1: INDEX (BERANDA / DASHBOARD) ================= -->
+<!-- ================= PAGE 1: INDEX ================= -->
 <div id="page-index" class="page-content space-y-4">
-<!-- Header Khusus Desktop -->
 <div class="pc-header-desktop hidden bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-3">
 <div class="flex items-center justify-between">
 <div class="flex items-center gap-3">
@@ -245,7 +230,6 @@ box-sizing: border-box;
 </div>
 </div>
 
-<!-- Banner Utama -->
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-2">
 <div class="w-20 h-20 mx-auto flex items-center justify-center">
 <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="w-full h-full object-contain no-zoom">
@@ -256,9 +240,7 @@ box-sizing: border-box;
 </div>
 </div>
 
-<!-- Menu Utama Grid Lengkap -->
 <div class="grid grid-cols-2 gap-3">
-<!-- Registrasi -->
 <a href="#" onclick="switchTab('registrasi', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-24 h-24 flex items-center justify-center">
 <img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
@@ -269,7 +251,6 @@ box-sizing: border-box;
 </div>
 </a>
 
-<!-- Informasi & Layanan -->
 <a href="#" onclick="switchTab('informasi', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-24 h-24 flex items-center justify-center">
 <img src="https://i.ibb.co.com/Kj3G0WhV/Picsart-26-07-29-23-08-35-566.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
@@ -280,7 +261,6 @@ box-sizing: border-box;
 </div>
 </a>
 
-<!-- Galeri Kegiatan -->
 <a href="#" onclick="switchTab('galeri', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-24 h-24 flex items-center justify-center">
 <img src="https://i.ibb.co.com/8LPVnZXb/Picsart-26-08-06-20-58-28-388.png" class="w-full h-full object-contain scale-[1.65] no-zoom">
@@ -291,7 +271,6 @@ box-sizing: border-box;
 </div>
 </a>
 
-<!-- Status Tamu -->
 <a href="#" onclick="switchTab('tamu', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-24 h-24 flex items-center justify-center">
 <img src="https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png" class="w-full h-full object-contain scale-[2.25] no-zoom">
@@ -302,7 +281,6 @@ box-sizing: border-box;
 </div>
 </a>
 
-<!-- Profil Pegawai -->
 <a href="#" onclick="switchTab('profil', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-24 h-24 flex items-center justify-center">
 <img src="https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
@@ -313,7 +291,6 @@ box-sizing: border-box;
 </div>
 </a>
 
-<!-- Konsultasi & Pengaduan -->
 <a href="#" onclick="switchTab('konsultasi', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-24 h-24 flex items-center justify-center">
 <img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-full h-full object-contain scale-[2.25] no-zoom">
@@ -324,7 +301,6 @@ box-sizing: border-box;
 </div>
 </a>
 
-<!-- Maps / Lokasi -->
 <a href="#" onclick="switchTab('maps', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-24 h-24 flex items-center justify-center">
 <img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
@@ -335,7 +311,6 @@ box-sizing: border-box;
 </div>
 </a>
 
-<!-- Panduan -->
 <a href="#" onclick="switchTab('panduan', event)" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-300 transition text-center space-y-2 flex flex-col items-center justify-center">
 <div class="w-24 h-24 flex items-center justify-center">
 <img src="https://i.ibb.co.com/Z6qSGXMx/Picsart-26-07-29-23-09-18-170.png" class="w-full h-full object-contain scale-[2.0] no-zoom">
@@ -347,7 +322,6 @@ box-sizing: border-box;
 </a>
 </div>
 
-<!-- Banner Survei Kepuasan -->
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
 <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-4 bg-emerald-50 hover:bg-emerald-100 p-3.5 rounded-xl border border-emerald-200 transition">
 <div class="w-24 h-24 flex items-center justify-center flex-shrink-0">
@@ -391,7 +365,6 @@ box-sizing: border-box;
 <input type="file" id="regFile" accept=".pdf,image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
 </div>
 
-<!-- Informasi Status GPS -->
 <div id="gpsStatusBox" class="bg-blue-50 border border-blue-200 p-3 rounded-xl text-[11px] text-blue-900">
 📍 Mendeteksi posisi koordinat GPS perangkat Anda...
 </div>
@@ -409,14 +382,13 @@ Kirim Registrasi Kunjungan
 </div>
 </div>
 
-<!-- ================= PAGE 3: INFORMASI, EDUKASI, LAYANAN & KATEGORI OBAT ================= -->
+<!-- ================= PAGE 3: INFORMASI ================= -->
 <div id="page-informasi" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-1">
 <h2 class="text-sm font-extrabold text-blue-900">📢 Pusat Informasi, Edukasi & Layanan</h2>
 <p class="text-[11px] text-gray-500">Pilih kategori sub-menu di bawah untuk melihat informasi terbaru yang dikelola oleh admin.</p>
 </div>
 
-<!-- Tombol Sub-Kategori -->
 <div class="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex flex-wrap gap-2 justify-center">
 <button onclick="filterKategoriPublik('Informasi')" id="btnKatPublikInformasi" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-blue-900 text-white transition shadow">Informasi</button>
 <button onclick="filterKategoriPublik('Edukasi')" id="btnKatPublikEdukasi" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Edukasi</button>
@@ -424,7 +396,6 @@ Kirim Registrasi Kunjungan
 <button onclick="filterKategoriPublik('Obat')" id="btnKatPublikObat" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Kategori Obat</button>
 </div>
 
-<!-- Kontainer Daftar Artikel / Konten Berdasarkan Kategori -->
 <div id="containerArtikelPublik" class="space-y-3">
 <div class="bg-white p-6 rounded-2xl shadow-sm border text-center text-xs text-gray-400">Memuat data informasi...</div>
 </div>
@@ -436,7 +407,7 @@ Kirim Registrasi Kunjungan
 </div>
 </div>
 
-<!-- ================= PAGE 4: GALERI KEGIATAN TERPISAH ================= -->
+<!-- ================= PAGE 4: GALERI ================= -->
 <div id="page-galeri" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center space-y-1">
 <h2 class="text-sm font-extrabold text-blue-900">📸 Galeri Kegiatan UPTD Farmasi</h2>
@@ -456,7 +427,7 @@ Kirim Registrasi Kunjungan
 </div>
 </div>
 
-<!-- ================= PAGE 5: PROFIL PEGAWAI ================= -->
+<!-- ================= PAGE 5: PROFIL ================= -->
 <div id="page-profil" class="page-content space-y-4 hidden-custom">
 <div class="bg-white p-6 rounded-2xl shadow-lg text-center border-2 border-blue-400">
 <h1 class="text-2xl font-bold text-blue-900">PROFIL PEGAWAI UPTD FARMASI</h1>
@@ -489,7 +460,7 @@ Kirim Registrasi Kunjungan
 <ol class="list-decimal list-inside text-[11px] text-gray-700 space-y-1.5 leading-relaxed pl-1">
 <li>Buka halaman utama atau menu <b>Registrasi</b> saat Anda berada di area UPTD Farmasi.</li>
 <li>Isi formulir data diri dengan lengkap, meliputi: <b>Nama Lengkap / Tamu</b>, <b>Instansi / Asal Puskesmas</b>, dan nomor kontak.</li>
-<li>Sistem akan secara otomatis mendeteksi posisi koordinat GPS perangkat Anda (radius maksimal 100 meter). Pastikan izin akses lokasi aktif.</li>
+<li>Sistem akan secara otomatis mendeteksi posisi koordinat GPS perangkat Anda.</li>
 <li>Lampirkan dokumen/surat pendukung dengan ukuran maksimal <b>700 KB</b>.</li>
 <li>Klik tombol kirim untuk mendapatkan nomor antrian secara real-time.</li>
 </ol>
@@ -502,7 +473,6 @@ Kirim Registrasi Kunjungan
 </div>
 <ul class="list-disc list-inside text-[11px] text-gray-700 space-y-1.5 leading-relaxed pl-1">
 <li>Masuk ke menu <b>Tamu</b> untuk memantau status pelayanan (<i>Menunggu</i>, <i>Diproses</i>, atau <i>Selesai</i>).</li>
-<li>Admin akan mengisi rincian obat serta memantau koordinat GPS kunjungan Anda.</li>
 <li>Jika status sudah <b>Selesai</b>, klik tombol <b>Download PDF 📥</b> untuk mengunduh tanda terima resmi Pemkot Tangsel.</li>
 </ul>
 </div>
@@ -513,7 +483,7 @@ Kirim Registrasi Kunjungan
 <h3 class="font-extrabold text-xs text-amber-900 uppercase">Wajib Mengisi Survei Kepuasan Pelanggan</h3>
 </div>
 <p class="text-[11px] text-gray-700 leading-relaxed">
-Setiap selesai mendapatkan layanan atau setiap kali membuka kembali halaman web, pengunjung <b>diwajibkan</b> mengisi formulir <b>Survei Kepuasan</b> demi mencapai target 100%.
+Setiap kali Anda membuka web atau kembali setelah menutup browser, Anda wajib mengisi Survei Kepuasan terlebih dahulu untuk mencapai target 100%.
 </p>
 </div>
 
@@ -619,7 +589,7 @@ Memuat data registrasi dari database...
 </div>
 </div>
 
-<!-- Modal Zoom Gambar Interaktif -->
+<!-- Modal Zoom Gambar -->
 <div id="imageModal" class="hidden-custom fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onclick="closeImageModal()">
 <div class="relative max-w-4xl max-h-[90vh] overflow-hidden flex items-center justify-center">
 <img id="modalImageSrc" src="" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl transition-transform duration-300 transform scale-100">
@@ -627,7 +597,6 @@ Memuat data registrasi dari database...
 </div>
 </div>
 
-<!-- Area Tersembunyi untuk Format Cetak PDF Bukti Pengambilan Obat -->
 <div id="areaCetakPdf" style="display: none;"></div>
 
 <!-- FIREBASE & LOGIKA APLIKASI -->
@@ -638,67 +607,58 @@ import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTim
 const firebaseConfig = { apiKey: "AIzaSyA6B5MysWIMi4weR3Wgo3HuaIl-aaZpChw", authDomain: "digital-books-d22c9.firebaseapp.com", projectId: "digital-books-d22c9", storageBucket: "digital-books-d22c9.firebasestorage.app", messagingSenderId: "905407530155", appId: "1:905407530155:web:dd90e18d4158ce42fae3ee", measurementId: "G-LL7GF2RMF8" };
 const db = getFirestore(initializeApp(firebaseConfig));
 
-// Koordinat UPTD Farmasi Tangsel & Batas Radius (100 Meter)
 const OFFICE_LAT = -6.292850;
 const OFFICE_LNG = 106.671500;
-const MAX_RADIUS = 100; // meter
+const MAX_RADIUS = 100;
 
 let userLat = null;
 let userLng = null;
 let userDistance = null;
 let isWithinRadius = false;
 
-// --- LOGIKA GERBANG SURVEI & SESI (MENGGUNAKAN sessionStorage AGAR KELUAR WEB / TUTUP TAB / REFRESH WAJIB ISI ULANG) ---
-window.bukaSurveyForm = function(event) {
+// --- LOGIKA GERBANG SURVEI & SESI (HANYA 1 TOMBOL & OTOMATIS MASUK SAAT KEMBALI DARI TAB SURVEY) ---
+window.mulaiIsiSurvey = function(event) {
+  // Tandai bahwa user sedang dalam proses mengisi survei pada sesi ini
+  sessionStorage.setItem('sedang_isi_survei', 'true');
+  // Buka Google Form di tab baru
   window.open("https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform", "_blank");
 }
 
-window.selesaiKirimSurvey = function() {
-  // Simpan status bahwa user sudah mengisi survei HANYA untuk sesi aktif ini
-  sessionStorage.setItem('survei_terisi_sesi_ini', 'true');
-  
-  // Sembunyikan halaman gerbang utama
-  const gatePage = document.getElementById('gatePage');
-  if (gatePage) {
-    gatePage.style.display = 'none';
+// Begitu user kembali/fokus lagi ke halaman web UPTD Farmasi setelah dari tab Google Form, otomatis buka menu utama
+window.addEventListener('focus', function() {
+  if (sessionStorage.getItem('sedang_isi_survei') === 'true') {
+    sessionStorage.setItem('survei_terisi_sesi_ini', 'true');
+    sessionStorage.removeItem('sedang_isi_survei');
+    
+    const gatePage = document.getElementById('gatePage');
+    if (gatePage) gatePage.style.display = 'none';
+    
+    const mainMenuContent = document.getElementById('mainMenuContent');
+    if (mainMenuContent) mainMenuContent.classList.remove('hidden');
   }
-  
-  // Tampilkan konten menu utama secara otomatis
-  const mainMenuContent = document.getElementById('mainMenuContent');
-  if (mainMenuContent) {
-    mainMenuContent.classList.remove('hidden');
-  }
-}
+});
 
 window.resetAkses = function() {
   sessionStorage.removeItem('survei_terisi_sesi_ini');
+  sessionStorage.removeItem('sedang_isi_survei');
   location.reload();
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  // Menggunakan sessionStorage: Ketika tab/browser ditutup lalu dibuka kembali, status terhapus sehingga wajib mengisi survei lagi (100% Target Tercapai)
+  // Menggunakan sessionStorage: Jika browser/tab ditutup lalu dibuka kembali, status terhapus sehingga wajib mengisi survei lagi dari awal
   if (sessionStorage.getItem('survei_terisi_sesi_ini') === 'true') {
     const gatePage = document.getElementById('gatePage');
-    if (gatePage) {
-      gatePage.style.display = 'none';
-    }
+    if (gatePage) gatePage.style.display = 'none';
     const mainMenuContent = document.getElementById('mainMenuContent');
-    if (mainMenuContent) {
-      mainMenuContent.classList.remove('hidden');
-    }
+    if (mainMenuContent) mainMenuContent.classList.remove('hidden');
   } else {
     const gatePage = document.getElementById('gatePage');
-    if (gatePage) {
-      gatePage.style.display = 'flex';
-    }
+    if (gatePage) gatePage.style.display = 'flex';
     const mainMenuContent = document.getElementById('mainMenuContent');
-    if (mainMenuContent) {
-      mainMenuContent.classList.add('hidden');
-    }
+    if (mainMenuContent) mainMenuContent.classList.add('hidden');
   }
 });
 
-// Fungsi Navigasi Antar Tab (SPA Switcher)
 window.switchTab = function(tabName, event) {
 if(event) event.preventDefault();
 
@@ -748,7 +708,6 @@ mSub.innerText = "UPTD Farmasi Tangsel";
 window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-// --- FUNGSI ZOOM GAMBAR INTERAKTIF ---
 window.openImageModal = function(imgSrc) {
 const modal = document.getElementById('imageModal');
 const modalImg = document.getElementById('modalImageSrc');
@@ -767,7 +726,6 @@ modal.classList.add('hidden-custom');
 }
 };
 
-// Delegasi klik gambar otomatis di seluruh konten agar bisa zoom (dengan proteksi no-zoom)
 document.addEventListener('click', function(e) {
 if(e.target.tagName === 'IMG' && e.target.closest('.page-content')) {
 if(e.target.classList.contains('no-zoom') || e.target.closest('nav') || e.target.closest('header') || e.target.closest('aside')) return;
@@ -775,7 +733,6 @@ openImageModal(e.target.src);
 }
 });
 
-// --- LOGIKA FILTER KATEGORI INFORMASI & LAYANAN ---
 let kategoriPublikAktif = "Informasi";
 window.filterKategoriPublik = function(kat) {
 kategoriPublikAktif = kat;
@@ -819,7 +776,6 @@ ${item.url ? `<div class="overflow-hidden rounded-xl mb-2"><img src="${item.url}
 
 muatArtikelPublik("Informasi");
 
-// --- REAL-TIME FIRESTORE LISTENER UNTUK GALERI TERPISAH ---
 onSnapshot(query(collection(db, "galeri"), orderBy("waktuInput", "desc")), (snap) => {
 const grid = document.getElementById("gridGaleriPublik");
 if(!grid) return;
@@ -840,7 +796,6 @@ grid.innerHTML += `
 });
 });
 
-// --- GEOLOKASI GPS UNTUK REGISTRASI ---
 function initGPS() {
 const statusBox = document.getElementById('gpsStatusBox');
 if (!navigator.geolocation) {
@@ -865,12 +820,11 @@ statusBox.innerText = `✅ Lokasi Valid! Anda berada dalam radius kantor (${Math
 } else {
 isWithinRadius = true; 
 statusBox.className = "bg-amber-50 border border-amber-200 p-3 rounded-xl text-[11px] text-amber-900 font-bold";
-statusBox.innerText = `⚠️ Perhatian: Jarak Anda sekitar ${Math.round(userDistance)} meter dari UPTD Farmasi (di luar radius standar 100m).`;
+statusBox.innerText = `⚠️ Perhatian: Jarak Anda sekitar ${Math.round(userDistance)} meter dari UPTD Farmasi.`;
 }
 }
 },
 (error) => {
-console.warn("Gagal mendapatkan GPS:", error.message);
 isWithinRadius = true; 
 if(statusBox) {
 statusBox.className = "bg-blue-50 border border-blue-200 p-3 rounded-xl text-[11px] text-blue-900";
@@ -894,7 +848,6 @@ return R * c;
 
 initGPS();
 
-// --- FORM SUBMIT REGISTRASI KE FIRESTORE ---
 const formReg = document.getElementById('formRegistrasi');
 if(formReg) {
 formReg.addEventListener('submit', async (e) => {
@@ -959,7 +912,6 @@ reader.onerror = error => reject(error);
 });
 }
 
-// --- REAL-TIME FIRESTORE LISTENER UNTUK PROFIL PEGAWAI ---
 onSnapshot(query(collection(db, "pegawai"), orderBy("waktuInput", "desc")), (snap) => {
 const container = document.getElementById("containerProfilPegawai");
 if(!container) return;
@@ -973,12 +925,10 @@ return;
 snap.forEach(d => {
 const item = d.data();
 const fotoUrl = item.url ? item.url : "https://via.placeholder.com/150?text=No+Photo";
-
 container.innerHTML += `<div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col md:flex-row items-center gap-6 border-2 border-blue-400"> <div class="w-32 h-32 md:w-36 md:h-36 shrink-0 rounded-2xl overflow-hidden border-2 border-blue-900 shadow-md bg-gray-100"> <img src="${fotoUrl}" alt="Foto Pegawai" class="w-full h-full object-cover cursor-pointer"> </div> <div class="flex-1 w-full text-center md:text-left space-y-2"> <div> <h3 class="font-bold text-xl text-blue-900">${item.nama}</h3> <p class="text-sm text-gray-600 font-semibold">${item.jabatan}</p> </div> <div class="border-t pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 bg-gray-50 p-3 rounded-xl"> <p><b>Golongan:</b> ${item.golongan || '-'}</p> <p><b>PJ Program:</b> ${item.pj || '-'}</p> </div> </div> </div>`;
 });
 });
 
-// --- REAL-TIME FIRESTORE LISTENER UNTUK TAB TAMU & PDF ---
 onSnapshot(query(collection(db, "tamu"), orderBy("waktu", "desc")), (snapshot) => {
 const container = document.getElementById("containerTamu");
 if(!container) return;
@@ -999,8 +949,6 @@ waktuStr = item.waktu.toDate().toLocaleString('id-ID');
 } else {
 waktuStr = item.waktu;
 }
-} else if (item.tanggal || item.createdAt) {
-waktuStr = item.tanggal || item.createdAt;
 }
 
 let durasi = "-";
@@ -1009,7 +957,7 @@ durasi = Math.round((item.waktuSelesai.toDate() - item.waktuProses.toDate()) / 6
 }
 
 let statusColor = "bg-amber-50 text-amber-800 border-amber-200";
-let statusText = item.status || item.statusPelayanan || "Selesai";
+let statusText = item.status || "Selesai";
 const statusLower = String(statusText).toLowerCase();
 if (statusLower.includes("proses")) {
 statusColor = "bg-blue-50 text-blue-800 border-blue-200";
@@ -1023,20 +971,20 @@ itemsObatArr = item.itemsObat;
 }
 
 const obatTerima = item.obatDiterima || item.daftarObat || item.obat || item.keteranganObat || '-';
-const namaPetugasVal = item.petugas || item.namaPetugas || item.petugasProgram || '-';
-const fileLink = item.suratUrl || item.fileUrl || item.fileLampiran || '';
+const namaPetugasVal = item.petugas || item.namaPetugas || '-';
+const fileLink = item.suratUrl || item.fileUrl || '';
 
 const normalizedData = {
-nama: item.nama || item.namaTamu || item.namaLengkap || 'Tanpa Nama',
-instansi: item.instansi || item.asal || item.instansiAsal || '-',
-keperluan: item.keperluan || item.tujuan || '-',
+nama: item.nama || 'Tanpa Nama',
+instansi: item.instansi || '-',
+keperluan: item.keperluan || '-',
 petugas: namaPetugasVal,
 waktuFormatted: waktuStr,
 durasi: durasi,
 status: statusText,
 obatTerimaFormatted: obatTerima,
 itemsObat: itemsObatArr,
-nomorAntrian: item.nomorAntrian || item.noAntrian || '',
+nomorAntrian: item.nomorAntrian || '',
 fileUrl: fileLink
 };
 
@@ -1056,7 +1004,7 @@ bagianObatHtml = `<div class="bg-gray-50 p-2.5 rounded-xl border border-gray-100
 
 let fileLampiranHtml = '';
 if (fileLink && fileLink.length > 0) {
-fileLampiranHtml = `<div class="pt-1"> <a href="${fileLink}" download="Surat_Permintaan_${normalizedData.nama}" target="_blank" class="inline-block bg-blue-100 text-blue-800 px-2.5 py-1 rounded text-[10px] font-bold hover:bg-blue-200 transition">📥 Lihat/Unduh File Lampiran</a> </div>`;
+fileLampiranHtml = `<div class="pt-1"> <a href="${fileLink}" download target="_blank" class="inline-block bg-blue-100 text-blue-800 px-2.5 py-1 rounded text-[10px] font-bold hover:bg-blue-200 transition">📥 Lihat/Unduh File Lampiran</a> </div>`;
 }
 
 card.innerHTML = `<div class="flex justify-between items-start gap-2"> <div class="space-y-0.5"> <h3 class="font-extrabold text-xs text-blue-900">${normalizedData.nama}</h3> <p class="text-[10px] text-gray-600"><b>Instansi:</b> ${normalizedData.instansi}</p> <p class="text-[10px] text-gray-600"><b>Keperluan:</b> ${normalizedData.keperluan}</p> <p class="text-[10px] text-gray-600"><b>Petugas:</b> ${normalizedData.petugas}</p> <p class="text-[10px] text-gray-600"><b>Durasi:</b> ${normalizedData.durasi}</p> ${normalizedData.nomorAntrian ? `<p class="text-[10px] text-blue-700 font-bold">No. Antrian: ${normalizedData.nomorAntrian}</p>` : ''} </div> <span class="px-2.5 py-1 rounded-full text-[10px] font-bold border shrink-0 ${statusColor}"> ${normalizedData.status} </span> </div> ${fileLampiranHtml} ${bagianObatHtml} <div class="border-t pt-2 flex justify-between items-center text-[10px] text-gray-500"> <span><b>Waktu:</b> ${normalizedData.waktuFormatted}</span> <button onclick='downloadPdf(${JSON.stringify(normalizedData)})' class="bg-blue-900 hover:bg-blue-800 text-white px-3 py-1.5 rounded-xl font-bold transition shadow-sm inline-flex items-center gap-1"> Download PDF 📥 </button> </div>`;
@@ -1069,12 +1017,11 @@ const areaCetak = document.getElementById("areaCetakPdf");
 areaCetak.style.display = "block";
 
 const items = (data.itemsObat && data.itemsObat.length > 0) ? data.itemsObat : [];
-
 let rowsHtml = '';
 if (items.length > 0) {
 rowsHtml = items.map((item, i) => `<tr> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; height: 18px;">${i + 1}</td> <td style="border: 1px solid #000; padding: 5px; font-size: 9px; font-weight: bold;">${item.nama || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.tahun || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.satuan || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.volume || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.ed || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; font-family: monospace;">${item.batch || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;"></td> </tr>`).join('');
 } else {
-rowsHtml = `<tr> <td style="border: 1px solid #000; text-align: center; padding: 6px; font-size: 9px;">1</td> <td style="border: 1px solid #000; padding: 6px; font-size: 9px; text-align: center; font-style: italic;" colspan="7">Belum ada rincian barang/obat yang dimasukkan.</td> </tr>`;
+rowsHtml = `<tr> <td style="border: 1px solid #000; text-align: center; padding: 6px; font-size: 9px;">1</td> <td style="border: 1px solid #000; padding: 6px; font-size: 9px; text-align: center; font-style: italic;" colspan="7">Belum ada rincian barang/obat.</td> </tr>`;
 }
 
 areaCetak.innerHTML = `
@@ -1085,24 +1032,23 @@ areaCetak.innerHTML = `
 <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 72px; height: auto;" crossorigin="anonymous">
 </td>
 <td style="text-align: center; vertical-align: middle; padding-right: 35px;">
-<h2 style="font-size: 13.5px; margin: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
-<h1 style="font-size: 15.5px; margin: 2px 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">DINAS KESEHATAN</h1>
-<h1 style="font-size: 17px; margin: 2px 0; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">UPTD FARMASI</h1>
+<h2 style="font-size: 13.5px; margin: 0; font-weight: bold; text-transform: uppercase;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
+<h1 style="font-size: 15.5px; margin: 2px 0; font-weight: bold; text-transform: uppercase;">DINAS KESEHATAN</h1>
+<h1 style="font-size: 17px; margin: 2px 0; font-weight: 900; text-transform: uppercase;">UPTD FARMASI</h1>
 <p style="font-size: 9.5px; margin: 3px 0 1px 0;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</p>
-<p style="font-size: 9px; margin: 0; color: #000;">pos-el <span style="color: #0000ff; text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></p>
 </td>
 </tr>
 </table>
 
 <div style="text-align: center; margin-bottom: 12px;">
-<div style="font-size: 11.5px; font-weight: bold; text-decoration: underline; display: inline-block; padding-bottom: 1px;">BUKTI PENGAMBILAN OBAT/PELAYANAN</div>
+<div style="font-size: 11.5px; font-weight: bold; text-decoration: underline; display: inline-block;">BUKTI PENGAMBILAN OBAT/PELAYANAN</div>
 </div>
 
 <table style="width: 100%; font-size: 9.5px; margin-bottom: 12px; border-collapse: collapse;">
 <tr>
 <td style="width: 120px; font-weight: bold;">Nama</td>
 <td style="width: 10px;">:</td>
-<td style="font-weight: bold; text-transform: uppercase;">${data.nama || '-'}</td>
+<td style="font-weight: bold; text-transform: uppercase;">${data.nama}</td>
 <td style="width: 110px; font-weight: bold;">No Antrian</td>
 <td style="width: 10px; text-align: center;">:</td>
 <td style="font-weight: bold;">${data.nomorAntrian || '-'}</td>
@@ -1110,26 +1056,26 @@ areaCetak.innerHTML = `
 <tr>
 <td style="font-weight: bold;">Instansi</td>
 <td>:</td>
-<td style="text-transform: uppercase;">${data.instansi || '-'}</td>
+<td style="text-transform: uppercase;">${data.instansi}</td>
 <td style="font-weight: bold;">Status Pelayanan</td>
 <td style="text-align: center;">:</td>
-<td style="font-weight: bold; text-transform: uppercase;">${data.status || '-'}</td>
+<td style="font-weight: bold; text-transform: uppercase;">${data.status}</td>
 </tr>
 <tr>
 <td style="font-weight: bold;">Keperluan</td>
 <td>:</td>
-<td>${data.keperluan || '-'}</td>
+<td>${data.keperluan}</td>
 <td style="font-weight: bold;">Durasi</td>
 <td style="text-align: center;">:</td>
-<td>${data.durasi || '-'}</td>
+<td>${data.durasi}</td>
 </tr>
 <tr>
 <td style="font-weight: bold;">Petugas Program</td>
 <td>:</td>
-<td>${data.petugas || '-'}</td>
+<td>${data.petugas}</td>
 <td style="font-weight: bold;">Waktu Kunjungan</td>
 <td style="text-align: center;">:</td>
-<td>${data.waktuFormatted || '-'}</td>
+<td>${data.waktuFormatted}</td>
 </tr>
 </table>
 
@@ -1161,7 +1107,7 @@ ${rowsHtml}
 <td style="width: 50%; text-align: center; vertical-align: top;">
 <p style="margin: 0; font-weight: bold;">Penerima</p>
 <br><br><br>
-<p style="margin: 0; font-weight: bold; text-decoration: underline;">${data.nama || '......................................'}</p>
+<p style="margin: 0; font-weight: bold; text-decoration: underline;">${data.nama}</p>
 </td>
 </tr>
 </table>
@@ -1170,11 +1116,11 @@ ${rowsHtml}
 
 setTimeout(() => {
 const opt = {
-margin:       [5, 5, 5, 5],
-filename:     `Bukti_Pengambilan_Obat_${data.nama || 'Tamu'}.pdf`,
-image:        { type: 'jpeg', quality: 0.98 },
-html2canvas:  { scale: 2, useCORS: true, letterRendering: true, scrollX: 0, scrollY: 0 },
-jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+margin: [5, 5, 5, 5],
+filename: `Bukti_Pengambilan_Obat_${data.nama}.pdf`,
+image: { type: 'jpeg', quality: 0.98 },
+html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollX: 0, scrollY: 0 },
+jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
 };
 
 html2pdf().from(areaCetak).set(opt).save().then(() => {
@@ -1184,7 +1130,6 @@ areaCetak.innerHTML = "";
 }, 300);
 };
 
-// --- FORM SUBMIT KONSULTASI KE FIRESTORE & WHATSAPP ---
 const formKonsultasi = document.getElementById('formKonsultasi');
 if(formKonsultasi) {
 const NOMOR_WA_ADMIN = "6285716842806";
@@ -1213,7 +1158,6 @@ waktuInput: serverTimestamp()
 const pesanWA = `Halo Admin / Penanggung Jawab UPTD Farmasi Tangsel,%0A%0ASaya ingin menyampaikan konsultasi / keluhan baru:%0A%0A*Nama:* ${encodeURIComponent(nama)}%0A*Instansi:* ${encodeURIComponent(instansi)}%0A*No. WhatsApp:* ${encodeURIComponent(kontak)}%0A*Kategori:* ${encodeURIComponent(kategori)}%0A*Isi Keluhan:*%0A${encodeURIComponent(isi)}%0A%0ATerima kasih.`;
 
 window.open(`https://wa.me/${NOMOR_WA_ADMIN}?text=${pesanWA}`, '_blank');
-
 alert("Konsultasi berhasil disimpan ke sistem dan WhatsApp penanggung jawab akan segera dibuka.");
 formKonsultasi.reset();
 } catch (err) {
@@ -1228,3 +1172,4 @@ btn.innerHTML = `<span>Kirim Konsultasi & Keluhan via WhatsApp</span> <span>→<
 </script>
 </body>
 </html>
+
