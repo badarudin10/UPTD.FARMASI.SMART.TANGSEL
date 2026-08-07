@@ -8,7 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 .hidden-custom { opacity: 0; visibility: hidden; pointer-events: none; display: none !important; }
-.visible-custom { opacity: 1; visibility: visible; pointer-events: auto; display: block !important; }
+.visible-custom { opacity: 1; visibility: visible; pointer-events: auto; display: flex !important; }
 body {
 overflow-x: hidden;
 width: 100%;
@@ -599,6 +599,32 @@ Memuat data registrasi dari database...
 </div>
 </div>
 
+<!-- CUSTOM MODAL NOTIFIKASI NOMOR ANTRIAN (PROFESIONAL DESIGN) -->
+<div id="modalAntrianSukses" class="hidden-custom fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl shadow-2xl border-2 border-emerald-300 max-w-sm w-full p-6 text-center space-y-5 animate-scaleUp">
+    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner font-bold">
+      ✓
+    </div>
+    <div class="space-y-1">
+      <span class="px-3 py-1 bg-blue-100 text-blue-900 text-[10px] font-extrabold uppercase rounded-full tracking-wider">
+        Registrasi Berhasil
+      </span>
+      <h3 class="text-lg font-black text-blue-900 uppercase tracking-tight mt-1">Nomor Antrian Anda</h3>
+      <p class="text-xs text-gray-500">Tunjukkan nomor antrian ini kepada petugas UPTD Farmasi.</p>
+    </div>
+
+    <div class="bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-400 py-4 px-6 rounded-2xl shadow-sm">
+      <span id="txtNomorAntrianModal" class="text-3xl font-black text-emerald-700 tracking-wider">T-001</span>
+    </div>
+
+    <div class="space-y-2 pt-2">
+      <button onclick="tutupModalAntrianDanKeTamu()" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-extrabold py-3 rounded-xl text-xs transition shadow-lg">
+        Lihat Status & Menu Tamu
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- Modal Zoom Gambar -->
 <div id="imageModal" class="hidden-custom fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onclick="closeImageModal()">
 <div class="relative max-w-4xl max-h-[90vh] overflow-hidden flex items-center justify-center">
@@ -730,6 +756,16 @@ if(modal) {
 modal.classList.remove('visible-custom');
 modal.classList.add('hidden-custom');
 }
+};
+
+// Fungsi kontrol custom modal antrian
+window.tutupModalAntrianDanKeTamu = function() {
+  const modal = document.getElementById('modalAntrianSukses');
+  if(modal) {
+    modal.classList.remove('visible-custom');
+    modal.classList.add('hidden-custom');
+  }
+  switchTab('tamu');
 };
 
 document.addEventListener('click', function(e) {
@@ -881,7 +917,6 @@ fileUrlVal = await toBase64(file);
 }
 
 try {
-// Tentukan Prefiks Huruf Berdasarkan Keperluan
 let prefix = "L";
 const lkep = keperluan.toLowerCase();
 if (lkep.includes("obat pkd")) prefix = "O";
@@ -892,7 +927,6 @@ else if (lkep.includes("hiv")) prefix = "H";
 else if (lkep.includes("dbd")) prefix = "D";
 else if (lkep.includes("hepatitis")) prefix = "P";
 
-// Hitung nomor urut berdasarkan kategori & tanggal hari yang sama (reset harian)
 const todayStr = new Date().toISOString().split('T')[0];
 const qCek = query(collection(db, "tamu"), where("keperluan", "==", keperluan));
 const snapCek = await getDocs(qCek);
@@ -928,9 +962,18 @@ lng: userLng || 0,
 jarak: userDistance ? Math.round(userDistance) : 0
 });
 
-alert(`Registrasi berhasil dikirim!\nNomor Antrian Anda: ${antrianNo}`);
 formReg.reset();
-switchTab('tamu');
+
+// Tampilkan custom modal antrian yang profesional (menggantikan alert bawaan browser)
+const txtAntrianModal = document.getElementById('txtNomorAntrianModal');
+if(txtAntrianModal) txtAntrianModal.innerText = antrianNo;
+
+const modalSukses = document.getElementById('modalAntrianSukses');
+if(modalSukses) {
+modalSukses.classList.remove('hidden-custom');
+modalSukses.classList.add('visible-custom');
+}
+
 } catch (err) {
 console.error("Gagal kirim registrasi:", err);
 alert("Gagal mengirim registrasi ke database. Silakan coba lagi.");
@@ -1027,7 +1070,6 @@ fileUrl: fileLink
 };
 
 const card = document.createElement("div");
-// Desain Profesional untuk Kartu/Notif Antrian selaras dengan tema aplikasi (#e3ede6 / blue-emerald harmony)
 card.className = "bg-gradient-to-br from-white via-blue-50/30 to-emerald-50/30 p-5 rounded-2xl shadow-md border-2 border-emerald-200 space-y-3.5 transition hover:shadow-lg";
 
 let bagianObatHtml = '';
