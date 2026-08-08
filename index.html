@@ -75,11 +75,11 @@ box-sizing: border-box;
 </style>
 <title>UPTD Farmasi - Kota Tangerang Selatan</title>
 </head>
-<body class="font-sans min-h-screen pb-6 flex items-center justify-center p-0 lg:p-6">
+<body class="font-sans min-h-screen pb-6 flex items-center justify-center p-0 lg:p-6 text-slate-100">
 
   <!-- HALAMAN GERBANG UTAMA (HANYA SATU TOMBOL SURVEY & REDIRECT OTOMATIS) -->
 <div id="gatePage" class="bg-slate-900 flex items-center justify-center p-4" style="position: fixed; inset: 0; z-index: 9999; overflow-y: auto;">
-  <div class="max-w-md w-full bg-[#dce7e1] rounded-3xl shadow-xl border-2 border-blue-900 p-8 text-center space-y-6 my-auto">
+  <div class="max-w-md w-full bg-slate-800/90 backdrop-blur-md rounded-3xl shadow-xl border-2 border-red-600 p-8 text-center space-y-6 my-auto">
     
     <!-- Logo Instansi / Identitas -->
     <div class="flex justify-center">
@@ -88,26 +88,26 @@ box-sizing: border-box;
 
     <!-- Ucapan Selamat Datang Modern -->
     <div class="space-y-2">
-      <span class="px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest bg-blue-900 text-white rounded-full">
+      <span class="px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest bg-red-600 text-white rounded-full">
         Sistem Layanan Digital Terpadu
       </span>
-      <h1 class="text-2xl font-black text-emerald-700 tracking-tight leading-snug">
+      <h1 class="text-2xl font-black text-emerald-400 tracking-tight leading-snug">
         SELAMAT DATANG DI UPTD FARMASI
       </h1>
-      <p class="text-xs text-emerald-800 font-medium leading-relaxed">
+      <p class="text-xs text-emerald-300 font-medium leading-relaxed">
         Kota Tangerang Selatan
       </p>
-      <p class="text-xs text-blue-900 font-medium leading-relaxed">
+      <p class="text-xs text-slate-300 font-medium leading-relaxed">
         Pelayanan Optimal: Menjadi unit penunjang distribusi obat dan perbekalan kesehatan yang efektif, efisien, serta dapat dipertanggung jawabkan
       </p>
     </div>
 
     <!-- Kotak Informasi Akses -->
-    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-left space-y-1">
-      <p class="text-xs font-bold text-amber-900 flex items-center gap-1.5">
+    <div class="bg-slate-900/70 border border-amber-500/40 rounded-2xl p-4 text-left space-y-1">
+      <p class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
         <span>⚠️</span> Survei Kepuasan Masyarakat:
       </p>
-      <p class="text-[11px] text-amber-800 leading-normal">
+      <p class="text-[11px] text-slate-300 leading-normal">
         Silakan isi <b>Survei Kepuasan Masyarakat</b> terlebih dahulu. Ketika Anda menekan tombol kirim pada Google Form, sistem akan otomatis membuka menu utama. Setiap kali Anda keluar/menutup web ini, Anda wajib mengisi survei kembali saat berkunjung berikutnya.
       </p>
     </div>
@@ -117,27 +117,27 @@ box-sizing: border-box;
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" 
          target="_blank" 
          onclick="mulaiIsiSurvey(event)"
-         class="w-full bg-blue-900 hover:bg-blue-800 text-white font-extrabold py-4 px-6 rounded-2xl transition transform active:scale-95 flex items-center justify-center gap-2.5 text-sm">
+         class="w-full bg-red-600 hover:bg-red-700 text-white font-extrabold py-4 px-6 rounded-2xl transition transform active:scale-95 flex items-center justify-center gap-2.5 text-sm shadow-lg">
         <i class="fas fa-external-link-alt"></i>
         <span>ISI SURVEI KEPUASAN & MASUK MENU</span>
       </a>
     </div>
 
-    <p class="text-[10px] text-blue-900 leading-normal">
+    <p class="text-[10px] text-slate-400 leading-normal">
       Tombol di atas akan mengarahkan Anda ke survei. Setelah selesai mengisi dan mengirim, sistem akan otomatis membuka akses masuk ke halaman menu utama.
     </p>
 
   </div>
 </div>
 
-<!-- KONTEN MENU UTAMA (DIBUNGKUS KONTainer UTAMA DENGAN WARNA HIJAU SAGE & BORDER BIRU TUA) -->
-<div id="mainMenuContent" class="hidden max-w-md w-full bg-[#dce7e1] rounded-3xl shadow-xl border-2 border-blue-900 overflow-hidden my-auto p-4 lg:max-w-4xl lg:p-6">
+<!-- KONTEN MENU UTAMA (DIBUNGKUS KONTainer UTAMA DENGAN WARNA GELAP TIPIS & BORDER MERAH) -->
+<div id="mainMenuContent" class="hidden max-w-md w-full bg-slate-800/90 backdrop-blur-md rounded-3xl shadow-xl border-2 border-red-600 overflow-hidden my-auto p-4 lg:max-w-4xl lg:p-6">
 
 <!-- Header Atas (Hanya tampil di Mobile/HP) -->
-<header class="mobile-header-bar bg-[#dce7e1] px-2 py-2 mb-3 border-2 border-blue-900/20 text-center">
+<header class="mobile-header-bar bg-slate-900/60 px-2 py-2 mb-3 border border-red-600/30 text-center rounded-xl">
 <div class="max-w-md mx-auto">
-<h1 id="mobileHeaderTitle" class="font-black text-blue-900 text-xs tracking-wider leading-tight uppercase">UPTD FARMASI KOTA TANGERANG SELATAN</h1>
-<p id="mobileHeaderSub" class="text-[9px] text-emerald-800 font-semibold uppercase tracking-widest mt-0.5">Sistem Layanan Digital Terpadu</p>
+<h1 id="mobileHeaderTitle" class="font-black text-slate-100 text-xs tracking-wider leading-tight uppercase">UPTD FARMASI KOTA TANGERANG SELATAN</h1>
+<p id="mobileHeaderSub" class="text-[9px] text-emerald-400 font-semibold uppercase tracking-widest mt-0.5">Sistem Layanan Digital Terpadu</p>
 </div>
 </header>
 
@@ -145,69 +145,69 @@ box-sizing: border-box;
 
 <!-- SIDEBAR KIRI KHUSUS PC -->
 <aside class="pc-sidebar space-y-4">
-<a href="#" onclick="switchTab('profil', event)" class="block bg-[#dce7e1] p-4 rounded-2xl shadow-sm border border-blue-900/30 relative hover:border-blue-900 transition text-center">
+<a href="#" onclick="switchTab('profil', event)" class="block bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-red-600/40 relative hover:border-red-600 transition text-center">
 <div class="flex flex-col items-center gap-2">
 <div class="h-28 w-28 flex items-center justify-center flex-shrink-0 bg-transparent">
 <img src="https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png" class="w-full h-full object-contain no-zoom">
 </div>
 <div>
-<h2 class="text-xs font-extrabold text-blue-900">Profil Pegawai</h2>
-<p class="text-[11px] text-emerald-800 font-extrabold uppercase tracking-wide mt-0.5">UPTD FARMASI</p>
+<h2 class="text-xs font-extrabold text-slate-100">Profil Pegawai</h2>
+<p class="text-[11px] text-emerald-400 font-extrabold uppercase tracking-wide mt-0.5">UPTD FARMASI</p>
 </div>
 </div>
 </a>
 
-<div class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border-2 border-blue-900/30">
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600/40">
 <nav class="space-y-1.5">
-<a href="#" onclick="switchTab('index', event)" id="nav-index" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-100/60 text-blue-900 font-bold text-xs transition">
-<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+<a href="#" onclick="switchTab('index', event)" id="nav-index" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-200 font-bold text-xs transition">
+<div class="w-10 h-10 flex items-center justify-center flex-shrink-0 bg-red-600 rounded-lg p-1">
 <img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Beranda / Dashboard</span>
 </a>
-<a href="#" onclick="switchTab('registrasi', event)" id="nav-registrasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-100/60 text-blue-900 font-bold text-xs transition">
-<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+<a href="#" onclick="switchTab('registrasi', event)" id="nav-registrasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-200 font-bold text-xs transition">
+<div class="w-10 h-10 flex items-center justify-center flex-shrink-0 bg-red-600 rounded-lg p-1">
 <img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Registrasi</span>
 </a>
-<a href="#" onclick="switchTab('informasi', event)" id="nav-informasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-100/60 text-blue-900 font-bold text-xs transition">
-<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+<a href="#" onclick="switchTab('informasi', event)" id="nav-informasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-200 font-bold text-xs transition">
+<div class="w-10 h-10 flex items-center justify-center flex-shrink-0 bg-red-600 rounded-lg p-1">
 <img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Informasi & Layanan</span>
 </a>
-<a href="#" onclick="switchTab('galeri', event)" id="nav-galeri" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-100/60 text-blue-900 font-bold text-xs transition">
-<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+<a href="#" onclick="switchTab('galeri', event)" id="nav-galeri" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-200 font-bold text-xs transition">
+<div class="w-10 h-10 flex items-center justify-center flex-shrink-0 bg-red-600 rounded-lg p-1">
 <img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Galeri Kegiatan</span>
 </a>
-<a href="#" onclick="switchTab('maps', event)" id="nav-maps" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-100/60 text-blue-900 font-bold text-xs transition">
-<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+<a href="#" onclick="switchTab('maps', event)" id="nav-maps" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-200 font-bold text-xs transition">
+<div class="w-10 h-10 flex items-center justify-center flex-shrink-0 bg-red-600 rounded-lg p-1">
 <img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Maps</span>
 </a>
-<a href="#" onclick="switchTab('tamu', event)" id="nav-tamu" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-100/60 text-blue-900 font-bold text-xs transition">
-<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+<a href="#" onclick="switchTab('tamu', event)" id="nav-tamu" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-200 font-bold text-xs transition">
+<div class="w-10 h-10 flex items-center justify-center flex-shrink-0 bg-red-600 rounded-lg p-1">
 <img src="https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Tamu</span>
 </a>
-<a href="#" onclick="switchTab('panduan', event)" id="nav-panduan" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-100/60 text-blue-900 font-bold text-xs transition">
-<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+<a href="#" onclick="switchTab('panduan', event)" id="nav-panduan" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-200 font-bold text-xs transition">
+<div class="w-10 h-10 flex items-center justify-center flex-shrink-0 bg-red-600 rounded-lg p-1">
 <img src="https://i.ibb.co.com/m524Hk0C/Picsart-26-07-25-11-28-11-137.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Panduan</span>
 </a>
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-100/60 text-blue-900 font-bold text-xs transition">
-<div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-200 font-bold text-xs transition">
+<div class="w-10 h-10 flex items-center justify-center flex-shrink-0 bg-red-600 rounded-lg p-1">
 <img src="https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png" class="w-full h-full object-contain no-zoom">
 </div>
 <span class="text-xs">Survei</span>
 </a>
-<button onclick="resetAkses()" class="w-full mt-2 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-red-900/10 hover:bg-red-900/20 text-red-700 font-bold text-xs transition">
+<button onclick="resetAkses()" class="w-full mt-2 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-red-600/20 hover:bg-red-600/30 text-red-300 font-bold text-xs transition">
 <i class="fas fa-lock"></i> <span>Kunci Kembali</span>
 </button>
 </nav>
@@ -219,122 +219,122 @@ box-sizing: border-box;
 
 <!-- ================= PAGE 1: INDEX ================= -->
 <div id="page-index" class="page-content space-y-4">
-<div class="pc-header-desktop hidden bg-[#dce7e1] p-4 rounded-2xl shadow-sm border border-blue-900/30 mb-3">
+<div class="pc-header-desktop hidden bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-red-600/40 mb-3">
 <div class="flex items-center justify-between">
 <div class="flex items-center gap-3">
 <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo" class="h-12 w-12 object-contain no-zoom">
 <div>
-<h1 class="font-black text-blue-900 text-base tracking-wide leading-tight">UPTD FARMASI KOTA TANGERANG SELATAN</h1>
-<p class="text-xs text-emerald-800 font-semibold uppercase tracking-wider">Sistem Layanan Digital Terpadu</p>
+<h1 class="font-black text-slate-100 text-base tracking-wide leading-tight">UPTD FARMASI KOTA TANGERANG SELATAN</h1>
+<p class="text-xs text-emerald-400 font-semibold uppercase tracking-wider">Sistem Layanan Digital Terpadu</p>
 </div>
 </div>
-<button onclick="resetAkses()" class="text-xs bg-red-800 hover:bg-red-900 text-white px-3 py-2 rounded-xl transition font-bold flex items-center gap-1.5 shadow-sm">
+<button onclick="resetAkses()" class="text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl transition font-bold flex items-center gap-1.5 shadow-sm">
 <i class="fas fa-lock"></i> Kunci Kembali
 </button>
 </div>
 </div>
 
-<div class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border border-blue-900/30 text-center space-y-2">
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-red-600/40 text-center space-y-2">
 <div class="w-20 h-20 mx-auto flex items-center justify-center">
 <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="w-full h-full object-contain no-zoom">
 </div>
 <div>
-<h2 class="text-sm font-black text-blue-900 uppercase">Selamat Datang di UPTD Farmasi</h2>
-<p class="text-[11px] text-emerald-900 mt-0.5 font-medium leading-relaxed">Silakan pilih menu layanan di bawah untuk registrasi, informasi, konsultasi, atau memantau status kunjungan Anda.</p>
+<h2 class="text-sm font-black text-slate-100 uppercase">Selamat Datang di UPTD Farmasi</h2>
+<p class="text-[11px] text-slate-300 mt-0.5 font-medium leading-relaxed">Silakan pilih menu layanan di bawah untuk registrasi, informasi, konsultasi, atau memantau status kunjungan Anda.</p>
 </div>
 </div>
 
-<!-- GRID MENU UTAMA (Border Biru Tua & Warna Halus Berbeda di Pembungkus Ikon) -->
+<!-- GRID MENU UTAMA (Border Merah & Warna Gelap Tipis di Pembungkus Ikon) -->
 <div class="grid grid-cols-2 gap-3">
-<a href="#" onclick="switchTab('registrasi', event)" class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border-2 border-blue-900 hover:bg-blue-50/50 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-blue-50/70 rounded-2xl p-2 border border-blue-900/20 shadow-inner">
+<a href="#" onclick="switchTab('registrasi', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-red-600 rounded-2xl p-2 border border-red-500/40 shadow-inner">
 <img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
 </div>
 <div>
-<h3 class="font-black text-xs text-blue-900">Registrasi</h3>
-<p class="text-[10px] text-emerald-900 font-semibold">Form Kunjungan</p>
+<h3 class="font-black text-xs text-slate-100">Registrasi</h3>
+<p class="text-[10px] text-emerald-400 font-semibold">Form Kunjungan</p>
 </div>
 </a>
 
-<a href="#" onclick="switchTab('informasi', event)" class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border-2 border-blue-900 hover:bg-emerald-50/50 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-emerald-50/70 rounded-2xl p-2 border border-blue-900/20 shadow-inner">
+<a href="#" onclick="switchTab('informasi', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-red-600 rounded-2xl p-2 border border-red-500/40 shadow-inner">
 <img src="https://i.ibb.co.com/Kj3G0WhV/Picsart-26-07-29-23-08-35-566.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
 </div>
 <div>
-<h3 class="font-black text-xs text-blue-900">Informasi & Layanan</h3>
-<p class="text-[10px] text-emerald-900 font-semibold">Edukasi & Obat</p>
+<h3 class="font-black text-xs text-slate-100">Informasi & Layanan</h3>
+<p class="text-[10px] text-emerald-400 font-semibold">Edukasi & Obat</p>
 </div>
 </a>
 
-<a href="#" onclick="switchTab('galeri', event)" class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border-2 border-blue-900 hover:bg-amber-50/50 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-amber-50/70 rounded-2xl p-2 border border-blue-900/20 shadow-inner">
+<a href="#" onclick="switchTab('galeri', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-red-600 rounded-2xl p-2 border border-red-500/40 shadow-inner">
 <img src="https://i.ibb.co.com/8LPVnZXb/Picsart-26-08-06-20-58-28-388.png" class="w-full h-full object-contain scale-[1.65] no-zoom">
 </div>
 <div>
-<h3 class="font-black text-xs text-blue-900">Galeri Kegiatan</h3>
-<p class="text-[10px] text-emerald-900 font-semibold">Dokumentasi Foto</p>
+<h3 class="font-black text-xs text-slate-100">Galeri Kegiatan</h3>
+<p class="text-[10px] text-emerald-400 font-semibold">Dokumentasi Foto</p>
 </div>
 </a>
 
-<a href="#" onclick="switchTab('tamu', event)" class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border-2 border-blue-900 hover:bg-sky-50/50 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-sky-50/70 rounded-2xl p-2 border border-blue-900/20 shadow-inner">
+<a href="#" onclick="switchTab('tamu', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-red-600 rounded-2xl p-2 border border-red-500/40 shadow-inner">
 <img src="https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png" class="w-full h-full object-contain scale-[2.25] no-zoom">
 </div>
 <div>
-<h3 class="font-black text-xs text-blue-900">Status Tamu</h3>
-<p class="text-[10px] text-emerald-900 font-semibold">Cek & Unduh PDF</p>
+<h3 class="font-black text-xs text-slate-100">Status Tamu</h3>
+<p class="text-[10px] text-emerald-400 font-semibold">Cek & Unduh PDF</p>
 </div>
 </a>
 
-<a href="#" onclick="switchTab('profil', event)" class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border-2 border-blue-900 hover:bg-teal-50/50 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-teal-50/70 rounded-2xl p-2 border border-blue-900/20 shadow-inner">
+<a href="#" onclick="switchTab('profil', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-red-600 rounded-2xl p-2 border border-red-500/40 shadow-inner">
 <img src="https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
 </div>
 <div>
-<h3 class="font-black text-xs text-blue-900">Profil Pegawai</h3>
-<p class="text-[10px] text-emerald-900 font-semibold">Daftar PJ Program</p>
+<h3 class="font-black text-xs text-slate-100">Profil Pegawai</h3>
+<p class="text-[10px] text-emerald-400 font-semibold">Daftar PJ Program</p>
 </div>
 </a>
 
-<a href="#" onclick="switchTab('konsultasi', event)" class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border-2 border-blue-900 hover:bg-rose-50/50 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-rose-50/70 rounded-2xl p-2 border border-blue-900/20 shadow-inner">
+<a href="#" onclick="switchTab('konsultasi', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-red-600 rounded-2xl p-2 border border-red-500/40 shadow-inner">
 <img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-full h-full object-contain scale-[2.25] no-zoom">
 </div>
 <div>
-<h3 class="font-black text-xs text-blue-900">Konsultasi</h3>
-<p class="text-[10px] text-emerald-900 font-semibold">Pengaduan via WA</p>
+<h3 class="font-black text-xs text-slate-100">Konsultasi</h3>
+<p class="text-[10px] text-emerald-400 font-semibold">Pengaduan via WA</p>
 </div>
 </a>
 
-<a href="#" onclick="switchTab('maps', event)" class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border-2 border-blue-900 hover:bg-indigo-50/50 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-indigo-50/70 rounded-2xl p-2 border border-blue-900/20 shadow-inner">
+<a href="#" onclick="switchTab('maps', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-red-600 rounded-2xl p-2 border border-red-500/40 shadow-inner">
 <img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
 </div>
 <div>
-<h3 class="font-black text-xs text-blue-900">Maps Lokasi</h3>
-<p class="text-[10px] text-emerald-900 font-semibold">Panduan Rute GPS</p>
+<h3 class="font-black text-xs text-slate-100">Maps Lokasi</h3>
+<p class="text-[10px] text-emerald-400 font-semibold">Panduan Rute GPS</p>
 </div>
 </a>
 
-<a href="#" onclick="switchTab('panduan', event)" class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border-2 border-blue-900 hover:bg-purple-50/50 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-purple-50/70 rounded-2xl p-2 border border-blue-900/20 shadow-inner">
+<a href="#" onclick="switchTab('panduan', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-red-600 rounded-2xl p-2 border border-red-500/40 shadow-inner">
 <img src="https://i.ibb.co.com/Z6qSGXMx/Picsart-26-07-29-23-09-18-170.png" class="w-full h-full object-contain scale-[2.0] no-zoom">
 </div>
 <div>
-<h3 class="font-black text-xs text-blue-900">Panduan</h3>
-<p class="text-[10px] text-emerald-900 font-semibold">Petunjuk Sistem</p>
+<h3 class="font-black text-xs text-slate-100">Panduan</h3>
+<p class="text-[10px] text-emerald-400 font-semibold">Petunjuk Sistem</p>
 </div>
 </a>
 </div>
 
-<div class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border-2 border-blue-900">
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-4 bg-emerald-100/80 hover:bg-emerald-100 p-3.5 rounded-xl border border-blue-900/30 transition">
-<div class="w-24 h-24 flex items-center justify-center flex-shrink-0 bg-white/80 rounded-xl p-2 border border-blue-900/20 shadow-inner">
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600">
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-4 bg-slate-800/80 hover:bg-slate-800 p-3.5 rounded-xl border border-red-600/30 transition">
+<div class="w-24 h-24 flex items-center justify-center flex-shrink-0 bg-red-600 rounded-xl p-2 border border-red-500/40 shadow-inner">
 <img src="https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png" class="w-full h-full object-contain scale-[2.0] no-zoom">
 </div>
 <div>
-<h3 class="font-black text-xs text-blue-900">Survei Kepuasan Pelanggan</h3>
-<p class="text-[10px] text-emerald-900 mt-0.5 font-medium">Berikan penilaian & masukan untuk peningkatan pelayanan UPTD Farmasi Tangsel.</p>
+<h3 class="font-black text-xs text-slate-100">Survei Kepuasan Pelanggan</h3>
+<p class="text-[10px] text-slate-300 mt-0.5 font-medium">Berikan penilaian & masukan untuk peningkatan pelayanan UPTD Farmasi Tangsel.</p>
 </div>
 </a>
 </div>
@@ -342,24 +342,24 @@ box-sizing: border-box;
 
 <!-- ================= PAGE 2: REGISTRASI ================= -->
 <div id="page-registrasi" class="page-content space-y-4 hidden-custom">
-<div class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border border-blue-900/30 text-center space-y-1">
-<h2 class="text-sm font-black text-blue-900">📝 Formulir Registrasi Kunjungan</h2>
-<p class="text-[11px] text-emerald-900 font-medium">Silakan lengkapi data kunjungan Anda. Sistem akan memvalidasi posisi GPS.</p>
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-red-600/40 text-center space-y-1">
+<h2 class="text-sm font-black text-slate-100">📝 Formulir Registrasi Kunjungan</h2>
+<p class="text-[11px] text-slate-300 font-medium">Silakan lengkapi data kunjungan Anda. Sistem akan memvalidasi posisi GPS.</p>
 </div>
 
-<div class="bg-[#dce7e1] p-5 rounded-2xl shadow-sm border border-blue-900/30">
+<div class="bg-slate-900/70 p-5 rounded-2xl shadow-sm border border-red-600/40">
 <form id="formRegistrasi" class="space-y-3">
 <div>
-<label class="block text-xs font-black text-blue-900 mb-1">Nama Lengkap / Tamu</label>
-<input type="text" id="regNama" required placeholder="Masukkan nama lengkap..." class="w-full px-3 py-2 text-xs border border-blue-900/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-900 bg-white">
+<label class="block text-xs font-black text-slate-200 mb-1">Nama Lengkap / Tamu</label>
+<input type="text" id="regNama" required placeholder="Masukkan nama lengkap..." class="w-full px-3 py-2 text-xs border border-red-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 text-slate-100 placeholder-slate-400">
 </div>
 <div>
-<label class="block text-xs font-black text-blue-900 mb-1">Instansi / Asal Puskesmas</label>
-<input type="text" id="regInstansi" required placeholder="Contoh: Puskesmas Setu / RSUD..." class="w-full px-3 py-2 text-xs border border-blue-900/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-900 bg-white">
+<label class="block text-xs font-black text-slate-200 mb-1">Instansi / Asal Puskesmas</label>
+<input type="text" id="regInstansi" required placeholder="Contoh: Puskesmas Setu / RSUD..." class="w-full px-3 py-2 text-xs border border-red-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 text-slate-100 placeholder-slate-400">
 </div>
 <div>
-<label class="block text-xs font-black text-blue-900 mb-1">Keperluan Kunjungan</label>
-<select id="regKeperluan" required class="w-full px-3 py-2 text-xs border border-blue-900/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-900 bg-white font-bold text-gray-700">
+<label class="block text-xs font-black text-slate-200 mb-1">Keperluan Kunjungan</label>
+<select id="regKeperluan" required class="w-full px-3 py-2 text-xs border border-red-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 font-bold text-slate-100">
 <option value="" disabled selected>-- Pilih Keperluan Kunjungan --</option>
 <option value="1. Obat PKD">1. Obat PKD</option>
 <option value="2. VAKSIN">2. VAKSIN</option>
@@ -372,26 +372,26 @@ box-sizing: border-box;
 </select>
 </div>
 <div>
-<label class="block text-xs font-black text-blue-900 mb-1">Nomor Kontak / WhatsApp</label>
-<input type="tel" id="regKontak" required placeholder="Contoh: 081234567890" class="w-full px-3 py-2 text-xs border border-blue-900/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-900 bg-white">
+<label class="block text-xs font-black text-slate-200 mb-1">Nomor Kontak / WhatsApp</label>
+<input type="tel" id="regKontak" required placeholder="Contoh: 081234567890" class="w-full px-3 py-2 text-xs border border-red-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 text-slate-100 placeholder-slate-400">
 </div>
 <div>
-<label class="block text-xs font-black text-blue-900 mb-1">Lampirkan Surat / Dokumen Pendukung (Maks. 700 KB)</label>
-<input type="file" id="regFile" accept=".pdf,image/*" class="w-full text-xs text-gray-700 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-900 file:text-white hover:file:bg-blue-800">
+<label class="block text-xs font-black text-slate-200 mb-1">Lampirkan Surat / Dokumen Pendukung (Maks. 700 KB)</label>
+<input type="file" id="regFile" accept=".pdf,image/*" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-red-600 file:text-white hover:file:bg-red-700">
 </div>
 
-<div id="gpsStatusBox" class="bg-blue-900/10 border border-blue-900/30 p-3 rounded-xl text-[11px] text-blue-900 font-medium">
+<div id="gpsStatusBox" class="bg-red-600/10 border border-red-600/30 p-3 rounded-xl text-[11px] text-slate-200 font-medium">
 📍 Mendeteksi posisi koordinat GPS perangkat Anda...
 </div>
 
-<button type="submit" id="btnSubmitReg" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-black py-2.5 rounded-xl text-xs transition shadow-md">
+<button type="submit" id="btnSubmitReg" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-2.5 rounded-xl text-xs transition shadow-md">
 Kirim Registrasi Kunjungan
 </button>
 </form>
 </div>
 
 <div class="flex justify-end pt-2">
-<button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
+<button onclick="switchTab('index', event)" class="bg-red-600 hover:bg-red-700 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
 ← Kembali ke Menu Utama
 </button>
 </div>
@@ -399,24 +399,24 @@ Kirim Registrasi Kunjungan
 
 <!-- ================= PAGE 3: INFORMASI ================= -->
 <div id="page-informasi" class="page-content space-y-4 hidden-custom">
-<div class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border border-blue-900/30 text-center space-y-1">
-<h2 class="text-sm font-black text-blue-900">📢 Pusat Informasi, Edukasi & Layanan</h2>
-<p class="text-[11px] text-emerald-900 font-medium">Pilih kategori sub-menu di bawah untuk melihat informasi terbaru yang dikelola oleh admin.</p>
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-red-600/40 text-center space-y-1">
+<h2 class="text-sm font-black text-slate-100">📢 Pusat Informasi, Edukasi & Layanan</h2>
+<p class="text-[11px] text-slate-300 font-medium">Pilih kategori sub-menu di bawah untuk melihat informasi terbaru yang dikelola oleh admin.</p>
 </div>
 
-<div class="bg-[#dce7e1] p-3 rounded-2xl shadow-sm border border-blue-900/30 flex flex-wrap gap-2 justify-center">
-<button onclick="filterKategoriPublik('Informasi')" id="btnKatPublikInformasi" class="px-3 py-2 rounded-xl text-xs font-black bg-blue-900 text-white transition shadow">Informasi</button>
-<button onclick="filterKategoriPublik('Edukasi')" id="btnKatPublikEdukasi" class="px-3 py-2 rounded-xl text-xs font-black bg-white/70 text-blue-900 hover:bg-white transition">Edukasi</button>
-<button onclick="filterKategoriPublik('Pelayanan')" id="btnKatPublikPelayanan" class="px-3 py-2 rounded-xl text-xs font-black bg-white/70 text-blue-900 hover:bg-white transition">Layanan</button>
-<button onclick="filterKategoriPublik('Obat')" id="btnKatPublikObat" class="px-3 py-2 rounded-xl text-xs font-black bg-white/70 text-blue-900 hover:bg-white transition">Kategori Obat</button>
+<div class="bg-slate-900/70 p-3 rounded-2xl shadow-sm border border-red-600/40 flex flex-wrap gap-2 justify-center">
+<button onclick="filterKategoriPublik('Informasi')" id="btnKatPublikInformasi" class="px-3 py-2 rounded-xl text-xs font-black bg-red-600 text-white transition shadow">Informasi</button>
+<button onclick="filterKategoriPublik('Edukasi')" id="btnKatPublikEdukasi" class="px-3 py-2 rounded-xl text-xs font-black bg-slate-800 text-slate-200 hover:bg-slate-700 transition">Edukasi</button>
+<button onclick="filterKategoriPublik('Pelayanan')" id="btnKatPublikPelayanan" class="px-3 py-2 rounded-xl text-xs font-black bg-slate-800 text-slate-200 hover:bg-slate-700 transition">Layanan</button>
+<button onclick="filterKategoriPublik('Obat')" id="btnKatPublikObat" class="px-3 py-2 rounded-xl text-xs font-black bg-slate-800 text-slate-200 hover:bg-slate-700 transition">Kategori Obat</button>
 </div>
 
 <div id="containerArtikelPublik" class="space-y-3">
-<div class="bg-[#dce7e1] p-6 rounded-2xl shadow-sm border border-blue-900/30 text-center text-xs text-blue-900 font-medium">Memuat data informasi...</div>
+<div class="bg-slate-900/70 p-6 rounded-2xl shadow-sm border border-red-600/40 text-center text-xs text-slate-200 font-medium">Memuat data informasi...</div>
 </div>
 
 <div class="flex justify-end pt-2">
-<button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
+<button onclick="switchTab('index', event)" class="bg-red-600 hover:bg-red-700 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
 ← Kembali ke Menu Utama
 </button>
 </div>
@@ -424,19 +424,19 @@ Kirim Registrasi Kunjungan
 
 <!-- ================= PAGE 4: GALERI ================= -->
 <div id="page-galeri" class="page-content space-y-4 hidden-custom">
-<div class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border border-blue-900/30 text-center space-y-1">
-<h2 class="text-sm font-black text-blue-900">📸 Galeri Kegiatan UPTD Farmasi</h2>
-<p class="text-[11px] text-emerald-900 font-medium">Dokumentasi foto kegiatan dan operasional UPTD Farmasi Kota Tangerang Selatan.</p>
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-red-600/40 text-center space-y-1">
+<h2 class="text-sm font-black text-slate-100">📸 Galeri Kegiatan UPTD Farmasi</h2>
+<p class="text-[11px] text-slate-300 font-medium">Dokumentasi foto kegiatan dan operasional UPTD Farmasi Kota Tangerang Selatan.</p>
 </div>
 
-<div class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border border-blue-900/30">
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-red-600/40">
 <div id="gridGaleriPublik" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-<div class="text-xs text-blue-900 font-medium col-span-full text-center py-6">Memuat galeri kegiatan...</div>
+<div class="text-xs text-slate-200 font-medium col-span-full text-center py-6">Memuat galeri kegiatan...</div>
 </div>
 </div>
 
 <div class="flex justify-end pt-2">
-<button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
+<button onclick="switchTab('index', event)" class="bg-red-600 hover:bg-red-700 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
 ← Kembali ke Menu Utama
 </button>
 </div>
@@ -444,17 +444,17 @@ Kirim Registrasi Kunjungan
 
 <!-- ================= PAGE 5: PROFIL ================= -->
 <div id="page-profil" class="page-content space-y-4 hidden-custom">
-<div class="bg-[#dce7e1] p-6 rounded-2xl shadow-lg text-center border-2 border-blue-900">
-<h1 class="text-xl font-black text-blue-900">PROFIL PEGAWAI UPTD FARMASI</h1>
-<p class="text-xs text-emerald-900 font-semibold mt-1">Daftar Pegawai & Penanggung Jawab Program</p>
+<div class="bg-slate-900/70 p-6 rounded-2xl shadow-lg text-center border-2 border-red-600">
+<h1 class="text-xl font-black text-slate-100">PROFIL PEGAWAI UPTD FARMASI</h1>
+<p class="text-xs text-emerald-400 font-semibold mt-1">Daftar Pegawai & Penanggung Jawab Program</p>
 </div>
 
 <div id="containerProfilPegawai" class="space-y-4">
-<div class="bg-[#dce7e1] p-6 rounded-2xl shadow-lg text-center text-blue-900 font-medium border-2 border-blue-900">Memuat data pegawai...</div>
+<div class="bg-slate-900/70 p-6 rounded-2xl shadow-lg text-center text-slate-200 font-medium border-2 border-red-600">Memuat data pegawai...</div>
 </div>
 
 <div class="flex justify-end pt-2">
-<button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
+<button onclick="switchTab('index', event)" class="bg-red-600 hover:bg-red-700 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
 ← Kembali ke Menu Utama
 </button>
 </div>
@@ -462,17 +462,17 @@ Kirim Registrasi Kunjungan
 
 <!-- ================= PAGE 6: PANDUAN ================= -->
 <div id="page-panduan" class="page-content space-y-4 hidden-custom">
-<div class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border border-blue-900/30 text-center space-y-1">
-<h2 class="text-sm font-black text-blue-900">📖 Panduan & Tutorial Layanan</h2>
-<p class="text-[11px] text-emerald-900 font-medium leading-relaxed">Pelajari langkah-langkah mudah menggunakan sistem layanan digital UPTD Farmasi Tangsel.</p>
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-red-600/40 text-center space-y-1">
+<h2 class="text-sm font-black text-slate-100">📖 Panduan & Tutorial Layanan</h2>
+<p class="text-[11px] text-slate-300 font-medium leading-relaxed">Pelajari langkah-langkah mudah menggunakan sistem layanan digital UPTD Farmasi Tangsel.</p>
 </div>
 
-<div class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border border-blue-900/30 space-y-2">
-<div class="flex items-center gap-2.5 border-b border-blue-900/20 pb-2">
-<div class="w-7 h-7 rounded-full bg-blue-900 text-white flex items-center justify-center font-black text-xs">1</div>
-<h3 class="font-black text-xs text-blue-900 uppercase">Cara Melakukan Registrasi & Validasi GPS</h3>
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-red-600/40 space-y-2">
+<div class="flex items-center gap-2.5 border-b border-red-600/30 pb-2">
+<div class="w-7 h-7 rounded-full bg-red-600 text-white flex items-center justify-center font-black text-xs">1</div>
+<h3 class="font-black text-xs text-slate-100 uppercase">Cara Melakukan Registrasi & Validasi GPS</h3>
 </div>
-<ol class="list-decimal list-inside text-[11px] text-blue-900 font-medium space-y-1.5 leading-relaxed pl-1">
+<ol class="list-decimal list-inside text-[11px] text-slate-300 font-medium space-y-1.5 leading-relaxed pl-1">
 <li>Buka halaman utama atau menu <b>Registrasi</b> saat Anda berada di area UPTD Farmasi.</li>
 <li>Isi formulir data diri dengan lengkap, meliputi: <b>Nama Lengkap / Tamu</b>, <b>Instansi / Asal Puskesmas</b>, dan nomor kontak.</li>
 <li>Sistem akan secara otomatis mendeteksi posisi koordinat GPS perangkat Anda.</li>
@@ -481,29 +481,29 @@ Kirim Registrasi Kunjungan
 </ol>
 </div>
 
-<div class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border border-blue-900/30 space-y-2">
-<div class="flex items-center gap-2.5 border-b border-blue-900/20 pb-2">
-<div class="w-7 h-7 rounded-full bg-blue-900 text-white flex items-center justify-center font-black text-xs">2</div>
-<h3 class="font-black text-xs text-blue-900 uppercase">Cek Status, Rincian Obat & Download Bukti PDF</h3>
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-red-600/40 space-y-2">
+<div class="flex items-center gap-2.5 border-b border-red-600/30 pb-2">
+<div class="w-7 h-7 rounded-full bg-red-600 text-white flex items-center justify-center font-black text-xs">2</div>
+<h3 class="font-black text-xs text-slate-100 uppercase">Cek Status, Rincian Obat & Download Bukti PDF</h3>
 </div>
-<ul class="list-disc list-inside text-[11px] text-blue-900 font-medium space-y-1.5 leading-relaxed pl-1">
+<ul class="list-disc list-inside text-[11px] text-slate-300 font-medium space-y-1.5 leading-relaxed pl-1">
 <li>Masuk ke menu <b>Tamu</b> untuk memantau status pelayanan (<i>Menunggu</i>, <i>Diproses</i>, atau <i>Selesai</i>).</li>
 <li>Jika status sudah <b>Selesai</b>, klik tombol <b>Download PDF 📥</b> untuk mengunduh tanda terima resmi Pemkot Tangsel.</li>
 </ul>
 </div>
 
-<div class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border border-blue-900/30 space-y-2 border-l-4 border-l-amber-500">
-<div class="flex items-center gap-2.5 border-b border-blue-900/20 pb-2">
-<div class="w-7 h-7 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-black text-xs">⚠️</div>
-<h3 class="font-black text-xs text-amber-900 uppercase">Wajib Mengisi Survei Kepuasan Pelanggan</h3>
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-red-600/40 space-y-2 border-l-4 border-l-amber-500">
+<div class="flex items-center gap-2.5 border-b border-red-600/30 pb-2">
+<div class="w-7 h-7 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-black text-xs">⚠️</div>
+<h3 class="font-black text-xs text-amber-400 uppercase">Wajib Mengisi Survei Kepuasan Pelanggan</h3>
 </div>
-<p class="text-[11px] text-blue-900 font-medium leading-relaxed">
+<p class="text-[11px] text-slate-300 font-medium leading-relaxed">
 Setiap kali Anda membuka web atau kembali setelah menutup browser, Anda wajib mengisi Survei Kepuasan terlebih dahulu untuk mencapai target 100%.
 </p>
 </div>
 
 <div class="flex justify-end pt-2">
-<button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
+<button onclick="switchTab('index', event)" class="bg-red-600 hover:bg-red-700 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
 ← Kembali ke Menu Utama
 </button>
 </div>
@@ -511,31 +511,31 @@ Setiap kali Anda membuka web atau kembali setelah menutup browser, Anda wajib me
 
 <!-- ================= PAGE 7: MAPS ================= -->
 <div id="page-maps" class="page-content space-y-4 hidden-custom">
-<div class="bg-[#dce7e1] p-6 rounded-2xl shadow-sm text-center max-w-sm mx-auto space-y-4 border border-blue-900/30">
+<div class="bg-slate-900/70 p-6 rounded-2xl shadow-sm text-center max-w-sm mx-auto space-y-4 border border-red-600/40">
 <div class="text-3xl">📍</div>
-<h2 class="text-sm font-black text-blue-900">Membuka Navigasi Rute...</h2>
-<p class="text-xs text-emerald-900 font-medium">Anda sedang diarahkan ke rute perjalanan Google Maps menuju UPTD Farmasi Tangsel.</p>
+<h2 class="text-sm font-black text-slate-100">Membuka Navigasi Rute...</h2>
+<p class="text-xs text-slate-300 font-medium">Anda sedang diarahkan ke rute perjalanan Google Maps menuju UPTD Farmasi Tangsel.</p>
 <div class="pt-2">
-<button onclick="switchTab('index', event)" class="text-xs font-black text-blue-900 underline">← Batal / Kembali ke Menu Utama</button>
+<button onclick="switchTab('index', event)" class="text-xs font-black text-emerald-400 underline">← Batal / Kembali ke Menu Utama</button>
 </div>
 </div>
 </div>
 
 <!-- ================= PAGE 8: TAMU ================= -->
 <div id="page-tamu" class="page-content space-y-4 hidden-custom">
-<div class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border-2 border-blue-900 text-center space-y-1 mb-5">
-<h2 class="text-sm font-black text-blue-900">Daftar Tamu & Pengambilan Obat</h2>
-<p class="text-[11px] text-emerald-900 font-medium leading-relaxed">Cek status registrasi Anda secara real-time dan download bukti PDF pengambilan obat.</p>
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 text-center space-y-1 mb-5">
+<h2 class="text-sm font-black text-slate-100">Daftar Tamu & Pengambilan Obat</h2>
+<p class="text-[11px] text-slate-300 font-medium leading-relaxed">Cek status registrasi Anda secara real-time dan download bukti PDF pengambilan obat.</p>
 </div>
 
 <div id="containerTamu" class="space-y-3">
-<div class="bg-[#dce7e1] p-6 rounded-2xl shadow-sm border-2 border-blue-900 text-center text-xs text-blue-900 font-medium">
+<div class="bg-slate-900/70 p-6 rounded-2xl shadow-sm border-2 border-red-600 text-center text-xs text-slate-200 font-medium">
 Memuat data registrasi dari database...
 </div>
 </div>
 
 <div class="flex justify-end pt-2">
-<button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
+<button onclick="switchTab('index', event)" class="bg-red-600 hover:bg-red-700 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
 ← Kembali
 </button>
 </div>
@@ -543,33 +543,33 @@ Memuat data registrasi dari database...
 
 <!-- ================= PAGE 9: KONSULTASI ================= -->
 <div id="page-konsultasi" class="page-content space-y-4 hidden-custom">
-<div class="bg-[#dce7e1] p-4 rounded-2xl shadow-sm border-2 border-blue-900 flex items-center gap-4">
-<div class="w-24 h-24 flex items-center justify-center flex-shrink-0 bg-white/70 rounded-2xl p-2 border border-blue-900/30 overflow-hidden">
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 flex items-center gap-4">
+<div class="w-24 h-24 flex items-center justify-center flex-shrink-0 bg-red-600 rounded-2xl p-2 border border-red-500/40 overflow-hidden">
 <img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-full h-full object-contain transform scale-[2.0] no-zoom">
 </div>
 <div>
-<h2 class="text-sm font-black text-blue-900 uppercase">Layanan Konsultasi & Pengaduan</h2>
-<p class="text-[11px] text-emerald-900 font-medium mt-0.5">Sampaikan pertanyaan teknis, kendala layanan, atau masukan Anda. Data tercatat di sistem dan otomatis terkirim via WhatsApp penanggung jawab.</p>
+<h2 class="text-sm font-black text-slate-100 uppercase">Layanan Konsultasi & Pengaduan</h2>
+<p class="text-[11px] text-slate-300 font-medium mt-0.5">Sampaikan pertanyaan teknis, kendala layanan, atau masukan Anda. Data tercatat di sistem dan otomatis terkirim via WhatsApp penanggung jawab.</p>
 </div>
 </div>
 
-<div class="bg-[#dce7e1] p-5 rounded-2xl shadow-sm border-2 border-blue-900">
+<div class="bg-slate-900/70 p-5 rounded-2xl shadow-sm border-2 border-red-600">
 <form id="formKonsultasi" class="space-y-3">
 <div>
-<label class="block text-xs font-black text-blue-900 mb-1">Nama Lengkap</label>
-<input type="text" id="namaPengirim" required placeholder="Masukkan nama lengkap..." class="w-full px-3 py-2 text-xs border border-blue-900/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-900 bg-white">
+<label class="block text-xs font-black text-slate-200 mb-1">Nama Lengkap</label>
+<input type="text" id="namaPengirim" required placeholder="Masukkan nama lengkap..." class="w-full px-3 py-2 text-xs border border-red-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 text-slate-100 placeholder-slate-400">
 </div>
 <div>
-<label class="block text-xs font-black text-blue-900 mb-1">Asal Instansi / Unit Kerja</label>
-<input type="text" id="instansiPengirim" required placeholder="Masukkan asal instansi / Puskesmas / RS..." class="w-full px-3 py-2 text-xs border border-blue-900/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-900 bg-white">
+<label class="block text-xs font-black text-slate-200 mb-1">Asal Instansi / Unit Kerja</label>
+<input type="text" id="instansiPengirim" required placeholder="Masukkan asal instansi / Puskesmas / RS..." class="w-full px-3 py-2 text-xs border border-red-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 text-slate-100 placeholder-slate-400">
 </div>
 <div>
-<label class="block text-xs font-black text-blue-900 mb-1">Nomor WhatsApp / Kontak</label>
-<input type="tel" id="kontakPengirim" required placeholder="Contoh: 081234567890" class="w-full px-3 py-2 text-xs border border-blue-900/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-900 bg-white">
+<label class="block text-xs font-black text-slate-200 mb-1">Nomor WhatsApp / Kontak</label>
+<input type="tel" id="kontakPengirim" required placeholder="Contoh: 081234567890" class="w-full px-3 py-2 text-xs border border-red-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 text-slate-100 placeholder-slate-400">
 </div>
 <div>
-<label class="block text-xs font-black text-blue-900 mb-1">Pilih Keperluan</label>
-<select id="kategoriKonsultasi" required class="w-full px-3 py-2 text-xs border border-blue-900/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-900 bg-white font-bold text-gray-700">
+<label class="block text-xs font-black text-slate-200 mb-1">Pilih Keperluan</label>
+<select id="kategoriKonsultasi" required class="w-full px-3 py-2 text-xs border border-red-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 font-bold text-slate-100">
 <option value="" disabled selected>Pilih Keperluan:</option>
 <option value="A. OBAT PKD">A. OBAT PKD</option>
 <option value="B. VAKSIN">B. VAKSIN</option>
@@ -582,11 +582,11 @@ Memuat data registrasi dari database...
 </select>
 </div>
 <div>
-<label class="block text-xs font-black text-blue-900 mb-1">Isi Konsultasi / Keluhan</label>
-<textarea id="isiKonsultasi" rows="4" required placeholder="Tuliskan detail pertanyaan atau keluhan Anda..." class="w-full px-3 py-2 text-xs border border-blue-900/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-900 bg-white"></textarea>
+<label class="block text-xs font-black text-slate-200 mb-1">Isi Konsultasi / Keluhan</label>
+<textarea id="isiKonsultasi" rows="4" required placeholder="Tuliskan detail pertanyaan atau keluhan Anda..." class="w-full px-3 py-2 text-xs border border-red-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 text-slate-100 placeholder-slate-400"></textarea>
 </div>
 
-<button type="submit" id="btnKirimKonsul" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-black py-2.5 rounded-xl text-xs transition shadow-md flex items-center justify-center gap-2">
+<button type="submit" id="btnKirimKonsul" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-2.5 rounded-xl text-xs transition shadow-md flex items-center justify-center gap-2">
 <span>Kirim Konsultasi & Keluhan via WhatsApp</span>
 <span>→</span>
 </button>
@@ -594,7 +594,7 @@ Memuat data registrasi dari database...
 </div>
 
 <div class="flex justify-end">
-<button onclick="switchTab('index', event)" class="bg-blue-900 hover:bg-blue-800 text-white font-black px-5 py-2.5 rounded-xl text-xs transition shadow-md inline-flex items-center justify-center gap-2">
+<button onclick="switchTab('index', event)" class="bg-red-600 hover:bg-red-700 text-white font-black px-5 py-2.5 rounded-xl text-xs transition shadow-md inline-flex items-center justify-center gap-2">
 <span>← Kembali</span>
 </button>
 </div>
@@ -607,24 +607,24 @@ Memuat data registrasi dari database...
 
 <!-- CUSTOM MODAL NOTIFIKASI NOMOR ANTRIAN (PROFESIONAL DESIGN) -->
 <div id="modalAntrianSukses" class="hidden-custom fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-  <div class="bg-[#dce7e1] rounded-3xl shadow-2xl border-2 border-blue-900 max-w-sm w-full p-6 text-center space-y-5 animate-scaleUp">
-    <div class="w-16 h-16 bg-blue-900 text-white rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner font-black">
+  <div class="bg-slate-800 rounded-3xl shadow-2xl border-2 border-red-600 max-w-sm w-full p-6 text-center space-y-5 animate-scaleUp">
+    <div class="w-16 h-16 bg-red-600 text-white rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner font-black">
       ✓
     </div>
     <div class="space-y-1">
-      <span class="px-3 py-1 bg-blue-900 text-white text-[10px] font-black uppercase rounded-full tracking-wider">
+      <span class="px-3 py-1 bg-red-600 text-white text-[10px] font-black uppercase rounded-full tracking-wider">
         Registrasi Berhasil
       </span>
-      <h3 class="text-lg font-black text-blue-900 uppercase tracking-tight mt-1">Nomor Antrian Anda</h3>
-      <p class="text-xs text-emerald-900 font-medium">Tunjukkan nomor antrian ini kepada petugas UPTD Farmasi.</p>
+      <h3 class="text-lg font-black text-slate-100 uppercase tracking-tight mt-1">Nomor Antrian Anda</h3>
+      <p class="text-xs text-slate-300 font-medium">Tunjukkan nomor antrian ini kepada petugas UPTD Farmasi.</p>
     </div>
 
-    <div class="bg-white border-2 border-blue-900 py-4 px-6 rounded-2xl shadow-sm">
-      <span id="txtNomorAntrianModal" class="text-3xl font-black text-blue-900 tracking-wider">T-001</span>
+    <div class="bg-slate-900 border-2 border-red-600 py-4 px-6 rounded-2xl shadow-sm">
+      <span id="txtNomorAntrianModal" class="text-3xl font-black text-emerald-400 tracking-wider">T-001</span>
     </div>
 
     <div class="space-y-2 pt-2">
-      <button onclick="tutupModalAntrianDanKeTamu()" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-black py-3 rounded-xl text-xs transition shadow-lg">
+      <button onclick="tutupModalAntrianDanKeTamu()" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl text-xs transition shadow-lg">
         Lihat Status & Menu Tamu
       </button>
     </div>
@@ -658,7 +658,6 @@ let userLng = null;
 let userDistance = null;
 let isWithinRadius = false;
 
-// --- LOGIKA GERBANG SURVEI & SESI (HANYA 1 TOMBOL & OTOMATIS MASUK SAAT KEMBALI DARI TAB SURVEY) ---
 window.mulaiIsiSurvey = function(event) {
   sessionStorage.setItem('sedang_isi_survei', 'true');
   window.open("https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform", "_blank");
@@ -764,7 +763,6 @@ modal.classList.add('hidden-custom');
 }
 };
 
-// Fungsi kontrol custom modal antrian
 window.tutupModalAntrianDanKeTamu = function() {
   const modal = document.getElementById('modalAntrianSukses');
   if(modal) {
@@ -788,9 +786,9 @@ kategoriPublikAktif = kat;
 const btn = document.getElementById(`btnKatPublik${k}`);
 if(btn) {
 if(k === kat) {
-btn.className = "px-3 py-2 rounded-xl text-xs font-black bg-blue-900 text-white transition shadow";
+btn.className = "px-3 py-2 rounded-xl text-xs font-black bg-red-600 text-white transition shadow";
 } else {
-btn.className = "px-3 py-2 rounded-xl text-xs font-black bg-white/70 text-blue-900 hover:bg-white transition";
+btn.className = "px-3 py-2 rounded-xl text-xs font-black bg-slate-800 text-slate-200 hover:bg-slate-700 transition";
 }
 }
 });
@@ -804,18 +802,18 @@ if(!container) return;
 container.innerHTML = "";
 
 if(snap.empty) {
-container.innerHTML = `<div class="bg-[#dce7e1] p-6 rounded-2xl shadow-sm border border-blue-900/30 text-center text-xs text-blue-900 font-medium">Belum ada konten untuk kategori ${kat}.</div>`;
+container.innerHTML = `<div class="bg-slate-900/70 p-6 rounded-2xl shadow-sm border border-red-600/40 text-center text-xs text-slate-200 font-medium">Belum ada konten untuk kategori ${kat}.</div>`;
 return;
 }
 
 snap.forEach(d => {
 const item = d.data();
 container.innerHTML += `
-<div class="bg-white p-4 rounded-2xl shadow-sm border border-blue-900/20 space-y-2">
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-red-600/30 space-y-2">
 ${item.url ? `<div class="overflow-hidden rounded-xl mb-2"><img src="${item.url}" class="w-full h-40 object-cover cursor-pointer hover:scale-105 transition duration-300"></div>` : ''}
-<span class="bg-blue-900 text-white text-[10px] font-black px-2 py-0.5 rounded">${kat}</span>
-<h3 class="font-black text-sm text-blue-900 mt-1">${item.judul || 'Tanpa Judul'}</h3>
-<p class="text-xs text-gray-700 whitespace-pre-line font-medium">${item.isi || ''}</p>
+<span class="bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded">${kat}</span>
+<h3 class="font-black text-sm text-slate-100 mt-1">${item.judul || 'Tanpa Judul'}</h3>
+<p class="text-xs text-slate-300 whitespace-pre-line font-medium">${item.isi || ''}</p>
 </div>
 `;
 });
@@ -830,14 +828,14 @@ if(!grid) return;
 grid.innerHTML = "";
 
 if(snap.empty) {
-grid.innerHTML = `<div class="text-xs text-blue-900 font-medium col-span-full text-center py-6">Memuat galeri kegiatan...</div>`;
+grid.innerHTML = `<div class="text-xs text-slate-200 font-medium col-span-full text-center py-6">Memuat galeri kegiatan...</div>`;
 return;
 }
 
 snap.forEach(d => {
 const item = d.data();
 grid.innerHTML += `
-<div class="h-32 rounded-xl overflow-hidden shadow-sm border border-blue-900/30 bg-white cursor-pointer group">
+<div class="h-32 rounded-xl overflow-hidden shadow-sm border border-red-600/30 bg-slate-800 cursor-pointer group">
 <img src="${item.url}" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
 </div>
 `;
@@ -848,7 +846,7 @@ function initGPS() {
 const statusBox = document.getElementById('gpsStatusBox');
 if (!navigator.geolocation) {
 if(statusBox) {
-statusBox.className = "bg-red-900/10 border border-red-900/30 p-3 rounded-xl text-[11px] text-red-900 font-medium";
+statusBox.className = "bg-red-600/10 border border-red-600/30 p-3 rounded-xl text-[11px] text-red-300 font-medium";
 statusBox.innerText = "❌ Geolokasi tidak didukung oleh browser Anda.";
 }
 return;
@@ -863,11 +861,11 @@ userDistance = calculateDistance(userLat, userLng, OFFICE_LAT, OFFICE_LNG);
 if(statusBox) {
 if (userDistance <= MAX_RADIUS) {
 isWithinRadius = true;
-statusBox.className = "bg-emerald-900/10 border border-emerald-900/30 p-3 rounded-xl text-[11px] text-emerald-900 font-black";
+statusBox.className = "bg-emerald-500/10 border border-emerald-500/30 p-3 rounded-xl text-[11px] text-emerald-400 font-black";
 statusBox.innerText = `✅ Lokasi Valid! Anda berada dalam radius kantor (${Math.round(userDistance)} meter dari UPTD Farmasi).`;
 } else {
 isWithinRadius = true; 
-statusBox.className = "bg-amber-900/10 border border-amber-900/30 p-3 rounded-xl text-[11px] text-amber-900 font-black";
+statusBox.className = "bg-amber-500/10 border border-amber-500/30 p-3 rounded-xl text-[11px] text-amber-400 font-black";
 statusBox.innerText = `⚠️ Perhatian: Jarak Anda sekitar ${Math.round(userDistance)} meter dari UPTD Farmasi.`;
 }
 }
@@ -875,7 +873,7 @@ statusBox.innerText = `⚠️ Perhatian: Jarak Anda sekitar ${Math.round(userDis
 (error) => {
 isWithinRadius = true; 
 if(statusBox) {
-statusBox.className = "bg-blue-900/10 border border-blue-900/30 p-3 rounded-xl text-[11px] text-blue-900 font-medium";
+statusBox.className = "bg-red-600/10 border border-red-600/30 p-3 rounded-xl text-[11px] text-slate-200 font-medium";
 statusBox.innerText = "ℹ️ Akses GPS dilewati atau tidak diaktifkan. Anda tetap dapat melanjutkan registrasi.";
 }
 },
@@ -970,7 +968,6 @@ jarak: userDistance ? Math.round(userDistance) : 0
 
 formReg.reset();
 
-// Tampilkan custom modal antrian yang profesional (menggantikan alert bawaan browser)
 const txtAntrianModal = document.getElementById('txtNomorAntrianModal');
 if(txtAntrianModal) txtAntrianModal.innerText = antrianNo;
 
@@ -1005,14 +1002,14 @@ if(!container) return;
 container.innerHTML = "";
 
 if (snap.empty) {
-container.innerHTML = `<div class="bg-[#dce7e1] p-6 rounded-2xl shadow-lg text-center text-blue-900 font-medium border-2 border-blue-900">Belum ada data pegawai yang ditambahkan oleh admin.</div>`;
+container.innerHTML = `<div class="bg-slate-900/70 p-6 rounded-2xl shadow-lg text-center text-slate-200 font-medium border-2 border-red-600">Belum ada data pegawai yang ditambahkan oleh admin.</div>`;
 return;
 }
 
 snap.forEach(d => {
 const item = d.data();
 const fotoUrl = item.url ? item.url : "https://via.placeholder.com/150?text=No+Photo";
-container.innerHTML += `<div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col md:flex-row items-center gap-6 border-2 border-blue-900"> <div class="w-32 h-32 md:w-36 md:h-36 shrink-0 rounded-2xl overflow-hidden border-2 border-blue-900 shadow-md bg-gray-100"> <img src="${fotoUrl}" alt="Foto Pegawai" class="w-full h-full object-cover cursor-pointer"> </div> <div class="flex-1 w-full text-center md:text-left space-y-2"> <div> <h3 class="font-black text-xl text-blue-900">${item.nama}</h3> <p class="text-sm text-emerald-900 font-bold">${item.jabatan}</p> </div> <div class="border-t border-blue-900/20 pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-blue-900 bg-[#dce7e1] p-3 rounded-xl font-medium"> <p><b>Golongan:</b> ${item.golongan || '-'}</p> <p><b>PJ Program:</b> ${item.pj || '-'}</p> </div> </div> </div>`;
+container.innerHTML += `<div class="bg-slate-900/70 p-6 rounded-2xl shadow-lg flex flex-col md:flex-row items-center gap-6 border-2 border-red-600"> <div class="w-32 h-32 md:w-36 md:h-36 shrink-0 rounded-2xl overflow-hidden border-2 border-red-600 shadow-md bg-slate-800"> <img src="${fotoUrl}" alt="Foto Pegawai" class="w-full h-full object-cover cursor-pointer"> </div> <div class="flex-1 w-full text-center md:text-left space-y-2"> <div> <h3 class="font-black text-xl text-slate-100">${item.nama}</h3> <p class="text-sm text-emerald-400 font-bold">${item.jabatan}</p> </div> <div class="border-t border-red-600/30 pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-200 bg-slate-800 p-3 rounded-xl font-medium"> <p><b>Golongan:</b> ${item.golongan || '-'}</p> <p><b>PJ Program:</b> ${item.pj || '-'}</p> </div> </div> </div>`;
 });
 });
 
@@ -1022,7 +1019,7 @@ if(!container) return;
 container.innerHTML = "";
 
 if (snapshot.empty) {
-container.innerHTML = `<div class="bg-[#dce7e1] p-6 rounded-2xl shadow-sm border border-blue-900/30 text-center text-xs text-blue-900 font-medium"> Belum ada riwayat registrasi yang tercatat di sistem. </div>`;
+container.innerHTML = `<div class="bg-slate-900/70 p-6 rounded-2xl shadow-sm border border-red-600/40 text-center text-xs text-slate-200 font-medium"> Belum ada riwayat registrasi yang tercatat di sistem. </div>`;
 return;
 }
 
@@ -1043,13 +1040,13 @@ if (item.status === 'selesai' && item.waktuSelesai && item.waktuProses) {
 durasi = Math.round((item.waktuSelesai.toDate() - item.waktuProses.toDate()) / 60000) + " Menit";
 }
 
-let statusColor = "bg-amber-100 text-amber-900 border-amber-300";
+let statusColor = "bg-amber-500/20 text-amber-300 border-amber-500/40";
 let statusText = item.status || "Selesai";
 const statusLower = String(statusText).toLowerCase();
 if (statusLower.includes("proses")) {
-statusColor = "bg-blue-100 text-blue-900 border-blue-300";
+statusColor = "bg-blue-500/20 text-blue-300 border-blue-500/40";
 } else if (statusLower.includes("selesai")) {
-statusColor = "bg-emerald-100 text-emerald-900 border-emerald-300";
+statusColor = "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
 }
 
 let itemsObatArr = [];
@@ -1076,42 +1073,42 @@ fileUrl: fileLink
 };
 
 const card = document.createElement("div");
-card.className = "bg-white p-5 rounded-2xl shadow-md border-2 border-blue-900 space-y-3.5 transition hover:shadow-lg";
+card.className = "bg-slate-900/70 p-5 rounded-2xl shadow-md border-2 border-red-600 space-y-3.5 transition hover:shadow-lg";
 
 let bagianObatHtml = '';
 if (normalizedData.itemsObat.length > 0) {
 let rowsHtml = '';
 normalizedData.itemsObat.forEach((ob, idx) => {
-rowsHtml += `<tr class="border-b text-[10px]"> <td class="border p-1 text-center">${idx + 1}</td> <td class="border p-1 font-bold">${ob.nama || '-'}</td> <td class="border p-1 text-center">${ob.tahun || '-'}</td> <td class="border p-1 text-center">${ob.satuan || '-'}</td> <td class="border p-1 text-center">${ob.volume || '-'}</td> <td class="border p-1 text-center">${ob.ed || '-'}</td> <td class="border p-1 text-center font-mono">${ob.batch || '-'}</td> </tr>`;
+rowsHtml += `<tr class="border-b border-red-600/20 text-[10px] text-slate-200"> <td class="border border-red-600/20 p-1 text-center">${idx + 1}</td> <td class="border border-red-600/20 p-1 font-bold">${ob.nama || '-'}</td> <td class="border border-red-600/20 p-1 text-center">${ob.tahun || '-'}</td> <td class="border border-red-600/20 p-1 text-center">${ob.satuan || '-'}</td> <td class="border border-red-600/20 p-1 text-center">${ob.volume || '-'}</td> <td class="border border-red-600/20 p-1 text-center">${ob.ed || '-'}</td> <td class="border border-red-600/20 p-1 text-center font-mono">${ob.batch || '-'}</td> </tr>`;
 });
-bagianObatHtml = `<div class="border-t pt-2.5 space-y-1.5"> <p class="text-[11px] text-blue-900 font-black flex items-center gap-1.5"><span>📦</span> Tabel Rincian Obat / Barang:</p> <div class="overflow-x-auto rounded-xl border border-blue-900/30"> <table class="w-full text-left border-collapse text-[10px] bg-white"> <thead> <tr class="bg-blue-900 text-center font-bold text-[9px] uppercase text-white"> <th class="border p-1 w-6">No</th> <th class="border p-1">Nama Barang</th> <th class="border p-1 w-12">Tahun</th> <th class="border p-1 w-12">Satuan</th> <th class="border p-1 w-10">Vol</th> <th class="border p-1 w-12">Ed</th> <th class="border p-1 w-16">No Batch</th> </tr> </thead> <tbody> ${rowsHtml} </tbody> </table> </div> </div>`;
+bagianObatHtml = `<div class="border-t border-red-600/30 pt-2.5 space-y-1.5"> <p class="text-[11px] text-slate-100 font-black flex items-center gap-1.5"><span>📦</span> Tabel Rincian Obat / Barang:</p> <div class="overflow-x-auto rounded-xl border border-red-600/30"> <table class="w-full text-left border-collapse text-[10px] bg-slate-800"> <thead> <tr class="bg-red-600 text-center font-bold text-[9px] uppercase text-white"> <th class="border border-red-600/30 p-1 w-6">No</th> <th class="border border-red-600/30 p-1">Nama Barang</th> <th class="border border-red-600/30 p-1 w-12">Tahun</th> <th class="border border-red-600/30 p-1 w-12">Satuan</th> <th class="border border-red-600/30 p-1 w-10">Vol</th> <th class="border border-red-600/30 p-1 w-12">Ed</th> <th class="border border-red-600/30 p-1 w-16">No Batch</th> </tr> </thead> <tbody> ${rowsHtml} </tbody> </table> </div> </div>`;
 } else {
-bagianObatHtml = `<div class="bg-[#dce7e1] p-3 rounded-xl border border-blue-900/30 text-[10px] space-y-1"> <p class="text-blue-900 font-black flex items-center gap-1.5"><span>💊</span> Obat yang Diterima:</p> <p class="text-emerald-900 whitespace-pre-line font-medium">${normalizedData.obatTerimaFormatted}</p> </div>`;
+bagianObatHtml = `<div class="bg-slate-800 p-3 rounded-xl border border-red-600/30 text-[10px] space-y-1"> <p class="text-slate-100 font-black flex items-center gap-1.5"><span>💊</span> Obat yang Diterima:</p> <p class="text-slate-300 whitespace-pre-line font-medium">${normalizedData.obatTerimaFormatted}</p> </div>`;
 }
 
 let fileLampiranHtml = '';
 if (fileLink && fileLink.length > 0) {
-fileLampiranHtml = `<div class="pt-1"> <a href="${fileLink}" download target="_blank" class="inline-flex items-center gap-1 bg-blue-900 text-white px-3 py-1.5 rounded-xl text-[10px] font-bold hover:bg-blue-800 transition shadow-sm">📥 Lihat/Unduh File Lampiran</a> </div>`;
+fileLampiranHtml = `<div class="pt-1"> <a href="${fileLink}" download target="_blank" class="inline-flex items-center gap-1 bg-red-600 text-white px-3 py-1.5 rounded-xl text-[10px] font-bold hover:bg-red-700 transition shadow-sm">📥 Lihat/Unduh File Lampiran</a> </div>`;
 }
 
 card.innerHTML = `
-<div class="flex justify-between items-start gap-3 border-b border-blue-900/20 pb-3">
+<div class="flex justify-between items-start gap-3 border-b border-red-600/30 pb-3">
   <div class="space-y-1">
     <div class="flex items-center gap-2">
-      <span class="bg-blue-900 text-white text-[11px] font-black px-2.5 py-1 rounded-xl shadow-sm tracking-wider">
+      <span class="bg-red-600 text-white text-[11px] font-black px-2.5 py-1 rounded-xl shadow-sm tracking-wider">
         🎫 ${normalizedData.nomorAntrian || '-'}
       </span>
-      <h3 class="font-black text-sm text-blue-900 uppercase tracking-tight">${normalizedData.nama}</h3>
+      <h3 class="font-black text-sm text-slate-100 uppercase tracking-tight">${normalizedData.nama}</h3>
     </div>
-    <p class="text-[11px] text-emerald-900 font-medium"><b>Instansi:</b> ${normalizedData.instansi}</p>
-    <p class="text-[11px] text-emerald-900 font-medium"><b>Keperluan:</b> <span class="text-blue-900 font-bold">${normalizedData.keperluan}</span></p>
+    <p class="text-[11px] text-slate-300 font-medium"><b>Instansi:</b> ${normalizedData.instansi}</p>
+    <p class="text-[11px] text-slate-300 font-medium"><b>Keperluan:</b> <span class="text-emerald-400 font-bold">${normalizedData.keperluan}</span></p>
   </div>
   <span class="px-3 py-1 rounded-full text-[10px] font-black border uppercase tracking-wider shrink-0 shadow-sm ${statusColor}">
     ${normalizedData.status}
   </span>
 </div>
 
-<div class="grid grid-cols-2 gap-2 text-[11px] text-blue-900 bg-[#dce7e1] p-2.5 rounded-xl border border-blue-900/30 font-medium">
+<div class="grid grid-cols-2 gap-2 text-[11px] text-slate-200 bg-slate-800 p-2.5 rounded-xl border border-red-600/30 font-medium">
   <p><b>Petugas:</b> ${normalizedData.petugas}</p>
   <p><b>Durasi:</b> ${normalizedData.durasi}</p>
 </div>
@@ -1119,9 +1116,9 @@ card.innerHTML = `
 ${fileLampiranHtml} 
 ${bagianObatHtml} 
 
-<div class="border-t border-blue-900/20 pt-2.5 flex justify-between items-center text-[10px] text-blue-900 font-medium">
+<div class="border-t border-red-600/30 pt-2.5 flex justify-between items-center text-[10px] text-slate-300 font-medium">
   <span><b>Waktu:</b> ${normalizedData.waktuFormatted}</span> 
-  <button onclick='downloadPdf(${JSON.stringify(normalizedData)})' class="bg-blue-900 hover:bg-blue-800 text-white px-3.5 py-2 rounded-xl font-black transition shadow-md inline-flex items-center gap-1.5 text-xs">
+  <button onclick='downloadPdf(${JSON.stringify(normalizedData)})' class="bg-red-600 hover:bg-red-700 text-white px-3.5 py-2 rounded-xl font-black transition shadow-md inline-flex items-center gap-1.5 text-xs">
     <span>Download PDF</span> <span>📥</span>
   </button>
 </div>`;
@@ -1137,156 +1134,9 @@ areaCetak.style.display = "block";
 const items = (data.itemsObat && data.itemsObat.length > 0) ? data.itemsObat : [];
 let rowsHtml = '';
 if (items.length > 0) {
-rowsHtml = items.map((item, i) => `<tr> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; height: 18px;">${i + 1}</td> <td style="border: 1px solid #000; padding: 5px; font-size: 9px; font-weight: bold;">${item.nama || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.tahun || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.satuan || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.volume || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.ed || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; font-family: monospace;">${item.batch || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;"></td> </tr>`).join('');
-} else {
-rowsHtml = `<tr> <td style="border: 1px solid #000; text-align: center; padding: 6px; font-size: 9px;">1</td> <td style="border: 1px solid #000; padding: 6px; font-size: 9px; text-align: center; font-style: italic;" colspan="7">Belum ada rincian barang/obat.</td> </tr>`;
+rowsHtml = items.map((item, i) => `<tr> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; height: 18px;">${i + 1}</td> <td style="border: 1px solid #000; padding: 5px; font-size: 9px; font-weight: bold;">${item.nama || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.tahun || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.satuan || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.volume || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.ed || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; font-family: monospace;">${item.batch || '-'}</td> </tr>`).join('');
 }
-
-areaCetak.innerHTML = `
-<div style="padding: 15px 20px; font-family: Arial, sans-serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
-<table style="width: 100%; border-collapse: collapse; border-bottom: 3.5px double #000; padding-bottom: 8px; margin-bottom: 12px;">
-<tr>
-<td style="width: 85px; vertical-align: middle; text-align: left; padding-left: 5px;">
-<img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 72px; height: auto;" crossorigin="anonymous">
-</td>
-<td style="text-align: center; vertical-align: middle; padding-right: 35px;">
-<h2 style="font-size: 13.5px; margin: 0; font-weight: bold; text-transform: uppercase;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
-<h1 style="font-size: 15.5px; margin: 2px 0; font-weight: bold; text-transform: uppercase;">DINAS KESEHATAN</h1>
-<h1 style="font-size: 17px; margin: 2px 0; font-weight: 900; text-transform: uppercase;">UPTD FARMASI</h1>
-<p style="font-size: 9.5px; margin: 3px 0 1px 0;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</p>
-</td>
-</tr>
-</table>
-
-<div style="text-align: center; margin-bottom: 12px;">
-<div style="font-size: 11.5px; font-weight: bold; text-decoration: underline; display: inline-block;">BUKTI PENGAMBILAN OBAT/PELAYANAN</div>
-</div>
-
-<table style="width: 100%; font-size: 9.5px; margin-bottom: 12px; border-collapse: collapse;">
-<tr>
-<td style="width: 120px; font-weight: bold;">Nama</td>
-<td style="width: 10px;">:</td>
-<td style="font-weight: bold; text-transform: uppercase;">${data.nama}</td>
-<td style="width: 110px; font-weight: bold;">No Antrian</td>
-<td style="width: 10px; text-align: center;">:</td>
-<td style="font-weight: bold;">${data.nomorAntrian || '-'}</td>
-</tr>
-<tr>
-<td style="font-weight: bold;">Instansi</td>
-<td>:</td>
-<td style="text-transform: uppercase;">${data.instansi}</td>
-<td style="font-weight: bold;">Status Pelayanan</td>
-<td style="text-align: center;">:</td>
-<td style="font-weight: bold; text-transform: uppercase;">${data.status}</td>
-</tr>
-<tr>
-<td style="font-weight: bold;">Keperluan</td>
-<td>:</td>
-<td>${data.keperluan}</td>
-<td style="font-weight: bold;">Durasi</td>
-<td style="text-align: center;">:</td>
-<td>${data.durasi}</td>
-</tr>
-<tr>
-<td style="font-weight: bold;">Petugas Program</td>
-<td>:</td>
-<td>${data.petugas}</td>
-<td style="font-weight: bold;">Waktu Kunjungan</td>
-<td style="text-align: center;">:</td>
-<td>${data.waktuFormatted}</td>
-</tr>
-</table>
-
-<table style="width: 100%; border-collapse: collapse; margin-bottom: 15px;">
-<thead>
-<tr style="background-color: #f3f4f6; text-align: center; font-size: 9px; font-weight: bold;">
-<th style="border: 1px solid #000; padding: 5px; width: 30px;">No</th>
-<th style="border: 1px solid #000; padding: 5px;">Nama Barang</th>
-<th style="border: 1px solid #000; padding: 5px; width: 65px;">Tahun</th>
-<th style="border: 1px solid #000; padding: 5px; width: 65px;">Satuan</th>
-<th style="border: 1px solid #000; padding: 5px; width: 55px;">Volume</th>
-<th style="border: 1px solid #000; padding: 5px; width: 60px;">Ed</th>
-<th style="border: 1px solid #000; padding: 5px; width: 75px;">No Batch</th>
-<th style="border: 1px solid #000; padding: 5px; width: 50px;">Paraf</th>
-</tr>
-</thead>
-<tbody>
-${rowsHtml}
-</tbody>
-</table>
-
-<table style="width: 100%; margin-top: 20px; font-size: 9.5px; border-collapse: collapse;">
-<tr>
-<td style="width: 50%; text-align: center; vertical-align: top;">
-<p style="margin: 0; font-weight: bold;">Petugas</p>
-<br><br><br>
-<p style="margin: 0; font-weight: bold; text-decoration: underline;">${data.petugas && data.petugas !== '-' ? data.petugas : '......................................'}</p>
-</td>
-<td style="width: 50%; text-align: center; vertical-align: top;">
-<p style="margin: 0; font-weight: bold;">Penerima</p>
-<br><br><br>
-<p style="margin: 0; font-weight: bold; text-decoration: underline;">${data.nama}</p>
-</td>
-</tr>
-</table>
-</div>
-`;
-
-setTimeout(() => {
-const opt = {
-margin: [5, 5, 5, 5],
-filename: `Bukti_Pengambilan_Obat_${data.nama}.pdf`,
-image: { type: 'jpeg', quality: 0.98 },
-html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollX: 0, scrollY: 0 },
-jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
 };
-
-html2pdf().from(areaCetak).set(opt).save().then(() => {
-areaCetak.style.display = "none";
-areaCetak.innerHTML = "";
-});
-}, 300);
-};
-
-const formKonsultasi = document.getElementById('formKonsultasi');
-if(formKonsultasi) {
-const NOMOR_WA_ADMIN = "6285716842806";
-formKonsultasi.addEventListener('submit', async (e) => {
-e.preventDefault();
-const btn = document.getElementById('btnKirimKonsul');
-btn.disabled = true;
-btn.innerText = "Mengirim...";
-
-const nama = document.getElementById('namaPengirim').value;
-const instansi = document.getElementById('instansiPengirim').value;
-const kontak = document.getElementById('kontakPengirim').value;
-const kategori = document.getElementById('kategoriKonsultasi').value;
-const isi = document.getElementById('isiKonsultasi').value;
-
-try {
-await addDoc(collection(db, "konsultasi"), {
-nama: nama,
-instansi: instansi,
-kontak: kontak,
-kategori: kategori,
-isi: isi,
-waktuInput: serverTimestamp()
-});
-
-const pesanWA = `Halo Admin / Penanggung Jawab UPTD Farmasi Tangsel,%0A%0ASaya ingin menyampaikan konsultasi / keluhan baru:%0A%0A*Nama:* ${encodeURIComponent(nama)}%0A*Instansi:* ${encodeURIComponent(instansi)}%0A*No. WhatsApp:* ${encodeURIComponent(kontak)}%0A*Kategori:* ${encodeURIComponent(kategori)}%0A*Isi Keluhan:*%0A${encodeURIComponent(isi)}%0A%0ATerima kasih.`;
-
-window.open(`https://wa.me/${NOMOR_WA_ADMIN}?text=${pesanWA}`, '_blank');
-alert("Konsultasi berhasil disimpan ke sistem dan WhatsApp penanggung jawab akan segera dibuka.");
-formKonsultasi.reset();
-} catch (err) {
-console.error("Gagal mengirim konsultasi:", err);
-alert("Gagal mengirim konsultasi. Silakan coba lagi.");
-} finally {
-btn.disabled = false;
-btn.innerHTML = `<span>Kirim Konsultasi & Keluhan via WhatsApp</span> <span>→</span>`;
-}
-});
-}
 </script>
 </body>
 </html>
