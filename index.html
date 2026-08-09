@@ -79,7 +79,7 @@ box-sizing: border-box;
 
   <!-- HALAMAN GERBANG UTAMA (HANYA SATU TOMBOL SURVEY & REDIRECT OTOMATIS) -->
 <div id="gatePage" class="bg-slate-900 flex items-center justify-center p-4" style="position: fixed; inset: 0; z-index: 9999; overflow-y: auto;">
-  <div class="max-w-md w-full bg-slate-800/90 backdrop-blur-md rounded-3xl shadow-xl border-2 border-blue-600 p-8 text-center space-y-6 my-auto">
+  <div class="max-w-md w-full bg-slate-800/90 backdrop-blur-md rounded-3xl shadow-xl border border-blue-800 p-8 text-center space-y-6 my-auto">
     
     <!-- Logo Instansi / Identitas -->
     <div class="flex justify-center">
@@ -117,7 +117,7 @@ box-sizing: border-box;
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" 
          target="_blank" 
          onclick="mulaiIsiSurvey(event)"
-         class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-4 px-6 rounded-2xl transition transform active:scale-95 flex items-center justify-center gap-2.5 text-sm shadow-lg">
+         class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-4 px-6 rounded-2xl transition transform active:scale-95 flex items-center justify-center gap-2.5 text-sm shadow-lg">
         <i class="fas fa-external-link-alt"></i>
         <span>ISI SURVEI KEPUASAN & MASUK MENU</span>
       </a>
@@ -131,7 +131,7 @@ box-sizing: border-box;
 </div>
 
 <!-- KONTEN MENU UTAMA (DIBUNGKUS KONTainer UTAMA DENGAN WARNA GELAP TIPIS & BORDER MERAH) -->
-<div id="mainMenuContent" class="hidden max-w-md w-full bg-slate-800/90 backdrop-blur-md rounded-3xl shadow-xl border-2 border-blue-600 overflow-hidden my-auto p-4 lg:max-w-4xl lg:p-6">
+<div id="mainMenuContent" class="hidden max-w-md w-full bg-slate-800/90 backdrop-blur-md rounded-3xl shadow-xl border border-blue-800 overflow-hidden my-auto p-4 lg:max-w-4xl lg:p-6">
 
 <!-- Header Atas (Hanya tampil di Mobile/HP) -->
 <header class="mobile-header-bar bg-slate-900/60 px-2 py-2 mb-3 border border-blue-600/30 text-center rounded-xl">
@@ -157,7 +157,7 @@ box-sizing: border-box;
 </div>
 </a>
 
-<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600/40">
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-blue-800/40">
 <nav class="space-y-1.5">
 <a href="#" onclick="switchTab('index', event)" id="nav-index" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-200 font-bold text-xs transition">
 <div class="w-10 h-10 flex items-center justify-center flex-shrink-0 bg-red-600 rounded-lg p-1">
@@ -246,8 +246,8 @@ box-sizing: border-box;
 
 <!-- GRID MENU UTAMA (Border Merah & Warna Gelap Tipis di Pembungkus Ikon) -->
 <div class="grid grid-cols-2 gap-3">
-<a href="#" onclick="switchTab('registrasi', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-emerald-600 rounded-2xl p-2 border-2 border-blue-500/40 shadow-inner">
+<a href="#" onclick="switchTab('registrasi', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-blue-800 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-gray-100 rounded-2xl p-2 border border-blue-800/40 shadow-inner">
 <img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
 </div>
 <div>
@@ -256,8 +256,8 @@ box-sizing: border-box;
 </div>
 </a>
 
-<a href="#" onclick="switchTab('informasi', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-blue-600 rounded-2xl p-2 border-2 border-blue-500/40 shadow-inner">
+<a href="#" onclick="switchTab('informasi', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-blue-800 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-gray-100 rounded-2xl p-2 border border-blue-800/40 shadow-inner">
 <img src="https://i.ibb.co.com/Kj3G0WhV/Picsart-26-07-29-23-08-35-566.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
 </div>
 <div>
@@ -266,8 +266,8 @@ box-sizing: border-box;
 </div>
 </a>
 
-<a href="#" onclick="switchTab('galeri', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-blue-600 rounded-2xl p-2 border-2 border-blue-500/40 shadow-inner">
+<a href="#" onclick="switchTab('galeri', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-blue-800 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-gray-100 rounded-2xl p-2 border border-blue-800/40 shadow-inner">
 <img src="https://i.ibb.co.com/8LPVnZXb/Picsart-26-08-06-20-58-28-388.png" class="w-full h-full object-contain scale-[1.65] no-zoom">
 </div>
 <div>
@@ -276,8 +276,8 @@ box-sizing: border-box;
 </div>
 </a>
 
-<a href="#" onclick="switchTab('tamu', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-blue-600 rounded-2xl p-2 border-2 border-blue-500/40 shadow-inner">
+<a href="#" onclick="switchTab('tamu', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-blue-800 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-gray-100 rounded-2xl p-2 border border-blue-800/40 shadow-inner">
 <img src="https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png" class="w-full h-full object-contain scale-[2.25] no-zoom">
 </div>
 <div>
@@ -286,8 +286,8 @@ box-sizing: border-box;
 </div>
 </a>
 
-<a href="#" onclick="switchTab('profil', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-blue-600 rounded-2xl p-2 border-2 border-blue-500/40 shadow-inner">
+<a href="#" onclick="switchTab('profil', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-blue-800 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-gray-100 rounded-2xl p-2 border border-blue-800/40 shadow-inner">
 <img src="https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
 </div>
 <div>
@@ -297,7 +297,7 @@ box-sizing: border-box;
 </a>
 
 <a href="#" onclick="switchTab('konsultasi', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-blue-600 rounded-2xl p-2 border-2 border-blue-500/40 shadow-inner">
+<div class="w-24 h-24 flex items-center justify-center bg-gray-100 rounded-2xl p-2 border border-blue-800/40 shadow-inner">
 <img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-full h-full object-contain scale-[2.25] no-zoom">
 </div>
 <div>
@@ -306,8 +306,8 @@ box-sizing: border-box;
 </div>
 </a>
 
-<a href="#" onclick="switchTab('maps', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-blue-600 rounded-2xl p-2 border-2 border-blue-500/40 shadow-inner">
+<a href="#" onclick="switchTab('maps', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-blue-800 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-gray-100 rounded-2xl p-2 border border-blue-800/40 shadow-inner">
 <img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
 </div>
 <div>
@@ -316,8 +316,8 @@ box-sizing: border-box;
 </div>
 </a>
 
-<a href="#" onclick="switchTab('panduan', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
-<div class="w-24 h-24 flex items-center justify-center bg-blue-600 rounded-2xl p-2 border-2 border-blue-500/40 shadow-inner">
+<a href="#" onclick="switchTab('panduan', event)" class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-blue-800 hover:bg-slate-800 transition text-center space-y-2 flex flex-col items-center justify-center">
+<div class="w-24 h-24 flex items-center justify-center bg-gray-100 rounded-2xl p-2 border border-blue-800/40 shadow-inner">
 <img src="https://i.ibb.co.com/Z6qSGXMx/Picsart-26-07-29-23-09-18-170.png" class="w-full h-full object-contain scale-[2.0] no-zoom">
 </div>
 <div>
@@ -328,12 +328,12 @@ box-sizing: border-box;
 </div>
 
 <div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border-2 border-red-600">
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-4 bg-slate-800/80 hover:bg-slate-800 p-3.5 rounded-xl border border-red-600/30 transition">
-<div class="w-24 h-24 flex items-center justify-center flex-shrink-0 bg-blue-600 rounded-xl p-2 border-2 border-blue-500/40 shadow-inner">
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-4 bg-slate-800/80 hover:bg-slate-800 p-3.5 rounded-xl border border-blue-800/30 transition">
+<div class="w-24 h-24 flex items-center justify-center flex-shrink-0 bg-gray-100 rounded-xl p-2 border border-blue-800/40 shadow-inner">
 <img src="https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png" class="w-full h-full object-contain scale-[2.0] no-zoom">
 </div>
 <div>
-<h3 class="font-black text-xs text-slate-100">Survei Kepuasan Pelanggan</h3>
+<h3 class="font-black text-xs text-slate-100">Survei Kepuasan Masyarakat</h3>
 <p class="text-[10px] text-slate-300 mt-0.5 font-medium">Berikan penilaian & masukan untuk peningkatan pelayanan UPTD Farmasi Tangsel.</p>
 </div>
 </a>
@@ -342,24 +342,24 @@ box-sizing: border-box;
 
 <!-- ================= PAGE 2: REGISTRASI ================= -->
 <div id="page-registrasi" class="page-content space-y-4 hidden-custom">
-<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-red-600/40 text-center space-y-1">
+<div class="bg-slate-900/70 p-4 rounded-2xl shadow-sm border border-blue-800/40 text-center space-y-1">
 <h2 class="text-sm font-black text-slate-100">📝 Formulir Registrasi Kunjungan</h2>
 <p class="text-[11px] text-slate-300 font-medium">Silakan lengkapi data kunjungan Anda. Sistem akan memvalidasi posisi GPS.</p>
 </div>
 
-<div class="bg-slate-900/70 p-5 rounded-2xl shadow-sm border border-red-600/40">
+<div class="bg-slate-900/70 p-5 rounded-2xl shadow-sm border border-blue-800/40">
 <form id="formRegistrasi" class="space-y-3">
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Nama Lengkap / Tamu</label>
-<input type="text" id="regNama" required placeholder="Masukkan nama lengkap..." class="w-full px-3 py-2 text-xs border border-red-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 text-slate-100 placeholder-slate-400">
+<input type="text" id="regNama" required placeholder="Masukkan nama lengkap..." class="w-full px-3 py-2 text-xs border border-blue-800/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 text-slate-100 placeholder-slate-400">
 </div>
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Instansi / Asal Puskesmas</label>
-<input type="text" id="regInstansi" required placeholder="Contoh: Puskesmas Setu / RSUD..." class="w-full px-3 py-2 text-xs border border-red-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 text-slate-100 placeholder-slate-400">
+<input type="text" id="regInstansi" required placeholder="Contoh: Puskesmas Setu / RSUD..." class="w-full px-3 py-2 text-xs border border-blue-800/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-800 bg-slate-800 text-slate-100 placeholder-slate-400">
 </div>
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Keperluan Kunjungan</label>
-<select id="regKeperluan" required class="w-full px-3 py-2 text-xs border border-red-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 font-bold text-slate-100">
+<select id="regKeperluan" required class="w-full px-3 py-2 text-xs border border-blue-800/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-800 bg-slate-800 font-bold text-slate-100">
 <option value="" disabled selected>-- Pilih Keperluan Kunjungan --</option>
 <option value="1. Obat PKD">1. Obat PKD</option>
 <option value="2. VAKSIN">2. VAKSIN</option>
@@ -373,25 +373,25 @@ box-sizing: border-box;
 </div>
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Nomor Kontak / WhatsApp</label>
-<input type="tel" id="regKontak" required placeholder="Contoh: 081234567890" class="w-full px-3 py-2 text-xs border border-red-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 bg-slate-800 text-slate-100 placeholder-slate-400">
+<input type="tel" id="regKontak" required placeholder="Contoh: 081234567890" class="w-full px-3 py-2 text-xs border border-blue-800/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-slate-800 text-slate-100 placeholder-slate-400">
 </div>
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Lampirkan Surat / Dokumen Pendukung (Maks. 700 KB)</label>
-<input type="file" id="regFile" accept=".pdf,image/*" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-red-600 file:text-white hover:file:bg-red-700">
+<input type="file" id="regFile" accept=".pdf,image/*" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-600 file:text-white hover:file:bg-blue-700">
 </div>
 
-<div id="gpsStatusBox" class="bg-red-600/10 border border-red-600/30 p-3 rounded-xl text-[11px] text-slate-200 font-medium">
+<div id="gpsStatusBox" class="bg-red-600/10 border border-blue-800/30 p-3 rounded-xl text-[11px] text-slate-200 font-medium">
 📍 Mendeteksi posisi koordinat GPS perangkat Anda...
 </div>
 
-<button type="submit" id="btnSubmitReg" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-2.5 rounded-xl text-xs transition shadow-md">
+<button type="submit" id="btnSubmitReg" class="w-full bg-blue-800 hover:bg-blue-900 text-white font-black py-2.5 rounded-xl text-xs transition shadow-md">
 Kirim Registrasi Kunjungan
 </button>
 </form>
 </div>
 
 <div class="flex justify-end pt-2">
-<button onclick="switchTab('index', event)" class="bg-red-600 hover:bg-red-700 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
+<button onclick="switchTab('index', event)" class="bg-blue-800 hover:bg-blue-900 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5">
 ← Kembali ke Menu Utama
 </button>
 </div>
