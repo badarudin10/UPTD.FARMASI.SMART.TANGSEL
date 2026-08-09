@@ -220,6 +220,8 @@ box-sizing: border-box;
 
 <!-- ================= PAGE 1: INDEX ================= -->
   <div class="pc-header-desktop hidden p-4 rounded-2xl shadow-sm border border-blue-900/40 mb-3" style="background: linear-gradient(to right, #141E30, #35577D);">
+  <div id="page-index" class="page-content space-y-4 p-4 rounded-3xl" style="background: linear-gradient(to bottom, #0f172a, #1e293b);">
+  <div class="pc-header-desktop hidden p-4 rounded-2xl shadow-sm border border-blue-900/40 mb-3" style="background: linear-gradient(to right, #141E30, #35577D);">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-3">
         <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo" class="h-12 w-12 object-contain no-zoom">
@@ -246,8 +248,8 @@ box-sizing: border-box;
 
   <!-- GRID MENU UTAMA -->
   <div class="grid grid-cols-2 gap-3">
-    <a href="#" onclick="switchTab('registrasi', event)" class="p-4 rounded-2xl shadow-sm border border-blue-900 hover:opacity-95 transition text-center space-y-2 flex flex-col items-center justify-center" style="background: linear-gradient(to right, #141E30, #35577D);">
-      <div class="w-24 h-24 flex items-center justify-center rounded-2xl p-2 border border-emerald-800/40 shadow-inner" style="background: linear-gradient(to bottom, #134E5E, #71B280);">
+    <a href="#" onclick="switchTab('registrasi', event)" class="p-4 rounded-2xl shadow-sm border border-emerald-700/50 hover:opacity-95 transition text-center space-y-2 flex flex-col items-center justify-center" style="background-color: #046307;">
+      <div class="w-24 h-24 flex items-center justify-center rounded-2xl p-2 border border-emerald-800/40 shadow-inner" style="background-color: #134E5E;">
         <img src="https://i.ibb.co.com/Xf1wsJ41/Picsart-26-07-25-12-29-14-940.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
       </div>
       <div>
@@ -256,8 +258,8 @@ box-sizing: border-box;
       </div>
     </a>
 
-    <a href="#" onclick="switchTab('informasi', event)" class="p-4 rounded-2xl shadow-sm border border-blue-900 hover:opacity-95 transition text-center space-y-2 flex flex-col items-center justify-center" style="background: linear-gradient(to right, #141E30, #35577D);">
-      <div class="w-24 h-24 flex items-center justify-center rounded-2xl p-2 border border-emerald-800/40 shadow-inner" style="background: linear-gradient(to bottom, #134E5E, #71B280);">
+    <a href="#" onclick="switchTab('informasi', event)" class="p-4 rounded-2xl shadow-sm border border-emerald-700/50 hover:opacity-95 transition text-center space-y-2 flex flex-col items-center justify-center" style="background-color: #046307;">
+      <div class="w-24 h-24 flex items-center justify-center rounded-2xl p-2 border border-emerald-800/40 shadow-inner" style="background-color: #134E5E;">
         <img src="https://i.ibb.co.com/Kj3G0WhV/Picsart-26-07-29-23-08-35-566.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
       </div>
       <div>
@@ -266,43 +268,79 @@ box-sizing: border-box;
       </div>
     </a>
 
-    <a href="#" onclick="switchTab('galeri', event)" class="p-4 rounded-2xl shadow-sm border border-blue-900 hover:opacity-95 transition text-center space-y-2 flex flex-col items-center justify-center" style="background: linear-gradient(to right, #141E30, #35577D);">
-      <div class="w-24 h-24 flex items-center justify-center rounded-2xl p-2 border border-emerald-800/40 shadow-inner" style="background: linear-gradient(to bottom, #134E5E, #71B280);">
+    <a href="#" onclick="switchTab('galeri', event)" class="p-4 rounded-2xl shadow-sm border border-emerald-700/50 hover:opacity-95 transition text-center space-y-2 flex flex-col items-center justify-center" style="background-color: #046307;">
+      <div class="w-24 h-24 flex items-center justify-center rounded-2xl p-2 border border-emerald-800/40 shadow-inner" style="background-color: #134E5E;">
         <img src="https://i.ibb.co.com/8LPVnZXb/Picsart-26-08-06-20-58-28-388.png" class="w-full h-full object-contain scale-[1.65] no-zoom">
       </div>
       <div>
-<div id="page-index" class="page-content space-y-4 p-4 rounded-3xl" style="background: linear-gradient(to bottom, #2C3E50, #4CA1AF);">
-  
-  <!-- No 4: Header Atas (Biru gelap malam / Navy dengan gradasi horizontal) -->
-  <div class="pc-header-desktop hidden p-4 rounded-2xl shadow-sm border border-blue-900/40 mb-3" style="background: linear-gradient(to right, #141E30, #35577D);">
-    <div class="flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo" class="h-12 w-12 object-contain no-zoom">
-        <div>
-          <h1 class="font-black text-slate-100 text-base tracking-wide leading-tight">UPTD FARMASI KOTA TANGERANG SELATAN</h1>
-          <p class="text-xs text-emerald-400 font-semibold uppercase tracking-wider">Sistem Layanan Digital Terpadu</p>
-        </div>
+        <h3 class="font-black text-xs text-slate-100">Galeri Kegiatan</h3>
+        <p class="text-[10px] text-emerald-300 font-semibold">Dokumentasi Foto</p>
       </div>
-      <button onclick="resetAkses()" class="text-xs bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-xl transition font-bold flex items-center gap-1.5 shadow-sm">
-        <i class="fas fa-lock"></i> Kunci Kembali
-      </button>
-    </div>
+    </a>
+
+    <a href="#" onclick="switchTab('tamu', event)" class="p-4 rounded-2xl shadow-sm border border-emerald-700/50 hover:opacity-95 transition text-center space-y-2 flex flex-col items-center justify-center" style="background-color: #046307;">
+      <div class="w-24 h-24 flex items-center justify-center rounded-2xl p-2 border border-emerald-800/40 shadow-inner" style="background-color: #134E5E;">
+        <img src="https://i.ibb.co.com/YBSNWNGM/Picsart-26-07-24-23-37-45-946.png" class="w-full h-full object-contain scale-[2.25] no-zoom">
+      </div>
+      <div>
+        <h3 class="font-black text-xs text-slate-100">Status Tamu</h3>
+        <p class="text-[10px] text-emerald-300 font-semibold">Cek & Unduh PDF</p>
+      </div>
+    </a>
+
+    <a href="#" onclick="switchTab('profil', event)" class="p-4 rounded-2xl shadow-sm border border-emerald-700/50 hover:opacity-95 transition text-center space-y-2 flex flex-col items-center justify-center" style="background-color: #046307;">
+      <div class="w-24 h-24 flex items-center justify-center rounded-2xl p-2 border border-emerald-800/40 shadow-inner" style="background-color: #134E5E;">
+        <img src="https://i.ibb.co.com/jPB3ZPgJ/Picsart-26-07-24-23-07-31-642.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
+      </div>
+      <div>
+        <h3 class="font-black text-xs text-slate-100">Profil Pegawai</h3>
+        <p class="text-[10px] text-emerald-300 font-semibold">Daftar PJ Program</p>
+      </div>
+    </a>
+
+    <a href="#" onclick="switchTab('konsultasi', event)" class="p-4 rounded-2xl shadow-sm border border-emerald-700/50 hover:opacity-95 transition text-center space-y-2 flex flex-col items-center justify-center" style="background-color: #046307;">
+      <div class="w-24 h-24 flex items-center justify-center rounded-2xl p-2 border border-emerald-800/40 shadow-inner" style="background-color: #134E5E;">
+        <img src="https://i.ibb.co.com/4nWYJqhW/Picsart-26-07-27-12-54-41-199.png" class="w-full h-full object-contain scale-[2.25] no-zoom">
+      </div>
+      <div>
+        <h3 class="font-black text-xs text-slate-100">Konsultasi</h3>
+        <p class="text-[10px] text-emerald-300 font-semibold">Pengaduan via WA</p>
+      </div>
+    </a>
+
+    <a href="#" onclick="switchTab('maps', event)" class="p-4 rounded-2xl shadow-sm border border-emerald-700/50 hover:opacity-95 transition text-center space-y-2 flex flex-col items-center justify-center" style="background-color: #046307;">
+      <div class="w-24 h-24 flex items-center justify-center rounded-2xl p-2 border border-emerald-800/40 shadow-inner" style="background-color: #134E5E;">
+        <img src="https://i.ibb.co.com/5PtXnK6/Picsart-26-07-25-12-25-33-560.png" class="w-full h-full object-contain scale-[1.75] no-zoom">
+      </div>
+      <div>
+        <h3 class="font-black text-xs text-slate-100">Maps Lokasi</h3>
+        <p class="text-[10px] text-emerald-300 font-semibold">Panduan Rute GPS</p>
+      </div>
+    </a>
+
+    <a href="#" onclick="switchTab('panduan', event)" class="p-4 rounded-2xl shadow-sm border border-emerald-700/50 hover:opacity-95 transition text-center space-y-2 flex flex-col items-center justify-center" style="background-color: #046307;">
+      <div class="w-24 h-24 flex items-center justify-center rounded-2xl p-2 border border-emerald-800/40 shadow-inner" style="background-color: #134E5E;">
+        <img src="https://i.ibb.co.com/Z6qSGXMx/Picsart-26-07-29-23-09-18-170.png" class="w-full h-full object-contain scale-[2.0] no-zoom">
+      </div>
+      <div>
+        <h3 class="font-black text-xs text-slate-100">Panduan</h3>
+        <p class="text-[10px] text-emerald-300 font-semibold">Petunjuk Sistem</p>
+      </div>
+    </a>
   </div>
 
-  <!-- No 2: Kotak Sambutan Utama (Hijau kebiruan dengan gradasi vertikal) -->
-  <div class="p-4 rounded-2xl shadow-sm border border-blue-900/40 text-center space-y-2" style="background: linear-gradient(to bottom, #134E5E, #71B280);">
-    <!-- No 4: Kotak Logo Tangsel (Biru gelap malam / Navy dengan gradasi horizontal) -->
-    <div class="w-20 h-20 mx-auto flex items-center justify-center p-2 rounded-2xl shadow-inner border border-blue-800/40" style="background: linear-gradient(to right, #141E30, #35577D);">
-      <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="w-full h-full object-contain no-zoom">
-    </div>
-    <div>
-      <h2 class="text-sm font-black text-slate-100 uppercase">Selamat Datang di UPTD Farmasi</h2>
-      <p class="text-[11px] text-slate-100 mt-0.5 font-medium leading-relaxed">Silakan pilih menu layanan di bawah untuk registrasi, informasi, konsultasi, atau memantau status kunjungan Anda.</p>
-    </div>
+  <div class="p-4 rounded-2xl shadow-sm border border-emerald-700/50" style="background-color: #046307;">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-4 p-3.5 rounded-xl border border-emerald-800/30 transition hover:opacity-95">
+      <div class="w-24 h-24 flex items-center justify-center flex-shrink-0 rounded-xl p-2 border border-emerald-800/40 shadow-inner" style="background-color: #134E5E;">
+        <img src="https://i.ibb.co.com/M5D0s0t9/Picsart-26-07-25-11-29-02-111.png" class="w-full h-full object-contain scale-[2.0] no-zoom">
+      </div>
+      <div>
+        <h3 class="font-black text-xs text-slate-100">Survei Kepuasan Masyarakat</h3>
+        <p class="text-[10px] text-slate-200 mt-0.5 font-medium">Berikan penilaian & masukan untuk peningkatan pelayanan UPTD Farmasi Tangsel.</p>
+      </div>
+    </a>
   </div>
-
-  <!-- GRID MENU UTAMA -->
-  <div class="grid grid-cols-2 gap-3">
+</div>
     
     <!-- No 3: Pembungkus Menu (Royal Emerald) & No 5: Kotak Ikon (Hijau Tosca Tua #134E5E) -->
     <a href="#" onclick="switchTab('registrasi', event)" class="p-4 rounded-2xl shadow-sm border border-emerald-700/50 hover:opacity-95 transition text-center space-y-2 flex flex-col items-center justify-center" style="background-color: #046307;">
