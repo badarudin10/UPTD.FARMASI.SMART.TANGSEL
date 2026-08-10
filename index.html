@@ -591,8 +591,8 @@ Memuat data registrasi dari database...
 </div>
 </div>
 
-<!-- Area Cetak PDF yang dilengkapi Kop Surat Resmi dan Rincian Tabel Barang -->
-<div id="areaCetakPdf" style="display: none; position: fixed; left: -9999px; top: 0; width: 750px; background: #ffffff;"></div>
+<!-- Area Cetak PDF (Diperbaiki agar tidak blank/kertas kosong saat di-render html2pdf) -->
+<div id="areaCetakPdf" style="position: fixed; left: -9999px; top: 0; width: 750px; background: #ffffff; z-index: -9999; visibility: hidden;"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
@@ -1043,7 +1043,6 @@ if (fileLink && fileLink.length > 0) {
 fileLampiranHtml = `<div class="pt-1"> <span class="inline-flex items-center gap-1.5 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-sm">📁 Tamu telah melampirkan surat permintaan</span> </div>`;
 }
 
-// Tombol download PDF aktif ketika status sudah Selesai
 let downloadBtnHtml = '';
 if (statusLower.includes("selesai")) {
   downloadBtnHtml = `<button onclick='downloadPdf(${JSON.stringify(normalizedData)})' class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl font-black transition shadow-md inline-flex items-center gap-1.5 text-xs cursor-pointer">
@@ -1208,7 +1207,8 @@ window.downloadPdf = (data) => {
     </div>
   `;
 
-  areaCetak.style.display = "block";
+  // Ubah visibilitas elemen agar siap dibaca html2pdf tanpa merusak layout layar utama
+  areaCetak.style.visibility = "visible";
 
   const opt = {
     margin:       [5, 5, 5, 5],
@@ -1220,15 +1220,15 @@ window.downloadPdf = (data) => {
 
   setTimeout(() => {
     html2pdf().set(opt).from(areaCetak).save().then(() => {
-      areaCetak.style.display = "none";
+      areaCetak.style.visibility = "hidden";
       areaCetak.innerHTML = "";
     }).catch(err => {
       console.error("Gagal export PDF:", err);
-      areaCetak.style.display = "none";
+      areaCetak.style.visibility = "hidden";
       areaCetak.innerHTML = "";
       alert("Terjadi kesalahan saat memproses PDF. Silakan coba lagi.");
     });
-  }, 300);
+  }, 400);
 };
 </script>
 </body>
