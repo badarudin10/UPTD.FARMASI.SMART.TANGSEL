@@ -1088,16 +1088,12 @@ container.appendChild(card);
 });
 });
 
-        window.downloadPdf = (data) => {
+            window.downloadPdf = (data) => {
       const inputPetugasElem = document.getElementById(`inPetugas_${data.docId}`);
       const namaPetugasFinal = inputPetugasElem ? inputPetugasElem.value.trim() : (data.petugas || '-');
 
       const areaCetak = document.getElementById("areaCetakPdf");
-      areaCetak.style.display = "block";
-      // Pastikan lebar kontainer fix untuk ukuran A4 potret agar tidak meluber
-      areaCetak.style.width = "190mm"; 
-      areaCetak.style.margin = "0 auto";
-
+      
       const items = (data.itemsObat && data.itemsObat.length > 0) ? data.itemsObat : [];
 
       let rowsHtml = '';
@@ -1124,7 +1120,7 @@ container.appendChild(card);
       }
 
       areaCetak.innerHTML = `
-        <div style="padding: 10px; font-family: Arial, sans-serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
+        <div style="padding: 15px; font-family: Arial, sans-serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
           
           <!-- KOP SURAT -->
           <table style="width: 100%; border-collapse: collapse; border-bottom: 3px double #000; padding-bottom: 6px; margin-bottom: 15px;">
@@ -1146,7 +1142,7 @@ container.appendChild(card);
             <div style="font-size: 12px; font-weight: bold; text-decoration: underline; display: inline-block;">BUKTI PENGAMBILAN OBAT / PELAYANAN</div>
           </div>
 
-          <!-- INFORMASI DETAIL (Dibagi 2 kolom agar seimbang & tidak terpotong ke kanan) -->
+          <!-- INFORMASI DETAIL -->
           <table style="width: 100%; font-size: 10px; margin-bottom: 15px; border-collapse: collapse;">
             <tr>
               <td style="width: 20%; font-weight: bold; padding-bottom: 4px;">Nama Tamu</td>
@@ -1182,7 +1178,7 @@ container.appendChild(card);
             </tr>
           </table>
 
-          <!-- TABEL OBAT / BARANG -->
+          <!-- TABEL OBAT -->
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
             <thead>
               <tr style="background-color: #f3f4f6; text-align: center; font-size: 10px; font-weight: bold;">
@@ -1202,7 +1198,7 @@ container.appendChild(card);
           </table>
 
           <!-- TANDA TANGAN -->
-          <table style="width: 100%; margin-top: 15px; font-size: 10px; border-collapse: collapse; page-break-inside: avoid;">
+          <table style="width: 100%; margin-top: 15px; font-size: 10px; border-collapse: collapse;">
             <tr>
               <td style="width: 50%; text-align: center; vertical-align: top;">
                 <p style="margin: 0; font-weight: bold;">Petugas UPTD Farmasi</p>
@@ -1220,20 +1216,30 @@ container.appendChild(card);
         </div>
       `;
 
+      // Pastikan elemen tampil sebelum diproses oleh html2pdf
+      areaCetak.classList.remove("hidden");
+      areaCetak.style.display = "block";
+
       setTimeout(() => {
         const opt = {
-          margin:       [10, 10, 10, 10], // Margin kertas 10mm di setiap sisi
+          margin:       [10, 10, 10, 10],
           filename:     `Bukti_Pengambilan_Obat_${data.nama || 'Tamu'}.pdf`,
           image:        { type: 'jpeg', quality: 0.98 },
-          html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+          html2canvas:  { scale: 2, useCORS: true, logging: false },
           jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
         html2pdf().from(areaCetak).set(opt).save().then(() => {
           areaCetak.style.display = "none";
+          areaCetak.classList.add("hidden");
           areaCetak.innerHTML = "";
+        }).catch(err => {
+          console.error("Gagal generate PDF:", err);
+          alert("Gagal mengunduh PDF, silakan coba lagi.");
+          areaCetak.style.display = "none";
+          areaCetak.classList.add("hidden");
         });
-      }, 300);
+      }, 500);
     };
 </script>
 </body>
