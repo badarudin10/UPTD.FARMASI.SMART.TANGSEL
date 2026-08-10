@@ -591,16 +591,9 @@ Memuat data registrasi dari database...
 </div>
 </div>
 
-<!-- Modal Overlay Khusus Render PDF (Aman dari blank/kertas kosong) -->
-<div id="pdfModalOverlay" class="hidden-custom fixed inset-0 z-[99999] bg-black/90 flex items-center justify-center p-2 overflow-y-auto">
-  <div class="bg-white rounded-2xl max-w-[800px] w-full p-4 relative shadow-2xl my-auto text-black">
-    <div class="flex justify-between items-center mb-3 border-b pb-2">
-      <span class="font-bold text-xs uppercase text-slate-700">Preview & Download PDF</span>
-      <button onclick="tutupPdfModal()" class="bg-red-500 text-white px-3 py-1 rounded-lg text-xs font-bold">Tutup ✕</button>
-    </div>
-    <!-- Kontainer cetak asli yang terlihat di modal -->
-    <div id="areaCetakPdf" style="width: 100%; background: #ffffff;"></div>
-  </div>
+<!-- Kontainer Tersembunyi di Latar Belakang (Render PDF Tanpa Muncul di Layar / Profesional) -->
+<div id="pdfOffscreenContainer" style="position: absolute; left: -9999px; top: -9999px; width: 794px; background: #ffffff; z-index: -9999;">
+  <div id="areaCetakPdf" style="width: 794px; background: #ffffff; padding: 20px; box-sizing: border-box;"></div>
 </div>
 
 <script type="module">
@@ -1095,18 +1088,9 @@ container.appendChild(card);
 });
 });
 
-window.tutupPdfModal = function() {
-  const modal = document.getElementById('pdfModalOverlay');
-  if(modal) {
-    modal.classList.remove('visible-custom');
-    modal.classList.add('hidden-custom');
-  }
-}
-
 window.prosesDownloadPdf = (data) => {
   const areaCetak = document.getElementById("areaCetakPdf");
-  const modalOverlay = document.getElementById('pdfModalOverlay');
-  if (!areaCetak || !modalOverlay) return;
+  if (!areaCetak) return;
 
   const items = (data.itemsObat && Array.isArray(data.itemsObat) && data.itemsObat.length > 0) ? data.itemsObat : [];
   let rowsHtml = '';
@@ -1134,7 +1118,7 @@ window.prosesDownloadPdf = (data) => {
   }
 
   areaCetak.innerHTML = `
-    <div style="padding: 15px 20px; font-family: Arial, Helvetica, sans-serif; color: #000; width: 100%; background: #ffffff; box-sizing: border-box;">
+    <div style="font-family: Arial, Helvetica, sans-serif; color: #000; width: 794px; background: #ffffff; box-sizing: border-box;">
       
       <table style="width: 100%; border-collapse: collapse; border-bottom: 3px double #000; padding-bottom: 8px; margin-bottom: 12px;">
         <tr>
@@ -1225,28 +1209,20 @@ window.prosesDownloadPdf = (data) => {
     </div>
   `;
 
-  // Munculkan modal overlay supaya elemen DOM-nya benar-benar ada dan ter-render di layar browser
-  modalOverlay.classList.remove('hidden-custom');
-  modalOverlay.classList.add('visible-custom');
-
   const opt = {
     margin:       [5, 5, 5, 5],
     filename:     `Bukti_Pengambilan_Obat_${(data.nama || 'Tamu').replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
     image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2, useCORS: true, logging: false },
+    html2canvas:  { scale: 2, useCORS: true, logging: false, windowWidth: 794 },
     jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
   };
 
-  // Beri jeda waktu render browser (500ms) agar gambar dan teks sepenuhnya dimuat sebelum html2pdf mengambil snapshot canvas
   setTimeout(() => {
-    html2pdf().set(opt).from(areaCetak).save().then(() => {
-      tutupPdfModal();
-    }).catch(err => {
+    html2pdf().set(opt).from(areaCetak).save().catch(err => {
       console.error("Gagal export PDF:", err);
-      tutupPdfModal();
       alert("Terjadi kesalahan saat memproses PDF. Silakan coba lagi.");
     });
-  }, 500);
+  }, 300);
 };
 </script>
 </body>
