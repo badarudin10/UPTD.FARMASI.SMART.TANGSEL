@@ -1088,9 +1088,9 @@ areaCetak.style.left = "0";
 const items = (data.itemsObat && data.itemsObat.length > 0) ? data.itemsObat : [];
 let rowsHtml = '';
 if (items.length > 0) {
-rowsHtml = items.map((item, i) => `<tr> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; height: 18px;">${i + 1}</td> <td style="border: 1px solid #000; padding: 5px; font-size: 9px; font-weight: bold;">${item.nama || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.tahun || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.satuan || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.volume || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.ed || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; font-family: monospace;">${item.batch || '-'}</td> </tr>`).join('');
+rowsHtml = items.map((item, i) => `<tr> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; height: 18px;">${i + 1}</td> <td style="border: 1px solid #000; padding: 5px; font-size: 9px; font-weight: bold;">${item.nama || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.tahun || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.satuan || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.volume || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.ed || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; font-family: monospace;">${item.batch || '-'}</td> <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;"></td> </tr>`).join('');
 } else {
-rowsHtml = `<tr><td colspan="7" style="border: 1px solid #000; text-align: center; padding: 8px; font-size: 9px;">${data.obatTerimaFormatted || '-'}</td></tr>`;
+rowsHtml = `<tr><td colspan="8" style="border: 1px solid #000; text-align: center; padding: 8px; font-size: 9px;">${data.obatTerimaFormatted || '-'}</td></tr>`;
 }
 
 areaCetak.innerHTML = `
@@ -1158,6 +1158,7 @@ areaCetak.innerHTML = `
           <th style="border: 1px solid #000; padding: 5px; font-size: 9px; text-align: center; width: 10%;">Volume</th>
           <th style="border: 1px solid #000; padding: 5px; font-size: 9px; text-align: center; width: 12%;">Ed</th>
           <th style="border: 1px solid #000; padding: 5px; font-size: 9px; text-align: center; width: 15%;">No Batch</th>
+          <th style="border: 1px solid #000; padding: 5px; font-size: 9px; text-align: center; width: 8%;">Paraf</th>
         </tr>
       </thead>
       <tbody>
