@@ -591,8 +591,17 @@ Memuat data registrasi dari database...
 </div>
 </div>
 
-<!-- Area Cetak PDF (Diperbaiki agar tidak blank/kertas kosong saat di-render html2pdf) -->
-<div id="areaCetakPdf" style="position: fixed; left: -9999px; top: 0; width: 750px; background: #ffffff; z-index: -9999; visibility: hidden;"></div>
+<!-- Modal Overlay Khusus Render PDF (Aman dari blank/kertas kosong) -->
+<div id="pdfModalOverlay" class="hidden-custom fixed inset-0 z-[99999] bg-black/90 flex items-center justify-center p-2 overflow-y-auto">
+  <div class="bg-white rounded-2xl max-w-[800px] w-full p-4 relative shadow-2xl my-auto text-black">
+    <div class="flex justify-between items-center mb-3 border-b pb-2">
+      <span class="font-bold text-xs uppercase text-slate-700">Preview & Download PDF</span>
+      <button onclick="tutupPdfModal()" class="bg-red-500 text-white px-3 py-1 rounded-lg text-xs font-bold">Tutup ✕</button>
+    </div>
+    <!-- Kontainer cetak asli yang terlihat di modal -->
+    <div id="areaCetakPdf" style="width: 100%; background: #ffffff;"></div>
+  </div>
+</div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
@@ -1045,7 +1054,7 @@ fileLampiranHtml = `<div class="pt-1"> <span class="inline-flex items-center gap
 
 let downloadBtnHtml = '';
 if (statusLower.includes("selesai")) {
-  downloadBtnHtml = `<button onclick='downloadPdf(${JSON.stringify(normalizedData)})' class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl font-black transition shadow-md inline-flex items-center gap-1.5 text-xs cursor-pointer">
+  downloadBtnHtml = `<button onclick='prosesDownloadPdf(${JSON.stringify(normalizedData)})' class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl font-black transition shadow-md inline-flex items-center gap-1.5 text-xs cursor-pointer">
     <span>Download PDF</span> <span>📥</span>
   </button>`;
 } else {
@@ -1086,9 +1095,18 @@ container.appendChild(card);
 });
 });
 
-window.downloadPdf = (data) => {
+window.tutupPdfModal = function() {
+  const modal = document.getElementById('pdfModalOverlay');
+  if(modal) {
+    modal.classList.remove('visible-custom');
+    modal.classList.add('hidden-custom');
+  }
+}
+
+window.prosesDownloadPdf = (data) => {
   const areaCetak = document.getElementById("areaCetakPdf");
-  if (!areaCetak) return;
+  const modalOverlay = document.getElementById('pdfModalOverlay');
+  if (!areaCetak || !modalOverlay) return;
 
   const items = (data.itemsObat && Array.isArray(data.itemsObat) && data.itemsObat.length > 0) ? data.itemsObat : [];
   let rowsHtml = '';
@@ -1207,8 +1225,9 @@ window.downloadPdf = (data) => {
     </div>
   `;
 
-  // Ubah visibilitas elemen agar siap dibaca html2pdf tanpa merusak layout layar utama
-  areaCetak.style.visibility = "visible";
+  // Munculkan modal overlay supaya elemen DOM-nya benar-benar ada dan ter-render di layar browser
+  modalOverlay.classList.remove('hidden-custom');
+  modalOverlay.classList.add('visible-custom');
 
   const opt = {
     margin:       [5, 5, 5, 5],
@@ -1218,17 +1237,16 @@ window.downloadPdf = (data) => {
     jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
   };
 
+  // Beri jeda waktu render browser (500ms) agar gambar dan teks sepenuhnya dimuat sebelum html2pdf mengambil snapshot canvas
   setTimeout(() => {
     html2pdf().set(opt).from(areaCetak).save().then(() => {
-      areaCetak.style.visibility = "hidden";
-      areaCetak.innerHTML = "";
+      tutupPdfModal();
     }).catch(err => {
       console.error("Gagal export PDF:", err);
-      areaCetak.style.visibility = "hidden";
-      areaCetak.innerHTML = "";
+      tutupPdfModal();
       alert("Terjadi kesalahan saat memproses PDF. Silakan coba lagi.");
     });
-  }, 400);
+  }, 500);
 };
 </script>
 </body>
