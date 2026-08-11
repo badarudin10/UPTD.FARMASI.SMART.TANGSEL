@@ -907,23 +907,43 @@ const nextNum = countHariIni + 1;
 const antrianNo = `${prefix}-${String(nextNum).padStart(3, '0')}`;
 
 await addDoc(collection(db, "tamu"), {
-nama: nama,
-instansi: instansi,
-keperluan: keperluan,
-kontak: kontak,
-fileUrl: fileUrlVal,
-nomorAntrian: antrianNo,
-status: "Menunggu",
-waktu: serverTimestamp(),
-lat: userLat || 0,
-lng: userLng || 0,
-jarak: userDistance ? Math.round(userDistance) : 0
-});
+      nama: nama,
+      instansi: instansi,
+      keperluan: keperluan,
+      kontak: kontak,
+      fileUrl: fileUrlVal,
+      nomorAntrian: antrianNo,
+      status: "Menunggu",
+      waktu: serverTimestamp(),
+      lat: userLat || 0,
+      lng: userLng || 0,
+      jarak: userDistance ? Math.round(userDistance) : 0
+    });
 
-formReg.reset();
+    // ─── KODE FETCH KE GOOGLE APPS SCRIPT DIMASUKKAN DI SINI ───
+    try {
+      await fetch("https://script.google.com/macros/s/AKfycbwIthuWfJ4HJTKHhRLea0-HK5ylqPp4Lg0-Nb9cmi3JIBJY9NRTy2IWuXmz8SH9_YVXCA/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nama: nama,
+          instansi: instansi,
+          keperluan: keperluan,
+          nomorAntrian: antrianNo,
+          status: "Menunggu",
+          jarak: userDistance ? Math.round(userDistance) : 0
+        })
+      });
+    } catch (sheetErr) {
+      console.log("Catatan ke Spreadsheet opsional:", sheetErr);
+    }
+    // ───────────────────────────────────────────────────────────
 
-const txtAntrianModal = document.getElementById('txtNomorAntrianModal');
-if(txtAntrianModal) txtAntrianModal.innerText = antrianNo;
+    formReg.reset();
+
+    const txtAntrianModal = document.getElementById('txtNomorAntrianModal');
+    if(txtAntrianModal) txtAntrianModal.innerText = antrianNo;
 
 const modalSukses = document.getElementById('modalAntrianSukses');
 if(modalSukses) {
