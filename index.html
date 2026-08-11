@@ -852,9 +852,11 @@ const formReg = document.getElementById('formRegistrasi');
 if(formReg) {
 formReg.addEventListener('submit', async (e) => {
 e.preventDefault();
-const btn = document.getElementById('btnSubmitReg');
-btn.disabled = true;
-btn.innerText = "Mengirim Registrasi...";
+const btn = document.getElementById('btnSubmitReg') || document.getElementById('btnSubmit');
+if(btn) {
+  btn.disabled = true;
+  btn.innerText = "Mengirim Registrasi...";
+}
 
 const nama = document.getElementById('regNama').value;
 const instansi = document.getElementById('regInstansi').value;
@@ -863,12 +865,14 @@ const kontak = document.getElementById('regKontak').value;
 const fileInput = document.getElementById('regFile');
 
 let fileUrlVal = "";
-if (fileInput.files && fileInput.files[0]) {
+if (fileInput && fileInput.files && fileInput.files[0]) {
 const file = fileInput.files[0];
 if (file.size > 700 * 1024) {
 alert("Ukuran file terlalu besar! Maksimal 700 KB.");
-btn.disabled = false;
-btn.innerText = "Kirim Registrasi Kunjungan";
+if(btn) {
+  btn.disabled = false;
+  btn.innerText = "Kirim Registrasi Kunjungan";
+}
 return;
 }
 fileUrlVal = await toBase64(file);
@@ -906,44 +910,64 @@ countHariIni++;
 const nextNum = countHariIni + 1;
 const antrianNo = `${prefix}-${String(nextNum).padStart(3, '0')}`;
 
-await addDoc(collection(db, "tamu"), {
+const dataPayload = {
+  nama: nama,
+  instansi: instansi,
+  keperluan: keperluan,
+  kontak: kontak,
+  fileUrl: fileUrlVal,
+  nomorAntrian: antrianNo,
+  status: "Menunggu",
+  waktu: serverTimestamp(),
+  lat: userLat || 0,
+  lng: userLng || 0,
+  jarak: userDistance ? Math.round(userDistance) : 0
+};
+
+// 1. Simpan ke Firebase Firestore
+await addDoc(collection(db, "tamu"), dataPayload);
+
+// 2. Kirim ke Google Apps Script (Web App URL)
+try {
+  await fetch("https://script.google.com/macros/s/AKfycbyHI3NQymJX-uRAcIdF0okCil24K-G9DYjPTzqy8DKSMo96nmB6MAYG-yo1rG0DEfONlg/exec", {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
       nama: nama,
       instansi: instansi,
       keperluan: keperluan,
-      kontak: kontak,
-      fileUrl: fileUrlVal,
       nomorAntrian: antrianNo,
       status: "Menunggu",
-      waktu: serverTimestamp(),
-      lat: userLat || 0,
-      lng: userLng || 0,
       jarak: userDistance ? Math.round(userDistance) : 0
+    })
+  });
+} catch (sheetErr) {
+  console.log("Catatan ke Spreadsheet opsional:", sheetErr);
+}
+
+// 3. Jalankan google.script.run (jika berjalan di lingkungan Google Apps Script Server-side)
+if (typeof google !== 'undefined' && google.script && google.script.run) {
+  google.script.run
+    .withSuccessHandler(function(msg) {
+      console.log("Sukses Apps Script:", msg);
+    })
+    .withFailureHandler(function(err) {
+      console.log("Gagal Apps Script:", err);
+    })
+    .tambahDataTamu({
+      nama: nama,
+      instansi: instansi,
+      keperluan: keperluan,
+      nomorAntrian: antrianNo,
+      kontak: kontak
     });
+}
 
-    // ─── INTEGRASI GOOGLE APPS SCRIPT (WEB APP URL) ───
-    try {
-      await fetch("https://script.google.com/macros/s/AKfycbw8T_5ipkWD9M6yHdz2xUFj9PM9-UDy8g4rFdLGid2GKqgnYxXviMLI6EI-OLbvuy7Wow/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nama: nama,
-          instansi: instansi,
-          keperluan: keperluan,
-          nomorAntrian: antrianNo,
-          status: "Menunggu",
-          jarak: userDistance ? Math.round(userDistance) : 0
-        })
-      });
-    } catch (sheetErr) {
-      console.log("Catatan ke Spreadsheet opsional:", sheetErr);
-    }
-    // ───────────────────────────────────────────────────────────
+formReg.reset();
 
-    formReg.reset();
-
-    const txtAntrianModal = document.getElementById('txtNomorAntrianModal');
-    if(txtAntrianModal) txtAntrianModal.innerText = antrianNo;
+const txtAntrianModal = document.getElementById('txtNomorAntrianModal');
+if(txtAntrianModal) txtAntrianModal.innerText = antrianNo;
 
 const modalSukses = document.getElementById('modalAntrianSukses');
 if(modalSukses) {
@@ -955,8 +979,10 @@ modalSukses.classList.add('visible-custom');
 console.error("Gagal kirim registrasi:", err);
 alert("Gagal mengirim registrasi ke database. Silakan coba lagi.");
 } finally {
-btn.disabled = false;
-btn.innerText = "Kirim Registrasi Kunjungan";
+if(btn) {
+  btn.disabled = false;
+  btn.innerText = "Kirim Registrasi Kunjungan";
+}
 }
 });
 }
