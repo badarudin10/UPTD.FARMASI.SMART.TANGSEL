@@ -920,9 +920,9 @@ await addDoc(collection(db, "tamu"), {
       jarak: userDistance ? Math.round(userDistance) : 0
     });
 
-    // ─── KODE FETCH KE GOOGLE APPS SCRIPT DIMASUKKAN DI SINI ───
+    // ─── INTEGRASI GOOGLE APPS SCRIPT (WEB APP URL) ───
     try {
-      await fetch("https://script.google.com/macros/s/AKfycbwIthuWfJ4HJTKHhRLea0-HK5ylqPp4Lg0-Nb9cmi3JIBJY9NRTy2IWuXmz8SH9_YVXCA/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbw8T_5ipkWD9M6yHdz2xUFj9PM9-UDy8g4rFdLGid2GKqgnYxXviMLI6EI-OLbvuy7Wow/exec", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
