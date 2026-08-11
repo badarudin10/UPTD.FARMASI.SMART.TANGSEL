@@ -1107,37 +1107,56 @@ window.prosesDownloadPdf = (data) => {
 
     // Update konten di area tersembunyi
     areaCetak.innerHTML = `
-        <div style="font-family: Arial, sans-serif; color: #000; padding: 0;">
-            <table style="width: 100%; border-bottom: 2px solid #000; margin-bottom: 20px;">
-                <tr>
-                    <td style="width: 80px; text-align: center;"><img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 60px;"></td>
-                    <td style="text-align: center;">
-                        <h2 style="margin: 0; font-size: 16px;">UPTD FARMASI KOTA TANGERANG SELATAN</h2>
-                        <p style="margin: 0; font-size: 10px;">Jl. Cendekia BSD Sektor XI, Serpong</p>
-                    </td>
+    <div style="font-family: Arial, sans-serif; color: #000; padding: 20px;">
+        <!-- Header -->
+        <table style="width: 100%; border-bottom: 2px solid #000; margin-bottom: 20px; table-layout: fixed;">
+            <tr>
+                <td style="width: 100px; text-align: center; vertical-align: middle;">
+                    <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 60px;">
+                </td>
+                <td style="text-align: center; vertical-align: middle;">
+                    <h2 style="margin: 0; font-size: 18px; font-weight: bold;">UPTD FARMASI KOTA TANGERANG SELATAN</h2>
+                    <p style="margin: 5px 0 0 0; font-size: 12px;">Jl. Cendekia BSD Sektor XI, Serpong</p>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Judul -->
+        <h3 style="text-align: center; text-decoration: underline; margin-bottom: 20px; font-size: 16px;">BUKTI LAYANAN</h3>
+
+        <!-- Info Antrian -->
+        <table style="width: 100%; margin-bottom: 20px; font-size: 13px; border-collapse: collapse;">
+            <tr>
+                <td style="width: 15%; padding: 3px;">Nama</td>
+                <td style="width: 35%; padding: 3px;">: ${data.nama}</td>
+                <td style="width: 15%; padding: 3px;">No Antrian</td>
+                <td style="width: 35%; padding: 3px;">: ${data.nomorAntrian}</td>
+            </tr>
+            <tr>
+                <td style="padding: 3px;">Instansi</td>
+                <td style="padding: 3px;">: ${data.instansi}</td>
+                <td style="padding: 3px;">Status</td>
+                <td style="padding: 3px;">: ${data.status}</td>
+            </tr>
+        </table>
+
+        <!-- Tabel Data -->
+        <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th style="border: 1px solid #000; padding: 8px; width: 5%;">No</th>
+                    <th style="border: 1px solid #000; padding: 8px;">Nama Barang</th>
+                    <th style="border: 1px solid #000; padding: 8px; width: 10%;">Thn</th>
+                    <th style="border: 1px solid #000; padding: 8px; width: 10%;">Sat</th>
+                    <th style="border: 1px solid #000; padding: 8px; width: 10%;">Vol</th>
+                    <th style="border: 1px solid #000; padding: 8px; width: 12%;">ED</th>
+                    <th style="border: 1px solid #000; padding: 8px; width: 12%;">Batch</th>
                 </tr>
-            </table>
-            <h3 style="text-align: center; text-decoration: underline;">BUKTI LAYANAN</h3>
-            <table style="width: 100%; font-size: 11px; margin-bottom: 20px;">
-                <tr><td>Nama</td><td>: ${data.nama}</td><td>No Antrian</td><td>: ${data.nomorAntrian}</td></tr>
-                <tr><td>Instansi</td><td>: ${data.instansi}</td><td>Status</td><td>: ${data.status}</td></tr>
-            </table>
-            <table style="width: 100%; border-collapse: collapse;">
-                <thead>
-                    <tr style="background: #e5e7eb;">
-                        <th style="border: 1px solid #000; padding: 5px;">No</th>
-                        <th style="border: 1px solid #000; padding: 5px;">Nama Barang</th>
-                        <th style="border: 1px solid #000; padding: 5px;">Thn</th>
-                        <th style="border: 1px solid #000; padding: 5px;">Sat</th>
-                        <th style="border: 1px solid #000; padding: 5px;">Vol</th>
-                        <th style="border: 1px solid #000; padding: 5px;">ED</th>
-                        <th style="border: 1px solid #000; padding: 5px;">Batch</th>
-                    </tr>
-                </thead>
-                <tbody>${rowsHtml}</tbody>
-            </table>
-        </div>
-    `;
+            </thead>
+            <tbody>${rowsHtml}</tbody>
+        </table>
+    </div>
+`;
 
     // Konfigurasi PDF yang konsisten dan anti-potong
     const opt = {
