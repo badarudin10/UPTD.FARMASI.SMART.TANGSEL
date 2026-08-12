@@ -1135,42 +1135,27 @@ container.appendChild(card);
 });
 
 window.prosesDownloadPdf = (data) => {
-    // Beritahu user bahwa dokumen resmi sedang disiapkan dari Google Sheets
-    alert("Menyiapkan dokumen resmi berformat rapi dari Google Sheets. Mohon tunggu sebentar...");
+    alert("Menyiapkan dokumen PDF dari Google Sheets...");
 
-    // Panggil mesin Google Apps Script untuk mengisi template dan mengembalikan file PDF jadi
-    if (typeof google !== 'undefined' && google.script && google.script.run) {
-        google.script.run
-            .withSuccessHandler(function(result) {
-                if (result && result.base64) {
-                    // Konversi Base64 dari Google Apps Script menjadi file biner PDF di browser
-                    const byteCharacters = atob(result.base64);
-                    const byteNumbers = new Array(byteCharacters.length);
-                    for (let i = 0; i < byteCharacters.length; i++) {
-                        byteNumbers[i] = byteCharacters.charCodeAt(i);
-                    }
-                    const byteArray = new Uint8Array(byteNumbers);
-                    const blob = new Blob([byteArray], { type: result.mimeType || 'application/pdf' });
-                    
-                    // Otomatis unduh file PDF ke perangkat pengguna (admin / tamu)
-                    const link = document.createElement('a');
-                    link.href = window.URL.createObjectURL(blob);
-                    link.download = result.fileName || 'Bukti_Kunjungan.pdf';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                } else {
-                    alert("Gagal mengunduh file PDF. Periksa kembali data baris pada Google Sheets.");
-                }
-            })
-            .withFailureHandler(function(error) {
-                console.error("Error:", error);
-                alert("Terjadi kesalahan saat menghasilkan PDF: " + error.message);
-            })
-            .prosesDanExportPdfOtomatis(); // Menjalankan fungsi di Code.gs secara otomatis
-    } else {
-        alert("Fitur ini memerlukan lingkungan Web App Google Apps Script yang aktif.");
-    }
+    // URL Web App dari Google Apps Script Anda (Ganti dengan URL /exec milik Anda)
+    const urlWebApps = "https://script.google.com/macros/s/AKfycbzQgwnddNW8Xua38oFa1OaHB5hdVluCmU9JoqZphm-oeX1oqoDs3lMJ9hJjIU4zZkUsYg/exec";
+
+    // Kirim data menggunakan fetch API dari GitHub Pages ke Apps Script
+    fetch(urlWebApps, {
+        method: "POST",
+        mode: "no-cors", // atau handle CORS jika web app diset dengan benar
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    .then(() => {
+        alert("Perintah unduh dikirim ke server. Silakan cek file PDF di Google Drive atau hasil unduhan.");
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Gagal terhubung ke Apps Script: " + error.message);
+    });
 };
 </script>
 </body>
