@@ -77,7 +77,7 @@ box-sizing: border-box;
 </head>
 <body class="font-sans min-h-screen pb-6 flex items-center justify-center p-0 lg:p-6 text-slate-100">
 
-  <!-- HALAMAN GERBANG UTAMA (SURVEY) -->
+<!-- HALAMAN GERBANG UTAMA (SURVEY) -->
 <div id="gatePage" class="flex items-center justify-center p-4" style="position: fixed; inset: 0; z-index: 9999; overflow-y: auto; background: linear-gradient(135deg, #0f172a, #1e293b);">
   <div class="max-w-md w-full rounded-3xl shadow-2xl border border-slate-700/60 p-8 text-center space-y-6 my-auto bg-slate-900/90 backdrop-blur-md">
     
@@ -117,6 +117,12 @@ box-sizing: border-box;
         <i class="fas fa-external-link-alt"></i>
         <span>ISI SURVEI KEPUASAN & MASUK MENU</span>
       </a>
+
+      <!-- TOMBOL CADANGAN MANUAL -->
+      <button onclick="bukaMenuUtamaManual()" 
+              class="w-full bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/40 font-bold py-3 px-6 rounded-2xl transition text-xs flex items-center justify-center gap-2">
+        <span>✓ Saya Sudah Mengisi Survei, Masuk ke Menu</span>
+      </button>
     </div>
 
     <p class="text-[10px] text-slate-400 leading-normal">
@@ -609,6 +615,22 @@ let userLat = null;
 let userLng = null;
 let userDistance = null;
 let isWithinRadius = false;
+
+window.bukaMenuUtamaManual = function() {
+  sessionStorage.setItem('survei_terisi_sesi_ini', 'true');
+  
+  const gatePage = document.getElementById('gatePage');
+  if (gatePage) {
+    gatePage.style.display = 'none';
+    gatePage.classList.add('hidden-custom');
+  }
+  
+  const mainMenuContent = document.getElementById('mainMenuContent');
+  if (mainMenuContent) {
+    mainMenuContent.classList.remove('hidden');
+    mainMenuContent.style.display = 'block';
+  }
+}
 
 window.mulaiIsiSurvey = function(event) {
   sessionStorage.setItem('sedang_isi_survei', 'true');
