@@ -621,10 +621,16 @@ window.addEventListener('focus', function() {
     sessionStorage.removeItem('sedang_isi_survei');
     
     const gatePage = document.getElementById('gatePage');
-    if (gatePage) gatePage.style.display = 'none';
+    if (gatePage) {
+      gatePage.style.display = 'none';
+      gatePage.classList.add('hidden-custom');
+    }
     
     const mainMenuContent = document.getElementById('mainMenuContent');
-    if (mainMenuContent) mainMenuContent.classList.remove('hidden');
+    if (mainMenuContent) {
+      mainMenuContent.classList.remove('hidden');
+      mainMenuContent.style.display = 'block'; // Memastikan elemen tampil secara paksa
+    }
   }
 });
 
