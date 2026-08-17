@@ -105,28 +105,31 @@ box-sizing: border-box;
         <span>⚠️</span> Survei Kepuasan Masyarakat:
       </p>
       <p class="text-[11px] text-slate-300 leading-normal">
-        Silakan isi <b>Survei Kepuasan Masyarakat</b> terlebih dahulu. Ketika Anda menekan tombol kirim pada Google Form, sistem akan otomatis membuka menu utama.
+        Silakan klik tombol <b>Isi Survei</b> terlebih dahulu. Setelah itu, tombol masuk ke menu utama akan aktif dan bisa diklik.
       </p>
     </div>
 
     <div class="space-y-3">
+      <!-- Tombol Survei -->
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" 
          target="_blank" 
          onclick="mulaiIsiSurvey(event)"
-         class="w-full text-white font-extrabold py-4 px-6 rounded-2xl transition transform active:scale-95 flex items-center justify-center gap-2.5 text-sm shadow-lg bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600">
+         class="w-full text-white font-extrabold py-3.5 px-6 rounded-2xl transition transform active:scale-95 flex items-center justify-center gap-2.5 text-sm shadow-lg bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600">
         <i class="fas fa-external-link-alt"></i>
-        <span>ISI SURVEI KEPUASAN & MASUK MENU</span>
+        <span>ISI SURVEI KEPUASAN</span>
       </a>
 
-      <!-- TOMBOL CADANGAN MANUAL -->
-      <button onclick="bukaMenuUtamaManual()" 
-              class="w-full bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/40 font-bold py-3 px-6 rounded-2xl transition text-xs flex items-center justify-center gap-2">
-        <span>✓ Saya Sudah Mengisi Survei, Masuk ke Menu</span>
+      <!-- Tombol Menu Manual (Awalnya Disabled / Tidak Bisa Diklik) -->
+      <button id="btnManual" 
+              onclick="bukaMenuUtamaManual()" 
+              disabled
+              class="w-full bg-slate-800/50 text-slate-500 border border-slate-700 font-bold py-3.5 px-6 rounded-2xl transition text-xs flex items-center justify-center gap-2 cursor-not-allowed">
+        <span>✓ LANJUT MASUK KE MENU UTAMA</span>
       </button>
     </div>
 
     <p class="text-[10px] text-slate-400 leading-normal">
-      Setelah selesai mengisi survei, sistem akan otomatis membuka akses masuk ke halaman menu utama.
+      Tombol masuk menu akan aktif setelah Anda mengklik tautan survei di atas.
     </p>
 
   </div>
@@ -616,7 +619,20 @@ let userLng = null;
 let userDistance = null;
 let isWithinRadius = false;
 
-// 1. Perbaikan Fungsi Manual (Dipastikan terikat dengan benar ke objek window)
+window.mulaiIsiSurvey = function(event) {
+  sessionStorage.setItem('sedang_isi_survei', 'true');
+  
+  // Mengaktifkan tombol manual setelah tombol survei diklik
+  const btnManual = document.getElementById('btnManual');
+  if (btnManual) {
+    btnManual.disabled = false;
+    btnManual.classList.remove('bg-slate-800/50', 'text-slate-500', 'border-slate-700', 'cursor-not-allowed');
+    btnManual.classList.add('bg-slate-800', 'hover:bg-slate-700', 'text-emerald-400', 'border-emerald-500/40', 'cursor-pointer', 'shadow-md');
+  }
+
+  window.open("https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform", "_blank");
+};
+
 window.bukaMenuUtamaManual = function() {
   sessionStorage.setItem('survei_terisi_sesi_ini', 'true');
   
@@ -632,30 +648,6 @@ window.bukaMenuUtamaManual = function() {
     mainMenuContent.style.display = 'block';
   }
 };
-
-window.mulaiIsiSurvey = function(event) {
-  sessionStorage.setItem('sedang_isi_survei', 'true');
-  window.open("https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform", "_blank");
-};
-
-window.addEventListener('focus', function() {
-  if (sessionStorage.getItem('sedang_isi_survei') === 'true') {
-    sessionStorage.setItem('survei_terisi_sesi_ini', 'true');
-    sessionStorage.removeItem('sedang_isi_survei');
-    
-    const gatePage = document.getElementById('gatePage');
-    if (gatePage) {
-      gatePage.style.display = 'none';
-      gatePage.classList.add('hidden-custom');
-    }
-    
-    const mainMenuContent = document.getElementById('mainMenuContent');
-    if (mainMenuContent) {
-      mainMenuContent.classList.remove('hidden');
-      mainMenuContent.style.display = 'block';
-    }
-  }
-});
 
 window.resetAkses = function() {
   sessionStorage.removeItem('survei_terisi_sesi_ini');
