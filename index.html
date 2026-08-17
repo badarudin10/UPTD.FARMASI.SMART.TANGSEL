@@ -1122,30 +1122,30 @@ window.downloadPdf = (data) => {
     `;
   }
 
-               areaCetak.innerHTML = `
+   areaCetak.innerHTML = `
     <div style="padding: 15px 20px; font-family: Arial, sans-serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
       
-      <!-- KOP SURAT -->
-      <table style="width: 100%; border-collapse: collapse; border-bottom: 3.5px double #000; padding-bottom: 8px; margin-bottom: 20px;">
+      <!-- KOP SURAT DENGAN JARAK BAWAH (MARGIN) YANG LEBIH JAUH -->
+      <table style="width: 100%; border-collapse: collapse; border-bottom: 3.5px double #000; padding-bottom: 8px; margin-bottom: 35px;">
         <tr>
           <td style="width: 115px; vertical-align: middle; text-align: left; padding-left: 5px;">
-            <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 95px; height: auto; display: block;" crossorigin="anonymous">
+            <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 100px; height: auto; display: block;" crossorigin="anonymous">
           </td>
           <td style="text-align: center; vertical-align: middle; padding-right: 110px;">
-            <h2 style="font-size: 16px; margin: 0; font-weight: bold; text-transform: uppercase;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
-            <h1 style="font-size: 19px; margin: 3px 0; font-weight: bold; text-transform: uppercase;">DINAS KESEHATAN</h1>
+            <h2 style="font-size: 22px; margin: 0; font-weight: bold; text-transform: uppercase;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
+            <h1 style="font-size: 22px; margin: 3px 0; font-weight: bold; text-transform: uppercase;">DINAS KESEHATAN</h1>
             <h1 style="font-size: 22px; margin: 3px 0; font-weight: 900; text-transform: uppercase;">UPTD FARMASI</h1>
-            <p style="font-size: 11px; margin: 4px 0 2px 0;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</p>
+            <p style="font-size: 12px; margin: 4px 0 2px 0;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</p>
             <p style="font-size: 10.5px; margin: 0; color: #000;">pos-el <span style="text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></p>
           </td>
         </tr>
       </table>
 
-      <!-- JUDUL DOKUMEN TANPA WRAPPER TAMBAHAN YANG BIKIN GARIS -->
-      <div style="text-align: center; width: 100%; margin-bottom: 20px; padding: 0;">
-        <p style="font-size: 14px; font-weight: bold; text-transform: uppercase; margin: 0; display: inline-block; border-top: none !important; border-bottom: 1.5px solid #000; padding-bottom: 3px;">
+      <!-- JUDUL DOKUMEN DENGAN HANYA SATU GARIS DI BAWAHNYA -->
+      <div style="text-align: center; width: 100%; margin-bottom: 20px;">
+        <span style="font-size: 14px; font-weight: bold; text-transform: uppercase; border-bottom: 1.5px solid #000; padding-bottom: 3px; display: inline-block;">
           BUKTI PENGAMBILAN OBAT/PELAYANAN
-        </p>
+        </span>
       </div>
 
       <table style="width: 100%; font-size: 9.5px; margin-bottom: 12px; border-collapse: collapse;">
