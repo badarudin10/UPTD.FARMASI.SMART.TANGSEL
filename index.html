@@ -616,6 +616,7 @@ let userLng = null;
 let userDistance = null;
 let isWithinRadius = false;
 
+// 1. Perbaikan Fungsi Manual (Dipastikan terikat dengan benar ke objek window)
 window.bukaMenuUtamaManual = function() {
   sessionStorage.setItem('survei_terisi_sesi_ini', 'true');
   
@@ -630,12 +631,12 @@ window.bukaMenuUtamaManual = function() {
     mainMenuContent.classList.remove('hidden');
     mainMenuContent.style.display = 'block';
   }
-}
+};
 
 window.mulaiIsiSurvey = function(event) {
   sessionStorage.setItem('sedang_isi_survei', 'true');
   window.open("https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform", "_blank");
-}
+};
 
 window.addEventListener('focus', function() {
   if (sessionStorage.getItem('sedang_isi_survei') === 'true') {
@@ -651,7 +652,7 @@ window.addEventListener('focus', function() {
     const mainMenuContent = document.getElementById('mainMenuContent');
     if (mainMenuContent) {
       mainMenuContent.classList.remove('hidden');
-      mainMenuContent.style.display = 'block'; // Memastikan elemen tampil secara paksa
+      mainMenuContent.style.display = 'block';
     }
   }
 });
@@ -660,25 +661,7 @@ window.resetAkses = function() {
   sessionStorage.removeItem('survei_terisi_sesi_ini');
   sessionStorage.removeItem('sedang_isi_survei');
   location.reload();
-}
-
-window.mulaiIsiSurvey = function(event) {
-  sessionStorage.setItem('sedang_isi_survei', 'true');
-  window.open("https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform", "_blank");
-}
-
-window.addEventListener('focus', function() {
-  if (sessionStorage.getItem('sedang_isi_survei') === 'true') {
-    sessionStorage.setItem('survei_terisi_sesi_ini', 'true');
-    sessionStorage.removeItem('sedang_isi_survei');
-    
-    const gatePage = document.getElementById('gatePage');
-    if (gatePage) gatePage.style.display = 'none';
-    
-    const mainMenuContent = document.getElementById('mainMenuContent');
-    if (mainMenuContent) mainMenuContent.classList.remove('hidden');
-  }
-});
+};
 
 window.switchTab = function(tabName, event) {
 if(event) event.preventDefault();
@@ -1244,7 +1227,6 @@ window.downloadPdf = (data) => {
 
     </div>
   `;
-};
 
   setTimeout(() => {
     const opt = {
