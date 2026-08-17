@@ -592,8 +592,8 @@ Memuat data registrasi dari database...
 </div>
 
 <!-- Kontainer Tersembunyi di Latar Belakang (Render PDF Tanpa Muncul di Layar / Profesional) -->
-<div id="pdfOffscreenContainer" style="position: absolute; left: -9999px; top: -9999px; width: 794px; background: #ffffff; z-index: -9999;">
-  <div id="areaCetakPdf" style="width: 794px; background: #ffffff; padding: 20px; box-sizing: border-box;"></div>
+<div id="pdfOffscreenContainer" style="position: absolute; left: -9999px; top: -9999px; width: 700px; background: #ffffff; z-index: -9999;">
+  <div id="areaCetakPdf" style="width: 700px; background: #ffffff; padding: 15px; box-sizing: border-box;"></div>
 </div>
 
 <script type="module">
@@ -1098,55 +1098,58 @@ window.downloadPdf = (data) => {
       if (items.length > 0) {
         rowsHtml = items.map((item, i) => `
           <tr>
-            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; height: 18px;">${i + 1}</td>
-            <td style="border: 1px solid #000; padding: 5px; font-size: 9px; font-weight: bold;">${item.nama || '-'}</td>
-            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.tahun || '-'}</td>
-            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.satuan || '-'}</td>
-            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.volume || '-'}</td>
-            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.ed || '-'}</td>
-            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; font-family: monospace;">${item.batch || '-'}</td>
-            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;"></td>
+            <td style="border: 1px solid #000; text-align: center; padding: 4px; font-size: 8.5px;">${i + 1}</td>
+            <td style="border: 1px solid #000; padding: 4px; font-size: 8.5px; font-weight: bold;">${item.nama || '-'}</td>
+            <td style="border: 1px solid #000; text-align: center; padding: 4px; font-size: 8.5px;">${item.tahun || '-'}</td>
+            <td style="border: 1px solid #000; text-align: center; padding: 4px; font-size: 8.5px;">${item.satuan || '-'}</td>
+            <td style="border: 1px solid #000; text-align: center; padding: 4px; font-size: 8.5px;">${item.volume || '-'}</td>
+            <td style="border: 1px solid #000; text-align: center; padding: 4px; font-size: 8.5px;">${item.ed || '-'}</td>
+            <td style="border: 1px solid #000; text-align: center; padding: 4px; font-size: 8.5px; font-family: monospace;">${item.batch || '-'}</td>
+            <td style="border: 1px solid #000; text-align: center; padding: 4px; font-size: 8.5px;"></td>
           </tr>
         `).join('');
       } else {
         rowsHtml = `
           <tr>
-            <td style="border: 1px solid #000; text-align: center; padding: 6px; font-size: 9px;">1</td>
-            <td style="border: 1px solid #000; padding: 6px; font-size: 9px; text-align: center; font-style: italic;" colspan="7">Belum ada rincian barang/obat yang dimasukkan.</td>
+            <td style="border: 1px solid #000; text-align: center; padding: 6px; font-size: 8.5px;">1</td>
+            <td style="border: 1px solid #000; padding: 6px; font-size: 8.5px; text-align: center; font-style: italic;" colspan="7">Belum ada rincian barang/obat yang dimasukkan.</td>
           </tr>
         `;
       }
 
       areaCetak.innerHTML = `
-<div style="text-align: center; font-family: Arial, sans-serif; margin-bottom: 20px; color: #000000 !important;">
+<div style="font-family: Arial, sans-serif; margin-bottom: 10px; color: #000000 !important;">
     <table style="width: 100%; border-collapse: collapse; color: #000000 !important;">
         <tr>
-            <td style="width: 15%; text-align: center; vertical-align: middle;">
-                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo" style="width: 60px; height: auto;">
+            <td style="width: 15%; text-align: center; vertical-align: middle; padding-bottom: 5px;">
+                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo" style="width: 55px; height: auto;">
             </td>
-            <td style="text-align: center; vertical-align: middle;">
-                <span style="font-size: 14px; font-weight: bold; color: #000000;">PEMERINTAH KOTA TANGERANG SELATAN</span><br>
-                <span style="font-size: 16px; font-weight: bold; color: #000000;">DINAS KESEHATAN</span><br>
-                <span style="font-size: 18px; font-weight: bold; color: #000000;">UPTD FARMASI</span><br>
-                <span style="font-size: 11px; color: #000000;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</span><br>
-                <span style="font-size: 10px; color: #0000ff;">pos-el: uptdfarmasi@tangerangselatankota.go.id</span>
+            <td style="text-align: center; vertical-align: middle; padding-bottom: 5px;">
+                <span style="font-size: 13px; font-weight: bold; color: #000000;">PEMERINTAH KOTA TANGERANG SELATAN</span><br>
+                <span style="font-size: 15px; font-weight: bold; color: #000000;">DINAS KESEHATAN</span><br>
+                <span style="font-size: 16px; font-weight: bold; color: #000000;">UPTD FARMASI</span><br>
+                <span style="font-size: 10px; color: #000000;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</span><br>
+                <span style="font-size: 9px; color: #0000ff;">pos-el: uptdfarmasi@tangerangselatankota.go.id</span>
             </td>
         </tr>
     </table>
+    
+    <!-- Garis Pemisah Kop Surat -->
+    <div style="border-bottom: 2px solid #000000; margin-top: 6px; margin-bottom: 12px; width: 100%;"></div>
 
-    <div style="margin-top: 15px; text-align: center;">
-        <span style="font-size: 12px; font-weight: bold; color: #000000; border-bottom: 1.5px solid #000; padding-bottom: 2px; display: inline-block;">
+    <div style="text-align: center;">
+        <span style="font-size: 11px; font-weight: bold; color: #000000; border-bottom: 1px solid #000; padding-bottom: 2px; display: inline-block;">
             BUKTI PENGAMBILAN OBAT/PELAYANAN
         </span>
     </div>
 </div>
 
-<table style="width: 100%; font-size: 9.5px; margin-bottom: 12px; border-collapse: collapse; color: #000000 !important;">
+<table style="width: 100%; font-size: 9px; margin-bottom: 12px; border-collapse: collapse; color: #000000 !important;">
     <tr>
-        <td style="width: 120px; font-weight: bold;">Nama</td>
+        <td style="width: 110px; font-weight: bold;">Nama</td>
         <td style="width: 10px;">:</td>
         <td style="font-weight: bold; text-transform: uppercase;">${data.nama || '-'}</td>
-        <td style="width: 110px; font-weight: bold;">No Antrian</td>
+        <td style="width: 100px; font-weight: bold;">No Antrian</td>
         <td style="width: 10px; text-align: center;">:</td>
         <td style="font-weight: bold;">${data.nomorAntrian || '-'}</td>
     </tr>
@@ -1183,15 +1186,15 @@ window.downloadPdf = (data) => {
 
 <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px; color: #000000 !important;">
     <thead>
-        <tr style="background-color: #f3f4f6; text-align: center; font-size: 9px; font-weight: bold;">
-            <th style="border: 1px solid #000; padding: 5px; width: 30px;">No</th>
-            <th style="border: 1px solid #000; padding: 5px;">Nama Barang</th>
-            <th style="border: 1px solid #000; padding: 5px; width: 65px;">Tahun</th>
-            <th style="border: 1px solid #000; padding: 5px; width: 65px;">Satuan</th>
-            <th style="border: 1px solid #000; padding: 5px; width: 55px;">Volume</th>
-            <th style="border: 1px solid #000; padding: 5px; width: 60px;">Ed</th>
-            <th style="border: 1px solid #000; padding: 5px; width: 75px;">No Batch</th>
-            <th style="border: 1px solid #000; padding: 5px; width: 50px;">Paraf</th>
+        <tr style="background-color: #f3f4f6; text-align: center; font-size: 8.5px; font-weight: bold;">
+            <th style="border: 1px solid #000; padding: 4px; width: 25px;">No</th>
+            <th style="border: 1px solid #000; padding: 4px;">Nama Barang</th>
+            <th style="border: 1px solid #000; padding: 4px; width: 55px;">Tahun</th>
+            <th style="border: 1px solid #000; padding: 4px; width: 55px;">Satuan</th>
+            <th style="border: 1px solid #000; padding: 4px; width: 45px;">Vol</th>
+            <th style="border: 1px solid #000; padding: 4px; width: 50px;">Ed</th>
+            <th style="border: 1px solid #000; padding: 4px; width: 65px;">No Batch</th>
+            <th style="border: 1px solid #000; padding: 4px; width: 45px;">Paraf</th>
         </tr>
     </thead>
     <tbody>
@@ -1199,7 +1202,7 @@ window.downloadPdf = (data) => {
     </tbody>
 </table>
 
-<table style="width: 100%; margin-top: 20px; font-size: 9.5px; border-collapse: collapse; color: #000000 !important;">
+<table style="width: 100%; margin-top: 15px; font-size: 9px; border-collapse: collapse; color: #000000 !important;">
     <tr>
         <td style="width: 50%; text-align: center; vertical-align: top;">
             <p style="margin: 0; font-weight: bold;">Petugas</p>
