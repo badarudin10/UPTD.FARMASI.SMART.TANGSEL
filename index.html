@@ -1122,31 +1122,32 @@ window.downloadPdf = (data) => {
     `;
   }
 
-       areaCetak.innerHTML = `
+         areaCetak.innerHTML = `
     <div style="padding: 15px 20px; font-family: Arial, sans-serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
       
-      <!-- KOP SURAT MENGIKUTI CONTOH GAMBAR KEDUA -->
-      <table style="width: 100%; border-collapse: collapse; border-bottom: 3.5px double #000; padding-bottom: 8px; margin-bottom: 12px;">
+      <!-- KOP SURAT DIPBESAR DAN DIBUAT JELAS SESUAI GAMBAR KEDUA -->
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 8px;">
         <tr>
-          <!-- Kolom Logo di Kiri dengan Lebar Proporsional agar Dekat dengan Teks -->
-          <td style="width: 100px; vertical-align: middle; text-align: left; padding-left: 5px;">
-            <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 82px; height: auto; display: block;" crossorigin="anonymous">
+          <!-- Logo Lebih Besar & Proporsional -->
+          <td style="width: 115px; vertical-align: middle; text-align: left; padding-left: 5px;">
+            <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 95px; height: auto; display: block;" crossorigin="anonymous">
           </td>
           
-          <!-- Kolom Teks di Tengah dan Rapi -->
-          <td style="text-align: center; vertical-align: middle; padding-right: 95px;">
-            <h2 style="font-size: 14.5px; margin: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
-            <h1 style="font-size: 16.5px; margin: 2px 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">DINAS KESEHATAN</h1>
-            <h1 style="font-size: 18.5px; margin: 2px 0; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">UPTD FARMASI</h1>
-            <p style="font-size: 9.5px; margin: 3px 0 1px 0;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</p>
-            <p style="font-size: 9px; margin: 0; color: #000;">pos-el <span style="color: #000; text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></p>
+          <!-- Teks Kop Surat Ukuran Besar, Tebal, dan Rapi di Tengah -->
+          <td style="text-align: center; vertical-align: middle; padding-right: 110px;">
+            <h2 style="font-size: 16px; margin: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
+            <h1 style="font-size: 19px; margin: 3px 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">DINAS KESEHATAN</h1>
+            <h1 style="font-size: 22px; margin: 3px 0; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px;">UPTD FARMASI</h1>
+            <p style="font-size: 11px; margin: 4px 0 2px 0; font-weight: bold;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</p>
+            <p style="font-size: 10.5px; margin: 0; color: #000;">pos-el <span style="color: #000; text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></p>
           </td>
         </tr>
       </table>
 
-      <!-- JUDUL DOKUMEN POSISI TENGERAH & RAPI -->
-      <div style="text-align: center; width: 100%; margin-bottom: 12px;">
-        <div style="font-size: 11.5px; font-weight: bold; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px;">BUKTI PENGAMBILAN OBAT/PELAYANAN</div>
+      <!-- JUDUL DOKUMEN DIIKUTI DENGAN GARIS PEMISAH DI BAWAHNYA -->
+      <div style="text-align: center; width: 100%; margin-bottom: 15px;">
+        <div style="font-size: 13px; font-weight: bold; display: inline-block; text-transform: uppercase; letter-spacing: 1px; padding-bottom: 4px;">BUKTI PENGAMBILAN OBAT/PELAYANAN</div>
+        <div style="width: 100%; border-bottom: 3.5px double #000; margin-top: 5px;"></div>
       </div>
 
       <table style="width: 100%; font-size: 9.5px; margin-bottom: 12px; border-collapse: collapse;">
