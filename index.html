@@ -1122,25 +1122,26 @@ window.downloadPdf = (data) => {
     `;
   }
 
-    areaCetak.innerHTML = `
+      areaCetak.innerHTML = `
     <div style="padding: 15px 20px; font-family: Arial, sans-serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
       
-      <table style="width: 100%; border-collapse: collapse; border-bottom: 3.5px double #000; padding-bottom: 8px; margin-bottom: 8px;">
+      <!-- KOP SURAT (Garis bawah diubah menjadi hitam solid atau bisa dihapus) -->
+      <table style="width: 100%; border-collapse: collapse; border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 8px;">
         <tr>
           <td style="width: 85px; vertical-align: middle; text-align: left; padding-left: 5px;">
-            <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 72px; height: auto;" crossorigin="anonymous">
+            <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 95px; height: auto;" crossorigin="anonymous">
           </td>
           <td style="text-align: center; vertical-align: middle; padding-right: 35px;">
-            <h2 style="font-size: 13.5px; margin: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
-            <h1 style="font-size: 15.5px; margin: 2px 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">DINAS KESEHATAN</h1>
-            <h1 style="font-size: 17px; margin: 2px 0; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">UPTD FARMASI</h1>
-            <p style="font-size: 9.5px; margin: 3px 0 1px 0;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</p>
-            <p style="font-size: 9px; margin: 0; color: #000;">pos-el <span style="color: #0000ff; text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></p>
+            <h2 style="font-size: 18.5px; margin: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
+            <h1 style="font-size: 18.5px; margin: 2px 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">DINAS KESEHATAN</h1>
+            <h1 style="font-size: 18.5px; margin: 2px 0; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">UPTD FARMASI</h1>
+            <p style="font-size: 12.5px; margin: 3px 0 1px 0;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</p>
+            <!-- Warna teks email & garis bawah email dipaksa jadi hitam agar tidak memunculkan warna biru -->
+            <p style="font-size: 10px; margin: 0; color: #000;">pos-el <span style="color: #000; text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></p>
           </td>
         </tr>
       </table>
 
-      <!-- BAGIAN INI YANG DIUBAH: border-bottom dihapus atau diganti warna hitam jika ingin tetap ada garis -->
       <div style="text-align: center; margin-bottom: 10px;">
         <div style="font-size: 11.5px; font-weight: bold; display: inline-block; padding-bottom: 2px;">BUKTI PENGAMBILAN OBAT/PELAYANAN</div>
       </div>
