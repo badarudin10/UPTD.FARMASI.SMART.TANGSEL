@@ -1047,7 +1047,7 @@ fileLampiranHtml = `<div class="pt-1"> <span class="inline-flex items-center gap
 
 let downloadBtnHtml = '';
 if (statusLower.includes("selesai")) {
-  downloadBtnHtml = `<button onclick='prosesDownloadPdf(${JSON.stringify(normalizedData)})' class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl font-black transition shadow-md inline-flex items-center gap-1.5 text-xs cursor-pointer">
+  downloadBtnHtml = `<button onclick='downloadPdf(${JSON.stringify(normalizedData)})' class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl font-black transition shadow-md inline-flex items-center gap-1.5 text-xs cursor-pointer">
     <span>Download PDF</span> <span>📥</span>
   </button>`;
 } else {
@@ -1088,7 +1088,7 @@ container.appendChild(card);
 });
 });
 
-            window.downloadPdf = (data) => {
+window.downloadPdf = (data) => {
       const areaCetak = document.getElementById("areaCetakPdf");
       areaCetak.style.display = "block";
 
@@ -1233,3 +1233,4 @@ container.appendChild(card);
 </script>
 </body>
 </html>
+
