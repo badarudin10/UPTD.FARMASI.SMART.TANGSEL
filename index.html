@@ -640,17 +640,21 @@ window.resetAkses = function() {
   location.reload();
 }
 
-window.addEventListener('DOMContentLoaded', function() {
-  if (sessionStorage.getItem('survei_terisi_sesi_ini') === 'true') {
+window.mulaiIsiSurvey = function(event) {
+  sessionStorage.setItem('sedang_isi_survei', 'true');
+  window.open("https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform", "_blank");
+}
+
+window.addEventListener('focus', function() {
+  if (sessionStorage.getItem('sedang_isi_survei') === 'true') {
+    sessionStorage.setItem('survei_terisi_sesi_ini', 'true');
+    sessionStorage.removeItem('sedang_isi_survei');
+    
     const gatePage = document.getElementById('gatePage');
     if (gatePage) gatePage.style.display = 'none';
+    
     const mainMenuContent = document.getElementById('mainMenuContent');
     if (mainMenuContent) mainMenuContent.classList.remove('hidden');
-  } else {
-    const gatePage = document.getElementById('gatePage');
-    if (gatePage) gatePage.style.display = 'flex';
-    const mainMenuContent = document.getElementById('mainMenuContent');
-    if (mainMenuContent) mainMenuContent.classList.add('hidden');
   }
 });
 
