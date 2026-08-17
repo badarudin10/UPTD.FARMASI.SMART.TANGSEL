@@ -1122,7 +1122,7 @@ window.downloadPdf = (data) => {
     `;
   }
 
-  areaCetak.innerHTML = `
+    areaCetak.innerHTML = `
     <div style="padding: 15px 20px; font-family: Arial, sans-serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
       
       <table style="width: 100%; border-collapse: collapse; border-bottom: 3.5px double #000; padding-bottom: 8px; margin-bottom: 8px;">
@@ -1140,8 +1140,9 @@ window.downloadPdf = (data) => {
         </tr>
       </table>
 
+      <!-- BAGIAN INI YANG DIUBAH: border-bottom dihapus atau diganti warna hitam jika ingin tetap ada garis -->
       <div style="text-align: center; margin-bottom: 10px;">
-        <div style="font-size: 11.5px; font-weight: bold; border-bottom: 1.5px solid #000; display: inline-block; padding-bottom: 2px;">BUKTI PENGAMBILAN OBAT/PELAYANAN</div>
+        <div style="font-size: 11.5px; font-weight: bold; display: inline-block; padding-bottom: 2px;">BUKTI PENGAMBILAN OBAT/PELAYANAN</div>
       </div>
 
       <table style="width: 100%; font-size: 9.5px; margin-bottom: 12px; border-collapse: collapse;">
