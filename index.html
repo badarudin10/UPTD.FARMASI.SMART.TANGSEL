@@ -119,7 +119,7 @@ box-sizing: border-box;
         <span>ISI SURVEI KEPUASAN</span>
       </a>
 
-      <!-- Tombol Menu Manual (Awalnya Disabled / Tidak Bisa Diklik) -->
+      <!-- Tombol Menu Manual -->
       <button id="btnManual" 
               onclick="bukaMenuUtamaManual()" 
               disabled
@@ -202,8 +202,9 @@ box-sizing: border-box;
     </div>
   </div>
 
-  <!-- BAGIAN MENU UTAMA YANG DIUBAH POSISINYA MENJADI GRID 2 KOLOM & 1 KOLOM BAWAH -->
+  <!-- STRUKTUR MENU UTAMA (BARIS 1: Registrasi & Status Tamu | BARIS 2: Konsultasi & Survei | BARIS 3: Panduan Melebar Penuh) -->
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    
     <!-- Baris 1 Kolom 1: Registrasi -->
     <a href="#" onclick="switchTab('registrasi', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/30 hover:border-emerald-500 transition-all flex items-center gap-4 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
       <div class="shrink-0 flex items-center justify-center">
@@ -238,7 +239,7 @@ box-sizing: border-box;
     </a>
 
     <!-- Baris 2 Kolom 2: Survei Kepuasan Masyarakat -->
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/30 hover:border-emerald-500 transition-all flex items-center gap-4 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 sm:col-span-1">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/30 hover:border-emerald-500 transition-all flex items-center gap-4 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
       <div class="flex-shrink-0 flex items-center justify-center">
         <img src="https://i.ibb.co.com/yFDD7Dcb/Picsart-26-07-29-23-12-41-517.png" class="w-16 h-16 object-contain no-zoom">
       </div>
@@ -248,7 +249,7 @@ box-sizing: border-box;
       </div>
     </a>
 
-    <!-- Baris 3 (Paling Bawah): Panduan (Melebar Penuh / Span 2 Kolom di Layar Besar agar Presisi & Sama Rata) -->
+    <!-- Baris 3 (Paling Bawah): Panduan (Melebar Penuh / Span 2 Kolom di Layar Lebar) -->
     <a href="#" onclick="switchTab('panduan', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/30 hover:border-emerald-500 transition-all flex items-center gap-4 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 sm:col-span-2">
       <div class="shrink-0 flex items-center justify-center">
         <img src="https://i.ibb.co.com/4nyPdc2k/Picsart-26-07-29-23-09-18-170.png" class="w-16 h-16 object-contain no-zoom">
@@ -258,6 +259,7 @@ box-sizing: border-box;
         <p class="text-[10px] sm:text-[11px] text-emerald-300 font-medium">Petunjuk Penggunaan Sistem Layanan UPTD Farmasi</p>
       </div>
     </a>
+
   </div>
 </div>
 
