@@ -202,7 +202,9 @@ box-sizing: border-box;
     </div>
   </div>
 
+  <!-- BAGIAN MENU UTAMA YANG DIUBAH POSISINYA MENJADI GRID 2 KOLOM & 1 KOLOM BAWAH -->
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    <!-- Baris 1 Kolom 1: Registrasi -->
     <a href="#" onclick="switchTab('registrasi', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/30 hover:border-emerald-500 transition-all flex items-center gap-4 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
       <div class="shrink-0 flex items-center justify-center">
         <img src="https://i.ibb.co.com/VYhY2ctH/Picsart-26-07-29-23-12-02-981.png" class="w-16 h-16 object-contain no-zoom">
@@ -213,6 +215,7 @@ box-sizing: border-box;
       </div>
     </a>
 
+    <!-- Baris 1 Kolom 2: Status Tamu -->
     <a href="#" onclick="switchTab('tamu', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/30 hover:border-emerald-500 transition-all flex items-center gap-4 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
       <div class="shrink-0 flex items-center justify-center">
         <img src="https://i.ibb.co.com/F4SBD1L4/Picsart-26-07-30-01-19-44-361.png" class="w-16 h-16 object-contain no-zoom">
@@ -223,6 +226,7 @@ box-sizing: border-box;
       </div>
     </a>
 
+    <!-- Baris 2 Kolom 1: Konsultasi -->
     <a href="#" onclick="switchTab('konsultasi', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/30 hover:border-emerald-500 transition-all flex items-center gap-4 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
       <div class="shrink-0 flex items-center justify-center">
         <img src="https://i.ibb.co.com/BKZ6mGJ9/Picsart-26-07-29-23-11-15-140.png" class="w-16 h-16 object-contain no-zoom">
@@ -233,25 +237,25 @@ box-sizing: border-box;
       </div>
     </a>
 
-    <a href="#" onclick="switchTab('panduan', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/30 hover:border-emerald-500 transition-all flex items-center gap-4 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
+    <!-- Baris 2 Kolom 2: Survei Kepuasan Masyarakat -->
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/30 hover:border-emerald-500 transition-all flex items-center gap-4 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 sm:col-span-1">
+      <div class="flex-shrink-0 flex items-center justify-center">
+        <img src="https://i.ibb.co.com/yFDD7Dcb/Picsart-26-07-29-23-12-41-517.png" class="w-16 h-16 object-contain no-zoom">
+      </div>
+      <div class="text-left">
+        <h3 class="font-black text-xs sm:text-sm text-slate-100 uppercase tracking-wide group-hover:text-emerald-400 transition">Survei Kepuasan</h3>
+        <p class="text-[10px] sm:text-[11px] text-emerald-300 font-medium">Berikan Penilaian</p>
+      </div>
+    </a>
+
+    <!-- Baris 3 (Paling Bawah): Panduan (Melebar Penuh / Span 2 Kolom di Layar Besar agar Presisi & Sama Rata) -->
+    <a href="#" onclick="switchTab('panduan', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/30 hover:border-emerald-500 transition-all flex items-center gap-4 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 sm:col-span-2">
       <div class="shrink-0 flex items-center justify-center">
         <img src="https://i.ibb.co.com/4nyPdc2k/Picsart-26-07-29-23-09-18-170.png" class="w-16 h-16 object-contain no-zoom">
       </div>
       <div class="text-left">
         <h3 class="font-black text-xs sm:text-sm text-slate-100 uppercase tracking-wide group-hover:text-emerald-400 transition">Panduan</h3>
-        <p class="text-[10px] sm:text-[11px] text-emerald-300 font-medium">Petunjuk Sistem</p>
-      </div>
-    </a>
-  </div>
-
-  <div class="p-3.5 rounded-2xl shadow-md border border-emerald-600/30 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="flex items-center gap-4 transition hover:opacity-95">
-      <div class="flex-shrink-0 flex items-center justify-center">
-        <img src="https://i.ibb.co.com/yFDD7Dcb/Picsart-26-07-29-23-12-41-517.png" class="w-16 h-16 object-contain no-zoom">
-      </div>
-      <div class="text-left">
-        <h3 class="font-black text-xs sm:text-sm text-slate-100 uppercase tracking-wide">Survei Kepuasan Masyarakat</h3>
-        <p class="text-[10px] sm:text-[11px] text-slate-300 mt-0.5 font-medium">Berikan penilaian & masukan untuk peningkatan pelayanan UPTD Farmasi Tangsel.</p>
+        <p class="text-[10px] sm:text-[11px] text-emerald-300 font-medium">Petunjuk Penggunaan Sistem Layanan UPTD Farmasi</p>
       </div>
     </a>
   </div>
