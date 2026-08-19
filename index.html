@@ -736,85 +736,122 @@ btn.innerText = "Kirim Registrasi Kunjungan";
 });
 }
 
-// ---------------------------------------------------------------------------
-// PERBAIKAN UTAMA: Form Konsultasi & Pengaduan (Terintegrasi ke Firestore, 
-// localStorage untuk admin.html, & WhatsApp)
-// ---------------------------------------------------------------------------
-const formKonsul = document.getElementById('formKonsultasi');
-if(formKonsul) {
-  formKonsul.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btnKonsul = document.getElementById('btnKirimKonsul');
-    btnKonsul.disabled = true;
-    btnKonsul.innerText = "Menyimpan & Menghubungkan...";
+// ============================================================
+// FORM KONSULTASI & PENGADUAN
+// DATA DISIMPAN LANGSUNG KE FIRESTORE
+// ============================================================
 
-    const nama = document.getElementById('namaPengirim').value;
-    const instansi = document.getElementById('instansiPengirim').value;
-    const kontak = document.getElementById('kontakPengirim').value;
+const formKonsul = document.getElementById('formKonsultasi');
+
+if (formKonsul) {
+
+  formKonsul.addEventListener('submit', async (e) => {
+
+    e.preventDefault();
+
+    const btnKonsul = document.getElementById('btnKirimKonsul');
+
+    if (btnKonsul) {
+      btnKonsul.disabled = true;
+      btnKonsul.innerHTML = "⏳ Menyimpan konsultasi...";
+    }
+
+    // Ambil data dari form
+    const nama = document.getElementById('namaPengirim').value.trim();
+    const instansi = document.getElementById('instansiPengirim').value.trim();
+    const kontak = document.getElementById('kontakPengirim').value.trim();
     const kategori = document.getElementById('kategoriKonsultasi').value;
-    const isi = document.getElementById('isiKonsultasi').value;
-    const waktuFormatted = new Date().toLocaleString('id-ID');
+    const isi = document.getElementById('isiKonsultasi').value.trim();
 
     try {
-      // 1. Simpan ke Firestore (Koleksi "Konsultasi")
-      await addDoc(collection(db, "Konsultasi"), {
+
+      // --------------------------------------------------------
+      // SIMPAN LANGSUNG KE FIRESTORE
+      // Koleksi: Konsultasi
+      // --------------------------------------------------------
+
+      const docRef = await addDoc(collection(db, "Konsultasi"), {
+
         nama: nama,
+
         instansi: instansi,
+
         kontak: kontak,
+
         kategori: kategori,
+
         isi: isi,
+
         status: "Menunggu Tanggapan",
-        waktuInput: serverTimestamp()
+
+        waktuInput: serverTimestamp(),
+
+        // waktu tambahan untuk memudahkan admin
+        timestamp: serverTimestamp()
+
       });
 
-      // 2. Simpan ke LocalStorage agar langsung terbaca di admin.html (Pantau Konsultasi & Pengaduan Keluhan)
-      // Kunci yang diselaraskan: "dataKeluhanAdmin" (atau "dataKonsultasiAdmin")
-      const dataBaruAdmin = {
-        waktu: waktuFormatted,
-        nama: nama,
-        instansi: instansi,
-        kontak: kontak,
-        kategori: kategori,
-        isi: isi,
-        pesan: isi
-      };
-      
-      // Simpan ke array localStorage agar kompatibel dengan berbagai skrip admin
-      let daftarKeluhanAdmin = JSON.parse(localStorage.getItem("dataKeluhanAdmin")) || [];
-      daftarKeluhanAdmin.push(dataBaruAdmin);
-      localStorage.setItem("dataKeluhanAdmin", JSON.stringify(daftarKeluhanAdmin));
+      console.log("Konsultasi berhasil disimpan. ID:", docRef.id);
 
-      let daftarKonsulAdmin = JSON.parse(localStorage.getItem("dataKonsultasiAdmin")) || [];
-      daftarKonsulAdmin.push(dataBaruAdmin);
-      localStorage.setItem("dataKonsultasiAdmin", JSON.stringify(daftarKonsulAdmin));
+      // --------------------------------------------------------
+      // KONSULTASI BERHASIL
+      // --------------------------------------------------------
 
-      alert("Konsultasi berhasil disimpan ke sistem admin dan masuk ke admin.html!");
+      alert(
+        "Konsultasi berhasil dikirim.\n\n" +
+        "Data telah tersimpan ke sistem UPTD Farmasi."
+      );
+
+      // Reset form
       formKonsul.reset();
 
-      // 3. Membuka WhatsApp Penanggung Jawab
-      const nomorWAAdmin = "6285716842806"; 
-      const pesanWA = encodeURIComponent(`*LAYANAN KONSULTASI & PENGADUAN*%0A` +
-                     `----------------------------------%0A` +
-                     `*Nama:* ${nama}%0A` +
-                     `*Instansi:* ${instansi}%0A` +
-                     `*Kontak:* ${kontak}%0A` +
-                     `*Kategori:* ${kategori}%0A` +
-                     `*Pesan:* ${isi}%0A` +
-                     `*Waktu:* ${waktuFormatted}`);
-      
-      window.open(`https://wa.me/${nomorWAAdmin}?text=${pesanWA}`, '_blank');
+      // --------------------------------------------------------
+      // KIRIM / BUKA WHATSAPP
+      // --------------------------------------------------------
+
+      const nomorWAAdmin = "6285716842806";
+
+      const pesanWA =
+        `*LAYANAN KONSULTASI & PENGADUAN*\n` +
+        `----------------------------------\n` +
+        `*Nama:* ${nama}\n` +
+        `*Instansi:* ${instansi}\n` +
+        `*Kontak:* ${kontak}\n` +
+        `*Kategori:* ${kategori}\n` +
+        `*Pesan:* ${isi}\n`;
+
+      const urlWA =
+        `https://wa.me/${nomorWAAdmin}?text=${encodeURIComponent(pesanWA)}`;
+
+      window.open(urlWA, '_blank');
 
     } catch (err) {
-      console.error("Gagal mengirim konsultasi:", err);
-      alert("Gagal menyimpan ke database. Silakan coba lagi.");
-    } finally {
-      btnKonsul.disabled = false;
-      btnKonsul.innerHTML = "<span>Kirim Konsultasi ke Sistem & WhatsApp</span><span>→</span>";
-    }
-  });
-}
 
-function toBase64(file) {
+      console.error(
+        "Gagal menyimpan konsultasi ke Firestore:",
+        err
+      );
+
+      alert(
+        "Konsultasi gagal dikirim ke sistem.\n\n" +
+        "Silakan periksa koneksi internet dan coba kembali."
+      );
+
+    } finally {
+
+      if (btnKonsul) {
+        btnKonsul.disabled = false;
+
+        btnKonsul.innerHTML =
+          "<span>Kirim Konsultasi ke Sistem & WhatsApp</span><span>→</span>";
+      }
+
+    }
+
+  });
+
+}
+  function toBase64(file) {
 return new Promise((resolve, reject) => {
 const reader = new FileReader();
 reader.readAsDataURL(file);
