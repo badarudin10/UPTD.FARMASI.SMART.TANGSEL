@@ -202,7 +202,7 @@ box-sizing: border-box;
     </div>
   </div>
 
-  <!-- STRUKTUR MENU UTAMA (2 KOLOM, PANDUAN DI BAWAH MELEBAR PENUH) -->
+  <!-- STRUKTUR MENU UTAMA -->
   <div class="grid grid-cols-2 gap-3">
     
     <!-- Baris 1 Kolom 1: Registrasi -->
@@ -234,7 +234,7 @@ box-sizing: border-box;
       </div>
       <div class="text-center sm:text-left">
         <h3 class="font-black text-xs sm:text-sm text-slate-100 uppercase tracking-wide group-hover:text-emerald-400 transition">Konsultasi</h3>
-        <p class="text-[10px] sm:text-[11px] text-emerald-300 font-medium">Pengaduan via WA</p>
+        <p class="text-[10px] sm:text-[11px] text-emerald-300 font-medium">Pengaduan ke Sistem & WA</p>
       </div>
     </a>
 
@@ -249,7 +249,7 @@ box-sizing: border-box;
       </div>
     </a>
 
-    <!-- Baris 3 (Paling Bawah): Panduan (Melebar Penuh / Col-span-2) -->
+    <!-- Baris 3 (Paling Bawah): Panduan -->
     <a href="#" onclick="switchTab('panduan', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 col-span-2">
       <div class="shrink-0 flex items-center justify-center">
         <img src="https://i.ibb.co.com/4nyPdc2k/Picsart-26-07-29-23-09-18-170.png" class="w-12 h-12 sm:w-16 sm:h-16 object-contain no-zoom">
@@ -342,11 +342,10 @@ Kirim Registrasi Kunjungan
 <div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 space-y-2">
 <div class="flex items-center gap-2.5 border-b border-slate-700/50 pb-2">
 <div class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-xs">2</div>
-<h3 class="font-black text-xs text-slate-100 uppercase">Cek Status, Rincian Obat & Download Bukti PDF</h3>
+<h3 class="font-black text-xs text-slate-100 uppercase">Cek Status & Rincian Obat</h3>
 </div>
 <ul class="list-disc list-inside text-[11px] text-slate-300 font-medium space-y-1.5 leading-relaxed pl-1">
-<li>Masuk ke menu <b>Status Tamu</b> untuk memantau status pelayanan (<i>Menunggu</i>, <i>Diproses</i>, atau <i>Selesai</i>).</li>
-<li>Jika status sudah <b>Selesai</b>, klik tombol <b>Download PDF 📥</b> untuk mengunduh tanda terima resmi Pemkot Tangsel.</li>
+<li>Masuk ke menu <b>Status Tamu</b> untuk memantau status pelayanan (<i>Menunggu</i> atau <i>Selesai</i>).</li>
 </ul>
 </div>
 
@@ -360,7 +359,7 @@ Kirim Registrasi Kunjungan
 <div id="page-tamu" class="page-content space-y-4 hidden-custom">
 <div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1 mb-5">
 <h2 class="text-sm font-black text-slate-100">Daftar Tamu & Pengambilan Obat</h2>
-<p class="text-[11px] text-slate-300 font-medium leading-relaxed">Cek status registrasi Anda secara real-time dan download bukti PDF pengambilan obat.</p>
+<p class="text-[11px] text-slate-300 font-medium leading-relaxed">Cek status registrasi Anda secara real-time dari database.</p>
 </div>
 
 <div id="containerTamu" class="space-y-3">
@@ -383,7 +382,7 @@ Memuat data registrasi dari database...
 </div>
 <div>
 <h2 class="text-sm font-black text-slate-100 uppercase">Layanan Konsultasi & Pengaduan</h2>
-<p class="text-[11px] text-slate-300 font-medium mt-0.5">Sampaikan pertanyaan teknis, kendala layanan, atau masukan Anda via WhatsApp.</p>
+<p class="text-[11px] text-slate-300 font-medium mt-0.5">Sampaikan pertanyaan teknis, kendala layanan, atau masukan Anda. Data akan tercatat di sistem admin dan diteruskan ke WhatsApp.</p>
 </div>
 </div>
 
@@ -421,7 +420,7 @@ Memuat data registrasi dari database...
 </div>
 
 <button type="submit" id="btnKirimKonsul" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 rounded-xl text-xs transition shadow-md flex items-center justify-center gap-2">
-<span>Kirim Konsultasi & Keluhan via WhatsApp</span>
+<span>Kirim Konsultasi ke Sistem & WhatsApp</span>
 <span>→</span>
 </button>
 </form>
@@ -735,6 +734,51 @@ btn.disabled = false;
 btn.innerText = "Kirim Registrasi Kunjungan";
 }
 });
+}
+
+// Handler Form Konsultasi & Pengaduan (Terintegrasi ke Firestore & WhatsApp)
+const formKonsul = document.getElementById('formKonsultasi');
+if(formKonsul) {
+  formKonsul.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btnKonsul = document.getElementById('btnKirimKonsul');
+    btnKonsul.disabled = true;
+    btnKonsul.innerText = "Menyimpan & Menghubungkan...";
+
+    const nama = document.getElementById('namaPengirim').value;
+    const instansi = document.getElementById('instansiPengirim').value;
+    const kontak = document.getElementById('kontakPengirim').value;
+    const kategori = document.getElementById('kategoriKonsultasi').value;
+    const isi = document.getElementById('isiKonsultasi').value;
+
+    try {
+      // Menyimpan data konsultasi ke Firestore agar terbaca oleh Admin
+      await addDoc(collection(db, "konsultasi"), {
+        nama: nama,
+        instansi: instansi,
+        kontak: kontak,
+        kategori: kategori,
+        isi: isi,
+        status: "Menunggu Tanggapan",
+        waktu: serverTimestamp()
+      });
+
+      alert("Konsultasi berhasil dikirim dan tercatat di sistem admin!");
+      formKonsul.reset();
+
+      // Langsung arahkan juga ke WhatsApp admin
+      const nomorWAAdmin = "6281234567890"; // Ganti dengan nomor WA admin UPTD Farmasi jika diperlukan
+      const pesanWA = encodeURIComponent(`Halo Admin UPTD Farmasi,\n\nSaya ingin berkonsultasi:\n*Nama:* ${nama}\n*Instansi:* ${instansi}\n*Kategori:* ${kategori}\n*Pesan:* ${isi}`);
+      window.open(`https://wa.me/${nomorWAAdmin}?text=${pesanWA}`, '_blank');
+
+    } catch (err) {
+      console.error("Gagal mengirim konsultasi:", err);
+      alert("Gagal menyimpan ke database. Silakan coba lagi.");
+    } finally {
+      btnKonsul.disabled = false;
+      btnKonsul.innerText = "Kirim Konsultasi ke Sistem & WhatsApp →";
+    }
+  });
 }
 
 function toBase64(file) {
