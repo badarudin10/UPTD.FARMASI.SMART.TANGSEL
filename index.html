@@ -426,9 +426,9 @@ Memuat data registrasi dari database...
 </form>
 </div>
 
-<div class="flex justify-end">
-<button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black px-5 py-2.5 rounded-xl text-xs transition shadow-md inline-flex items-center justify-center gap-2 border border-slate-700">
-<span>← Kembali</span>
+<div class="flex justify-end pt-2">
+<button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5 border border-slate-700">
+← Kembali
 </button>
 </div>
 </div>
@@ -736,7 +736,7 @@ btn.innerText = "Kirim Registrasi Kunjungan";
 });
 }
 
-// Handler Form Konsultasi & Pengaduan (Terintegrasi penuh dengan koleksi "konsultasi" untuk admin.html)
+// Handler Form Konsultasi & Pengaduan (Terintegrasi penuh dengan koleksi "konsultasi")
 const formKonsul = document.getElementById('formKonsultasi');
 if(formKonsul) {
   formKonsul.addEventListener('submit', async (e) => {
@@ -752,7 +752,7 @@ if(formKonsul) {
     const isi = document.getElementById('isiKonsultasi').value;
 
     try {
-      // Menyimpan data ke koleksi "konsultasi" agar langsung terbaca di admin.html
+      // Menyimpan data ke koleksi "konsultasi"
       await addDoc(collection(db, "konsultasi"), {
         nama: nama,
         instansi: instansi,
@@ -766,8 +766,8 @@ if(formKonsul) {
       alert("Konsultasi berhasil dikirim dan tercatat di sistem admin!");
       formKonsul.reset();
 
-      // Langsung menghubungkan ke WhatsApp admin dengan format pesan yang rapi
-      const nomorWAAdmin = "6281234567890"; // Ganti dengan nomor WhatsApp admin jika diperlukan
+      // Menghubungkan ke WhatsApp admin
+      const nomorWAAdmin = "6281234567890"; // Ganti nomor WhatsApp admin jika perlu
       const pesanWA = encodeURIComponent(`Halo Admin UPTD Farmasi,\n\nSaya ingin berkonsultasi:\n*Nama:* ${nama}\n*Instansi:* ${instansi}\n*Kategori:* ${kategori}\n*Pesan:* ${isi}`);
       window.open(`https://wa.me/${nomorWAAdmin}?text=${pesanWA}`, '_blank');
 
