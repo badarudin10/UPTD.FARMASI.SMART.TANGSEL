@@ -359,7 +359,7 @@ Kirim Registrasi Kunjungan
 <div id="page-tamu" class="page-content space-y-4 hidden-custom">
 <div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1 mb-5">
 <h2 class="text-sm font-black text-slate-100">Daftar Tamu & Pengambilan Obat</h2>
-<p class="text-[11px] text-slate-300 font-medium leading-relaxed">Cek status registrasi Anda secara real-time dari database.</p>
+<p class="text-[11px] text-slate-300 font-medium leading-relaxed">Cek status registrasi Anda secara real-time dari database dan unduh PDF bukti pelayanan.</p>
 </div>
 
 <div id="containerTamu" class="space-y-3">
@@ -382,7 +382,7 @@ Memuat data registrasi dari database...
 </div>
 <div>
 <h2 class="text-sm font-black text-slate-100 uppercase">Layanan Konsultasi & Pengaduan</h2>
-<p class="text-[11px] text-slate-300 font-medium mt-0.5">Sampaikan pertanyaan teknis, kendala layanan, atau masukan Anda. Data akan tercatat di sistem admin dan diteruskan ke WhatsApp.</p>
+<p class="text-[11px] text-slate-300 font-medium mt-0.5">Sampaikan pertanyaan teknis, kendala layanan, atau masukan Anda. Data akan tercatat di sistem admin (`admin.html`) agar bisa di-download sebagai PDF dan diteruskan ke WhatsApp.</p>
 </div>
 </div>
 
@@ -736,7 +736,7 @@ btn.innerText = "Kirim Registrasi Kunjungan";
 });
 }
 
-// Handler Form Konsultasi & Pengaduan (Terintegrasi ke Firestore "Konsultasi" & WhatsApp)
+// Handler Form Konsultasi & Pengaduan (Terintegrasi ke Firestore "Konsultasi", localStorage untuk admin.html PDF, & WhatsApp)
 const formKonsul = document.getElementById('formKonsultasi');
 if(formKonsul) {
   formKonsul.addEventListener('submit', async (e) => {
@@ -750,9 +750,10 @@ if(formKonsul) {
     const kontak = document.getElementById('kontakPengirim').value;
     const kategori = document.getElementById('kategoriKonsultasi').value;
     const isi = document.getElementById('isiKonsultasi').value;
+    const waktuFormatted = new Date().toLocaleString('id-ID');
 
     try {
-      // Menggunakan koleksi "Konsultasi" dan field "waktuInput" sesuai dengan sistem dashboard admin
+      // 1. Simpan ke Firestore (Koleksi "Konsultasi")
       await addDoc(collection(db, "Konsultasi"), {
         nama: nama,
         instansi: instansi,
@@ -763,12 +764,33 @@ if(formKonsul) {
         waktuInput: serverTimestamp()
       });
 
-      alert("Konsultasi berhasil dikirim dan tercatat di sistem admin!");
+      // 2. Simpan juga ke localStorage agar sinkron dengan admin.html untuk cetak/download PDF
+      const dataBaruAdmin = {
+        nama: nama,
+        instansi: instansi,
+        kontak: kontak,
+        kategori: kategori,
+        pesan: isi,
+        waktu: waktuFormatted
+      };
+      let daftarKonsulAdmin = JSON.parse(localStorage.getItem("dataKonsultasiAdmin")) || [];
+      daftarKonsulAdmin.push(dataBaruAdmin);
+      localStorage.setItem("dataKonsultasiAdmin", JSON.stringify(daftarKonsulAdmin));
+
+      alert("Konsultasi berhasil disimpan ke sistem admin (siap cetak PDF) & diteruskan ke WhatsApp!");
       formKonsul.reset();
 
-      // Menghubungkan ke WhatsApp admin
+      // 3. Membuka WhatsApp Penanggung Jawab
       const nomorWAAdmin = "6285716842806"; 
-      const pesanWA = encodeURIComponent(`Halo Admin UPTD Farmasi,\n\nSaya ingin berkonsultasi:\n*Nama:* ${nama}\n*Instansi:* ${instansi}\n*Kategori:* ${kategori}\n*Pesan:* ${isi}`);
+      const pesanWA = encodeURIComponent(`*LAYANAN KONSULTASI & PENGADUAN*%0A` +
+                     `----------------------------------%0A` +
+                     `*Nama:* ${nama}%0A` +
+                     `*Instansi:* ${instansi}%0A` +
+                     `*Kontak:* ${kontak}%0A` +
+                     `*Kategori:* ${kategori}%0A` +
+                     `*Pesan:* ${isi}%0A` +
+                     `*Waktu:* ${waktuFormatted}`);
+      
       window.open(`https://wa.me/${nomorWAAdmin}?text=${pesanWA}`, '_blank');
 
     } catch (err) {
@@ -790,6 +812,25 @@ reader.onerror = error => reject(error);
 });
 }
 
+// Fungsi untuk mendownload bukti tamu sebagai PDF menggunakan html2pdf
+window.downloadPdfTamu = function(idAntrian) {
+  const element = document.getElementById(`card-tamu-${idAntrian}`);
+  if (!element) {
+    alert("Data bukti tamu tidak ditemukan!");
+    return;
+  }
+  
+  const opt = {
+    margin:       10,
+    filename:     `Bukti_Pelayanan_Tamu_${idAntrian}.pdf`,
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2, useCORS: true },
+    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().from(element).set(opt).save();
+};
+
 onSnapshot(query(collection(db, "tamu"), orderBy("waktu", "desc")), (snapshot) => {
 const container = document.getElementById("containerTamu");
 if(!container) return;
@@ -801,6 +842,7 @@ return;
 }
 
 snapshot.forEach((docSnap) => {
+const docId = docSnap.id;
 const item = docSnap.data();
 
 let waktuStr = '-';
@@ -851,6 +893,7 @@ fileUrl: fileLink
 
 const card = document.createElement("div");
 card.className = "bg-slate-800/80 p-5 rounded-2xl shadow-md border border-slate-700/60 space-y-3.5 transition hover:shadow-lg";
+card.id = `card-tamu-${docId}`;
 
 let bagianObatHtml = '';
 if (normalizedData.itemsObat.length > 0) {
@@ -870,7 +913,7 @@ fileLampiranHtml = `<div class="pt-1"> <span class="inline-flex items-center gap
 
 let downloadBtnHtml = '';
 if (statusLower.includes("selesai")) {
-  downloadBtnHtml = `<span class="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20">Pelayanan Selesai</span>`;
+  downloadBtnHtml = `<button onclick="downloadPdfTamu('${docId}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[10px] px-3.5 py-1.5 rounded-xl shadow transition inline-flex items-center gap-1.5 border border-emerald-500">📥 Unduh PDF</button>`;
 } else {
   downloadBtnHtml = `<span class="text-[10px] text-amber-400 font-bold bg-amber-500/10 px-3 py-1.5 rounded-xl border border-amber-500/20">Menunggu Admin Input Obat</span>`;
 }
