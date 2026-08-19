@@ -752,8 +752,8 @@ if(formKonsul) {
     const isi = document.getElementById('isiKonsultasi').value;
 
     try {
-      // PERBAIKAN: Ubah "konsultasi" menjadi "Konsultasi" (K kapital)
-      // dan ubah "waktu" menjadi "waktuInput" agar sinkron dengan admin.html
+      // PERBAIKAN: Menggunakan koleksi "Konsultasi" dengan K kapital dan "waktuInput" 
+      // agar terhubung dengan mulus dan tersinkronisasi ke admin.html tanpa error
       await addDoc(collection(db, "Konsultasi"), {
         nama: nama,
         instansi: instansi,
@@ -768,7 +768,7 @@ if(formKonsul) {
       formKonsul.reset();
 
       // Menghubungkan ke WhatsApp admin
-      const nomorWAAdmin = "6281234567890"; 
+      const nomorWAAdmin = "6285716842806"; 
       const pesanWA = encodeURIComponent(`Halo Admin UPTD Farmasi,\n\nSaya ingin berkonsultasi:\n*Nama:* ${nama}\n*Instansi:* ${instansi}\n*Kategori:* ${kategori}\n*Pesan:* ${isi}`);
       window.open(`https://wa.me/${nomorWAAdmin}?text=${pesanWA}`, '_blank');
 
@@ -912,3 +912,4 @@ container.appendChild(card);
 </script>
 </body>
 </html>
+
