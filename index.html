@@ -736,7 +736,7 @@ btn.innerText = "Kirim Registrasi Kunjungan";
 });
 }
 
-// Handler Form Konsultasi & Pengaduan (Di index.html)
+// Handler Form Konsultasi & Pengaduan (Terintegrasi ke Firestore "Konsultasi" & WhatsApp)
 const formKonsul = document.getElementById('formKonsultasi');
 if(formKonsul) {
   formKonsul.addEventListener('submit', async (e) => {
@@ -752,8 +752,7 @@ if(formKonsul) {
     const isi = document.getElementById('isiKonsultasi').value;
 
     try {
-      // PERBAIKAN: Menggunakan koleksi "Konsultasi" dengan K kapital dan "waktuInput" 
-      // agar terhubung dengan mulus dan tersinkronisasi ke admin.html tanpa error
+      // Menggunakan koleksi "Konsultasi" dan field "waktuInput" sesuai dengan sistem dashboard admin
       await addDoc(collection(db, "Konsultasi"), {
         nama: nama,
         instansi: instansi,
@@ -912,4 +911,3 @@ container.appendChild(card);
 </script>
 </body>
 </html>
-
