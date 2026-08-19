@@ -736,7 +736,10 @@ btn.innerText = "Kirim Registrasi Kunjungan";
 });
 }
 
-// Handler Form Konsultasi & Pengaduan (Terintegrasi ke Firestore "Konsultasi", localStorage untuk admin.html PDF, & WhatsApp)
+// ---------------------------------------------------------------------------
+// PERBAIKAN UTAMA: Form Konsultasi & Pengaduan (Terintegrasi ke Firestore, 
+// localStorage untuk admin.html, & WhatsApp)
+// ---------------------------------------------------------------------------
 const formKonsul = document.getElementById('formKonsultasi');
 if(formKonsul) {
   formKonsul.addEventListener('submit', async (e) => {
@@ -764,20 +767,28 @@ if(formKonsul) {
         waktuInput: serverTimestamp()
       });
 
-      // 2. Simpan juga ke localStorage agar sinkron dengan admin.html untuk cetak/download PDF
+      // 2. Simpan ke LocalStorage agar langsung terbaca di admin.html (Pantau Konsultasi & Pengaduan Keluhan)
+      // Kunci yang diselaraskan: "dataKeluhanAdmin" (atau "dataKonsultasiAdmin")
       const dataBaruAdmin = {
+        waktu: waktuFormatted,
         nama: nama,
         instansi: instansi,
         kontak: kontak,
         kategori: kategori,
-        pesan: isi,
-        waktu: waktuFormatted
+        isi: isi,
+        pesan: isi
       };
+      
+      // Simpan ke array localStorage agar kompatibel dengan berbagai skrip admin
+      let daftarKeluhanAdmin = JSON.parse(localStorage.getItem("dataKeluhanAdmin")) || [];
+      daftarKeluhanAdmin.push(dataBaruAdmin);
+      localStorage.setItem("dataKeluhanAdmin", JSON.stringify(daftarKeluhanAdmin));
+
       let daftarKonsulAdmin = JSON.parse(localStorage.getItem("dataKonsultasiAdmin")) || [];
       daftarKonsulAdmin.push(dataBaruAdmin);
       localStorage.setItem("dataKonsultasiAdmin", JSON.stringify(daftarKonsulAdmin));
 
-      alert("Konsultasi berhasil disimpan ke sistem admin (siap cetak PDF) & diteruskan ke WhatsApp!");
+      alert("Konsultasi berhasil disimpan ke sistem admin dan masuk ke admin.html!");
       formKonsul.reset();
 
       // 3. Membuka WhatsApp Penanggung Jawab
