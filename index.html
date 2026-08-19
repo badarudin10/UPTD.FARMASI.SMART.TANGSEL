@@ -736,7 +736,7 @@ btn.innerText = "Kirim Registrasi Kunjungan";
 });
 }
 
-// Handler Form Konsultasi & Pengaduan (Terintegrasi penuh dengan koleksi "konsultasi")
+// Handler Form Konsultasi & Pengaduan (Di index.html)
 const formKonsul = document.getElementById('formKonsultasi');
 if(formKonsul) {
   formKonsul.addEventListener('submit', async (e) => {
@@ -752,22 +752,23 @@ if(formKonsul) {
     const isi = document.getElementById('isiKonsultasi').value;
 
     try {
-      // Menyimpan data ke koleksi "konsultasi"
-      await addDoc(collection(db, "konsultasi"), {
+      // PERBAIKAN: Ubah "konsultasi" menjadi "Konsultasi" (K kapital)
+      // dan ubah "waktu" menjadi "waktuInput" agar sinkron dengan admin.html
+      await addDoc(collection(db, "Konsultasi"), {
         nama: nama,
         instansi: instansi,
         kontak: kontak,
         kategori: kategori,
         isi: isi,
         status: "Menunggu Tanggapan",
-        waktu: serverTimestamp()
+        waktuInput: serverTimestamp()
       });
 
       alert("Konsultasi berhasil dikirim dan tercatat di sistem admin!");
       formKonsul.reset();
 
       // Menghubungkan ke WhatsApp admin
-      const nomorWAAdmin = "6281234567890"; // Ganti nomor WhatsApp admin jika perlu
+      const nomorWAAdmin = "6281234567890"; 
       const pesanWA = encodeURIComponent(`Halo Admin UPTD Farmasi,\n\nSaya ingin berkonsultasi:\n*Nama:* ${nama}\n*Instansi:* ${instansi}\n*Kategori:* ${kategori}\n*Pesan:* ${isi}`);
       window.open(`https://wa.me/${nomorWAAdmin}?text=${pesanWA}`, '_blank');
 
