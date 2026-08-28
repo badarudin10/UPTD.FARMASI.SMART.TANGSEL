@@ -476,8 +476,9 @@ import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, onSna
 const firebaseConfig = { apiKey: "AIzaSyA6B5MysWIMi4weR3Wgo3HuaIl-aaZpChw", authDomain: "digital-books-d22c9.firebaseapp.com", projectId: "digital-books-d22c9", storageBucket: "digital-books-d22c9.firebasestorage.app", messagingSenderId: "905407530155", appId: "1:905407530155:web:dd90e18d4158ce42fae3ee", measurementId: "G-LL7GF2RMF8" };
 const db = getFirestore(initializeApp(firebaseConfig));
 
-const OFFICE_LAT = -6.292850;
-const OFFICE_LNG = 106.671500;
+// Koordinat UPTD Farmasi dari tautan Google Maps pengguna: MMCM+X3F, Ciater
+const OFFICE_LAT = -6.3275045;
+const OFFICE_LNG = 106.6826802;
 const MAX_RADIUS = 100;
 
 let userLat = null;
@@ -985,3 +986,4 @@ container.appendChild(card);
 </script>
 </body>
 </html>
+
