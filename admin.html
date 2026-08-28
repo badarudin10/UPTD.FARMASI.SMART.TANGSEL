@@ -1,42 +1,906 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dashboard Admin - UPTD Farmasi</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>body{background:#0b1329}.hidden{display:none!important}.sbbk-page{background:white;color:#111827;padding:28px;font-family:Arial,sans-serif}.sbbk-page table{width:100%;border-collapse:collapse}.sbbk-page th,.sbbk-page td{border:1px solid #9ca3af;padding:6px;font-size:11px}.sbbk-page th{background:#e5e7eb}.sbbk-page .no-border td{border:0}</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- Leaflet CSS untuk Maps tracking -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <title>Dashboard Admin - UPTD Farmasi</title>
+  <style>
+    @media print {
+      body * { visibility: hidden; }
+      #printAreaKeluhan, #printAreaKeluhan * { visibility: visible; }
+      #printAreaKeluhan { position: absolute; left: 0; top: 0; width: 100%; }
+      .no-print { display: none !important; }
+    }
+  </style>
 </head>
-<body class="min-h-screen text-slate-100 font-sans">
-<div id="loginView" class="min-h-screen flex items-center justify-center p-4"><div class="w-full max-w-md bg-slate-900 border border-slate-700 rounded-3xl p-7 shadow-2xl"><div class="text-center mb-6"><div class="text-4xl mb-2">🔐</div><h1 class="text-xl font-black">Dashboard Admin</h1><p class="text-xs text-slate-400 mt-1">UPTD Farmasi Kota Tangerang Selatan</p></div><form id="loginForm" class="space-y-3"><input id="email" type="email" required placeholder="Email admin" class="w-full rounded-xl bg-slate-800 border border-slate-700 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-emerald-500"><input id="password" type="password" required placeholder="Kata sandi" class="w-full rounded-xl bg-slate-800 border border-slate-700 px-3 py-3 text-sm outline-none focus:ring-2 focus:ring-emerald-500"><button class="w-full rounded-xl bg-emerald-600 hover:bg-emerald-500 py-3 text-sm font-black">Masuk sebagai Admin</button></form><p id="loginError" class="text-xs text-red-400 mt-3"></p><p class="text-[10px] text-slate-500 mt-5 text-center">Akun dibuat sendiri melalui Firebase Authentication.</p></div></div>
-<div id="appView" class="hidden"><header class="border-b border-slate-800 bg-slate-900/90 sticky top-0 z-10"><div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"><div><h1 class="font-black text-lg">Dashboard Admin UPTD Farmasi</h1><p class="text-xs text-emerald-400">Kontrol pelayanan realtime</p></div><button id="logoutBtn" class="text-xs font-bold px-3 py-2 rounded-lg bg-slate-800 border border-slate-700">Keluar</button></div></header>
-<main class="max-w-7xl mx-auto p-4 space-y-5"><div class="grid grid-cols-2 md:grid-cols-4 gap-3"><div class="bg-slate-900 border border-slate-800 rounded-2xl p-4"><p class="text-xs text-slate-400">Total Tamu</p><b id="statTotal" class="text-2xl">0</b></div><div class="bg-slate-900 border border-slate-800 rounded-2xl p-4"><p class="text-xs text-slate-400">Menunggu</p><b id="statWaiting" class="text-2xl text-amber-400">0</b></div><div class="bg-slate-900 border border-slate-800 rounded-2xl p-4"><p class="text-xs text-slate-400">Dalam Proses</p><b id="statProcess" class="text-2xl text-blue-400">0</b></div><div class="bg-slate-900 border border-slate-800 rounded-2xl p-4"><p class="text-xs text-slate-400">Selesai</p><b id="statDone" class="text-2xl text-emerald-400">0</b></div></div>
-<section class="bg-slate-900 border border-slate-800 rounded-2xl p-4"><div class="flex flex-wrap items-center justify-between gap-3 mb-3"><div><h2 class="font-black">Antrean Tamu & Pelayanan</h2><p class="text-xs text-slate-400">Perubahan tersinkron otomatis ke dashboard tamu.</p></div><select id="statusFilter" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs"><option value="semua">Semua status</option><option value="Menunggu">Menunggu</option><option value="Dalam Proses">Dalam Proses</option><option value="Selesai">Selesai</option><option value="Dilewati">Dilewati</option></select></div><div id="queueList" class="space-y-3"><p class="text-xs text-slate-400">Memuat antrean...</p></div></section>
-<section class="grid lg:grid-cols-2 gap-5"><div class="bg-slate-900 border border-slate-800 rounded-2xl p-4"><h2 class="font-black mb-1">Pengaturan Petugas</h2><p class="text-xs text-slate-400 mb-3">Nama ini dapat dipilih saat memproses tamu.</p><form id="staffForm" class="flex gap-2"><input id="staffName" required placeholder="Nama petugas/program" class="min-w-0 flex-1 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs"><button class="bg-emerald-600 rounded-lg px-4 text-xs font-black">Simpan</button></form><div id="staffList" class="mt-3 space-y-2"></div></div><div class="bg-slate-900 border border-slate-800 rounded-2xl p-4"><h2 class="font-black mb-1">Katalog Item Obat</h2><p class="text-xs text-slate-400 mb-3">Item tersedia untuk pengisian SBBK.</p><form id="drugForm" class="grid grid-cols-2 gap-2"><input id="drugName" required placeholder="Nama obat/barang" class="col-span-2 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs"><input id="drugUnit" required placeholder="Satuan" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs"><input id="drugYear" placeholder="Tahun" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs"><button class="col-span-2 bg-emerald-600 rounded-lg px-4 py-2 text-xs font-black">Tambah Item</button></form><div id="drugList" class="mt-3 space-y-2"></div></div></section>
-<section class="bg-slate-900 border border-slate-800 rounded-2xl p-4"><h2 class="font-black mb-1">Konsultasi & Pengaduan</h2><div id="consultList" class="space-y-2 mt-3"><p class="text-xs text-slate-400">Memuat konsultasi...</p></div></section></main></div>
-<div id="editModal" class="hidden fixed inset-0 bg-black/80 z-20 overflow-y-auto p-4"><div class="max-w-2xl mx-auto bg-slate-900 border border-slate-700 rounded-2xl p-5"><div class="flex justify-between items-center mb-4"><h2 class="font-black">Atur Pelayanan</h2><button id="closeModal" class="text-xl">×</button></div><form id="serviceForm" class="space-y-3"><input type="hidden" id="editId"><div id="editSummary" class="text-xs text-slate-300 bg-slate-800 rounded-xl p-3"></div><select id="editStatus" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs"><option>Menunggu</option><option>Dalam Proses</option><option>Selesai</option><option>Dilewati</option></select><select id="editStaff" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs"></select><textarea id="editNotes" rows="2" placeholder="Keterangan pelayanan" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs"></textarea><div><p class="text-xs font-bold mb-2">Item obat / barang diserahkan</p><div id="drugInputs" class="space-y-2"></div><button type="button" id="addDrugRow" class="text-xs text-emerald-400 font-bold mt-2">+ Tambah baris item</button></div><button class="w-full bg-emerald-600 rounded-xl py-3 text-xs font-black">Simpan & Sinkronkan ke Tamu</button></form></div></div>
-<script type="module">
-import {initializeApp} from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-import {getFirestore,collection,query,orderBy,onSnapshot,doc,updateDoc,addDoc,serverTimestamp} from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
-import {getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut} from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
-const firebaseConfig={apiKey:'AIzaSyA6B5MysWIMi4weR3Wgo3HuaIl-aaZpChw',authDomain:'digital-books-d22c9.firebaseapp.com',projectId:'digital-books-d22c9',storageBucket:'digital-books-d22c9.firebasestorage.app',messagingSenderId:'905407530155',appId:'1:905407530155:web:dd90e18d4158ce42fae3ee',measurementId:'G-LL7GF2RMF8'};
-const db=getFirestore(initializeApp(firebaseConfig)),auth=getAuth();const ADMIN_WA='6285716842806';let tamu=[],staff=[],drugs=[];
-const $=id=>document.getElementById(id);const esc=v=>String(v??'-').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-function dateVal(v){try{return v?.toDate?v.toDate():new Date(v)}catch{return null}}function fmt(v){const d=dateVal(v);return d&&!isNaN(d)?d.toLocaleString('id-ID'):'-'}
-function duration(item){const a=dateVal(item.waktuProses),b=dateVal(item.waktuSelesai);return a&&b?Math.max(0,Math.round((b-a)/60000))+' menit':'-'}
-function renderStats(){ $('statTotal').textContent=tamu.length;$('statWaiting').textContent=tamu.filter(x=>x.status==='Menunggu').length;$('statProcess').textContent=tamu.filter(x=>String(x.status).toLowerCase().includes('proses')).length;$('statDone').textContent=tamu.filter(x=>x.status==='Selesai'||String(x.status).toLowerCase()==='selesai').length }
-function renderQueue(){renderStats();const filter=$('statusFilter').value;const list=tamu.filter(x=>filter==='semua'||x.status===filter);$('queueList').innerHTML=list.length?list.map(x=>`<article class="rounded-xl border border-slate-700 bg-slate-800/70 p-3"><div class="flex flex-wrap justify-between gap-2"><div><b class="text-emerald-400">${esc(x.nomorAntrian)}</b><b class="ml-2 text-sm">${esc(x.nama)}</b><p class="text-xs text-slate-400">${esc(x.instansi)} · ${esc(x.keperluan)} · ${fmt(x.waktu)}</p></div><span class="text-xs font-black">${esc(x.status||'Menunggu')}</span></div><div class="grid sm:grid-cols-3 gap-2 text-[11px] mt-3 text-slate-300"><span>Jarak: ${esc(x.jarak)} m</span><span>Petugas: ${esc(x.petugas||'-')}</span><span>Durasi: ${duration(x)}</span></div><div class="mt-3 flex gap-2"><button data-edit="${x.id}" class="editBtn bg-emerald-600 rounded-lg px-3 py-2 text-[11px] font-black">Atur Pelayanan</button>${(x.status==='Selesai'||String(x.status).toLowerCase()==='selesai')?`<button data-download="${x.id}" class="downloadBtn bg-slate-700 rounded-lg px-3 py-2 text-[11px] font-black">Unduh SBBK Word</button>`:''}</div></article>`).join(''):'<p class="text-xs text-slate-400">Tidak ada data pada filter ini.</p>';document.querySelectorAll('.editBtn').forEach(b=>b.onclick=()=>openEditor(b.dataset.edit));document.querySelectorAll('.downloadBtn').forEach(b=>b.onclick=()=>downloadSbbkWord(b.dataset.download))}
-function renderStaff(){$('staffList').innerHTML=staff.map(x=>`<div class="text-xs bg-slate-800 rounded-lg px-3 py-2">${esc(x.nama)}</div>`).join('')||'<p class="text-xs text-slate-500">Belum ada petugas.</p>';$('editStaff').innerHTML='<option value="">-- Pilih petugas --</option>'+staff.map(x=>`<option value="${esc(x.nama)}">${esc(x.nama)}</option>`).join('')}
-function renderDrugs(){$('drugList').innerHTML=drugs.map(x=>`<div class="text-xs bg-slate-800 rounded-lg px-3 py-2 flex justify-between"><span>${esc(x.nama)}</span><span class="text-slate-400">${esc(x.satuan)}${x.tahun?' · '+esc(x.tahun):''}</span></div>`).join('')||'<p class="text-xs text-slate-500">Belum ada item.</p>'}
-function addDrugRow(data={}){const d=document.createElement('div');d.className='grid grid-cols-4 gap-2 drug-row';d.innerHTML=`<input value="${esc(data.nama||'')}" placeholder="Nama" class="col-span-2 drug-name bg-slate-800 border border-slate-700 rounded-lg px-2 py-2 text-xs"><input value="${esc(data.volume||'')}" placeholder="Vol" class="drug-vol bg-slate-800 border border-slate-700 rounded-lg px-2 py-2 text-xs"><input value="${esc(data.satuan||'')}" placeholder="Satuan" class="drug-unit bg-slate-800 border border-slate-700 rounded-lg px-2 py-2 text-xs">`;$('drugInputs').appendChild(d)}
-function openEditor(id){const x=tamu.find(v=>v.id===id);if(!x)return;$('editId').value=id;$('editSummary').innerHTML=`<b>${esc(x.nomorAntrian)} · ${esc(x.nama)}</b><br>${esc(x.instansi)} · ${esc(x.keperluan)}`;$('editStatus').value=x.status||'Menunggu';$('editStaff').value=x.petugas||'';$('editNotes').value=x.keteranganPelayanan||'';$('drugInputs').innerHTML='';(x.itemsObat?.length?x.itemsObat:[{}]).forEach(addDrugRow);$('editModal').classList.remove('hidden')}
-async function saveService(e){e.preventDefault();const id=$('editId').value,x=tamu.find(v=>v.id===id),status=$('editStatus').value,now=serverTimestamp(),items=[...document.querySelectorAll('.drug-row')].map(r=>({nama:r.querySelector('.drug-name').value.trim(),volume:r.querySelector('.drug-vol').value.trim(),satuan:r.querySelector('.drug-unit').value.trim()})).filter(v=>v.nama);const patch={status,petugas:$('editStaff').value,keteranganPelayanan:$('editNotes').value.trim(),itemsObat:items,updatedAt:now};if(status==='Dalam Proses'&&!x.waktuProses)patch.waktuProses=now;if(status==='Selesai'&&!x.waktuSelesai)patch.waktuSelesai=now;await updateDoc(doc(db,'tamu',id),patch);const waText=`PEMBARUAN PELAYANAN UPTD FARMASI\nNo. Antrian: ${x.nomorAntrian||'-'}\nNama: ${x.nama||'-'}\nStatus: ${status}\nPetugas: ${$('editStaff').value||'-'}\nDurasi: ${duration({...x,...patch})}`;window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(waText)}`,'_blank','noopener');$('editModal').classList.add('hidden')}
-function downloadSbbkWord(id){
-  const x=tamu.find(v=>v.id===id);if(!x)return;
-  const rows=(x.itemsObat||[]).map((o,i)=>`<tr><td>${i+1}</td><td>${esc(o.nama)}</td><td>${esc(o.tahun||new Date().getFullYear())}</td><td>${esc(o.satuan)}</td><td>${esc(o.volume)}</td><td>${esc(o.ed||'-')}</td><td>${esc(o.batch||'-')}</td><td style="width:70px"></td></tr>`).join('')||'<tr><td colspan="8" style="height:45px">Belum ada item obat</td></tr>';
-  const wordHtml=`<!doctype html><html><head><meta charset="utf-8"><title>SBBK ${esc(x.nomorAntrian||id)}</title><style>@page{size:A4;margin:18mm}body{font-family:Arial,sans-serif;color:#111827;font-size:11pt}.kop{border-bottom:3px solid #111827;padding-bottom:8pt;margin-bottom:18pt}.kop-inner{display:flex;align-items:center;gap:14pt}.logo{width:72pt;height:72pt;object-fit:contain}.kop-title{flex:1;text-align:center}.kop-title div{font-weight:bold}.kop-title .city{font-size:15pt}.kop-title .agency{font-size:16pt}.kop-title .unit{font-size:18pt}.kop-title .small{font-size:9pt}.spacer{width:72pt}.title{text-align:center;margin:0 0 3pt;font-size:18pt}.subtitle{text-align:center;margin:0 0 15pt;font-size:10pt}.meta{width:100%;border-collapse:collapse;margin-bottom:16pt}.meta td{padding:3pt 0;border:0}.meta .label{font-weight:bold;width:16%}.meta .value{width:34%}.items{width:100%;border-collapse:collapse}.items th,.items td{border:1pt solid #6b7280;padding:5pt;font-size:9pt}.items th{background:#e5e7eb;text-align:center}.notes{margin-top:12pt}.signatures{width:100%;border-collapse:collapse;margin-top:48pt}.signatures td{width:50%;border:0;text-align:center;vertical-align:top}</style></head><body><div class="kop"><div class="kop-inner"><img class="logo" src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png"><div class="kop-title"><div class="city">PEMERINTAH KOTA TANGERANG SELATAN</div><div class="agency">DINAS KESEHATAN</div><div class="unit">UPTD FARMASI</div><div class="small">Kota Tangerang Selatan</div></div><div class="spacer"></div></div></div><h1 class="title">BUKTI BARANG KELUAR</h1><p class="subtitle">Nomor dokumen: SBBK/${esc(x.nomorAntrian||id)}/${new Date().getFullYear()}</p><table class="meta"><tr><td class="label">Nama</td><td class="value">: ${esc(x.nama)}</td><td class="label">No. Antrian</td><td>: ${esc(x.nomorAntrian)}</td></tr><tr><td class="label">Instansi</td><td class="value">: ${esc(x.instansi)}</td><td class="label">Status Pelayanan</td><td>: ${esc(x.status||'Selesai')}</td></tr><tr><td class="label">Keperluan</td><td class="value">: ${esc(x.keperluan)}</td><td class="label">Durasi</td><td>: ${duration(x)}</td></tr><tr><td class="label">Petugas Program</td><td class="value">: ${esc(x.petugas||'-')}</td><td class="label">Waktu Kunjungan</td><td>: ${fmt(x.waktu)}</td></tr></table><table class="items"><thead><tr><th style="width:5%">No</th><th>Nama Barang</th><th style="width:9%">Tahun</th><th style="width:10%">Satuan</th><th style="width:10%">Volume</th><th style="width:10%">ED</th><th style="width:13%">Batch</th><th style="width:10%">Paraf</th></tr></thead><tbody>${rows}</tbody></table><p class="notes"><b>Keterangan:</b> ${esc(x.keteranganPelayanan||'-')}</p><table class="signatures"><tr><td>Yang menerima,<br><br><br><br><b>${esc(x.nama)}</b><br>${esc(x.instansi)}</td><td>Petugas Program,<br><br><br><br><b>${esc(x.petugas||'________________')}</b></td></tr></table></body></html>`;
-  const blob=new Blob([wordHtml],{type:'application/msword;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`SBBK_${x.nomorAntrian||id}.doc`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)
-}
-function subscribe(){onSnapshot(query(collection(db,'tamu'),orderBy('waktu','desc')),s=>{tamu=s.docs.map(d=>({id:d.id,...d.data()}));renderQueue()});onSnapshot(query(collection(db,'admin_petugas'),orderBy('nama')),s=>{staff=s.docs.map(d=>({id:d.id,...d.data()}));renderStaff()});onSnapshot(query(collection(db,'admin_obat'),orderBy('nama')),s=>{drugs=s.docs.map(d=>({id:d.id,...d.data()}));renderDrugs()});onSnapshot(query(collection(db,'Konsultasi'),orderBy('timestamp','desc')),s=>{$('consultList').innerHTML=s.docs.map(d=>{const x=d.data();return`<div class="bg-slate-800 rounded-xl p-3 text-xs"><b>${esc(x.nama)} · ${esc(x.kategori)}</b><p class="text-slate-300 mt-1">${esc(x.isi)}</p><p class="text-slate-500 mt-1">Status: ${esc(x.status||'Menunggu Tanggapan')} · ${fmt(x.timestamp)}</p></div>`}).join('')||'<p class="text-xs text-slate-500">Belum ada konsultasi.</p>'})}
-$('loginForm').onsubmit=async e=>{e.preventDefault();$('loginError').textContent='';try{await signInWithEmailAndPassword(auth,$('email').value,$('password').value)}catch(err){$('loginError').textContent='Login gagal. Pastikan akun Email/Password sudah dibuat dan diaktifkan di Firebase.'}};$('logoutBtn').onclick=()=>signOut(auth);$('statusFilter').onchange=renderQueue;$('closeModal').onclick=()=>$('editModal').classList.add('hidden');$('serviceForm').onsubmit=saveService;$('addDrugRow').onclick=()=>addDrugRow();$('staffForm').onsubmit=async e=>{e.preventDefault();await addDoc(collection(db,'admin_petugas'),{nama:$('staffName').value.trim(),createdAt:serverTimestamp()});e.target.reset()};$('drugForm').onsubmit=async e=>{e.preventDefault();await addDoc(collection(db,'admin_obat'),{nama:$('drugName').value.trim(),satuan:$('drugUnit').value.trim(),tahun:$('drugYear').value.trim(),createdAt:serverTimestamp()});e.target.reset()};onAuthStateChanged(auth,user=>{if(user){$('loginView').classList.add('hidden');$('appView').classList.remove('hidden');subscribe()}else{$('loginView').classList.remove('hidden');$('appView').classList.add('hidden')}});
-</script></body></html>
+<body class="bg-[#d1e7dd] min-h-screen">
+
+  <!-- LAYAR LOGIN -->
+  <div id="loginScreen" class="flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-sm text-center">
+      <h2 class="text-2xl font-bold text-blue-900 mb-6">Login Admin UPTD</h2>
+      <div id="loginError" class="hidden mb-4 p-3 bg-red-100 text-red-700 text-xs rounded-lg text-left"></div>
+      <form id="loginForm" class="space-y-4 text-left">
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 mb-1">Email</label>
+          <input type="email" id="emailInput" placeholder="admin@uptd.com" required class="w-full p-3 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-900">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 mb-1">Kata Sandi</label>
+          <input type="password" id="passwordInput" placeholder="••••••••" required class="w-full p-3 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-900">
+        </div>
+        <button type="submit" class="w-full bg-blue-900 text-white p-3 rounded-lg font-bold hover:bg-blue-800 transition">Masuk</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="dashboardAdmin" class="hidden p-4 max-w-6xl mx-auto space-y-6">
+    <div class="bg-white p-6 rounded-2xl shadow-lg">
+      <h2 class="text-xl font-bold text-blue-900 mb-4">Grafik Tren Tamu (7 Hari Terakhir)</h2>
+      <canvas id="grafikPelayanan" height="80"></canvas>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-blue-900 text-white p-6 rounded-2xl shadow-lg text-center"><p class="text-sm opacity-80">Total Antrian</p><h2 id="totalTamu" class="text-4xl font-bold">0</h2></div>
+      <div class="bg-yellow-500 text-white p-6 rounded-2xl shadow-lg text-center"><p class="text-sm opacity-80">Sedang Diproses</p><h2 id="totalProses" class="text-4xl font-bold">0</h2></div>
+      <div class="bg-green-600 text-white p-6 rounded-2xl shadow-lg text-center"><p class="text-sm opacity-80">Sudah Selesai</p><h2 id="totalSelesai" class="text-4xl font-bold">0</h2></div>
+    </div>
+
+    <!-- TABEL UTAMA: ANTRIAN, NAMA, INSTANSI, STATUS, DURASI + KOLOM FILE LAMPIRAN & INPUT OBAT -->
+    <div class="bg-white p-6 rounded-2xl shadow-lg overflow-x-auto">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold text-blue-900">Daftar Antrian Registrasi Tamu, File, Input Obat & Pemantauan Lokasi</h2>
+      </div>
+
+      <table class="w-full text-left" id="tabelTamuData">
+        <thead>
+          <tr class="border-b text-gray-500 text-xs uppercase bg-gray-50">
+            <th class="p-3">Antrian</th>
+            <th class="p-3">Nama</th>
+            <th class="p-3">Instansi</th>
+            <th class="p-3">Status</th>
+            <th class="p-3">Durasi</th>
+            <th class="p-3">Kolom File / Lampiran Tamu</th>
+            <th class="p-3">Form Input Obat & Aksi Resmi</th>
+          </tr>
+        </thead>
+        <tbody id="tabelTamu"></tbody>
+      </table>
+    </div>
+
+    <!-- AREA TERSEMBUNYI UNTUK CETAK PDF -->
+    <div id="areaCetakPdf" class="hidden"></div>
+
+    <!-- PEMANTAUAN KELUHAN -->
+    <div class="bg-white p-6 rounded-2xl shadow-lg">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold text-blue-900">Pantau Konsultasi & Pengaduan Keluhan</h2>
+        <button onclick="downloadPDFKeluhan()" class="no-print bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-emerald-800 transition shadow flex items-center gap-2">
+          <span>🖨️ Download PDF Keluhan</span>
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b text-gray-500 text-xs uppercase bg-gray-50">
+              <th class="p-3 border">Waktu</th>
+              <th class="p-3 border">Nama</th>
+              <th class="p-3 border">Instansi</th>
+              <th class="p-3 border">Kontak</th>
+              <th class="p-3 border">Kategori</th>
+              <th class="p-3 border">Isi Keluhan</th>
+              <th class="p-3 border">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tabelKonsultasiAdmin" class="text-xs text-gray-800">
+            <tr><td colspan="7" class="text-center py-4 text-gray-400">Memuat data keluhan...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- AREA KHUSUS CETAK PDF KELUHAN -->
+    <div id="printAreaKeluhan" class="hidden bg-white p-6 text-black box-border">
+      <div class="text-center mb-4">
+        <h3 class="text-xs font-black uppercase tracking-wider underline">LAPORAN KONSULTASI DAN PENGADUAN KELUHAN</h3>
+      </div>
+      <table class="w-full text-left border-collapse text-xs">
+        <thead>
+          <tr class="border-b text-gray-700 text-[10px] uppercase bg-gray-50">
+            <th class="p-2 border">Waktu</th>
+            <th class="p-2 border">Nama</th>
+            <th class="p-2 border">Instansi</th>
+            <th class="p-2 border">Kontak</th>
+            <th class="p-2 border">Kategori</th>
+            <th class="p-2 border">Isi Keluhan</th>
+          </tr>
+        </thead>
+        <tbody id="tabelKonsultasiPDF" class="text-[11px] text-gray-800"></tbody>
+      </table>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <h2 class="text-xl font-bold text-blue-900 mb-4">Kelola Galeri Kegiatan</h2>
+        <div class="flex gap-2 mb-4"><input type="text" id="urlFotoInput" placeholder="Link Foto..." class="flex-1 p-2 border rounded-lg text-sm"><button onclick="tambahFoto('galeri', 'urlFotoInput')" class="bg-blue-900 text-white px-4 py-2 rounded-lg text-sm font-bold">Tambah</button></div>
+        <div id="listFotoGaleri" class="grid grid-cols-3 gap-2 border-t pt-4"></div>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <h2 class="text-xl font-bold text-blue-900 mb-4">Kelola Artikel Menu</h2>
+        <div class="space-y-3 mb-4">
+          <select id="pilihKategori" class="w-full p-2 border rounded-lg text-sm font-bold bg-gray-50">
+            <option value="Informasi">Informasi</option>
+            <option value="Edukasi">Edukasi</option>
+            <option value="Pelayanan">Pelayanan</option>
+            <option value="Obat">Kategori Obat</option>
+            <option value="Konsultasi">Konsultasi/Keluhan</option>
+          </select>
+          <input type="text" id="judulArtikelInput" placeholder="Judul Artikel..." class="w-full p-2 border rounded-lg text-sm">
+          <input type="text" id="urlKategoriInput" placeholder="Link Foto Artikel..." class="w-full p-2 border rounded-lg text-sm">
+          <textarea id="isiKategoriInput" rows="3" placeholder="Isi artikel..." class="w-full p-2 border rounded-lg text-sm"></textarea>
+          <button onclick="tambahArtikel()" class="w-full bg-green-600 text-white p-3 rounded-lg font-bold">Tambah Artikel Baru</button>
+          <div id="listDaftarArtikel" class="mt-6 border-t pt-4 max-h-60 overflow-y-auto">
+            <h3 class="font-bold text-sm text-blue-900 mb-2">Daftar Artikel (Klik untuk Hapus):</h3>
+            <div id="containerDaftarArtikel" class="space-y-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-lg">
+      <h2 class="text-xl font-bold text-blue-900 mb-4">Kelola Profil Pegawai</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+        <input type="text" id="inputPegawaiNama" placeholder="Nama & Gelar..." class="p-2 border rounded-lg text-sm">
+        <input type="text" id="inputPegawaiJabatan" placeholder="Jabatan..." class="p-2 border rounded-lg text-sm">
+        <input type="text" id="inputPegawaiGolongan" placeholder="Golongan..." class="p-2 border rounded-lg text-sm">
+        <input type="text" id="inputPegawaiPj" placeholder="PJ Program..." class="p-2 border rounded-lg text-sm">
+        <input type="text" id="inputPegawaiFoto" placeholder="Link Foto URL..." class="p-2 border rounded-lg text-sm md:col-span-2">
+      </div>
+      <button onclick="tambahPegawaiAdmin()" class="w-full bg-blue-900 text-white p-3 rounded-lg font-bold mb-4 hover:bg-blue-800">Tambah Profil Pegawai</button>
+
+      <div class="border-t pt-4">
+        <h3 class="font-bold text-sm text-blue-900 mb-2">Daftar Pegawai Saat Ini:</h3>
+        <div id="containerDaftarPegawai" class="space-y-2 max-h-60 overflow-y-auto"></div>
+      </div>
+    </div>
+
+    <div class="pt-4">
+      <button onclick="logout()" class="w-full bg-red-600 text-white p-3 rounded-lg font-bold hover:bg-red-700">Keluar (Logout)</button>
+    </div>
+  </div>
+
+  <!-- Modal Peta Pemantauan Lokasi Tamu (Admin) -->
+  <div id="modalMapAdmin" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden border-2 border-blue-400 flex flex-col max-h-[90vh]">
+      <div class="bg-blue-900 text-white px-4 py-3 flex justify-between items-center">
+        <div>
+          <h3 class="font-extrabold text-xs uppercase tracking-wider">Pemantauan Lokasi GPS Tamu</h3>
+          <p id="modalVisitorNameAdmin" class="text-[10px] text-blue-200 mt-0.5 font-semibold">-</p>
+        </div>
+        <button onclick="closeMapModalAdmin()" class="text-white hover:text-gray-200 font-bold text-base px-2 py-1 rounded-lg bg-blue-800 transition">✕</button>
+      </div>
+      <div class="p-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center text-[11px]">
+        <span id="lokasiStatusBadgeAdmin" class="px-2.5 py-1 rounded-lg font-extrabold border text-[10px]">Mengecek jarak...</span>
+        <span id="jarakInfoTextAdmin" class="text-gray-600 font-bold">-</span>
+      </div>
+      <div class="relative w-full h-72 sm:h-80 bg-gray-200">
+        <div id="leafletMapAdmin" class="w-full h-full z-10"></div>
+      </div>
+      <div class="p-3 bg-white border-t border-gray-100 text-[10px] text-gray-500 flex justify-between items-center">
+        <p>Batas Radius Lokasi: <b class="text-blue-900">100 meter</b> UPTD Farmasi.</p>
+        <button onclick="closeMapModalAdmin()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-1.5 rounded-xl font-bold transition">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getFirestore, collection, onSnapshot, query, orderBy, updateDoc, doc, serverTimestamp, addDoc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+    const firebaseConfig = { apiKey: "AIzaSyA6B5MysWIMi4weR3Wgo3HuaIl-aaZpChw", authDomain: "digital-books-d22c9.firebaseapp.com", projectId: "digital-books-d22c9", storageBucket: "digital-books-d22c9.firebasestorage.app", messagingSenderId: "905407530155", appId: "1:905407530155:web:dd90e18d4158ce42fae3ee", measurementId: "G-LL7GF2RMF8" };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+    let chart;
+
+    const FARMASI_LAT = -6.3273811;
+    const FARMASI_LNG = 106.6826688;
+    const RADIUS_MAKS_METER = 100;
+    const ADMIN_WA = "6285716842806";
+
+    let activeMapAdmin = null;
+    let activeMarkerTamuAdmin = null;
+    let activeMarkerFarmasiAdmin = null;
+    let activeCircleRadiusAdmin = null;
+
+    function hitungJarakMeter(lat1, lon1, lat2, lon2) {
+      const R = 6371e3;
+      const φ1 = lat1 * Math.PI/180;
+      const φ2 = lat2 * Math.PI/180;
+      const Δφ = (lat2-lat1) * Math.PI/180;
+      const Δλ = (lon2-lon1) * Math.PI/180;
+
+      const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                Math.cos(φ1) * Math.cos(φ2) *
+                Math.sin(Δλ/2) * Math.sin(Δλ/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return R * c;
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      const loginScreen = document.getElementById("loginScreen");
+      const dashboardAdmin = document.getElementById("dashboardAdmin");
+      if (user) {
+        loginScreen.classList.add("hidden");
+        dashboardAdmin.classList.remove("hidden");
+        tampilkanDashboardData();
+      } else {
+        loginScreen.classList.remove("hidden");
+        dashboardAdmin.classList.add("hidden");
+      }
+    });
+
+    const loginForm = document.getElementById("loginForm");
+    const loginError = document.getElementById("loginError");
+
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("emailInput").value.trim();
+      const password = document.getElementById("passwordInput").value;
+      loginError.classList.add("hidden");
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        loginError.textContent = "Login Gagal: " + error.message;
+        loginError.classList.remove("hidden");
+      }
+    });
+
+    window.logout = async () => {
+      try { await signOut(auth); } catch (error) { console.error("Gagal logout:", error); }
+    };
+
+    function updateGrafik(dataPerHari) {
+      const ctx = document.getElementById('grafikPelayanan').getContext('2d');
+      if (chart) chart.destroy();
+      chart = new Chart(ctx, { type: 'bar', data: { labels: Object.keys(dataPerHari), datasets: [{ label: 'Jumlah Tamu', data: Object.values(dataPerHari), backgroundColor: '#1e3a8a' }] }, options: { responsive: true } });
+    }
+
+    function tampilkanDashboardData() {
+      onSnapshot(query(collection(db, "tamu"), orderBy("waktu", "desc")), (snapshot) => {
+        let total=0, proses=0, selesai=0, dataPerHari = {}; const tabel = document.getElementById("tabelTamu"); tabel.innerHTML = "";
+        snapshot.forEach((docSnap) => {
+          const data = docSnap.data(); total++;
+          if (data.status === "proses") proses++; else if (data.status === "selesai") selesai++;
+          if (data.waktu) { const tgl = data.waktu.toDate().toLocaleDateString('id-ID', {day: 'numeric', month: 'short'}); dataPerHari[tgl] = (dataPerHari[tgl] || 0) + 1; }
+          let durasi = "-"; if (data.status === 'selesai' && data.waktuSelesai && data.waktuProses) durasi = Math.round((data.waktuSelesai.toDate() - data.waktuProses.toDate()) / 60000) + " Menit";
+
+          let waktuFormatted = '-';
+          if (data.waktu && data.waktu.toDate) {
+            waktuFormatted = data.waktu.toDate().toLocaleString('id-ID');
+          }
+
+          const fileLink = data.suratUrl || data.fileUrl || data.fileLampiran || '';
+          const namaPetugasVal = data.petugas || data.namaPetugas || '';
+
+          let tamuLat = data.lat || data.latitude || data.gpsLat || null;
+          let tamuLng = data.lng || data.longitude || data.gpsLng || null;
+
+          const dataObjStr = JSON.stringify({
+            docId: docSnap.id,
+            nomorAntrian: data.nomorAntrian || '-',
+            nama: data.nama || '-',
+            instansi: data.instansi || '-',
+            keperluan: data.keperluan || '-',
+            petugas: namaPetugasVal,
+            waktuFormatted: waktuFormatted,
+            durasi: durasi || '-',
+            status: data.status || 'SELESAI',
+            itemsObat: data.itemsObat || [],
+            fileUrl: fileLink,
+            lat: tamuLat,
+            lng: tamuLng
+          }).replace(/"/g, '&quot;');
+
+          let fileLampiranHtml = '<span class="text-gray-400 italic text-xs">Tidak ada file</span>';
+          if (fileLink && fileLink.length > 0) {
+            fileLampiranHtml = `
+              <div class="space-y-1">
+                <a href="${fileLink}" download="Surat_Permintaan_${data.nama || 'Tamu'}" target="_blank" class="inline-block bg-blue-100 text-blue-800 px-2.5 py-1 rounded text-xs font-bold hover:bg-blue-200 transition">📥 Lihat/Unduh File</a>
+              </div>
+            `;
+          }
+
+          let mapButtonHtml = '';
+          if (tamuLat && tamuLng) {
+            const jarakVal = hitungJarakMeter(FARMASI_LAT, FARMASI_LNG, Number(tamuLat), Number(tamuLng));
+            const isDiLuar = jarakVal > RADIUS_MAKS_METER;
+            const badgeLokasiClass = isDiLuar ? "bg-red-50 text-red-700 border-red-200" : "bg-emerald-50 text-emerald-700 border-emerald-200";
+            const badgeLokasiText = isDiLuar ? "⚠️ Di Luar Lokasi" : "✅ Di Lokasi UPTD";
+
+            let aksiLewatiHtml = '';
+            if (isDiLuar) {
+              aksiLewatiHtml = `
+                <button onclick="ubahStatusAntrianAdmin('${docSnap.id}', 'Antrian Dilewati (Di Luar Lokasi)')" class="bg-red-700 hover:bg-red-600 text-white px-2 py-1 rounded text-[10px] font-extrabold transition shadow-sm">
+                  ⏭️ Lewati Antrian
+                </button>
+              `;
+            }
+
+            mapButtonHtml = `
+              <div class="pt-2 flex flex-col gap-1.5 bg-blue-50/60 p-2 rounded-lg border border-blue-100">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded text-[9px] font-extrabold border ${badgeLokasiClass}">${badgeLokasiText} (${Math.round(jarakVal)}m)</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <button onclick='openMapModalAdmin(${JSON.stringify({docId: docSnap.id, nama: data.nama || '-', instansi: data.instansi || '-', lat: tamuLat, lng: tamuLng})})' class="bg-emerald-800 hover:bg-emerald-700 text-white px-2.5 py-1 rounded text-[10px] font-bold transition inline-flex items-center gap-1 shadow-sm">
+                    📍 Cek Posisi Map
+                  </button>
+                  ${aksiLewatiHtml}
+                </div>
+              </div>
+            `;
+          } else {
+            mapButtonHtml = `
+              <div class="pt-1">
+                <span class="text-[9px] text-gray-400 italic">Koordinat GPS tidak terekam.</span>
+              </div>
+            `;
+          }
+
+          tabel.innerHTML += `<tr class="border-b text-sm">
+            <td class="p-3 font-bold">${data.nomorAntrian || '-'}</td>
+            <td class="p-3 font-semibold text-blue-900">${data.nama || '-'}</td>
+            <td class="p-3 text-gray-600">${data.instansi || '-'}</td>
+            <td class="p-3 font-bold text-${data.status === 'selesai' ? 'green' : (data.status === 'proses' ? 'blue' : 'yellow')}-600 uppercase text-xs">${data.status || 'menunggu'}</td>
+            <td class="p-3 text-gray-500">${durasi}</td>
+            <td class="p-3 align-top">
+              ${fileLampiranHtml}
+              ${mapButtonHtml}
+            </td>
+            <td class="p-3 space-y-3 min-w-[340px]">
+
+              <div class="border border-blue-200 rounded-lg p-3 bg-blue-50/40 space-y-2">
+                <div class="text-[11px] font-extrabold text-blue-900 border-b border-blue-200 pb-1">👤 Input Nama Petugas</div>
+                <div class="flex items-center gap-1.5">
+                  <input type="text" id="inPetugas_${docSnap.id}" value="${namaPetugasVal}" placeholder="Ketik nama petugas..." class="w-full p-1.5 border rounded text-xs bg-white font-semibold text-blue-900">
+                  <button onclick="simpanPetugasAdmin('${docSnap.id}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[11px] px-3 py-1.5 rounded transition shrink-0 shadow-sm">Simpan</button>
+                </div>
+
+                <div class="text-[11px] font-extrabold text-blue-900 border-b border-blue-200 pt-1 pb-1">➕ Tambah Item Barang/Obat</div>
+                <div class="grid grid-cols-2 gap-1.5">
+                  <input type="text" id="inNama_${docSnap.id}" placeholder="Nama Barang/Obat..." class="p-1 border rounded text-xs col-span-2 bg-white">
+                  <input type="text" id="inTahun_${docSnap.id}" placeholder="Tahun (APBD 2025)" value="APBD 2025" class="p-1 border rounded text-xs bg-white">
+                  <input type="text" id="inSatuan_${docSnap.id}" placeholder="Satuan (Tablet/Box)" value="Tablet" class="p-1 border rounded text-xs bg-white">
+                  <input type="number" id="inVol_${docSnap.id}" placeholder="Volume (Qty)" class="p-1 border rounded text-xs bg-white">
+                  <input type="text" id="inED_${docSnap.id}" placeholder="Ed (Okt-27)" class="p-1 border rounded text-xs bg-white">
+                  <input type="text" id="inBatch_${docSnap.id}" placeholder="No Batch..." class="p-1 border rounded text-xs uppercase bg-white font-mono col-span-2">
+                </div>
+                <button onclick="tambahItemObatTamu('${docSnap.id}')" class="w-full bg-blue-900 text-white py-1.5 rounded text-[11px] font-bold hover:bg-blue-800 transition shadow-sm">+ Masukkan ke Rincian</button>
+              </div>
+
+              <div id="listObatContainer_${docSnap.id}" class="space-y-1 max-h-40 overflow-y-auto">
+                ${(data.itemsObat && data.itemsObat.length > 0) ? data.itemsObat.map((item, idx) => `
+                  <div class="bg-gray-50 border p-1.5 rounded text-[11px] flex justify-between items-center">
+                    <div><b>${idx+1}. ${item.nama}</b> (${item.volume} ${item.satuan}) - ${item.tahun}</div>
+                    <button onclick="hapusItemObatTamu('${docSnap.id}', ${idx})" class="text-red-600 font-bold px-1 hover:bg-red-100 rounded">×</button>
+                  </div>
+                `).join('') : '<div class="text-[10px] text-gray-400 italic">Belum ada item obat dimasukkan.</div>'}
+              </div>
+
+              <div class="flex gap-1 flex-wrap pt-1">
+                ${data.status !== 'selesai' && data.status !== 'proses' ? `<button onclick="updateStatusViaAdmin('${docSnap.id}', 'proses', '${data.kontak || data.hp || ''}', '${data.nama || ''}', '${data.nomorAntrian || ''}')" class="bg-yellow-500 text-white px-2.5 py-1 rounded-lg text-xs font-bold hover:bg-yellow-600">Proses</button>` : ''}
+                <button onclick="updateStatusViaAdmin('${docSnap.id}', 'selesai', '${data.kontak || data.hp || ''}', '${data.nama || ''}', '${data.nomorAntrian || ''}')" class="bg-green-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold hover:bg-green-700">Simpan & Selesai</button>
+                <button onclick="downloadWord(${dataObjStr})" class="bg-blue-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold hover:bg-blue-700">📝 Download Word SBBK</button>
+                <button onclick="hapusAntrian('${docSnap.id}')" class="bg-red-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold hover:bg-red-700">Hapus</button>
+              </div>
+            </td>
+          </tr>`;
+        });
+        updateGrafik(dataPerHari);
+        document.getElementById("totalTamu").innerText = total; document.getElementById("totalProses").innerText = proses; document.getElementById("totalSelesai").innerText = selesai;
+      });
+
+      onSnapshot(query(collection(db, "Konsultasi"), orderBy("waktuInput", "desc")), (snapshot) => {
+        const tabelKonsultasiAdmin = document.getElementById("tabelKonsultasiAdmin");
+        const tabelKonsultasiPDF = document.getElementById("tabelKonsultasiPDF");
+        tabelKonsultasiAdmin.innerHTML = "";
+        tabelKonsultasiPDF.innerHTML = "";
+
+        if (snapshot.empty) {
+          tabelKonsultasiAdmin.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-gray-400">Belum ada data keluhan.</td></tr>`;
+          return;
+        }
+
+        snapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          const tanggalStr = data.waktuInput?.toDate ? data.waktuInput.toDate().toLocaleString('id-ID') : 'Baru saja';
+
+          tabelKonsultasiAdmin.innerHTML += `
+            <tr class="border-b hover:bg-gray-50">
+              <td class="p-3 border text-gray-500 whitespace-nowrap">${tanggalStr}</td>
+              <td class="p-3 border font-bold text-blue-900">${data.nama || '-'}</td>
+              <td class="p-3 border text-gray-700">${data.instansi || '-'}</td>
+              <td class="p-3 border text-blue-900">${data.kontak || '-'}</td>
+              <td class="p-3 border font-semibold text-emerald-800">${data.kategori || '-'}</td>
+              <td class="p-3 border whitespace-pre-line text-gray-700">${data.isi || '-'}</td>
+              <td class="p-3 border text-center">
+                <button onclick="hapusKeluhan('${docSnap.id}')" class="bg-red-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold">Hapus</button>
+              </td>
+            </tr>
+          `;
+          tabelKonsultasiPDF.innerHTML += `
+            <tr class="border-b">
+              <td class="p-2 border text-[10px] text-gray-500">${tanggalStr}</td>
+              <td class="p-2 border font-bold">${data.nama || '-'}</td>
+              <td class="p-2 border text-gray-700">${data.instansi || '-'}</td>
+              <td class="p-2 border text-blue-900">${data.kontak || '-'}</td>
+              <td class="p-2 border font-semibold text-emerald-800">${data.kategori || '-'}</td>
+              <td class="p-2 border text-gray-700">${data.isi || '-'}</td>
+            </tr>
+          `;
+        });
+      });
+
+      onSnapshot(query(collection(db, "galeri"), orderBy("waktuInput", "desc")), (snap) => {
+        const c = document.getElementById("listFotoGaleri"); c.innerHTML = "";
+        snap.forEach(d => c.innerHTML += `<div class="relative h-16 border rounded overflow-hidden"><img src="${d.data().url}" class="w-full h-full object-cover"><button onclick="hapusFoto('galeri', '${d.id}')" class="absolute inset-0 bg-red-600/70 text-white text-[10px] opacity-0 hover:opacity-100">Hapus</button></div>`);
+      });
+
+      onSnapshot(query(collection(db, "pegawai"), orderBy("waktuInput", "desc")), (snap) => {
+        const container = document.getElementById("containerDaftarPegawai");
+        container.innerHTML = "";
+        if(snap.empty) { container.innerHTML = `<p class="text-xs text-gray-400">Belum ada pegawai.</p>`; return; }
+        snap.forEach(d => {
+          const item = d.data();
+          container.innerHTML += `<div class="flex justify-between items-center bg-gray-50 p-2.5 rounded-lg text-xs border"><div><b>${item.nama}</b> - <span class="text-gray-600">${item.jabatan}</span></div><button onclick="hapusPegawaiAdmin('${d.id}')" class="bg-red-100 text-red-600 px-3 py-1 rounded font-bold">Hapus</button></div>`;
+        });
+      });
+    }
+
+    window.ubahStatusAntrianAdmin = async (docId, statusBaru) => {
+      try {
+        await updateDoc(doc(db, "tamu", docId), { status: statusBaru });
+        alert(`Status antrian berhasil diperbarui menjadi: ${statusBaru}`);
+      } catch (err) {
+        console.error("Gagal memperbarui status:", err);
+        alert("Gagal memperbarui status antrian.");
+      }
+    };
+
+    window.openMapModalAdmin = (data) => {
+      document.getElementById("modalVisitorNameAdmin").innerText = `${data.nama} (${data.instansi})`;
+      document.getElementById("modalMapAdmin").classList.remove("hidden");
+
+      setTimeout(() => {
+        if (!activeMapAdmin) {
+          activeMapAdmin = L.map('leafletMapAdmin').setView([FARMASI_LAT, FARMASI_LNG], 16);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+          }).addTo(activeMapAdmin);
+        } else {
+          activeMapAdmin.invalidateSize();
+        }
+
+        if (activeMarkerFarmasiAdmin) activeMapAdmin.removeLayer(activeMarkerFarmasiAdmin);
+        if (activeMarkerTamuAdmin) activeMapAdmin.removeLayer(activeMarkerTamuAdmin);
+        if (activeCircleRadiusAdmin) activeMapAdmin.removeLayer(activeCircleRadiusAdmin);
+
+        activeMarkerFarmasiAdmin = L.marker([FARMASI_LAT, FARMASI_LNG]).addTo(activeMapAdmin)
+          .bindPopup("<b>UPTD Farmasi Kota Tangerang Selatan</b><br>Titik Pusat Lokasi Layanan");
+
+        activeCircleRadiusAdmin = L.circle([FARMASI_LAT, FARMASI_LNG], {
+          color: 'blue',
+          fillColor: '#3b82f6',
+          fillOpacity: 0.15,
+          radius: RADIUS_MAKS_METER
+        }).addTo(activeMapAdmin);
+
+        const tLat = Number(data.lat);
+        const tLng = Number(data.lng);
+        const jarak = hitungJarakMeter(FARMASI_LAT, FARMASI_LNG, tLat, tLng);
+        const diLuar = jarak > RADIUS_MAKS_METER;
+
+        const badgeEl = document.getElementById("lokasiStatusBadgeAdmin");
+        const infoEl = document.getElementById("jarakInfoTextAdmin");
+
+        infoEl.innerText = `Jarak dari UPTD: ${Math.round(jarak)} meter`;
+        if (diLuar) {
+          badgeEl.className = "px-2.5 py-1 rounded-lg font-extrabold border text-[10px] bg-red-50 text-red-700 border-red-200";
+          badgeEl.innerText = "⚠️ DI LUAR LOKASI (ANTRIAN BISA DILEWATI)";
+        } else {
+          badgeEl.className = "px-2.5 py-1 rounded-lg font-extrabold border text-[10px] bg-emerald-50 text-emerald-700 border-emerald-200";
+          badgeEl.innerText = "✅ BERADA DI DALAM LOKASI UPTD";
+        }
+
+        activeMarkerTamuAdmin = L.marker([tLat, tLng]).addTo(activeMapAdmin)
+          .bindPopup(`<b>Tamu: ${data.nama}</b><br>Instansi: ${data.instansi}<br>Jarak: ${Math.round(jarak)}m`)
+          .openPopup();
+
+        const bounds = L.latLngBounds([[FARMASI_LAT, FARMASI_LNG], [tLat, tLng]]);
+        activeMapAdmin.fitBounds(bounds, { padding: [50, 50] });
+
+      }, 200);
+    };
+
+    window.closeMapModalAdmin = () => {
+      document.getElementById("modalMapAdmin").classList.add("hidden");
+    };
+
+    window.simpanPetugasAdmin = async (id) => {
+      const inputVal = document.getElementById(`inPetugas_${id}`).value.trim();
+      try {
+        await updateDoc(doc(db, "tamu", id), {
+          petugas: inputVal
+        });
+        alert("Nama petugas berhasil disimpan!");
+      } catch (err) {
+        console.error("Gagal menyimpan petugas:", err);
+        alert("Gagal menyimpan nama petugas.");
+      }
+    };
+
+    window.tambahItemObatTamu = async (id) => {
+      const nama = document.getElementById(`inNama_${id}`).value.trim();
+      const tahun = document.getElementById(`inTahun_${id}`).value.trim() || "APBD 2025";
+      const satuan = document.getElementById(`inSatuan_${id}`).value.trim() || "Tablet";
+      const volume = parseFloat(document.getElementById(`inVol_${id}`).value) || 0;
+      const ed = document.getElementById(`inED_${id}`).value.trim() || "-";
+      const batch = document.getElementById(`inBatch_${id}`).value.trim() || "-";
+
+      if (!nama || volume <= 0) {
+        alert("Nama barang dan volume wajib diisi dengan benar!");
+        return;
+      }
+
+      const newItem = { nama, tahun, satuan, volume, ed, batch };
+
+      import("https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js").then(async ({ getDoc }) => {
+        const docSnap = await getDoc(doc(db, "tamu", id));
+        if (docSnap.exists()) {
+          const currentData = docSnap.data();
+          const existingItems = currentData.itemsObat || [];
+          existingItems.push(newItem);
+
+          await updateDoc(doc(db, "tamu", id), { itemsObat: existingItems });
+
+          document.getElementById(`inNama_${id}`).value = "";
+          document.getElementById(`inVol_${id}`).value = "";
+          document.getElementById(`inED_${id}`).value = "";
+          document.getElementById(`inBatch_${id}`).value = "";
+        }
+      });
+    };
+
+    window.hapusItemObatTamu = async (id, index) => {
+      import("https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js").then(async ({ getDoc }) => {
+        const docSnap = await getDoc(doc(db, "tamu", id));
+        if (docSnap.exists()) {
+          const currentData = docSnap.data();
+          let existingItems = currentData.itemsObat || [];
+          existingItems.splice(index, 1);
+          await updateDoc(doc(db, "tamu", id), { itemsObat: existingItems });
+        }
+      });
+    };
+
+    window.downloadPdf = (data) => {
+      const inputPetugasElem = document.getElementById(`inPetugas_${data.docId}`);
+      const namaPetugasFinal = inputPetugasElem ? inputPetugasElem.value.trim() : (data.petugas || '-');
+
+      const areaCetak = document.getElementById("areaCetakPdf");
+      areaCetak.style.display = "block";
+
+      const items = (data.itemsObat && data.itemsObat.length > 0) ? data.itemsObat : [];
+
+      let rowsHtml = '';
+      if (items.length > 0) {
+        rowsHtml = items.map((item, i) => `
+          <tr>
+            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; height: 18px;">${i + 1}</td>
+            <td style="border: 1px solid #000; padding: 5px; font-size: 9px; font-weight: bold;">${item.nama || '-'}</td>
+            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.tahun || '-'}</td>
+            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.satuan || '-'}</td>
+            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.volume || '-'}</td>
+            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;">${item.ed || '-'}</td>
+            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px; font-family: monospace;">${item.batch || '-'}</td>
+            <td style="border: 1px solid #000; text-align: center; padding: 5px; font-size: 9px;"></td>
+          </tr>
+        `).join('');
+      } else {
+        rowsHtml = `
+          <tr>
+            <td style="border: 1px solid #000; text-align: center; padding: 6px; font-size: 9px;">1</td>
+            <td style="border: 1px solid #000; padding: 6px; font-size: 9px; text-align: center; font-style: italic;" colspan="7">Belum ada rincian barang/obat yang dimasukkan.</td>
+          </tr>
+        `;
+      }
+
+      areaCetak.innerHTML = `
+        <div style="padding: 15px 20px; font-family: Arial, sans-serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
+
+          <table style="width: 100%; border-collapse: collapse; border-bottom: 3.5px double #000; padding-bottom: 8px; margin-bottom: 12px;">
+            <tr>
+              <td style="width: 85px; vertical-align: middle; text-align: left; padding-left: 5px;">
+                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 100px; height: auto;" crossorigin="anonymous">
+              </td>
+              <td style="text-align: center; vertical-align: middle; padding-right: 35px;">
+                <h2 style="font-size: 22px; margin: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
+                <h1 style="font-size: 22px; margin: 2px 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">DINAS KESEHATAN</h1>
+                <h1 style="font-size: 22px; margin: 2px 0; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">UPTD FARMASI</h1>
+                <p style="font-size: 15px; margin: 3px 0 1px 0;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</p>
+                <p style="font-size: 10px; margin: 0; color: #000;">pos-el <span style="color: #0000ff; text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></p>
+              </td>
+            </tr>
+          </table>
+
+          <div style="text-align: center; margin-bottom: 12px;">
+            <div style="font-size: 11.5px; font-weight: bold; text-decoration: underline; display: inline-block; padding-bottom: 1px;">BUKTI PENGAMBILAN OBAT/PELAYANAN</div>
+          </div>
+
+          <table style="width: 100%; font-size: 9.5px; margin-bottom: 12px; border-collapse: collapse;">
+            <tr>
+              <td style="width: 120px; font-weight: bold;">Nama</td>
+              <td style="width: 10px;">:</td>
+              <td style="font-weight: bold; text-transform: uppercase;">${data.nama || '-'}</td>
+              <td style="width: 110px; font-weight: bold;">No Antrian</td>
+              <td style="width: 10px; text-align: center;">:</td>
+              <td style="font-weight: bold;">${data.nomorAntrian || '-'}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">Instansi</td>
+              <td>:</td>
+              <td style="text-transform: uppercase;">${data.instansi || '-'}</td>
+              <td style="font-weight: bold;">Status Pelayanan</td>
+              <td style="text-align: center;">:</td>
+              <td style="font-weight: bold; text-transform: uppercase;">${data.status || '-'}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">Keperluan</td>
+              <td>:</td>
+              <td>${data.keperluan || '-'}</td>
+              <td style="font-weight: bold;">Durasi</td>
+              <td style="text-align: center;">:</td>
+              <td>${data.durasi || '-'}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">Petugas Program</td>
+              <td>:</td>
+              <td>${namaPetugasFinal}</td>
+              <td style="font-weight: bold;">Waktu Kunjungan</td>
+              <td style="text-align: center;">:</td>
+              <td>${data.waktuFormatted || '-'}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">Lampiran File</td>
+              <td>:</td>
+              <td colspan="4" style="color: #0000ff;">${data.fileUrl ? 'File Lampiran Tersedia' : 'Tidak ada file dilampirkan'}</td>
+            </tr>
+          </table>
+
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px;">
+            <thead>
+              <tr style="background-color: #f3f4f6; text-align: center; font-size: 9px; font-weight: bold;">
+                <th style="border: 1px solid #000; padding: 5px; width: 30px;">No</th>
+                <th style="border: 1px solid #000; padding: 5px;">Nama Barang</th>
+                <th style="border: 1px solid #000; padding: 5px; width: 65px;">Tahun</th>
+                <th style="border: 1px solid #000; padding: 5px; width: 65px;">Satuan</th>
+                <th style="border: 1px solid #000; padding: 5px; width: 55px;">Volume</th>
+                <th style="border: 1px solid #000; padding: 5px; width: 60px;">Ed</th>
+                <th style="border: 1px solid #000; padding: 5px; width: 75px;">No Batch</th>
+                <th style="border: 1px solid #000; padding: 5px; width: 50px;">Paraf</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rowsHtml}
+            </tbody>
+          </table>
+
+          <table style="width: 100%; margin-top: 20px; font-size: 9.5px; border-collapse: collapse;">
+            <tr>
+              <td style="width: 50%; text-align: center; vertical-align: top;">
+                <p style="margin: 0; font-weight: bold;">Petugas</p>
+                <br><br><br>
+                <p style="margin: 0; font-weight: bold; text-decoration: underline;">${namaPetugasFinal && namaPetugasFinal !== '-' ? namaPetugasFinal : '......................................'}</p>
+              </td>
+              <td style="width: 50%; text-align: center; vertical-align: top;">
+                <p style="margin: 0; font-weight: bold;">Penerima</p>
+                <br><br><br>
+                <p style="margin: 0; font-weight: bold; text-decoration: underline;">${data.nama || '......................................'}</p>
+              </td>
+            </tr>
+          </table>
+
+        </div>
+      `;
+
+      setTimeout(() => {
+        const opt = {
+          margin:       [5, 5, 5, 5],
+          filename:     `Bukti_Pengambilan_Obat_${data.nama || 'Tamu'}.pdf`,
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { scale: 2, useCORS: true, letterRendering: true, scrollX: 0, scrollY: 0 },
+          jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().from(areaCetak).set(opt).save().then(() => {
+          areaCetak.style.display = "none";
+          areaCetak.innerHTML = "";
+        });
+      }, 300);
+    };
+
+    window.downloadWord = (data) => {
+      const inputPetugasElem = document.getElementById(`inPetugas_${data.docId}`);
+      const petugas = inputPetugasElem ? inputPetugasElem.value.trim() : (data.petugas || '-');
+      const items = Array.isArray(data.itemsObat) ? data.itemsObat : [];
+      const rows = items.length ? items.map((item, i) => `<tr><td>${i+1}</td><td>${item.nama || '-'}</td><td>${item.tahun || '-'}</td><td>${item.satuan || '-'}</td><td>${item.volume || '-'}</td><td>${item.ed || '-'}</td><td>${item.batch || '-'}</td><td></td></tr>`).join('') : '<tr><td>1</td><td colspan="7">Belum ada rincian barang/obat.</td></tr>';
+      const html = `<!doctype html><html><head><meta charset="utf-8"><style>@page{size:A4;margin:15mm}body{font-family:Arial;font-size:10pt;color:#000}.kop{border-bottom:3px double #000;padding-bottom:8px}.kop td{border:0}.meta,.items,.sign{width:100%;border-collapse:collapse}.meta td{border:0;padding:3px}.items th,.items td{border:1px solid #000;padding:5px;font-size:9pt}.items th{background:#f2f2f2}.sign td{border:0;text-align:center;padding-top:55px}</style></head><body><table class="kop"><tr><td style="width:95px"><img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width:80px" crossorigin="anonymous"></td><td style="text-align:center"><b style="font-size:15pt">PEMERINTAH KOTA TANGERANG SELATAN</b><br><b style="font-size:15pt">DINAS KESEHATAN</b><br><b style="font-size:18pt">UPTD FARMASI</b><br>Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten<br><small>uptdfarmasi@tangerangselatankota.go.id</small></td></tr></table><h3 style="text-align:center;text-decoration:underline;margin:16px 0 4px">BUKTI BARANG KELUAR</h3><p style="text-align:center;margin-top:0">Nomor dokumen: SBBK/${data.nomorAntrian || '-'}</p><table class="meta"><tr><td style="width:17%"><b>Nama</b></td><td style="width:33%">: ${data.nama || '-'}</td><td style="width:20%"><b>No Antrian</b></td><td>: ${data.nomorAntrian || '-'}</td></tr><tr><td><b>Instansi</b></td><td>: ${data.instansi || '-'}</td><td><b>Status Pelayanan</b></td><td>: ${data.status || '-'}</td></tr><tr><td><b>Keperluan</b></td><td>: ${data.keperluan || '-'}</td><td><b>Durasi</b></td><td>: ${data.durasi || '-'}</td></tr><tr><td><b>Petugas Program</b></td><td>: ${petugas}</td><td><b>Waktu Kunjungan</b></td><td>: ${data.waktuFormatted || '-'}</td></tr></table><table class="items"><thead><tr><th>No</th><th>Nama Barang</th><th>Tahun</th><th>Satuan</th><th>Volume</th><th>ED</th><th>Batch</th><th>Paraf</th></tr></thead><tbody>${rows}</tbody></table><p><b>Keterangan:</b> ${data.keterangan || '-'}</p><table class="sign"><tr><td>Petugas Program,<br><br><br><br><b>${petugas}</b></td><td>Yang menerima,<br><br><br><br><b>${data.nama || '........................'}</b></td></tr></table></body></html>`;
+      const blob = new Blob([html], {type:'application/msword;charset=utf-8'});
+      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download=`SBBK_${data.nomorAntrian || 'Tamu'}.doc`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+    };
+
+    window.downloadPDFKeluhan = () => {
+      const sourceElement = document.getElementById('printAreaKeluhan');
+      if (!sourceElement) return;
+
+      const tabelHtml = sourceElement.querySelector('table').outerHTML;
+
+      sourceElement.innerHTML = `
+        <div style="padding: 15px 20px; font-family: Arial, sans-serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
+          <table style="width: 100%; border-collapse: collapse; border-bottom: 3.5px double #000; padding-bottom: 8px; margin-bottom: 12px;">
+            <tr>
+              <td style="width: 85px; vertical-align: middle; text-align: left; padding-left: 5px;">
+                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 72px; height: auto;" crossorigin="anonymous">
+              </td>
+              <td style="text-align: center; vertical-align: middle; padding-right: 35px;">
+                <h2 style="font-size: 13.5px; margin: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
+                <h1 style="font-size: 15.5px; margin: 2px 0; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">DINAS KESEHATAN</h1>
+                <h1 style="font-size: 17px; margin: 2px 0; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">UPTD FARMASI</h1>
+                <p style="font-size: 9.5px; margin: 3px 0 1px 0;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</p>
+                <p style="font-size: 9px; margin: 0; color: #000;">pos-el <span style="color: #0000ff; text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></p>
+              </td>
+            </tr>
+          </table>
+
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="font-size: 11.5px; font-weight: bold; text-decoration: underline; display: inline-block; padding-bottom: 1px;">LAPORAN KONSULTASI DAN PENGADUAN UPTD FARMASI</div>
+          </div>
+
+          <div style="margin-bottom: 25px; width: 100%;">
+            ${tabelHtml}
+          </div>
+
+          <table style="width: 100%; margin-top: 30px; font-size: 9.5px; border-collapse: collapse; page-break-inside: avoid;">
+            <tr>
+              <td style="width: 60%;"></td>
+              <td style="width: 40%; text-align: center; vertical-align: top;">
+                <p style="margin: 0;">Tangerang Selatan, ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                <p style="margin: 3px 0 0 0; font-weight: bold;">Petugas Penanggung Jawab</p>
+                <br><br><br>
+                <p style="margin: 0; font-weight: bold; text-decoration: underline;">( .................................................... )</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      `;
+
+      sourceElement.style.display = 'block';
+      sourceElement.classList.remove('hidden');
+
+      const opt = {
+        margin:       [5, 5, 5, 5],
+        filename:     'Laporan_Konsultasi_Dan_Pengaduan_UPTD.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, letterRendering: true, scrollX: 0, scrollY: 0 },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      setTimeout(() => {
+        html2pdf().from(sourceElement).set(opt).save().then(() => {
+          sourceElement.innerHTML = `
+            <div class="text-center mb-4">
+              <h3 class="text-xs font-black uppercase tracking-wider underline">LAPORAN KONSULTASI DAN PENGADUAN KELUHAN</h3>
+            </div>
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="border-b text-gray-700 text-[10px] uppercase bg-gray-50">
+                  <th class="p-2 border">Waktu</th>
+                  <th class="p-2 border">Nama</th>
+                  <th class="p-2 border">Instansi</th>
+                  <th class="p-2 border">Kontak</th>
+                  <th class="p-2 border">Kategori</th>
+                  <th class="p-2 border">Isi Keluhan</th>
+                </tr>
+              </thead>
+              <tbody id="tabelKonsultasiPDF" class="text-[11px] text-gray-800"></tbody>
+            </table>
+          `;
+          sourceElement.style.display = 'none';
+          sourceElement.classList.add('hidden');
+        });
+      }, 300);
+    };
+
+    window.updateStatusViaAdmin = async (id, status, hpTamu, namaTamu, antrian) => {
+      const inputPetugas = document.getElementById(`inPetugas_${id}`);
+      const namaPetugas = inputPetugas ? inputPetugas.value.trim() : '-';
+
+      let updateData = {
+        status: status,
+        petugas: namaPetugas,
+        [status === 'proses' ? 'waktuProses' : 'waktuSelesai']: serverTimestamp()
+      };
+      await updateDoc(doc(db, "tamu", id), updateData);
+
+      const pesanAdmin = `PEMBARUAN PELAYANAN UPTD FARMASI\nNo. Antrian: ${antrian}\nNama Tamu: ${namaTamu}\nStatus: ${status}\nNomor tamu: ${hpTamu || '-'}\nPetugas: ${namaPetugas}`;
+      window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesanAdmin)}`, '_blank');
+    };
+
+    window.hapusAntrian = async (id) => {
+      if (confirm("Hapus data antrian ini?")) await deleteDoc(doc(db, "tamu", id));
+    };
+
+    window.hapusKeluhan = async (id) => {
+      if (confirm("Hapus keluhan ini?")) await deleteDoc(doc(db, "Konsultasi", id));
+    };
+
+    window.tambahFoto = async (koleksi, inputId) => {
+      const url = document.getElementById(inputId).value.trim();
+      if (!url) return;
+      await addDoc(collection(db, koleksi), { url, waktuInput: serverTimestamp() });
+      document.getElementById(inputId).value = "";
+    };
+
+    window.hapusFoto = async (koleksi, id) => { if (confirm("Hapus foto?")) await deleteDoc(doc(db, koleksi, id)); };
+
+    window.tambahArtikel = async () => {
+      const kategori = document.getElementById("pilihKategori").value;
+      const judul = document.getElementById("judulArtikelInput").value || "Tanpa Judul";
+      const url = document.getElementById("urlKategoriInput").value || "";
+      const isi = document.getElementById("isiKategoriInput").value || "";
+      await addDoc(collection(db, kategori), { judul, url, isi, waktuInput: serverTimestamp() });
+      alert("Artikel berhasil ditambah!");
+    };
+
+    const kategoriList = ['Informasi', 'Edukasi', 'Pelayanan', 'Obat', 'Konsultasi'];
+    kategoriList.forEach(kat => {
+      onSnapshot(query(collection(db, kat), orderBy("waktuInput", "desc")), (snap) => {
+        const container = document.getElementById("containerDaftarArtikel");
+        snap.forEach(d => {
+          container.innerHTML += `<div class="flex justify-between items-center bg-gray-50 p-2 rounded text-[11px]"><span><b>${kat}</b>: ${d.data().judul}</span> <button onclick="hapusArtikel('${kat}', '${d.id}')" class="text-red-600 font-bold">Hapus</button></div>`;
+        });
+      });
+    });
+
+    window.hapusArtikel = async (kategori, id) => {
+      if(confirm("Hapus artikel?")) await deleteDoc(doc(db, kategori, id));
+    };
+
+    window.tambahPegawaiAdmin = async () => {
+      const nama = document.getElementById("inputPegawaiNama").value.trim();
+      const jabatan = document.getElementById("inputPegawaiJabatan").value.trim();
+      const hp = document.getElementById("inputPegawaiPj").value.trim();
+      if (!nama || !jabatan) { alert("Nama & Jabatan wajib diisi!"); return; }
+      await addDoc(collection(db, "pegawai"), { nama, jabatan, hp, waktuInput: Date.now() });
+      alert("Pegawai ditambah!");
+    };
+
+    window.hapusPegawaiAdmin = async (id) => {
+      if (confirm("Hapus pegawai?")) await deleteDoc(doc(db, "pegawai", id));
+    };
+  </script>
+</body>
+</html>
