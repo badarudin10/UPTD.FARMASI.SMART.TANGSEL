@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <!-- Leaflet CSS untuk Maps tracking -->
@@ -705,14 +706,25 @@
       }, 300);
     };
 
-    window.downloadWord = (data) => {
-      const inputPetugasElem = document.getElementById(`inPetugas_${data.docId}`);
-      const petugas = inputPetugasElem ? inputPetugasElem.value.trim() : (data.petugas || '-');
-      const items = Array.isArray(data.itemsObat) ? data.itemsObat : [];
-      const rows = items.length ? items.map((item, i) => `<tr><td>${i+1}</td><td>${item.nama || '-'}</td><td>${item.tahun || '-'}</td><td>${item.satuan || '-'}</td><td>${item.volume || '-'}</td><td>${item.ed || '-'}</td><td>${item.batch || '-'}</td><td></td></tr>`).join('') : '<tr><td>1</td><td colspan="7">Belum ada rincian barang/obat.</td></tr>';
-      const html = `<!doctype html><html><head><meta charset="utf-8"><style>@page{size:A4;margin:15mm}body{font-family:Arial;font-size:10pt;color:#000}.kop{border-bottom:3px double #000;padding-bottom:8px}.kop td{border:0}.meta,.items,.sign{width:100%;border-collapse:collapse}.meta td{border:0;padding:3px}.items th,.items td{border:1px solid #000;padding:5px;font-size:9pt}.items th{background:#f2f2f2}.sign td{border:0;text-align:center;padding-top:55px}</style></head><body><table class="kop"><tr><td style="width:95px"><img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width:80px" crossorigin="anonymous"></td><td style="text-align:center"><b style="font-size:15pt">PEMERINTAH KOTA TANGERANG SELATAN</b><br><b style="font-size:15pt">DINAS KESEHATAN</b><br><b style="font-size:18pt">UPTD FARMASI</b><br>Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten<br><small>uptdfarmasi@tangerangselatankota.go.id</small></td></tr></table><h3 style="text-align:center;text-decoration:underline;margin:16px 0 4px">BUKTI BARANG KELUAR</h3><p style="text-align:center;margin-top:0">Nomor dokumen: SBBK/${data.nomorAntrian || '-'}</p><table class="meta"><tr><td style="width:17%"><b>Nama</b></td><td style="width:33%">: ${data.nama || '-'}</td><td style="width:20%"><b>No Antrian</b></td><td>: ${data.nomorAntrian || '-'}</td></tr><tr><td><b>Instansi</b></td><td>: ${data.instansi || '-'}</td><td><b>Status Pelayanan</b></td><td>: ${data.status || '-'}</td></tr><tr><td><b>Keperluan</b></td><td>: ${data.keperluan || '-'}</td><td><b>Durasi</b></td><td>: ${data.durasi || '-'}</td></tr><tr><td><b>Petugas Program</b></td><td>: ${petugas}</td><td><b>Waktu Kunjungan</b></td><td>: ${data.waktuFormatted || '-'}</td></tr></table><table class="items"><thead><tr><th>No</th><th>Nama Barang</th><th>Tahun</th><th>Satuan</th><th>Volume</th><th>ED</th><th>Batch</th><th>Paraf</th></tr></thead><tbody>${rows}</tbody></table><p><b>Keterangan:</b> ${data.keterangan || '-'}</p><table class="sign"><tr><td>Petugas Program,<br><br><br><br><b>${petugas}</b></td><td>Yang menerima,<br><br><br><br><b>${data.nama || '........................'}</b></td></tr></table></body></html>`;
-      const blob = new Blob([html], {type:'application/msword;charset=utf-8'});
-      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download=`SBBK_${data.nomorAntrian || 'Tamu'}.doc`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+    window.downloadWord = async (data) => {
+      try {
+        const inputPetugasElem = document.getElementById(`inPetugas_${data.docId}`);
+        const petugas = inputPetugasElem ? inputPetugasElem.value.trim() : (data.petugas || '-');
+        const x = (v) => String(v ?? '-').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+        const p = (text, bold=false, align='left') => `<w:p><w:pPr><w:jc w:val="${align}"/></w:pPr><w:r>${bold?'<w:rPr><w:b/></w:rPr>':''}<w:t xml:space="preserve">${x(text)}</w:t></w:r></w:p>`;
+        const cell = (text, bold=false) => `<w:tc><w:tcPr><w:tcBorders><w:top w:val="single" w:sz="4"/><w:left w:val="single" w:sz="4"/><w:bottom w:val="single" w:sz="4"/><w:right w:val="single" w:sz="4"/></w:tcBorders></w:tcPr>${p(text,bold,'left')}</w:tc>`;
+        const row = (cells, bold=false) => `<w:tr>${cells.map(v=>cell(v,bold)).join('')}</w:tr>`;
+        const items = Array.isArray(data.itemsObat) ? data.itemsObat : [];
+        const itemRows = items.length ? items.map((item,i)=>row([i+1,item.nama||'-',item.tahun||'-',item.satuan||'-',item.volume||'-',item.ed||'-',item.batch||'-',''])).join('') : row(['1','Belum ada rincian barang/obat','-','-','-','-','-','']);
+        const metaRows = [row(['Nama',data.nama||'-','No Antrian',data.nomorAntrian||'-']),row(['Instansi',data.instansi||'-','Status Pelayanan',data.status||'-']),row(['Keperluan',data.keperluan||'-','Durasi',data.durasi||'-']),row(['Petugas Program',petugas,'Waktu Kunjungan',data.waktuFormatted||'-'])].join('');
+        const documentXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${p('PEMERINTAH KOTA TANGERANG SELATAN',true,'center')}${p('DINAS KESEHATAN',true,'center')}${p('UPTD FARMASI',true,'center')}${p('Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten','', 'center')}<w:p><w:pPr><w:pBdr><w:bottom w:val="double" w:sz="12" w:space="1" w:color="000000"/></w:pBdr></w:pPr></w:p>${p('BUKTI BARANG KELUAR',true,'center')}${p('Nomor dokumen: SBBK/'+(data.nomorAntrian||'-'),'','center')}<w:tbl>${metaRows}</w:tbl>${p('RINCIAN BARANG/OBAT',true,'left')}<w:tbl>${row(['No','Nama Barang','Tahun','Satuan','Volume','ED','Batch','Paraf'],true)}${itemRows}</w:tbl>${p('Keterangan: '+(data.keterangan||'-'))}<w:p/><w:p/><w:p/><w:tbl>${row(['Petugas Program,','','Yang menerima,'])}${row([petugas,'',data.nama||'........................'])}</w:tbl><w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="720" w:right="720" w:bottom="720" w:left="720"/></w:sectPr></w:body></w:document>`;
+        const zip = new JSZip();
+        zip.file('[Content_Types].xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>');
+        zip.file('_rels/.rels','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>');
+        zip.file('word/document.xml',documentXml);
+        const blob=await zip.generateAsync({type:'blob',mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+        const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`SBBK_${data.nomorAntrian||'Tamu'}.docx`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),2000);
+      } catch (error) { console.error('Gagal membuat DOCX SBBK:',error); alert('SBBK Word gagal dibuat: '+error.message); }
     };
 
     window.downloadPDFKeluhan = () => {
