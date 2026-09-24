@@ -25,6 +25,170 @@ cursor: default !important;
 #imageModal {
 transition: opacity 0.2s ease-in-out;
 }
+
+/* ============================================ */
+/* ANIMASI */
+/* ============================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes popIn {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.1); opacity: 1; }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+@keyframes pulseAlert {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+}
+@keyframes pulseGreen {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+}
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes glowGreen {
+  0%, 100% { box-shadow: 0 0 5px rgba(16, 185, 129, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.6); }
+}
+
+.animasi-masuk { animation: fadeInUp 0.5s ease-out both; }
+.animasi-fade { animation: fadeIn 0.4s ease-out both; }
+.animasi-pop { animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animasi-bounce-in { animation: bounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animasi-slide-left { animation: slideInLeft 0.4s ease-out both; }
+
+/* Kartu menu */
+.menu-card {
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.menu-card::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.15);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+}
+.menu-card:hover::before {
+  width: 300px; height: 300px;
+}
+.menu-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.6);
+}
+.menu-card .menu-icon {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.menu-card:hover .menu-icon {
+  transform: scale(1.15) rotate(-5deg);
+  animation: iconBounce 1s ease-in-out infinite;
+}
+
+/* Tombol */
+.btn-animasi {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+.btn-animasi:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  filter: brightness(1.1);
+}
+.btn-animasi:active {
+  transform: translateY(0) scale(0.95);
+}
+
+/* Kartu tamu */
+.kartu-tamu {
+  transition: all 0.3s ease;
+}
+.kartu-tamu:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+/* Modal */
+.modal-custom {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.modal-content-custom {
+  transform: scale(0.85) translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal-custom.visible-custom .modal-content-custom {
+  transform: scale(1) translateY(0);
+}
+
+/* Loading */
+.btn-loading { pointer-events: none; opacity: 0.8; }
+.btn-loading i { animation: spin 1s linear infinite; }
+
+/* GPS Box */
+.gps-valid { animation: pulseGreen 2s infinite; }
+.gps-invalid { animation: pulseAlert 1.5s infinite; }
+.gps-detecting { animation: pulseSoft 1.5s infinite; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(90deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* Halaman berpindah */
+.page-content {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.page-content:not(.hidden-custom) {
+  animation: fadeInUp 0.4s ease-out both;
+}
+
+/* Icon glow pada modal */
+.icon-glow {
+  animation: glowGreen 2s ease-in-out infinite;
+}
+
 @media (min-width: 1024px) {
 .app-layout-wrapper {
 max-width: 1280px !important;
@@ -78,10 +242,10 @@ box-sizing: border-box;
 
 <!-- HALAMAN GERBANG UTAMA (SURVEY) -->
 <div id="gatePage" class="flex items-center justify-center p-4" style="position: fixed; inset: 0; z-index: 9999; overflow-y: auto; background: linear-gradient(135deg, #0f172a, #1e293b);">
-  <div class="max-w-md w-full rounded-3xl shadow-2xl border border-slate-700/60 p-8 text-center space-y-6 my-auto bg-slate-900/90 backdrop-blur-md">
+  <div class="max-w-md w-full rounded-3xl shadow-2xl border border-slate-700/60 p-8 text-center space-y-6 my-auto bg-slate-900/90 backdrop-blur-md animasi-masuk">
     
-    <div class="flex justify-center">
-      <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="h-20 w-20 object-contain drop-shadow-md no-zoom">
+    <div class="flex justify-center animasi-pop">
+      <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="h-20 w-20 object-contain drop-shadow-md no-zoom" style="animation: iconBounce 2s ease-in-out infinite;">
     </div>
 
     <div class="space-y-2">
@@ -112,7 +276,7 @@ box-sizing: border-box;
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" 
          target="_blank" 
          onclick="mulaiIsiSurvey(event)"
-         class="w-full text-white font-extrabold py-3.5 px-6 rounded-2xl transition transform active:scale-95 flex items-center justify-center gap-2.5 text-sm shadow-lg bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600">
+         class="w-full text-white font-extrabold py-3.5 px-6 rounded-2xl flex items-center justify-center gap-2.5 text-sm shadow-lg bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 btn-animasi">
         <i class="fas fa-clipboard-list"></i>
         <span>ISI SURVEI KEPUASAN</span>
       </a>
@@ -120,7 +284,7 @@ box-sizing: border-box;
       <button id="btnManual" 
               onclick="bukaMenuUtamaManual()" 
               disabled
-              class="w-full bg-slate-800/50 text-slate-500 border border-slate-700 font-bold py-3.5 px-6 rounded-2xl transition text-xs flex items-center justify-center gap-2 cursor-not-allowed">
+              class="w-full bg-slate-800/50 text-slate-500 border border-slate-700 font-bold py-3.5 px-6 rounded-2xl text-xs flex items-center justify-center gap-2 cursor-not-allowed transition-all duration-300">
         <i class="fas fa-check-circle"></i>
         <span>LANJUT MASUK KE MENU UTAMA</span>
       </button>
@@ -148,23 +312,23 @@ box-sizing: border-box;
 <aside class="pc-sidebar space-y-4">
 <div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60">
 <nav class="space-y-1.5">
-<a href="#" onclick="switchTab('index', event)" id="nav-index" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition">
+<a href="#" onclick="switchTab('index', event)" id="nav-index" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition btn-animasi">
 <div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1"><i class="fas fa-house"></i></div>
 <span class="text-xs">Beranda / Dashboard</span>
 </a>
-<a href="#" onclick="switchTab('registrasi', event)" id="nav-registrasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition">
+<a href="#" onclick="switchTab('registrasi', event)" id="nav-registrasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition btn-animasi">
 <div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1"><i class="fas fa-pen-to-square"></i></div>
 <span class="text-xs">Registrasi</span>
 </a>
-<a href="#" onclick="switchTab('tamu', event)" id="nav-tamu" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition">
+<a href="#" onclick="switchTab('tamu', event)" id="nav-tamu" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition btn-animasi">
 <div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1"><i class="fas fa-ticket"></i></div>
 <span class="text-xs">Status Tamu</span>
 </a>
-<a href="#" onclick="switchTab('panduan', event)" id="nav-panduan" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition">
+<a href="#" onclick="switchTab('panduan', event)" id="nav-panduan" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition btn-animasi">
 <div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1"><i class="fas fa-book-open"></i></div>
 <span class="text-xs">Panduan Sistem</span>
 </a>
-<button onclick="resetAkses()" class="w-full mt-3 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-slate-700/50 hover:bg-slate-700 text-slate-300 font-bold text-xs transition border border-slate-600/40">
+<button onclick="resetAkses()" class="w-full mt-3 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-slate-700/50 hover:bg-slate-700 text-slate-300 font-bold text-xs transition border border-slate-600/40 btn-animasi">
 <i class="fas fa-lock"></i> <span>Kunci Kembali</span>
 </button>
 </nav>
@@ -175,7 +339,7 @@ box-sizing: border-box;
 <main class="main-container lg:max-w-none space-y-4 pt-1 pb-3">
 
 <div id="page-index" class="page-content space-y-3.5">
-  <div class="pc-header-desktop hidden p-4 rounded-2xl shadow-sm border border-slate-700/60 mb-3 bg-slate-800/80">
+  <div class="pc-header-desktop hidden p-4 rounded-2xl shadow-sm border border-slate-700/60 mb-3 bg-slate-800/80 animasi-masuk">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-3">
         <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo" class="h-20 w-20 object-contain no-zoom">
@@ -184,15 +348,15 @@ box-sizing: border-box;
           <p class="text-xs text-emerald-400 font-semibold uppercase tracking-wider">Sistem Layanan Digital Terpadu</p>
         </div>
       </div>
-      <button onclick="resetAkses()" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-2 rounded-xl transition font-bold flex items-center gap-1.5 shadow-sm border border-slate-600">
+      <button onclick="resetAkses()" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-2 rounded-xl transition font-bold flex items-center gap-1.5 shadow-sm border border-slate-600 btn-animasi">
         <i class="fas fa-lock"></i> Kunci Kembali
       </button>
     </div>
   </div>
 
-  <div class="p-4 sm:p-5 rounded-2xl shadow-md border border-emerald-500/30 text-center space-y-2 bg-gradient-to-br from-slate-800 via-teal-950/40 to-emerald-950/40">
+  <div class="p-4 sm:p-5 rounded-2xl shadow-md border border-emerald-500/30 text-center space-y-2 bg-gradient-to-br from-slate-800 via-teal-950/40 to-emerald-950/40 animasi-masuk" style="animation-delay: 0.05s;">
     <div class="mx-auto flex items-center justify-center">
-      <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="w-24 h-24 object-contain no-zoom">
+      <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="w-24 h-24 object-contain no-zoom" style="animation: iconBounce 3s ease-in-out infinite;">
     </div>
     <div>
       <h2 class="text-sm sm:text-base font-black text-slate-100 uppercase tracking-wide">Selamat Datang di UPTD Farmasi</h2>
@@ -202,9 +366,9 @@ box-sizing: border-box;
 
   <div class="grid grid-cols-2 gap-3">
     
-    <a href="#" onclick="switchTab('registrasi', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
+    <a href="#" onclick="switchTab('registrasi', event)" class="menu-card group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 animasi-masuk" style="animation-delay: 0.1s;">
       <div class="shrink-0 flex items-center justify-center">
-        <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
           <i class="fas fa-pen-to-square text-2xl sm:text-3xl"></i>
         </div>
       </div>
@@ -214,9 +378,9 @@ box-sizing: border-box;
       </div>
     </a>
 
-    <a href="#" onclick="switchTab('tamu', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
+    <a href="#" onclick="switchTab('tamu', event)" class="menu-card group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 animasi-masuk" style="animation-delay: 0.15s;">
       <div class="shrink-0 flex items-center justify-center">
-        <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
           <i class="fas fa-ticket text-2xl sm:text-3xl"></i>
         </div>
       </div>
@@ -226,9 +390,9 @@ box-sizing: border-box;
       </div>
     </a>
 
-    <a href="#" onclick="switchTab('konsultasi', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
+    <a href="#" onclick="switchTab('konsultasi', event)" class="menu-card group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 animasi-masuk" style="animation-delay: 0.2s;">
       <div class="shrink-0 flex items-center justify-center">
-        <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
           <i class="fas fa-comments text-2xl sm:text-3xl"></i>
         </div>
       </div>
@@ -238,9 +402,9 @@ box-sizing: border-box;
       </div>
     </a>
 
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="menu-card group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 animasi-masuk" style="animation-delay: 0.25s;">
       <div class="flex-shrink-0 flex items-center justify-center">
-        <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
           <i class="fas fa-star text-2xl sm:text-3xl"></i>
         </div>
       </div>
@@ -250,9 +414,9 @@ box-sizing: border-box;
       </div>
     </a>
 
-    <a href="#" onclick="switchTab('panduan', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 col-span-2">
+    <a href="#" onclick="switchTab('panduan', event)" class="menu-card group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 col-span-2 animasi-masuk" style="animation-delay: 0.3s;">
       <div class="shrink-0 flex items-center justify-center">
-        <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
           <i class="fas fa-book-open text-2xl sm:text-3xl"></i>
         </div>
       </div>
@@ -266,24 +430,24 @@ box-sizing: border-box;
 </div>
 
 <div id="page-registrasi" class="page-content space-y-4 hidden-custom">
-<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1">
+<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1 animasi-masuk">
 <h2 class="text-sm font-black text-slate-100"><i class="fas fa-pen-to-square mr-1"></i> Formulir Registrasi Kunjungan</h2>
 <p class="text-[11px] text-slate-300 font-medium">Silakan lengkapi data kunjungan Anda. Sistem akan memvalidasi posisi GPS.</p>
 </div>
 
-<div class="bg-slate-800/80 p-5 rounded-2xl shadow-sm border border-slate-700/60">
+<div class="bg-slate-800/80 p-5 rounded-2xl shadow-sm border border-slate-700/60 animasi-masuk" style="animation-delay: 0.1s;">
 <form id="formRegistrasi" class="space-y-3">
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Nama Lengkap / Tamu</label>
-<input type="text" id="regNama" required placeholder="Masukkan nama lengkap..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500">
+<input type="text" id="regNama" required placeholder="Masukkan nama lengkap..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]">
 </div>
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Instansi / Asal Puskesmas</label>
-<input type="text" id="regInstansi" required placeholder="Contoh: Puskesmas Setu / RSUD..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500">
+<input type="text" id="regInstansi" required placeholder="Contoh: Puskesmas Setu / RSUD..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]">
 </div>
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Keperluan Kunjungan</label>
-<select id="regKeperluan" required class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 font-bold text-slate-100">
+<select id="regKeperluan" required class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 font-bold text-slate-100 transition-all duration-200 focus:scale-[1.02]">
 <option value="" disabled selected>-- Pilih Keperluan Kunjungan --</option>
 <option value="1. Obat PKD">1. Obat PKD</option>
 <option value="2. VAKSIN">2. VAKSIN</option>
@@ -297,37 +461,37 @@ box-sizing: border-box;
 </div>
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Nomor Kontak / WhatsApp</label>
-<input type="tel" id="regKontak" required placeholder="Contoh: 081234567890" class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500">
+<input type="tel" id="regKontak" required placeholder="Contoh: 081234567890" class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]">
 </div>
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Lampirkan Surat / Dokumen Pendukung (Maks. 700 KB)</label>
-<input type="file" id="regFile" accept=".pdf,image/*" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700">
+<input type="file" id="regFile" accept=".pdf,image/*" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 transition-all">
 </div>
 
-<div id="gpsStatusBox" class="bg-emerald-500/10 border border-emerald-500/30 p-3 rounded-xl text-[11px] text-emerald-400 font-medium">
+<div id="gpsStatusBox" class="gps-detecting bg-emerald-500/10 border border-emerald-500/30 p-3 rounded-xl text-[11px] text-emerald-400 font-medium">
 <i class="fas fa-location-dot mr-1"></i> Mendeteksi posisi koordinat GPS perangkat Anda...
 </div>
 
-<button type="submit" id="btnSubmitReg" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 rounded-xl text-xs transition shadow-md">
+<button type="submit" id="btnSubmitReg" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 rounded-xl text-xs shadow-md btn-animasi">
 <i class="fas fa-paper-plane mr-1"></i> Kirim Registrasi Kunjungan
 </button>
 </form>
 </div>
 
-<div class="flex justify-end pt-2">
-<button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5 border border-slate-700">
+<div class="flex justify-end pt-2 animasi-masuk" style="animation-delay: 0.2s;">
+<button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md inline-flex items-center gap-1.5 border border-slate-700 btn-animasi">
 <i class="fas fa-arrow-left"></i> Kembali ke Menu Utama
 </button>
 </div>
 </div>
 
 <div id="page-panduan" class="page-content space-y-4 hidden-custom">
-<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1">
+<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1 animasi-masuk">
 <h2 class="text-sm font-black text-slate-100"><i class="fas fa-book-open mr-1"></i> Panduan & Tutorial Layanan</h2>
 <p class="text-[11px] text-slate-300 font-medium leading-relaxed">Pelajari langkah-langkah mudah menggunakan sistem layanan digital UPTD Farmasi Tangsel.</p>
 </div>
 
-<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 space-y-2">
+<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 space-y-2 animasi-masuk" style="animation-delay: 0.1s;">
 <div class="flex items-center gap-2.5 border-b border-slate-700/50 pb-2">
 <div class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-xs">1</div>
 <h3 class="font-black text-xs text-slate-100 uppercase">Cara Melakukan Registrasi & Validasi GPS</h3>
@@ -342,7 +506,7 @@ box-sizing: border-box;
 </ol>
 </div>
 
-<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 space-y-2">
+<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 space-y-2 animasi-masuk" style="animation-delay: 0.15s;">
 <div class="flex items-center gap-2.5 border-b border-slate-700/50 pb-2">
 <div class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-xs">2</div>
 <h3 class="font-black text-xs text-slate-100 uppercase">Cek Status & Rincian Obat</h3>
@@ -352,15 +516,15 @@ box-sizing: border-box;
 </ul>
 </div>
 
-<div class="flex justify-end pt-2">
-<button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5 border border-slate-700">
+<div class="flex justify-end pt-2 animasi-masuk" style="animation-delay: 0.2s;">
+<button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md inline-flex items-center gap-1.5 border border-slate-700 btn-animasi">
 <i class="fas fa-arrow-left"></i> Kembali ke Menu Utama
 </button>
 </div>
 </div>
 
 <div id="page-tamu" class="page-content space-y-4 hidden-custom">
-<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1 mb-5">
+<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1 mb-5 animasi-masuk">
 <h2 class="text-sm font-black text-slate-100"><i class="fas fa-ticket mr-1"></i> Daftar Tamu & Pengambilan Obat</h2>
 <p class="text-[11px] text-slate-300 font-medium leading-relaxed">Pantau proses pelayanan Anda secara real-time dari registrasi hingga selesai.</p>
 </div>
@@ -371,16 +535,16 @@ box-sizing: border-box;
 </div>
 </div>
 
-<div class="flex justify-end pt-2">
-<button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5 border border-slate-700">
+<div class="flex justify-end pt-2 animasi-masuk" style="animation-delay: 0.1s;">
+<button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md inline-flex items-center gap-1.5 border border-slate-700 btn-animasi">
 <i class="fas fa-arrow-left"></i> Kembali
 </button>
 </div>
 </div>
 
 <div id="page-konsultasi" class="page-content space-y-4 hidden-custom">
-<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 flex items-center gap-4">
-<div class="w-16 h-16 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-2xl p-2 border border-emerald-500/30 overflow-hidden">
+<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 flex items-center gap-4 animasi-masuk">
+<div class="w-16 h-16 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-2xl p-2 border border-emerald-500/30 overflow-hidden" style="animation: iconBounce 2s ease-in-out infinite;">
 <i class="fas fa-comments text-2xl"></i>
 </div>
 <div>
@@ -389,23 +553,23 @@ box-sizing: border-box;
 </div>
 </div>
 
-<div class="bg-slate-800/80 p-5 rounded-2xl shadow-sm border border-slate-700/60">
+<div class="bg-slate-800/80 p-5 rounded-2xl shadow-sm border border-slate-700/60 animasi-masuk" style="animation-delay: 0.1s;">
 <form id="formKonsultasi" class="space-y-3">
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Nama Lengkap</label>
-<input type="text" id="namaPengirim" required placeholder="Masukkan nama lengkap..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500">
+<input type="text" id="namaPengirim" required placeholder="Masukkan nama lengkap..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]">
 </div>
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Asal Instansi / Unit Kerja</label>
-<input type="text" id="instansiPengirim" required placeholder="Masukkan asal instansi / Puskesmas / RS..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500">
+<input type="text" id="instansiPengirim" required placeholder="Masukkan asal instansi / Puskesmas / RS..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]">
 </div>
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Nomor WhatsApp / Kontak</label>
-<input type="tel" id="kontakPengirim" required placeholder="Contoh: 081234567890" class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500">
+<input type="tel" id="kontakPengirim" required placeholder="Contoh: 081234567890" class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]">
 </div>
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Pilih Keperluan</label>
-<select id="kategoriKonsultasi" required class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 font-bold text-slate-100">
+<select id="kategoriKonsultasi" required class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 font-bold text-slate-100 transition-all duration-200 focus:scale-[1.02]">
 <option value="" disabled selected>Pilih Keperluan:</option>
 <option value="A. OBAT PKD">A. OBAT PKD</option>
 <option value="B. VAKSIN">B. VAKSIN</option>
@@ -419,18 +583,18 @@ box-sizing: border-box;
 </div>
 <div>
 <label class="block text-xs font-black text-slate-200 mb-1">Isi Konsultasi / Keluhan</label>
-<textarea id="isiKonsultasi" rows="4" required placeholder="Tuliskan detail pertanyaan atau keluhan Anda..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500"></textarea>
+<textarea id="isiKonsultasi" rows="4" required placeholder="Tuliskan detail pertanyaan atau keluhan Anda..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]"></textarea>
 </div>
 
-<button type="submit" id="btnKirimKonsul" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 rounded-xl text-xs transition shadow-md flex items-center justify-center gap-2">
+<button type="submit" id="btnKirimKonsul" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 rounded-xl text-xs shadow-md flex items-center justify-center gap-2 btn-animasi">
 <span><i class="fas fa-paper-plane mr-1"></i> Kirim Konsultasi ke Sistem & WhatsApp</span>
 <span>→</span>
 </button>
 </form>
 </div>
 
-<div class="flex justify-end pt-2">
-<button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5 border border-slate-700">
+<div class="flex justify-end pt-2 animasi-masuk" style="animation-delay: 0.2s;">
+<button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md inline-flex items-center gap-1.5 border border-slate-700 btn-animasi">
 <i class="fas fa-arrow-left"></i> Kembali
 </button>
 </div>
@@ -442,9 +606,9 @@ box-sizing: border-box;
 </div>
 
 <!-- MODAL NOMOR ANTRIAN SUKSES -->
-<div id="modalAntrianSukses" class="hidden-custom fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-  <div class="bg-slate-900 rounded-3xl shadow-2xl border border-slate-700 max-w-sm w-full p-6 text-center space-y-5">
-    <div class="w-16 h-16 bg-emerald-600/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner font-black border border-emerald-500/30">
+<div id="modalAntrianSukses" class="modal-custom hidden-custom fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="modal-content-custom bg-slate-900 rounded-3xl shadow-2xl border border-slate-700 max-w-sm w-full p-6 text-center space-y-5">
+    <div class="w-16 h-16 bg-emerald-600/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner font-black border border-emerald-500/30 animasi-bounce-in icon-glow">
       <i class="fas fa-check"></i>
     </div>
     <div class="space-y-1">
@@ -455,12 +619,12 @@ box-sizing: border-box;
       <p class="text-xs text-slate-300 font-medium">Tunjukkan nomor antrian ini kepada petugas UPTD Farmasi.</p>
     </div>
 
-    <div class="bg-slate-800 border border-emerald-500/40 py-4 px-6 rounded-2xl shadow-sm">
+    <div class="bg-slate-800 border border-emerald-500/40 py-4 px-6 rounded-2xl shadow-sm animasi-pop">
       <span id="txtNomorAntrianModal" class="text-3xl font-black text-emerald-400 tracking-wider">T-001</span>
     </div>
 
     <div class="space-y-2 pt-2">
-      <button onclick="tutupModalAntrianDanKeTamu()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 rounded-xl text-xs transition shadow-lg">
+      <button onclick="tutupModalAntrianDanKeTamu()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 rounded-xl text-xs shadow-lg btn-animasi">
         <i class="fas fa-ticket mr-1"></i> Lihat Status & Menu Tamu
       </button>
     </div>
@@ -468,19 +632,17 @@ box-sizing: border-box;
 </div>
 
 <!-- MODAL SUKSES KONSULTASI PROFESIONAL -->
-<div id="modalKonsultasiSukses" class="hidden-custom fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-  <div class="bg-slate-900 rounded-3xl shadow-2xl border border-slate-700 max-w-md w-full overflow-hidden">
+<div id="modalKonsultasiSukses" class="modal-custom hidden-custom fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="modal-content-custom bg-slate-900 rounded-3xl shadow-2xl border border-slate-700 max-w-md w-full overflow-hidden">
     
-    <!-- Header -->
     <div class="bg-gradient-to-r from-emerald-600 to-teal-700 px-6 py-5 text-center">
-      <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-white/40">
+      <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-white/40 animasi-bounce-in icon-glow">
         <i class="fas fa-check text-white text-2xl"></i>
       </div>
       <h3 class="text-lg font-black text-white uppercase tracking-wide">Konsultasi Terkirim!</h3>
       <p class="text-xs text-emerald-100 mt-1 font-medium">Data Anda telah tersimpan di sistem UPTD Farmasi</p>
     </div>
 
-    <!-- Body -->
     <div class="p-6 space-y-4">
       <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 space-y-2.5">
         <p class="text-[11px] text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
@@ -510,10 +672,10 @@ box-sizing: border-box;
       </div>
 
       <div class="flex gap-2 pt-1">
-        <button onclick="tutupModalKonsultasi()" class="flex-1 bg-slate-700 hover:bg-slate-600 text-slate-100 font-bold py-3 rounded-xl text-xs transition">
+        <button onclick="tutupModalKonsultasi()" class="flex-1 bg-slate-700 hover:bg-slate-600 text-slate-100 font-bold py-3 rounded-xl text-xs btn-animasi">
           <i class="fas fa-times mr-1"></i> Tutup
         </button>
-        <button onclick="kirimKonsultasiKeWA()" class="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-3 rounded-xl text-xs transition shadow-lg">
+        <button onclick="kirimKonsultasiKeWA()" class="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-3 rounded-xl text-xs shadow-lg btn-animasi">
           <i class="fab fa-whatsapp mr-1"></i> Kirim ke WhatsApp
         </button>
       </div>
@@ -525,7 +687,7 @@ box-sizing: border-box;
 <div id="imageModal" class="hidden-custom fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onclick="closeImageModal()">
 <div class="relative max-w-4xl max-h-[90vh] overflow-hidden flex items-center justify-center">
 <img id="modalImageSrc" src="" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl transition-transform duration-300 transform scale-100">
-<button onclick="closeImageModal()" class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-900 rounded-full w-8 h-8 font-extrabold flex items-center justify-center shadow"><i class="fas fa-times"></i></button>
+<button onclick="closeImageModal()" class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-900 rounded-full w-8 h-8 font-extrabold flex items-center justify-center shadow btn-animasi"><i class="fas fa-times"></i></button>
 </div>
 </div>
 
@@ -536,17 +698,12 @@ import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, onSna
 const firebaseConfig = { apiKey: "AIzaSyA6B5MysWIMi4weR3Wgo3HuaIl-aaZpChw", authDomain: "digital-books-d22c9.firebaseapp.com", projectId: "digital-books-d22c9", storageBucket: "digital-books-d22c9.firebasestorage.app", messagingSenderId: "905407530155", appId: "1:905407530155:web:dd90e18d4158ce42fae3ee", measurementId: "G-LL7GF2RMF8" };
 const db = getFirestore(initializeApp(firebaseConfig));
 
-// Koordinat UPTD Farmasi
 const OFFICE_LAT = -6.3275045;
 const OFFICE_LNG = 106.6826802;
 const MAX_RADIUS = 100;
 
-// ============================================================
-// NOMOR WA ADMIN KONSULTASI (BARU)
-// ============================================================
 const WA_ADMIN_KONSULTASI = "6282114172761";
 
-// Mapping WA PIC berdasarkan keperluan registrasi
 const PIC_WA_MAPPING = {
   "1. Obat PKD": "6281214090200",
   "2. VAKSIN": "628126449487",
@@ -563,7 +720,6 @@ let userLng = null;
 let userDistance = null;
 let isWithinRadius = false;
 
-// Data konsultasi terakhir (untuk modal & WA)
 let dataKonsultasiTerakhir = {
   nama: '',
   instansi: '',
@@ -578,7 +734,7 @@ window.mulaiIsiSurvey = function(event) {
   if (btnManual) {
     btnManual.disabled = false;
     btnManual.classList.remove('bg-slate-800/50', 'text-slate-500', 'border-slate-700', 'cursor-not-allowed');
-    btnManual.classList.add('bg-slate-800', 'hover:bg-slate-700', 'text-emerald-400', 'border-emerald-500/40', 'cursor-pointer', 'shadow-md');
+    btnManual.classList.add('bg-slate-800', 'hover:bg-slate-700', 'text-emerald-400', 'border-emerald-500/40', 'cursor-pointer', 'shadow-md', 'animasi-pop');
   }
   window.open("https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform", "_blank");
 };
@@ -586,9 +742,9 @@ window.mulaiIsiSurvey = function(event) {
 window.bukaMenuUtamaManual = function() {
   sessionStorage.setItem('survei_terisi_sesi_ini', 'true');
   const gatePage = document.getElementById('gatePage');
-  if (gatePage) { gatePage.style.display = 'none'; gatePage.classList.add('hidden-custom'); }
+  if (gatePage) { gatePage.style.opacity = '0'; setTimeout(() => { gatePage.style.display = 'none'; gatePage.classList.add('hidden-custom'); }, 300); }
   const mainMenuContent = document.getElementById('mainMenuContent');
-  if (mainMenuContent) { mainMenuContent.classList.remove('hidden'); mainMenuContent.style.display = 'block'; }
+  if (mainMenuContent) { mainMenuContent.classList.remove('hidden'); mainMenuContent.style.display = 'block'; mainMenuContent.classList.add('animasi-fade'); }
 };
 
 window.resetAkses = function() {
@@ -598,32 +754,37 @@ window.resetAkses = function() {
 };
 
 window.switchTab = function(tabName, event) {
-if(event) event.preventDefault();
-document.querySelectorAll('.page-content').forEach(el => { el.classList.add('hidden-custom'); });
-const targetPage = document.getElementById(`page-${tabName}`);
-if(targetPage) { targetPage.classList.remove('hidden-custom'); }
+  if(event) event.preventDefault();
+  document.querySelectorAll('.page-content').forEach(el => { el.classList.add('hidden-custom'); });
+  const targetPage = document.getElementById(`page-${tabName}`);
+  if(targetPage) { 
+    targetPage.classList.remove('hidden-custom');
+    targetPage.style.animation = 'none';
+    void targetPage.offsetWidth;
+    targetPage.style.animation = 'fadeInUp 0.4s ease-out both';
+  }
 
-const mTitle = document.getElementById('mobileHeaderTitle');
-const mSub = document.getElementById('mobileHeaderSub');
-if(mTitle && mSub) {
-if(tabName === 'index') { mTitle.innerText = "UPTD FARMASI KOTA TANGERANG SELATAN"; mSub.innerText = "Sistem Layanan Digital Terpadu"; }
-else if(tabName === 'registrasi') { mTitle.innerText = "REGISTRASI KUNJUNGAN"; mSub.innerText = "UPTD Farmasi Tangsel"; }
-else if(tabName === 'panduan') { mTitle.innerText = "PANDUAN APLIKASI"; mSub.innerText = "UPTD Farmasi Tangsel"; }
-else if(tabName === 'tamu') { mTitle.innerText = "STATUS & BUKTI TAMU"; mSub.innerText = "UPTD Farmasi Tangsel"; }
-else if(tabName === 'konsultasi') { mTitle.innerText = "KONSULTASI & PENGADUAN"; mSub.innerText = "UPTD Farmasi Tangsel"; }
-}
-window.scrollTo({ top: 0, behavior: 'smooth' });
+  const mTitle = document.getElementById('mobileHeaderTitle');
+  const mSub = document.getElementById('mobileHeaderSub');
+  if(mTitle && mSub) {
+    if(tabName === 'index') { mTitle.innerText = "UPTD FARMASI KOTA TANGERANG SELATAN"; mSub.innerText = "Sistem Layanan Digital Terpadu"; }
+    else if(tabName === 'registrasi') { mTitle.innerText = "REGISTRASI KUNJUNGAN"; mSub.innerText = "UPTD Farmasi Tangsel"; }
+    else if(tabName === 'panduan') { mTitle.innerText = "PANDUAN APLIKASI"; mSub.innerText = "UPTD Farmasi Tangsel"; }
+    else if(tabName === 'tamu') { mTitle.innerText = "STATUS & BUKTI TAMU"; mSub.innerText = "UPTD Farmasi Tangsel"; }
+    else if(tabName === 'konsultasi') { mTitle.innerText = "KONSULTASI & PENGADUAN"; mSub.innerText = "UPTD Farmasi Tangsel"; }
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 window.openImageModal = function(imgSrc) {
-const modal = document.getElementById('imageModal');
-const modalImg = document.getElementById('modalImageSrc');
-if(modal && modalImg) { modalImg.src = imgSrc; modal.classList.remove('hidden-custom'); modal.classList.add('visible-custom'); }
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImageSrc');
+  if(modal && modalImg) { modalImg.src = imgSrc; modal.classList.remove('hidden-custom'); modal.classList.add('visible-custom'); }
 };
 
 window.closeImageModal = function() {
-const modal = document.getElementById('imageModal');
-if(modal) { modal.classList.remove('visible-custom'); modal.classList.add('hidden-custom'); }
+  const modal = document.getElementById('imageModal');
+  if(modal) { modal.classList.remove('visible-custom'); modal.classList.add('hidden-custom'); }
 };
 
 window.tutupModalAntrianDanKeTamu = function() {
@@ -632,13 +793,9 @@ window.tutupModalAntrianDanKeTamu = function() {
   switchTab('tamu');
 };
 
-// ============================================================
-// FUNGSI MODAL KONSULTASI SUKSES
-// ============================================================
 window.tutupModalKonsultasi = function() {
   const modal = document.getElementById('modalKonsultasiSukses');
   if(modal) { modal.classList.remove('visible-custom'); modal.classList.add('hidden-custom'); }
-  // Reset form
   const formKonsul = document.getElementById('formKonsultasi');
   if (formKonsul) formKonsul.reset();
 };
@@ -661,178 +818,177 @@ window.kirimKonsultasiKeWA = function() {
 };
 
 document.addEventListener('click', function(e) {
-if(e.target.tagName === 'IMG' && e.target.closest('.page-content')) {
-if(e.target.classList.contains('no-zoom') || e.target.closest('nav') || e.target.closest('header') || e.target.closest('aside')) return;
-openImageModal(e.target.src);
-}
+  if(e.target.tagName === 'IMG' && e.target.closest('.page-content')) {
+    if(e.target.classList.contains('no-zoom') || e.target.closest('nav') || e.target.closest('header') || e.target.closest('aside')) return;
+    openImageModal(e.target.src);
+  }
 });
 
 function initGPS() {
-const statusBox = document.getElementById('gpsStatusBox');
-if (!navigator.geolocation) {
-if(statusBox) {
-statusBox.className = "bg-red-500/10 border border-red-500/30 p-3 rounded-xl text-[11px] text-red-400 font-medium";
-statusBox.innerHTML = "<i class='fas fa-circle-xmark mr-1'></i> Geolokasi tidak didukung oleh browser Anda.";
-}
-return;
-}
-
-navigator.geolocation.getCurrentPosition(
-(position) => {
-userLat = position.coords.latitude;
-userLng = position.coords.longitude;
-userDistance = calculateDistance(userLat, userLng, OFFICE_LAT, OFFICE_LNG);
-
-if(statusBox) {
-if (userDistance <= MAX_RADIUS) {
-isWithinRadius = true;
-statusBox.className = "bg-emerald-500/10 border border-emerald-500/30 p-3 rounded-xl text-[11px] text-emerald-400 font-black";
-statusBox.innerHTML = `<i class="fas fa-circle-check mr-1"></i> Lokasi Valid! Anda berada dalam radius kantor (${Math.round(userDistance)} meter dari UPTD Farmasi).`;
-} else {
-    isWithinRadius = false;
-    statusBox.className = "bg-red-500/10 border border-red-500/30 p-3 rounded-xl text-[11px] text-red-400 font-black";
-    statusBox.innerHTML = `<i class="fas fa-circle-xmark mr-1"></i> Anda berada di luar radius layanan (${Math.round(userDistance)} meter). Maksimal jarak registrasi adalah ${MAX_RADIUS} meter.`;
-}
-}
-},
-(error) => {
-    isWithinRadius = false;
+  const statusBox = document.getElementById('gpsStatusBox');
+  if (!navigator.geolocation) {
     if(statusBox) {
-    statusBox.className = "bg-red-500/10 border border-red-500/30 p-3 rounded-xl text-[11px] text-red-400 font-black";
-    statusBox.innerHTML = "<i class='fas fa-circle-xmark mr-1'></i> Lokasi wajib diaktifkan. Registrasi hanya dapat dilakukan dalam radius 100 meter dari UPTD Farmasi.";
+      statusBox.className = "bg-red-500/10 border border-red-500/30 p-3 rounded-xl text-[11px] text-red-400 font-medium";
+      statusBox.innerHTML = "<i class='fas fa-circle-xmark mr-1'></i> Geolokasi tidak didukung oleh browser Anda.";
     }
-},
-{ enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-);
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      userLat = position.coords.latitude;
+      userLng = position.coords.longitude;
+      userDistance = calculateDistance(userLat, userLng, OFFICE_LAT, OFFICE_LNG);
+
+      if(statusBox) {
+        if (userDistance <= MAX_RADIUS) {
+          isWithinRadius = true;
+          statusBox.className = "gps-valid bg-emerald-500/10 border border-emerald-500/30 p-3 rounded-xl text-[11px] text-emerald-400 font-black";
+          statusBox.innerHTML = `<i class="fas fa-circle-check mr-1"></i> Lokasi Valid! Anda berada dalam radius kantor (${Math.round(userDistance)} meter dari UPTD Farmasi).`;
+        } else {
+          isWithinRadius = false;
+          statusBox.className = "gps-invalid bg-red-500/10 border border-red-500/30 p-3 rounded-xl text-[11px] text-red-400 font-black";
+          statusBox.innerHTML = `<i class="fas fa-circle-xmark mr-1"></i> Anda berada di luar radius layanan (${Math.round(userDistance)} meter). Maksimal jarak registrasi adalah ${MAX_RADIUS} meter.`;
+        }
+      }
+    },
+    (error) => {
+      isWithinRadius = false;
+      if(statusBox) {
+        statusBox.className = "gps-invalid bg-red-500/10 border border-red-500/30 p-3 rounded-xl text-[11px] text-red-400 font-black";
+        statusBox.innerHTML = "<i class='fas fa-circle-xmark mr-1'></i> Lokasi wajib diaktifkan. Registrasi hanya dapat dilakukan dalam radius 100 meter dari UPTD Farmasi.";
+      }
+    },
+    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+  );
 }
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
-const R = 6371e3; 
-const dLat = (lat2 - lat1) * Math.PI / 180;
-const dLon = (lon2 - lon1) * Math.PI / 180;
-const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-Math.sin(dLon/2) * Math.sin(dLon/2);
-const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-return R * c;
+  const R = 6371e3; 
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+  Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+  Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
 }
 
 initGPS();
 
 const formReg = document.getElementById('formRegistrasi');
 if(formReg) {
-formReg.addEventListener('submit', async (e) => {
-e.preventDefault();
+  formReg.addEventListener('submit', async (e) => {
+    e.preventDefault();
     const btn = document.getElementById('btnSubmitReg');
     if (!isWithinRadius || userLat === null || userLng === null) {
       alert('Registrasi ditolak. Anda harus berada dalam radius maksimal 100 meter dari UPTD Farmasi dan mengizinkan akses lokasi.');
       return;
     }
     btn.disabled = true;
-btn.innerHTML = "<i class='fas fa-spinner fa-spin mr-1'></i> Mengirim Registrasi...";
+    btn.classList.add('btn-loading');
+    btn.innerHTML = "<i class='fas fa-spinner fa-spin mr-1'></i> Mengirim Registrasi...";
 
-const nama = document.getElementById('regNama').value;
-const instansi = document.getElementById('regInstansi').value;
-const keperluan = document.getElementById('regKeperluan').value;
-const kontak = document.getElementById('regKontak').value;
-const fileInput = document.getElementById('regFile');
+    const nama = document.getElementById('regNama').value;
+    const instansi = document.getElementById('regInstansi').value;
+    const keperluan = document.getElementById('regKeperluan').value;
+    const kontak = document.getElementById('regKontak').value;
+    const fileInput = document.getElementById('regFile');
 
-let fileUrlVal = "";
-if (fileInput.files && fileInput.files[0]) {
-const file = fileInput.files[0];
-if (file.size > 700 * 1024) {
-alert("Ukuran file terlalu besar! Maksimal 700 KB.");
-btn.disabled = false;
-btn.innerHTML = "<i class='fas fa-paper-plane mr-1'></i> Kirim Registrasi Kunjungan";
-return;
+    let fileUrlVal = "";
+    if (fileInput.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
+      if (file.size > 700 * 1024) {
+        alert("Ukuran file terlalu besar! Maksimal 700 KB.");
+        btn.disabled = false;
+        btn.classList.remove('btn-loading');
+        btn.innerHTML = "<i class='fas fa-paper-plane mr-1'></i> Kirim Registrasi Kunjungan";
+        return;
+      }
+      fileUrlVal = await toBase64(file);
+    }
+
+    try {
+      let prefix = "L";
+      const lkep = keperluan.toLowerCase();
+      if (lkep.includes("obat pkd")) prefix = "O";
+      else if (lkep.includes("vaksin")) prefix = "V";
+      else if (lkep.includes("reagen")) prefix = "R";
+      else if (lkep.includes("tb")) prefix = "T";
+      else if (lkep.includes("hiv")) prefix = "H";
+      else if (lkep.includes("dbd")) prefix = "D";
+      else if (lkep.includes("hepatitis")) prefix = "P";
+
+      const todayStr = new Date().toISOString().split('T')[0];
+      const qCek = query(collection(db, "tamu"), where("keperluan", "==", keperluan));
+      const snapCek = await getDocs(qCek);
+      let countHariIni = 0;
+      snapCek.forEach(doc => {
+        const d = doc.data();
+        if (d.waktu) {
+          let dDate = "";
+          if (typeof d.waktu.toDate === 'function') {
+            dDate = d.waktu.toDate().toISOString().split('T')[0];
+          } else if (typeof d.waktu === 'string') {
+            dDate = d.waktu.split('T')[0];
+          }
+          if (dDate === todayStr) { countHariIni++; }
+        }
+      });
+      const nextNum = countHariIni + 1;
+      const antrianNo = `${prefix}-${String(nextNum).padStart(3, '0')}`;
+
+      await addDoc(collection(db, "tamu"), {
+        nama: nama,
+        instansi: instansi,
+        keperluan: keperluan,
+        kontak: kontak,
+        fileUrl: fileUrlVal,
+        nomorAntrian: antrianNo,
+        status: "Menunggu",
+        waktu: serverTimestamp(),
+        lat: userLat || 0,
+        lng: userLng || 0,
+        jarak: userDistance ? Math.round(userDistance) : 0
+      });
+
+      formReg.reset();
+
+      const txtAntrianModal = document.getElementById('txtNomorAntrianModal');
+      if(txtAntrianModal) txtAntrianModal.innerText = antrianNo;
+
+      const modalSukses = document.getElementById('modalAntrianSukses');
+      if(modalSukses) { modalSukses.classList.remove('hidden-custom'); modalSukses.classList.add('visible-custom'); }
+
+      const picWA = PIC_WA_MAPPING[keperluan];
+      if (picWA) {
+        const pesanPIC =
+          `*NOTIFIKASI KUNJUNGAN BARU - UPTD FARMASI*\n` +
+          `==================================\n` +
+          `*No. Antrian:* ${antrianNo}\n` +
+          `*Nama Tamu:* ${nama}\n` +
+          `*Instansi:* ${instansi}\n` +
+          `*Keperluan:* ${keperluan}\n` +
+          `*Kontak Tamu:* ${kontak}\n` +
+          `*Waktu:* ${new Date().toLocaleString('id-ID')}\n` +
+          `==================================\n` +
+          `Mohon cek dashboard admin untuk memproses kunjungan ini.\n\n` +
+          `_Pesan otomatis dari Sistem Layanan Digital UPTD Farmasi Tangsel_`;
+        const urlWA = `https://wa.me/${picWA}?text=${encodeURIComponent(pesanPIC)}`;
+        window.open(urlWA, '_blank');
+      }
+
+    } catch (err) {
+      console.error("Gagal kirim registrasi:", err);
+      alert("Gagal mengirim registrasi ke database. Silakan coba lagi.");
+    } finally {
+      btn.disabled = false;
+      btn.classList.remove('btn-loading');
+      btn.innerHTML = "<i class='fas fa-paper-plane mr-1'></i> Kirim Registrasi Kunjungan";
+    }
+  });
 }
-fileUrlVal = await toBase64(file);
-}
 
-try {
-let prefix = "L";
-const lkep = keperluan.toLowerCase();
-if (lkep.includes("obat pkd")) prefix = "O";
-else if (lkep.includes("vaksin")) prefix = "V";
-else if (lkep.includes("reagen")) prefix = "R";
-else if (lkep.includes("tb")) prefix = "T";
-else if (lkep.includes("hiv")) prefix = "H";
-else if (lkep.includes("dbd")) prefix = "D";
-else if (lkep.includes("hepatitis")) prefix = "P";
-
-const todayStr = new Date().toISOString().split('T')[0];
-const qCek = query(collection(db, "tamu"), where("keperluan", "==", keperluan));
-const snapCek = await getDocs(qCek);
-let countHariIni = 0;
-snapCek.forEach(doc => {
-const d = doc.data();
-if (d.waktu) {
-let dDate = "";
-if (typeof d.waktu.toDate === 'function') {
-dDate = d.waktu.toDate().toISOString().split('T')[0];
-} else if (typeof d.waktu === 'string') {
-dDate = d.waktu.split('T')[0];
-}
-if (dDate === todayStr) { countHariIni++; }
-}
-});
-const nextNum = countHariIni + 1;
-const antrianNo = `${prefix}-${String(nextNum).padStart(3, '0')}`;
-
-await addDoc(collection(db, "tamu"), {
-nama: nama,
-instansi: instansi,
-keperluan: keperluan,
-kontak: kontak,
-fileUrl: fileUrlVal,
-nomorAntrian: antrianNo,
-status: "Menunggu",
-waktu: serverTimestamp(),
-lat: userLat || 0,
-lng: userLng || 0,
-jarak: userDistance ? Math.round(userDistance) : 0
-});
-
-formReg.reset();
-
-const txtAntrianModal = document.getElementById('txtNomorAntrianModal');
-if(txtAntrianModal) txtAntrianModal.innerText = antrianNo;
-
-const modalSukses = document.getElementById('modalAntrianSukses');
-if(modalSukses) { modalSukses.classList.remove('hidden-custom'); modalSukses.classList.add('visible-custom'); }
-
-// KIRIM NOTIFIKASI WHATSAPP KE PIC
-const picWA = PIC_WA_MAPPING[keperluan];
-if (picWA) {
-  const pesanPIC =
-    `*NOTIFIKASI KUNJUNGAN BARU - UPTD FARMASI*\n` +
-    `==================================\n` +
-    `*No. Antrian:* ${antrianNo}\n` +
-    `*Nama Tamu:* ${nama}\n` +
-    `*Instansi:* ${instansi}\n` +
-    `*Keperluan:* ${keperluan}\n` +
-    `*Kontak Tamu:* ${kontak}\n` +
-    `*Waktu:* ${new Date().toLocaleString('id-ID')}\n` +
-    `==================================\n` +
-    `Mohon cek dashboard admin untuk memproses kunjungan ini.\n\n` +
-    `_Pesan otomatis dari Sistem Layanan Digital UPTD Farmasi Tangsel_`;
-  const urlWA = `https://wa.me/${picWA}?text=${encodeURIComponent(pesanPIC)}`;
-  window.open(urlWA, '_blank');
-}
-
-} catch (err) {
-console.error("Gagal kirim registrasi:", err);
-alert("Gagal mengirim registrasi ke database. Silakan coba lagi.");
-} finally {
-btn.disabled = false;
-btn.innerHTML = "<i class='fas fa-paper-plane mr-1'></i> Kirim Registrasi Kunjungan";
-}
-});
-}
-
-// ============================================================
-// FORM KONSULTASI & PENGADUAN - DENGAN MODAL PROFESIONAL
-// ============================================================
 const formKonsul = document.getElementById('formKonsultasi');
 
 if (formKonsul) {
@@ -842,6 +998,7 @@ if (formKonsul) {
 
     if (btnKonsul) {
       btnKonsul.disabled = true;
+      btnKonsul.classList.add('btn-loading');
       btnKonsul.innerHTML = "<i class='fas fa-spinner fa-spin mr-1'></i> Menyimpan konsultasi...";
     }
 
@@ -863,12 +1020,8 @@ if (formKonsul) {
         timestamp: serverTimestamp()
       });
 
-      console.log("Konsultasi berhasil disimpan. ID:", docRef.id);
-
-      // Simpan data terakhir
       dataKonsultasiTerakhir = { nama, instansi, kontak, kategori, isi };
 
-      // Tampilkan modal profesional (bukan alert)
       const modalKonsul = document.getElementById('modalKonsultasiSukses');
       if (modalKonsul) {
         document.getElementById('modalKonsulNama').innerText = nama || '-';
@@ -884,6 +1037,7 @@ if (formKonsul) {
     } finally {
       if (btnKonsul) {
         btnKonsul.disabled = false;
+        btnKonsul.classList.remove('btn-loading');
         btnKonsul.innerHTML = "<span><i class='fas fa-paper-plane mr-1'></i> Kirim Konsultasi ke Sistem & WhatsApp</span><span>→</span>";
       }
     }
@@ -891,122 +1045,125 @@ if (formKonsul) {
 }
 
 function toBase64(file) {
-return new Promise((resolve, reject) => {
-const reader = new FileReader();
-reader.readAsDataURL(file);
-reader.onload = () => resolve(reader.result);
-reader.onerror = error => reject(error);
-});
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
 }
 
 onSnapshot(query(collection(db, "tamu"), orderBy("waktu", "desc")), (snapshot) => {
-const container = document.getElementById("containerTamu");
-if(!container) return;
-container.innerHTML = "";
+  const container = document.getElementById("containerTamu");
+  if(!container) return;
+  container.innerHTML = "";
 
-if (snapshot.empty) {
-container.innerHTML = `<div class="bg-slate-800/80 p-6 rounded-2xl shadow-sm border border-slate-700 text-center text-xs text-slate-300 font-medium"><i class="fas fa-inbox mr-1"></i> Belum ada riwayat registrasi yang tercatat di sistem.</div>`;
-return;
-}
+  if (snapshot.empty) {
+    container.innerHTML = `<div class="bg-slate-800/80 p-6 rounded-2xl shadow-sm border border-slate-700 text-center text-xs text-slate-300 font-medium animasi-fade"><i class="fas fa-inbox mr-1"></i> Belum ada riwayat registrasi yang tercatat di sistem.</div>`;
+    return;
+  }
 
-snapshot.forEach((docSnap) => {
-const docId = docSnap.id;
-const item = docSnap.data();
+  let cardIndex = 0;
+  snapshot.forEach((docSnap) => {
+    const docId = docSnap.id;
+    const item = docSnap.data();
 
-let waktuStr = '-';
-if (item.waktu) {
-if (typeof item.waktu.toDate === 'function') { waktuStr = item.waktu.toDate().toLocaleString('id-ID'); }
-else { waktuStr = item.waktu; }
-}
+    let waktuStr = '-';
+    if (item.waktu) {
+      if (typeof item.waktu.toDate === 'function') { waktuStr = item.waktu.toDate().toLocaleString('id-ID'); }
+      else { waktuStr = item.waktu; }
+    }
 
-let durasi = "-";
-if (String(item.status || '').toLowerCase() === 'selesai' && item.waktuSelesai && item.waktuProses) {
-  const selesai = typeof item.waktuSelesai.toDate === 'function' ? item.waktuSelesai.toDate() : new Date(item.waktuSelesai);
-  const proses = typeof item.waktuProses.toDate === 'function' ? item.waktuProses.toDate() : new Date(item.waktuProses);
-  if (!isNaN(selesai) && !isNaN(proses)) durasi = Math.max(0, Math.round((selesai - proses) / 60000)) + " Menit";
-}
+    let durasi = "-";
+    if (String(item.status || '').toLowerCase() === 'selesai' && item.waktuSelesai && item.waktuProses) {
+      const selesai = typeof item.waktuSelesai.toDate === 'function' ? item.waktuSelesai.toDate() : new Date(item.waktuSelesai);
+      const proses = typeof item.waktuProses.toDate === 'function' ? item.waktuProses.toDate() : new Date(item.waktuProses);
+      if (!isNaN(selesai) && !isNaN(proses)) durasi = Math.max(0, Math.round((selesai - proses) / 60000)) + " Menit";
+    }
 
-let statusColor = "bg-amber-500/20 text-amber-300 border-amber-500/40";
-let statusText = item.status || "Menunggu";
-const statusLower = String(statusText).toLowerCase();
-if (statusLower.includes("proses")) { statusColor = "bg-blue-500/20 text-blue-300 border-blue-500/40"; }
-else if (statusLower.includes("selesai")) { statusColor = "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"; }
+    let statusColor = "bg-amber-500/20 text-amber-300 border-amber-500/40";
+    let statusText = item.status || "Menunggu";
+    const statusLower = String(statusText).toLowerCase();
+    if (statusLower.includes("proses")) { statusColor = "bg-blue-500/20 text-blue-300 border-blue-500/40"; }
+    else if (statusLower.includes("selesai")) { statusColor = "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"; }
 
-let itemsObatArr = [];
-if (Array.isArray(item.itemsObat) && item.itemsObat.length > 0) { itemsObatArr = item.itemsObat; }
+    let itemsObatArr = [];
+    if (Array.isArray(item.itemsObat) && item.itemsObat.length > 0) { itemsObatArr = item.itemsObat; }
 
-const obatTerima = item.obatDiterima || item.daftarObat || item.obat || item.keteranganObat || '-';
-const namaPetugasVal = item.petugas || item.namaPetugas || '-';
-const fileLink = item.suratUrl || item.fileUrl || '';
+    const obatTerima = item.obatDiterima || item.daftarObat || item.obat || item.keteranganObat || '-';
+    const namaPetugasVal = item.petugas || item.namaPetugas || '-';
+    const fileLink = item.suratUrl || item.fileUrl || '';
 
-const normalizedData = {
-nama: item.nama || 'Tanpa Nama',
-instansi: item.instansi || '-',
-keperluan: item.keperluan || '-',
-petugas: namaPetugasVal,
-waktuFormatted: waktuStr,
-durasi: durasi,
-status: statusText,
-obatTerimaFormatted: obatTerima,
-itemsObat: itemsObatArr,
-nomorAntrian: item.nomorAntrian || '',
-fileUrl: fileLink
-};
+    const normalizedData = {
+      nama: item.nama || 'Tanpa Nama',
+      instansi: item.instansi || '-',
+      keperluan: item.keperluan || '-',
+      petugas: namaPetugasVal,
+      waktuFormatted: waktuStr,
+      durasi: durasi,
+      status: statusText,
+      obatTerimaFormatted: obatTerima,
+      itemsObat: itemsObatArr,
+      nomorAntrian: item.nomorAntrian || '',
+      fileUrl: fileLink
+    };
 
-const card = document.createElement("div");
-card.className = "bg-slate-800/80 p-5 rounded-2xl shadow-md border border-slate-700/60 space-y-3.5 transition hover:shadow-lg";
-card.id = `card-tamu-${docId}`;
+    const card = document.createElement("div");
+    card.className = "kartu-tamu bg-slate-800/80 p-5 rounded-2xl shadow-md border border-slate-700/60 space-y-3.5 animasi-masuk";
+    card.style.animationDelay = `${cardIndex * 0.08}s`;
+    card.id = `card-tamu-${docId}`;
 
-let bagianObatHtml = '';
-if (normalizedData.itemsObat.length > 0) {
-let rowsHtml = '';
-normalizedData.itemsObat.forEach((ob, idx) => {
-rowsHtml += `<tr class="border-b border-slate-700 text-[10px] text-slate-200"> <td class="border border-slate-700 p-1 text-center">${idx + 1}</td> <td class="border border-slate-700 p-1 font-bold">${ob.nama || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.tahun || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.satuan || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.volume || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.ed || '-'}</td> <td class="border border-slate-700 p-1 text-center font-mono">${ob.batch || '-'}</td> </tr>`;
-});
-bagianObatHtml = `<div class="border-t border-slate-700 pt-2.5 space-y-1.5"> <p class="text-[11px] text-slate-100 font-black flex items-center gap-1.5"><i class="fas fa-boxes-stacked"></i> Tabel Rincian Obat / Barang:</p> <div class="overflow-x-auto rounded-xl border border-slate-700"> <table class="w-full text-left border-collapse text-[10px] bg-slate-900"> <thead> <tr class="bg-emerald-800 text-center font-bold text-[9px] uppercase text-white"> <th class="border border-slate-700 p-1 w-6">No</th> <th class="border border-slate-700 p-1">Nama Barang</th> <th class="border border-slate-700 p-1 w-12">Tahun</th> <th class="border border-slate-700 p-1 w-12">Satuan</th> <th class="border border-slate-700 p-1 w-10">Vol</th> <th class="border border-slate-700 p-1 w-12">Ed</th> <th class="border border-slate-700 p-1 w-16">No Batch</th> </tr> </thead> <tbody> ${rowsHtml} </tbody> </table> </div> </div>`;
-} else {
-bagianObatHtml = `<div class="bg-slate-900 p-3 rounded-xl border border-slate-700 text-[10px] space-y-1"> <p class="text-slate-100 font-black flex items-center gap-1.5"><i class="fas fa-pills"></i> Obat yang Diterima:</p> <p class="text-slate-300 whitespace-pre-line font-medium">${normalizedData.obatTerimaFormatted}</p> </div>`;
-}
+    let bagianObatHtml = '';
+    if (normalizedData.itemsObat.length > 0) {
+      let rowsHtml = '';
+      normalizedData.itemsObat.forEach((ob, idx) => {
+        rowsHtml += `<tr class="border-b border-slate-700 text-[10px] text-slate-200 transition-colors hover:bg-slate-800"> <td class="border border-slate-700 p-1 text-center">${idx + 1}</td> <td class="border border-slate-700 p-1 font-bold">${ob.nama || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.tahun || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.satuan || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.volume || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.ed || '-'}</td> <td class="border border-slate-700 p-1 text-center font-mono">${ob.batch || '-'}</td> </tr>`;
+      });
+      bagianObatHtml = `<div class="border-t border-slate-700 pt-2.5 space-y-1.5"> <p class="text-[11px] text-slate-100 font-black flex items-center gap-1.5"><i class="fas fa-boxes-stacked"></i> Tabel Rincian Obat / Barang:</p> <div class="overflow-x-auto rounded-xl border border-slate-700"> <table class="w-full text-left border-collapse text-[10px] bg-slate-900"> <thead> <tr class="bg-emerald-800 text-center font-bold text-[9px] uppercase text-white"> <th class="border border-slate-700 p-1 w-6">No</th> <th class="border border-slate-700 p-1">Nama Barang</th> <th class="border border-slate-700 p-1 w-12">Tahun</th> <th class="border border-slate-700 p-1 w-12">Satuan</th> <th class="border border-slate-700 p-1 w-10">Vol</th> <th class="border border-slate-700 p-1 w-12">Ed</th> <th class="border border-slate-700 p-1 w-16">No Batch</th> </tr> </thead> <tbody> ${rowsHtml} </tbody> </table> </div> </div>`;
+    } else {
+      bagianObatHtml = `<div class="bg-slate-900 p-3 rounded-xl border border-slate-700 text-[10px] space-y-1"> <p class="text-slate-100 font-black flex items-center gap-1.5"><i class="fas fa-pills"></i> Obat yang Diterima:</p> <p class="text-slate-300 whitespace-pre-line font-medium">${normalizedData.obatTerimaFormatted}</p> </div>`;
+    }
 
-let fileLampiranHtml = '';
-if (fileLink && fileLink.length > 0) {
-fileLampiranHtml = `<div class="pt-1"> <span class="inline-flex items-center gap-1.5 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-sm"><i class="fas fa-paperclip"></i> Tamu telah melampirkan surat permintaan</span> </div>`;
-}
+    let fileLampiranHtml = '';
+    if (fileLink && fileLink.length > 0) {
+      fileLampiranHtml = `<div class="pt-1"> <span class="inline-flex items-center gap-1.5 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-sm"><i class="fas fa-paperclip"></i> Tamu telah melampirkan surat permintaan</span> </div>`;
+    }
 
-let downloadBtnHtml = `<span class="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20"><i class="fas fa-sync-alt fa-spin mr-1"></i> Pembaruan realtime aktif</span>`;
+    let downloadBtnHtml = `<span class="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20"><i class="fas fa-sync-alt fa-spin mr-1"></i> Pembaruan realtime aktif</span>`;
 
-card.innerHTML = `
-<div class="flex justify-between items-start gap-3 border-b border-slate-700 pb-3">
-  <div class="space-y-1">
-    <div class="flex items-center gap-2">
-      <span class="bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-black px-2.5 py-1 rounded-xl shadow-sm tracking-wider">
-        <i class="fas fa-ticket mr-1"></i> ${normalizedData.nomorAntrian || '-'}
+    card.innerHTML = `
+    <div class="flex justify-between items-start gap-3 border-b border-slate-700 pb-3">
+      <div class="space-y-1">
+        <div class="flex items-center gap-2">
+          <span class="bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-black px-2.5 py-1 rounded-xl shadow-sm tracking-wider">
+            <i class="fas fa-ticket mr-1"></i> ${normalizedData.nomorAntrian || '-'}
+          </span>
+          <h3 class="font-black text-sm text-slate-100 uppercase tracking-tight">${normalizedData.nama}</h3>
+        </div>
+        <p class="text-[11px] text-slate-300 font-medium"><b>Instansi:</b> ${normalizedData.instansi}</p>
+        <p class="text-[11px] text-slate-300 font-medium"><b>Keperluan:</b> <span class="text-emerald-400 font-bold">${normalizedData.keperluan}</span></p>
+      </div>
+      <span class="px-3 py-1 rounded-full text-[10px] font-black border uppercase tracking-wider shrink-0 shadow-sm ${statusColor}">
+        ${normalizedData.status}
       </span>
-      <h3 class="font-black text-sm text-slate-100 uppercase tracking-tight">${normalizedData.nama}</h3>
     </div>
-    <p class="text-[11px] text-slate-300 font-medium"><b>Instansi:</b> ${normalizedData.instansi}</p>
-    <p class="text-[11px] text-slate-300 font-medium"><b>Keperluan:</b> <span class="text-emerald-400 font-bold">${normalizedData.keperluan}</span></p>
-  </div>
-  <span class="px-3 py-1 rounded-full text-[10px] font-black border uppercase tracking-wider shrink-0 shadow-sm ${statusColor}">
-    ${normalizedData.status}
-  </span>
-</div>
 
-<div class="grid grid-cols-2 gap-2 text-[11px] text-slate-200 bg-slate-900 p-2.5 rounded-xl border border-slate-700 font-medium">
-  <p><b>Petugas:</b> ${normalizedData.petugas}</p>
-  <p><b>Durasi:</b> ${normalizedData.durasi}</p>
-</div>
+    <div class="grid grid-cols-2 gap-2 text-[11px] text-slate-200 bg-slate-900 p-2.5 rounded-xl border border-slate-700 font-medium">
+      <p><b>Petugas:</b> ${normalizedData.petugas}</p>
+      <p><b>Durasi:</b> ${normalizedData.durasi}</p>
+    </div>
 
-${fileLampiranHtml} 
-${bagianObatHtml} 
+    ${fileLampiranHtml} 
+    ${bagianObatHtml} 
 
-<div class="border-t border-slate-700 pt-2.5 flex justify-between items-center text-[10px] text-slate-300 font-medium">
-  <span><b>Waktu:</b> ${normalizedData.waktuFormatted}</span> 
-  ${downloadBtnHtml}
-</div>`;
+    <div class="border-t border-slate-700 pt-2.5 flex justify-between items-center text-[10px] text-slate-300 font-medium">
+      <span><b>Waktu:</b> ${normalizedData.waktuFormatted}</span> 
+      ${downloadBtnHtml}
+    </div>`;
 
-container.appendChild(card);
-});
+    container.appendChild(card);
+    cardIndex++;
+  });
 });
 </script>
 </body>
