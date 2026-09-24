@@ -425,7 +425,6 @@
           const noAntrianKomplain = data.nomorAntrian || '-';
           const namaPetugasKonsul = data.petugasKonsul || '';
 
-          // Kolom Aksi untuk Konsultasi (mirip dengan antrian)
           let aksiKonsultasiHtml = `
             <div class="border border-amber-500/30 rounded-lg p-3 bg-amber-500/10 space-y-2 min-w-[200px]">
               <div class="text-[10px] font-extrabold text-slate-100 border-b border-amber-500/30 pb-1">👤 Petugas Menangani</div>
@@ -636,8 +635,7 @@
     };
 
     // ============================================================
-    // FUNGSI DOWNLOAD PDF SBBK - FORMAT F4/LEGAL, VERTIKAL, ADA LOGO
-    // KOP SURAT DIPERBESAR & IDEAL
+    // FUNGSI DOWNLOAD PDF SBBK - F4/LEGAL, VERTIKAL, LOGO IDEAL
     // ============================================================
     window.downloadPdf = (data) => {
       const inputPetugasElem = document.getElementById(`inPetugas_${data.docId}`);
@@ -672,82 +670,86 @@
         `;
       }
 
-      // KOP SURAT DENGAN LOGO - UKURAN DIPERBESAR & IDEAL
+      // ============================================================
+      // KOP SURAT IDEAL - FONT ARIAL, UKURAN PROPORSIONAL
+      // ============================================================
       areaCetak.innerHTML = `
-        <div style="padding: 25px 30px; font-family: 'Times New Roman', Times, serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
+        <div style="padding: 20px 30px; font-family: Arial, Helvetica, sans-serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
 
-          <!-- KOP SURAT DENGAN LOGO - DIPERBESAR -->
-          <table style="width: 100%; border-collapse: collapse; padding-bottom: 10px; margin-bottom: 20px;">
+          <!-- KOP SURAT -->
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 5px;">
             <tr>
-              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 15px;">
-                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 120px; height: auto;" crossorigin="anonymous" alt="Logo Kota Tangerang Selatan">
+              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 10px;">
+                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 105px; height: auto; display: block;" crossorigin="anonymous" alt="Logo">
               </td>
-              <td style="text-align: center; vertical-align: middle; padding-right: 20px;">
-                <h2 style="font-size: 26px; margin: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-family: 'Times New Roman', Times, serif;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
-                <h1 style="font-size: 30px; margin: 2px 0; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'Times New Roman', Times, serif;">DINAS KESEHATAN</h1>
-                <h1 style="font-size: 34px; margin: 2px 0; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-family: 'Times New Roman', Times, serif;">UPTD FARMASI</h1>
-                <p style="font-size: 15px; margin: 5px 0 2px 0; font-family: 'Times New Roman', Times, serif;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</p>
-                <p style="font-size: 13px; margin: 0; color: #000; font-family: 'Times New Roman', Times, serif;">pos-el <span style="color: #0000ff; text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></p>
+              <td style="text-align: center; vertical-align: middle; padding-right: 130px;">
+                <div style="font-size: 17px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25;">PEMERINTAH KOTA TANGERANG SELATAN</div>
+                <div style="font-size: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; margin-top: 2px;">DINAS KESEHATAN</div>
+                <div style="font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; margin-top: 2px;">UPTD FARMASI</div>
+                <div style="font-size: 11px; margin-top: 4px; line-height: 1.3;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</div>
+                <div style="font-size: 10px; margin-top: 1px; line-height: 1.3;">pos-el <span style="color: #0000ff; text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></div>
               </td>
             </tr>
           </table>
-          <div style="border-bottom: 4px double #000; margin-bottom: 20px;"></div>
 
-          <div style="text-align: center; margin-bottom: 20px;">
-            <div style="font-size: 15px; font-weight: bold; text-decoration: underline; display: inline-block; padding-bottom: 2px; font-family: 'Times New Roman', Times, serif;">BUKTI PENGAMBILAN OBAT/PELAYANAN</div>
+          <!-- GARIS GANDA -->
+          <div style="border-top: 2px solid #000; border-bottom: 1px solid #000; height: 3px; margin-top: 6px; margin-bottom: 18px;"></div>
+
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="font-size: 13px; font-weight: bold; text-decoration: underline; display: inline-block; letter-spacing: 0.5px;">BUKTI PENGAMBILAN OBAT/PELAYANAN</div>
           </div>
 
-          <table style="width: 100%; font-size: 12px; margin-bottom: 20px; border-collapse: collapse; font-family: 'Times New Roman', Times, serif;">
+          <table style="width: 100%; font-size: 11px; margin-bottom: 15px; border-collapse: collapse;">
             <tr>
-              <td style="width: 140px; font-weight: bold; padding: 3px 0;">Nama</td>
-              <td style="width: 10px; padding: 3px 0;">:</td>
-              <td style="font-weight: bold; text-transform: uppercase; padding: 3px 0;">${data.nama || '-'}</td>
-              <td style="width: 130px; font-weight: bold; padding: 3px 0;">No Antrian</td>
-              <td style="width: 10px; text-align: center; padding: 3px 0;">:</td>
-              <td style="font-weight: bold; padding: 3px 0;">${data.nomorAntrian || '-'}</td>
+              <td style="width: 120px; font-weight: bold; padding: 2px 0;">Nama</td>
+              <td style="width: 10px; padding: 2px 0;">:</td>
+              <td style="font-weight: bold; text-transform: uppercase; padding: 2px 0;">${data.nama || '-'}</td>
+              <td style="width: 115px; font-weight: bold; padding: 2px 0;">No Antrian</td>
+              <td style="width: 10px; text-align: center; padding: 2px 0;">:</td>
+              <td style="font-weight: bold; padding: 2px 0;">${data.nomorAntrian || '-'}</td>
             </tr>
             <tr>
-              <td style="font-weight: bold; padding: 3px 0;">Instansi</td>
-              <td style="padding: 3px 0;">:</td>
-              <td style="text-transform: uppercase; padding: 3px 0;">${data.instansi || '-'}</td>
-              <td style="font-weight: bold; padding: 3px 0;">Status Pelayanan</td>
-              <td style="text-align: center; padding: 3px 0;">:</td>
-              <td style="font-weight: bold; text-transform: uppercase; padding: 3px 0;">${data.status || '-'}</td>
+              <td style="font-weight: bold; padding: 2px 0;">Instansi</td>
+              <td style="padding: 2px 0;">:</td>
+              <td style="text-transform: uppercase; padding: 2px 0;">${data.instansi || '-'}</td>
+              <td style="font-weight: bold; padding: 2px 0;">Status Pelayanan</td>
+              <td style="text-align: center; padding: 2px 0;">:</td>
+              <td style="font-weight: bold; text-transform: uppercase; padding: 2px 0;">${data.status || '-'}</td>
             </tr>
             <tr>
-              <td style="font-weight: bold; padding: 3px 0;">Keperluan</td>
-              <td style="padding: 3px 0;">:</td>
-              <td style="padding: 3px 0;">${data.keperluan || '-'}</td>
-              <td style="font-weight: bold; padding: 3px 0;">Durasi</td>
-              <td style="text-align: center; padding: 3px 0;">:</td>
-              <td style="padding: 3px 0;">${data.durasi || '-'}</td>
+              <td style="font-weight: bold; padding: 2px 0;">Keperluan</td>
+              <td style="padding: 2px 0;">:</td>
+              <td style="padding: 2px 0;">${data.keperluan || '-'}</td>
+              <td style="font-weight: bold; padding: 2px 0;">Durasi</td>
+              <td style="text-align: center; padding: 2px 0;">:</td>
+              <td style="padding: 2px 0;">${data.durasi || '-'}</td>
             </tr>
             <tr>
-              <td style="font-weight: bold; padding: 3px 0;">Petugas Program</td>
-              <td style="padding: 3px 0;">:</td>
-              <td style="padding: 3px 0;">${namaPetugasFinal}</td>
-              <td style="font-weight: bold; padding: 3px 0;">Waktu Kunjungan</td>
-              <td style="text-align: center; padding: 3px 0;">:</td>
-              <td style="padding: 3px 0;">${data.waktuFormatted || '-'}</td>
+              <td style="font-weight: bold; padding: 2px 0;">Petugas Program</td>
+              <td style="padding: 2px 0;">:</td>
+              <td style="padding: 2px 0;">${namaPetugasFinal}</td>
+              <td style="font-weight: bold; padding: 2px 0;">Waktu Kunjungan</td>
+              <td style="text-align: center; padding: 2px 0;">:</td>
+              <td style="padding: 2px 0;">${data.waktuFormatted || '-'}</td>
             </tr>
             <tr>
-              <td style="font-weight: bold; padding: 3px 0;">Lampiran File</td>
-              <td style="padding: 3px 0;">:</td>
-              <td colspan="4" style="color: #0000ff; padding: 3px 0;">${data.fileUrl ? 'File Lampiran Tersedia' : 'Tidak ada file dilampirkan'}</td>
+              <td style="font-weight: bold; padding: 2px 0;">Lampiran File</td>
+              <td style="padding: 2px 0;">:</td>
+              <td colspan="4" style="color: #0000ff; padding: 2px 0;">${data.fileUrl ? 'File Lampiran Tersedia' : 'Tidak ada file dilampirkan'}</td>
             </tr>
           </table>
 
-          <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; font-family: 'Times New Roman', Times, serif;">
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
             <thead>
-              <tr style="background-color: #f3f4f6; text-align: center; font-size: 12px; font-weight: bold;">
-                <th style="border: 1px solid #000; padding: 6px; width: 35px;">No</th>
-                <th style="border: 1px solid #000; padding: 6px;">Nama Barang</th>
-                <th style="border: 1px solid #000; padding: 6px; width: 80px;">Tahun</th>
-                <th style="border: 1px solid #000; padding: 6px; width: 80px;">Satuan</th>
-                <th style="border: 1px solid #000; padding: 6px; width: 70px;">Volume</th>
-                <th style="border: 1px solid #000; padding: 6px; width: 75px;">Ed</th>
-                <th style="border: 1px solid #000; padding: 6px; width: 90px;">No Batch</th>
-                <th style="border: 1px solid #000; padding: 6px; width: 60px;">Paraf</th>
+              <tr style="background-color: #f3f4f6; text-align: center; font-size: 10.5px; font-weight: bold;">
+                <th style="border: 1px solid #000; padding: 5px; width: 30px;">No</th>
+                <th style="border: 1px solid #000; padding: 5px;">Nama Barang</th>
+                <th style="border: 1px solid #000; padding: 5px; width: 65px;">Tahun</th>
+                <th style="border: 1px solid #000; padding: 5px; width: 65px;">Satuan</th>
+                <th style="border: 1px solid #000; padding: 5px; width: 60px;">Volume</th>
+                <th style="border: 1px solid #000; padding: 5px; width: 65px;">Ed</th>
+                <th style="border: 1px solid #000; padding: 5px; width: 80px;">No Batch</th>
+                <th style="border: 1px solid #000; padding: 5px; width: 50px;">Paraf</th>
               </tr>
             </thead>
             <tbody>
@@ -755,7 +757,7 @@
             </tbody>
           </table>
 
-          <table style="width: 100%; margin-top: 40px; font-size: 12px; border-collapse: collapse; font-family: 'Times New Roman', Times, serif;">
+          <table style="width: 100%; margin-top: 30px; font-size: 11px; border-collapse: collapse;">
             <tr>
               <td style="width: 50%; text-align: center; vertical-align: top;">
                 <p style="margin: 0; font-weight: bold;">Petugas</p>
@@ -794,8 +796,7 @@
     };
 
     // ============================================================
-    // FUNGSI DOWNLOAD PDF KELUHAN - F4/LEGAL, VERTIKAL, ADA LOGO
-    // KOP SURAT DIPERBESAR & IDEAL
+    // FUNGSI DOWNLOAD PDF KELUHAN - F4/LEGAL, VERTIKAL, LOGO IDEAL
     // ============================================================
     window.downloadPDFKeluhan = () => {
       const sourceElement = document.getElementById('printAreaKeluhan');
@@ -804,34 +805,36 @@
       const tabelHtml = sourceElement.querySelector('table').outerHTML;
 
       sourceElement.innerHTML = `
-        <div style="padding: 25px 30px; font-family: 'Times New Roman', Times, serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
+        <div style="padding: 20px 30px; font-family: Arial, Helvetica, sans-serif; color: #000; width: 100%; background: #fff; box-sizing: border-box;">
           
-          <!-- KOP SURAT DENGAN LOGO - DIPERBESAR -->
-          <table style="width: 100%; border-collapse: collapse; padding-bottom: 10px; margin-bottom: 20px;">
+          <!-- KOP SURAT -->
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 5px;">
             <tr>
-              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 15px;">
-                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 120px; height: auto;" crossorigin="anonymous" alt="Logo Kota Tangerang Selatan">
+              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 10px;">
+                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 105px; height: auto; display: block;" crossorigin="anonymous" alt="Logo">
               </td>
-              <td style="text-align: center; vertical-align: middle; padding-right: 20px;">
-                <h2 style="font-size: 22px; margin: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-family: 'Times New Roman', Times, serif;">PEMERINTAH KOTA TANGERANG SELATAN</h2>
-                <h1 style="font-size: 26px; margin: 2px 0; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'Times New Roman', Times, serif;">DINAS KESEHATAN</h1>
-                <h1 style="font-size: 30px; margin: 2px 0; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-family: 'Times New Roman', Times, serif;">UPTD FARMASI</h1>
-                <p style="font-size: 13px; margin: 5px 0 2px 0; font-family: 'Times New Roman', Times, serif;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</p>
-                <p style="font-size: 11px; margin: 0; color: #000; font-family: 'Times New Roman', Times, serif;">pos-el <span style="color: #0000ff; text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></p>
+              <td style="text-align: center; vertical-align: middle; padding-right: 130px;">
+                <div style="font-size: 17px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25;">PEMERINTAH KOTA TANGERANG SELATAN</div>
+                <div style="font-size: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; margin-top: 2px;">DINAS KESEHATAN</div>
+                <div style="font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; margin-top: 2px;">UPTD FARMASI</div>
+                <div style="font-size: 11px; margin-top: 4px; line-height: 1.3;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</div>
+                <div style="font-size: 10px; margin-top: 1px; line-height: 1.3;">pos-el <span style="color: #0000ff; text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></div>
               </td>
             </tr>
           </table>
-          <div style="border-bottom: 4px double #000; margin-bottom: 20px;"></div>
 
-          <div style="text-align: center; margin-bottom: 20px;">
-            <div style="font-size: 14px; font-weight: bold; text-decoration: underline; display: inline-block; padding-bottom: 2px; font-family: 'Times New Roman', Times, serif;">LAPORAN KONSULTASI DAN PENGADUAN UPTD FARMASI</div>
+          <!-- GARIS GANDA -->
+          <div style="border-top: 2px solid #000; border-bottom: 1px solid #000; height: 3px; margin-top: 6px; margin-bottom: 18px;"></div>
+
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="font-size: 13px; font-weight: bold; text-decoration: underline; display: inline-block; letter-spacing: 0.5px;">LAPORAN KONSULTASI DAN PENGADUAN UPTD FARMASI</div>
           </div>
 
-          <div style="margin-bottom: 30px; width: 100%;">
+          <div style="margin-bottom: 25px; width: 100%;">
             ${tabelHtml}
           </div>
 
-          <table style="width: 100%; margin-top: 40px; font-size: 12px; border-collapse: collapse; page-break-inside: avoid; font-family: 'Times New Roman', Times, serif;">
+          <table style="width: 100%; margin-top: 30px; font-size: 11px; border-collapse: collapse; page-break-inside: avoid;">
             <tr>
               <td style="width: 60%;"></td>
               <td style="width: 40%; text-align: center; vertical-align: top;">
