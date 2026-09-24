@@ -26,69 +26,35 @@
     #dashboardAdmin .text-emerald-800 { color:#6ee7b7; }
     #dashboardAdmin .text-red-700 { color:#fca5a5; }
 
-    /* CSS KHUSUS UNTUK AREA CETAK PDF */
-    #areaCetakPdf, #printAreaKeluhan {
-      color: #000 !important;
-      background: #fff !important;
-    }
-    #areaCetakPdf *, #printAreaKeluhan * {
-      color: #000 !important;
-    }
-    /* Hanya tabel data yang punya border */
-    #areaCetakPdf table.tabel-data,
-    #printAreaKeluhan table.tabel-data {
-      border-collapse: collapse !important;
-      width: 100% !important;
-      border: 1px solid #000 !important;
+    #areaCetakPdf, #printAreaKeluhan { color: #000 !important; background: #fff !important; }
+    #areaCetakPdf *, #printAreaKeluhan * { color: #000 !important; }
+    #areaCetakPdf table.tabel-data, #printAreaKeluhan table.tabel-data {
+      border-collapse: collapse !important; width: 100% !important; border: 1px solid #000 !important;
     }
     #areaCetakPdf table.tabel-data th, #printAreaKeluhan table.tabel-data th,
     #areaCetakPdf table.tabel-data td, #printAreaKeluhan table.tabel-data td {
-      border: 1px solid #000 !important;
-      padding: 4px 6px !important;
-      color: #000 !important;
-      background: #fff !important;
-      font-size: 9px !important;
-      vertical-align: middle !important;
-      word-wrap: break-word !important;
-      overflow-wrap: break-word !important;
+      border: 1px solid #000 !important; padding: 4px 6px !important; color: #000 !important;
+      background: #fff !important; font-size: 9px !important; vertical-align: middle !important;
+      word-wrap: break-word !important; overflow-wrap: break-word !important;
     }
     #areaCetakPdf table.tabel-data thead th, #printAreaKeluhan table.tabel-data thead th {
-      background: #e5e7eb !important;
-      font-weight: bold !important;
-      text-align: center !important;
+      background: #e5e7eb !important; font-weight: bold !important; text-align: center !important;
     }
-    /* Kop surat & ttd: HAPUS border */
-    #areaCetakPdf table.kop-surat,
-    #printAreaKeluhan table.kop-surat,
-    #areaCetakPdf table.ttd-table,
-    #printAreaKeluhan table.ttd-table {
-      border: none !important;
+    #areaCetakPdf table.kop-surat, #printAreaKeluhan table.kop-surat,
+    #areaCetakPdf table.ttd-table, #printAreaKeluhan table.ttd-table { border: none !important; }
+    #areaCetakPdf table.kop-surat td, #printAreaKeluhan table.kop-surat td,
+    #areaCetakPdf table.ttd-table td, #printAreaKeluhan table.ttd-table td {
+      border: none !important; background: #fff !important; padding: 0 !important;
     }
-    #areaCetakPdf table.kop-surat td,
-    #printAreaKeluhan table.kop-surat td,
-    #areaCetakPdf table.ttd-table td,
-    #printAreaKeluhan table.ttd-table td {
-      border: none !important;
-      background: #fff !important;
-      padding: 0 !important;
-    }
-
     .modal-backdrop-custom {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
+      opacity: 0; visibility: hidden; pointer-events: none;
       transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
     }
-    .modal-backdrop-custom.visible-custom {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
+    .modal-backdrop-custom.visible-custom { opacity: 1; visibility: visible; pointer-events: auto; }
   </style>
 </head>
 <body class="bg-[#0b1329] min-h-screen text-slate-100">
 
-  <!-- LAYAR LOGIN -->
   <div id="loginScreen" class="flex items-center justify-center min-h-screen p-4">
     <div class="bg-slate-900/90 border border-slate-700/60 p-8 rounded-3xl shadow-2xl w-full max-w-sm text-center">
       <div class="w-16 h-16 bg-emerald-600/20 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-emerald-500/30">
@@ -235,7 +201,6 @@
     </div>
   </div>
 
-  <!-- MODAL KONFIRMASI PROFESIONAL (Hapus) -->
   <div id="modalKonfirmasiHapus" class="modal-backdrop-custom fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-slate-900 rounded-3xl shadow-2xl border border-slate-700 max-w-sm w-full overflow-hidden">
       <div class="bg-gradient-to-r from-red-600 to-rose-700 px-6 py-5 text-center">
@@ -258,7 +223,6 @@
     </div>
   </div>
 
-  <!-- MODAL NOTIFIKASI PROFESIONAL -->
   <div id="modalNotifikasi" class="modal-backdrop-custom fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-slate-900 rounded-3xl shadow-2xl border border-slate-700 max-w-sm w-full overflow-hidden">
       <div id="modalNotifHeader" class="bg-gradient-to-r from-emerald-600 to-teal-700 px-6 py-5 text-center">
@@ -815,7 +779,7 @@
     };
 
     // ============================================================
-    // FUNGSI DOWNLOAD PDF SBBK - KOP SEIMBANG
+    // FUNGSI DOWNLOAD PDF SBBK - KOP SEIMBANG (3 KOLOM)
     // ============================================================
     window.downloadPdf = (data) => {
       const inputPetugasElem = document.getElementById(`inPetugas_${data.docId}`);
@@ -853,19 +817,23 @@
       areaCetak.innerHTML = `
         <div style="padding: 20px 30px; font-family: Arial, Helvetica, sans-serif; color: #000; background: #fff; width: 100%; box-sizing: border-box;">
 
-          <!-- KOP SURAT - SEIMBANG -->
-          <table class="kop-surat" style="width: 100%; border-collapse: collapse; margin-bottom: 5px; border: none;">
+          <!-- KOP SURAT - 3 KOLOM SEIMBANG -->
+          <table class="kop-surat" style="width: 100%; border-collapse: collapse; margin-bottom: 5px; border: none; table-layout: fixed;">
             <tr>
-              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 15px; border: none; background: #fff;">
-                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 105px; height: auto; display: block; margin: 0 auto;" crossorigin="anonymous" alt="Logo">
+              <!-- KOLOM KIRI: LOGO (20%) -->
+              <td style="width: 20%; vertical-align: middle; text-align: center; border: none; background: #fff;">
+                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 95px; height: auto; display: block; margin: 0 auto;" crossorigin="anonymous" alt="Logo">
               </td>
-              <td style="text-align: center; vertical-align: middle; border: none; background: #fff;">
+              <!-- KOLOM TENGAH: TEKS (60%) -->
+              <td style="width: 60%; text-align: center; vertical-align: middle; border: none; background: #fff;">
                 <div style="font-size: 17px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; color:#000;">PEMERINTAH KOTA TANGERANG SELATAN</div>
                 <div style="font-size: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; margin-top: 2px; color:#000;">DINAS KESEHATAN</div>
                 <div style="font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; margin-top: 2px; color:#000;">UPTD FARMASI</div>
                 <div style="font-size: 11px; margin-top: 4px; line-height: 1.3; color:#000;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</div>
                 <div style="font-size: 10px; margin-top: 1px; line-height: 1.3; color:#000;">pos-el <span style="color: #0000ff; text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></div>
               </td>
+              <!-- KOLOM KANAN: SPACER (20%) -->
+              <td style="width: 20%; border: none; background: #fff;"></td>
             </tr>
           </table>
 
@@ -916,7 +884,6 @@
             </tr>
           </table>
 
-          <!-- TABEL DATA - DENGAN BORDER -->
           <table class="tabel-data" style="width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #000;">
             <thead>
               <tr style="background-color: #e5e7eb; text-align: center; font-size: 10.5px; font-weight: bold;">
@@ -935,7 +902,6 @@
             </tbody>
           </table>
 
-          <!-- TTD - TANPA BORDER -->
           <table class="ttd-table" style="width: 100%; margin-top: 30px; font-size: 11px; border-collapse: collapse; border: none;">
             <tr>
               <td style="width: 50%; text-align: center; vertical-align: top; border: none; color:#000; background:#fff;">
@@ -975,7 +941,7 @@
     };
 
     // ============================================================
-    // FUNGSI DOWNLOAD PDF KELUHAN - KOP SEIMBANG
+    // FUNGSI DOWNLOAD PDF KELUHAN - KOP SEIMBANG (3 KOLOM)
     // ============================================================
     window.downloadPDFKeluhan = () => {
       const sourceElement = document.getElementById('printAreaKeluhan');
@@ -986,19 +952,23 @@
       sourceElement.innerHTML = `
         <div style="padding: 20px 30px; font-family: Arial, Helvetica, sans-serif; color: #000; background: #fff; width: 100%; box-sizing: border-box;">
           
-          <!-- KOP SURAT - SEIMBANG -->
-          <table class="kop-surat" style="width: 100%; border-collapse: collapse; margin-bottom: 5px; border: none;">
+          <!-- KOP SURAT - 3 KOLOM SEIMBANG -->
+          <table class="kop-surat" style="width: 100%; border-collapse: collapse; margin-bottom: 5px; border: none; table-layout: fixed;">
             <tr>
-              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 15px; border: none; background: #fff;">
-                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 105px; height: auto; display: block; margin: 0 auto;" crossorigin="anonymous" alt="Logo">
+              <!-- KOLOM KIRI: LOGO (20%) -->
+              <td style="width: 20%; vertical-align: middle; text-align: center; border: none; background: #fff;">
+                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 95px; height: auto; display: block; margin: 0 auto;" crossorigin="anonymous" alt="Logo">
               </td>
-              <td style="text-align: center; vertical-align: middle; border: none; background: #fff;">
+              <!-- KOLOM TENGAH: TEKS (60%) -->
+              <td style="width: 60%; text-align: center; vertical-align: middle; border: none; background: #fff;">
                 <div style="font-size: 17px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; color:#000;">PEMERINTAH KOTA TANGERANG SELATAN</div>
                 <div style="font-size: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; margin-top: 2px; color:#000;">DINAS KESEHATAN</div>
                 <div style="font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; margin-top: 2px; color:#000;">UPTD FARMASI</div>
                 <div style="font-size: 11px; margin-top: 4px; line-height: 1.3; color:#000;">Jl. Cendekia BSD Sektor XI Ciater Serpong, Kota Tangerang Selatan - Banten</div>
                 <div style="font-size: 10px; margin-top: 1px; line-height: 1.3; color:#000;">pos-el <span style="color: #0000ff; text-decoration: underline;">uptdfarmasi@tangerangselatankota.go.id</span></div>
               </td>
+              <!-- KOLOM KANAN: SPACER (20%) -->
+              <td style="width: 20%; border: none; background: #fff;"></td>
             </tr>
           </table>
 
@@ -1009,7 +979,6 @@
             <div style="font-size: 13px; font-weight: bold; text-decoration: underline; display: inline-block; letter-spacing: 0.5px; color:#000;">LAPORAN KONSULTASI DAN PENGADUAN UPTD FARMASI</div>
           </div>
 
-          <!-- TABEL DATA - DENGAN BORDER -->
           <table class="tabel-data" style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 25px;">
             <thead>
               <tr style="background-color: #e5e7eb;">
@@ -1027,7 +996,6 @@
             </tbody>
           </table>
 
-          <!-- TTD - TANPA BORDER -->
           <table class="ttd-table" style="width: 100%; margin-top: 30px; font-size: 11px; border-collapse: collapse; border: none; page-break-inside: avoid;">
             <tr>
               <td style="width: 60%; border: none; background: #fff;"></td>
