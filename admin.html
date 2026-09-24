@@ -8,7 +8,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <!-- Font Awesome untuk semua ikon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <title>Dashboard Admin - UPTD Farmasi</title>
   <style>
@@ -27,7 +26,7 @@
     #dashboardAdmin .text-emerald-800 { color:#6ee7b7; }
     #dashboardAdmin .text-red-700 { color:#fca5a5; }
 
-    /* CSS KHUSUS UNTUK AREA CETAK PDF */
+    /* CSS KHUSUS UNTUK AREA CETAK PDF - HANYA UNTUK TABEL DATA */
     #areaCetakPdf, #printAreaKeluhan {
       color: #000 !important;
       background: #fff !important;
@@ -35,12 +34,15 @@
     #areaCetakPdf *, #printAreaKeluhan * {
       color: #000 !important;
     }
-    #areaCetakPdf table, #printAreaKeluhan table {
+    /* Hanya tabel data yang punya border, BUKAN kop surat atau ttd */
+    #areaCetakPdf table.tabel-data,
+    #printAreaKeluhan table.tabel-data {
       border-collapse: collapse !important;
       width: 100% !important;
+      border: 1px solid #000 !important;
     }
-    #areaCetakPdf th, #printAreaKeluhan th,
-    #areaCetakPdf td, #printAreaKeluhan td {
+    #areaCetakPdf table.tabel-data th, #printAreaKeluhan table.tabel-data th,
+    #areaCetakPdf table.tabel-data td, #printAreaKeluhan table.tabel-data td {
       border: 1px solid #000 !important;
       padding: 4px 6px !important;
       color: #000 !important;
@@ -50,13 +52,27 @@
       word-wrap: break-word !important;
       overflow-wrap: break-word !important;
     }
-    #areaCetakPdf thead th, #printAreaKeluhan thead th {
+    #areaCetakPdf table.tabel-data thead th, #printAreaKeluhan table.tabel-data thead th {
       background: #e5e7eb !important;
       font-weight: bold !important;
       text-align: center !important;
     }
+    /* Kop surat & ttd: HAPUS border */
+    #areaCetakPdf table.kop-surat,
+    #printAreaKeluhan table.kop-surat,
+    #areaCetakPdf table.ttd-table,
+    #printAreaKeluhan table.ttd-table {
+      border: none !important;
+    }
+    #areaCetakPdf table.kop-surat td,
+    #printAreaKeluhan table.kop-surat td,
+    #areaCetakPdf table.ttd-table td,
+    #printAreaKeluhan table.ttd-table td {
+      border: none !important;
+      background: #fff !important;
+      padding: 0 !important;
+    }
 
-    /* Modal Transitions */
     .modal-backdrop-custom {
       opacity: 0;
       visibility: hidden;
@@ -138,7 +154,6 @@
       </table>
     </div>
 
-    <!-- AREA TERSEMBUNYI UNTUK CETAK PDF SBBK -->
     <div id="areaCetakPdf" class="hidden"></div>
 
     <div class="bg-slate-800/80 p-6 rounded-2xl shadow-lg">
@@ -174,7 +189,7 @@
       <div class="text-center mb-4">
         <h3 class="text-xs font-black uppercase tracking-wider underline">LAPORAN KONSULTASI DAN PENGADUAN KELUHAN</h3>
       </div>
-      <table class="w-full text-left border-collapse text-xs">
+      <table class="w-full text-left border-collapse text-xs tabel-data">
         <thead>
           <tr class="border-b text-slate-200 text-[10px] uppercase bg-slate-900">
             <th class="p-2 border">No. Antrian</th>
@@ -220,9 +235,7 @@
     </div>
   </div>
 
-  <!-- ============================================================ -->
   <!-- MODAL KONFIRMASI PROFESIONAL (Hapus) -->
-  <!-- ============================================================ -->
   <div id="modalKonfirmasiHapus" class="modal-backdrop-custom fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-slate-900 rounded-3xl shadow-2xl border border-slate-700 max-w-sm w-full overflow-hidden">
       <div class="bg-gradient-to-r from-red-600 to-rose-700 px-6 py-5 text-center">
@@ -245,9 +258,7 @@
     </div>
   </div>
 
-  <!-- ============================================================ -->
-  <!-- MODAL NOTIFIKASI PROFESIONAL (Sukses / Info) -->
-  <!-- ============================================================ -->
+  <!-- MODAL NOTIFIKASI PROFESIONAL -->
   <div id="modalNotifikasi" class="modal-backdrop-custom fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-slate-900 rounded-3xl shadow-2xl border border-slate-700 max-w-sm w-full overflow-hidden">
       <div id="modalNotifHeader" class="bg-gradient-to-r from-emerald-600 to-teal-700 px-6 py-5 text-center">
@@ -287,7 +298,6 @@
     let activeMarkerFarmasiAdmin = null;
     let activeCircleRadiusAdmin = null;
 
-    // State untuk modal hapus
     let pendingDeleteType = null;
     let pendingDeleteId = null;
 
@@ -297,7 +307,6 @@
       const φ2 = lat2 * Math.PI/180;
       const Δφ = (lat2-lat1) * Math.PI/180;
       const Δλ = (lon2-lon1) * Math.PI/180;
-
       const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
                 Math.cos(φ1) * Math.cos(φ2) *
                 Math.sin(Δλ/2) * Math.sin(Δλ/2);
@@ -305,9 +314,6 @@
       return R * c;
     }
 
-    // ============================================================
-    // FUNGSI MODAL NOTIFIKASI PROFESIONAL
-    // ============================================================
     window.tampilkanNotifikasi = (judul, pesan, tipe = 'sukses') => {
       const modal = document.getElementById('modalNotifikasi');
       const header = document.getElementById('modalNotifHeader');
@@ -318,7 +324,6 @@
       title.innerText = judul;
       pesanEl.innerText = pesan;
 
-      // Set warna & ikon berdasarkan tipe
       if (tipe === 'sukses') {
         header.className = "bg-gradient-to-r from-emerald-600 to-teal-700 px-6 py-5 text-center";
         icon.className = "fas fa-check text-white text-xl";
@@ -337,13 +342,9 @@
     };
 
     window.tutupModalNotifikasi = () => {
-      const modal = document.getElementById('modalNotifikasi');
-      modal.classList.remove('visible-custom');
+      document.getElementById('modalNotifikasi').classList.remove('visible-custom');
     };
 
-    // ============================================================
-    // FUNGSI MODAL KONFIRMASI HAPUS
-    // ============================================================
     window.bukaKonfirmasiHapus = (tipe, id, pesanKustom = null) => {
       pendingDeleteType = tipe;
       pendingDeleteId = id;
@@ -379,7 +380,6 @@
           await deleteDoc(doc(db, "pegawai", id));
           tampilkanNotifikasi("Berhasil Dihapus", "Data pegawai telah berhasil dihapus.", "sukses");
         } else if (tipe === 'artikel') {
-          // id berisi "kategori||id"
           const [kategori, docId] = id.split('||');
           await deleteDoc(doc(db, kategori, docId));
           tampilkanNotifikasi("Berhasil Dihapus", "Artikel telah berhasil dihapus.", "sukses");
@@ -523,17 +523,13 @@
             </td>
             <td class="p-3 space-y-3 min-w-[340px] align-top">
 
-              <!-- FORM INPUT VERTIKAL -->
               <div class="border border-emerald-500/30 rounded-lg p-3 bg-emerald-500/10 space-y-3">
-                
-                <!-- Input Petugas -->
                 <div class="text-[11px] font-extrabold text-slate-100 border-b border-emerald-500/30 pb-1"><i class="fas fa-user-tie mr-1"></i> Input Nama Petugas</div>
                 <div class="flex items-center gap-1.5">
                   <input type="text" id="inPetugas_${docSnap.id}" value="${namaPetugasVal}" placeholder="Ketik nama petugas..." class="w-full p-1.5 border rounded text-xs bg-slate-800/80 font-semibold text-slate-100">
                   <button onclick="simpanPetugasAdmin('${docSnap.id}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[11px] px-3 py-1.5 rounded transition shrink-0 shadow-sm"><i class="fas fa-save mr-1"></i> Simpan</button>
                 </div>
 
-                <!-- Input Obat Vertikal -->
                 <div class="text-[11px] font-extrabold text-slate-100 border-b border-emerald-500/30 pt-1 pb-1"><i class="fas fa-plus-circle mr-1"></i> Tambah Item Barang/Obat (SBBK)</div>
                 <div class="space-y-1.5">
                   <input type="text" id="inNama_${docSnap.id}" placeholder="Nama Barang/Obat..." class="w-full p-1 border rounded text-xs bg-slate-800/80">
@@ -550,7 +546,6 @@
                 <button onclick="tambahItemObatTamu('${docSnap.id}')" class="w-full bg-emerald-700 text-white py-1.5 rounded text-[11px] font-bold hover:bg-emerald-800 transition shadow-sm"><i class="fas fa-plus mr-1"></i> Masukkan ke Rincian</button>
               </div>
 
-              <!-- PREVIEW RINCIAN OBAT (TABEL SBBK) -->
               <div class="mt-2 border border-slate-600 rounded-lg overflow-hidden">
                 <div class="bg-slate-700 text-slate-200 text-[9px] font-bold p-1 text-center"><i class="fas fa-boxes-stacked mr-1"></i> RINCIAN BARANG/OBAT (SBBK)</div>
                 <table class="w-full text-[9px] text-left border-collapse">
@@ -585,7 +580,6 @@
                 </table>
               </div>
 
-              <!-- TOMBOL AKSI -->
               <div class="flex gap-1 flex-wrap pt-1">
                 ${data.status !== 'selesai' && data.status !== 'proses' ? `<button onclick="updateStatusViaAdmin('${docSnap.id}', 'proses', '${data.kontak || data.hp || ''}', '${data.nama || ''}', '${data.nomorAntrian || ''}')" class="bg-amber-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold hover:bg-amber-500"><i class="fas fa-spinner mr-1"></i> Proses</button>` : ''}
                 <button onclick="updateStatusViaAdmin('${docSnap.id}', 'selesai', '${data.kontak || data.hp || ''}', '${data.nama || ''}', '${data.nomorAntrian || ''}')" class="bg-emerald-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold hover:bg-emerald-500"><i class="fas fa-check mr-1"></i> Simpan & Selesai</button>
@@ -599,9 +593,6 @@
         document.getElementById("totalTamu").innerText = total; document.getElementById("totalProses").innerText = proses; document.getElementById("totalSelesai").innerText = selesai;
       });
 
-      // ============================================================
-      // TABEL KONSULTASI - FORMAT MIRIP ANTRIAN + KOLOM NO ANTRIAN
-      // ============================================================
       onSnapshot(query(collection(db, "Konsultasi"), orderBy("waktuInput", "desc")), (snapshot) => {
         const tabelKonsultasiAdmin = document.getElementById("tabelKonsultasiAdmin");
         const tabelKonsultasiPDF = document.getElementById("tabelKonsultasiPDF");
@@ -677,9 +668,6 @@
       });
     }
 
-    // ============================================================
-    // FUNGSI UNTUK KONSULTASI (DENGAN MODAL PROFESIONAL)
-    // ============================================================
     window.simpanPetugasKonsul = async (id) => {
       const inputVal = document.getElementById(`inPetugasKonsul_${id}`).value.trim();
       try {
@@ -774,9 +762,7 @@
     window.simpanPetugasAdmin = async (id) => {
       const inputVal = document.getElementById(`inPetugas_${id}`).value.trim();
       try {
-        await updateDoc(doc(db, "tamu", id), {
-          petugas: inputVal
-        });
+        await updateDoc(doc(db, "tamu", id), { petugas: inputVal });
         tampilkanNotifikasi("Berhasil Disimpan", "Nama petugas berhasil disimpan!", "sukses");
       } catch (err) {
         console.error("Gagal menyimpan petugas:", err);
@@ -829,7 +815,7 @@
     };
 
     // ============================================================
-    // FUNGSI DOWNLOAD PDF SBBK - F4/LEGAL, VERTIKAL, LOGO IDEAL
+    // FUNGSI DOWNLOAD PDF SBBK - TANPA KOTAK DI KOP/TTD
     // ============================================================
     window.downloadPdf = (data) => {
       const inputPetugasElem = document.getElementById(`inPetugas_${data.docId}`);
@@ -866,12 +852,14 @@
 
       areaCetak.innerHTML = `
         <div style="padding: 20px 30px; font-family: Arial, Helvetica, sans-serif; color: #000; background: #fff; width: 100%; box-sizing: border-box;">
-          <table style="width: 100%; border-collapse: collapse; margin-bottom: 5px; border: none;">
+
+          <!-- KOP SURAT - TANPA BORDER -->
+          <table class="kop-surat" style="width: 100%; border-collapse: collapse; margin-bottom: 5px; border: none;">
             <tr>
-              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 10px; border: none;">
+              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 10px; border: none; background: #fff;">
                 <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 105px; height: auto; display: block;" crossorigin="anonymous" alt="Logo">
               </td>
-              <td style="text-align: center; vertical-align: middle; padding-right: 130px; border: none;">
+              <td style="text-align: center; vertical-align: middle; padding-right: 130px; border: none; background: #fff;">
                 <div style="font-size: 17px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; color:#000;">PEMERINTAH KOTA TANGERANG SELATAN</div>
                 <div style="font-size: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; margin-top: 2px; color:#000;">DINAS KESEHATAN</div>
                 <div style="font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; margin-top: 2px; color:#000;">UPTD FARMASI</div>
@@ -880,11 +868,15 @@
               </td>
             </tr>
           </table>
+
+          <!-- GARIS GANDA -->
           <div style="border-top: 2px solid #000; border-bottom: 1px solid #000; height: 3px; margin-top: 6px; margin-bottom: 18px;"></div>
+
           <div style="text-align: center; margin-bottom: 15px;">
             <div style="font-size: 13px; font-weight: bold; text-decoration: underline; display: inline-block; letter-spacing: 0.5px; color:#000;">BUKTI PENGAMBILAN OBAT/PELAYANAN</div>
           </div>
-          <table style="width: 100%; font-size: 11px; margin-bottom: 15px; border-collapse: collapse; border: none;">
+
+          <table class="kop-surat" style="width: 100%; font-size: 11px; margin-bottom: 15px; border-collapse: collapse; border: none;">
             <tr>
               <td style="width: 120px; font-weight: bold; padding: 2px 0; border: none; color:#000; background:#fff;">Nama</td>
               <td style="width: 10px; padding: 2px 0; border: none; color:#000; background:#fff;">:</td>
@@ -923,7 +915,9 @@
               <td colspan="4" style="color: #0000ff; padding: 2px 0; border: none; background:#fff;">${data.fileUrl ? 'File Lampiran Tersedia' : 'Tidak ada file dilampirkan'}</td>
             </tr>
           </table>
-          <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #000;">
+
+          <!-- TABEL DATA - DENGAN BORDER -->
+          <table class="tabel-data" style="width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #000;">
             <thead>
               <tr style="background-color: #e5e7eb; text-align: center; font-size: 10.5px; font-weight: bold;">
                 <th style="border: 1px solid #000; padding: 5px; width: 30px; color:#000;">No</th>
@@ -940,7 +934,9 @@
               ${rowsHtml}
             </tbody>
           </table>
-          <table style="width: 100%; margin-top: 30px; font-size: 11px; border-collapse: collapse; border: none;">
+
+          <!-- TTD - TANPA BORDER -->
+          <table class="ttd-table" style="width: 100%; margin-top: 30px; font-size: 11px; border-collapse: collapse; border: none;">
             <tr>
               <td style="width: 50%; text-align: center; vertical-align: top; border: none; color:#000; background:#fff;">
                 <p style="margin: 0; font-weight: bold;">Petugas</p>
@@ -954,6 +950,7 @@
               </td>
             </tr>
           </table>
+
         </div>
       `;
 
@@ -978,7 +975,7 @@
     };
 
     // ============================================================
-    // FUNGSI DOWNLOAD PDF KELUHAN - F4/LEGAL, VERTIKAL, LOGO IDEAL
+    // FUNGSI DOWNLOAD PDF KELUHAN - TANPA KOTAK DI KOP/TTD
     // ============================================================
     window.downloadPDFKeluhan = () => {
       const sourceElement = document.getElementById('printAreaKeluhan');
@@ -988,12 +985,14 @@
 
       sourceElement.innerHTML = `
         <div style="padding: 20px 30px; font-family: Arial, Helvetica, sans-serif; color: #000; background: #fff; width: 100%; box-sizing: border-box;">
-          <table style="width: 100%; border-collapse: collapse; margin-bottom: 5px; border: none;">
+          
+          <!-- KOP SURAT - TANPA BORDER -->
+          <table class="kop-surat" style="width: 100%; border-collapse: collapse; margin-bottom: 5px; border: none;">
             <tr>
-              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 10px; border: none;">
+              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 10px; border: none; background: #fff;">
                 <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 105px; height: auto; display: block;" crossorigin="anonymous" alt="Logo">
               </td>
-              <td style="text-align: center; vertical-align: middle; padding-right: 130px; border: none;">
+              <td style="text-align: center; vertical-align: middle; padding-right: 130px; border: none; background: #fff;">
                 <div style="font-size: 17px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; color:#000;">PEMERINTAH KOTA TANGERANG SELATAN</div>
                 <div style="font-size: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; margin-top: 2px; color:#000;">DINAS KESEHATAN</div>
                 <div style="font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; margin-top: 2px; color:#000;">UPTD FARMASI</div>
@@ -1002,11 +1001,16 @@
               </td>
             </tr>
           </table>
+
+          <!-- GARIS GANDA -->
           <div style="border-top: 2px solid #000; border-bottom: 1px solid #000; height: 3px; margin-top: 6px; margin-bottom: 18px;"></div>
+
           <div style="text-align: center; margin-bottom: 15px;">
             <div style="font-size: 13px; font-weight: bold; text-decoration: underline; display: inline-block; letter-spacing: 0.5px; color:#000;">LAPORAN KONSULTASI DAN PENGADUAN UPTD FARMASI</div>
           </div>
-          <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 25px;">
+
+          <!-- TABEL DATA - DENGAN BORDER -->
+          <table class="tabel-data" style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 25px;">
             <thead>
               <tr style="background-color: #e5e7eb;">
                 <th style="border: 1px solid #000; padding: 5px; font-size: 10px; color:#000; text-align: center; width: 50px;">No. Antrian</th>
@@ -1022,10 +1026,12 @@
               ${tabelData}
             </tbody>
           </table>
-          <table style="width: 100%; margin-top: 30px; font-size: 11px; border-collapse: collapse; border: none; page-break-inside: avoid;">
+
+          <!-- TTD - TANPA BORDER -->
+          <table class="ttd-table" style="width: 100%; margin-top: 30px; font-size: 11px; border-collapse: collapse; border: none; page-break-inside: avoid;">
             <tr>
-              <td style="width: 60%; border: none;"></td>
-              <td style="width: 40%; text-align: center; vertical-align: top; border: none; color:#000;">
+              <td style="width: 60%; border: none; background: #fff;"></td>
+              <td style="width: 40%; text-align: center; vertical-align: top; border: none; color:#000; background: #fff;">
                 <p style="margin: 0;">Tangerang Selatan, ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                 <p style="margin: 3px 0 0 0; font-weight: bold;">Petugas Penanggung Jawab</p>
                 <br><br><br>
@@ -1073,9 +1079,6 @@
       window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesanAdmin)}`, '_blank');
     };
 
-    // ============================================================
-    // FUNGSI WRAPPER UNTUK TOMBOL HAPUS (menggunakan modal konfirmasi)
-    // ============================================================
     window.hapusAntrian = (id) => {
       bukaKonfirmasiHapus('tamu', id, 'Apakah Anda yakin ingin menghapus data antrian tamu ini?');
     };
