@@ -26,7 +26,7 @@
     #dashboardAdmin .text-emerald-800 { color:#6ee7b7; }
     #dashboardAdmin .text-red-700 { color:#fca5a5; }
 
-    /* CSS KHUSUS UNTUK AREA CETAK PDF - HANYA UNTUK TABEL DATA */
+    /* CSS KHUSUS UNTUK AREA CETAK PDF */
     #areaCetakPdf, #printAreaKeluhan {
       color: #000 !important;
       background: #fff !important;
@@ -34,7 +34,7 @@
     #areaCetakPdf *, #printAreaKeluhan * {
       color: #000 !important;
     }
-    /* Hanya tabel data yang punya border, BUKAN kop surat atau ttd */
+    /* Hanya tabel data yang punya border */
     #areaCetakPdf table.tabel-data,
     #printAreaKeluhan table.tabel-data {
       border-collapse: collapse !important;
@@ -815,7 +815,7 @@
     };
 
     // ============================================================
-    // FUNGSI DOWNLOAD PDF SBBK - TANPA KOTAK DI KOP/TTD
+    // FUNGSI DOWNLOAD PDF SBBK - KOP SEIMBANG
     // ============================================================
     window.downloadPdf = (data) => {
       const inputPetugasElem = document.getElementById(`inPetugas_${data.docId}`);
@@ -853,13 +853,13 @@
       areaCetak.innerHTML = `
         <div style="padding: 20px 30px; font-family: Arial, Helvetica, sans-serif; color: #000; background: #fff; width: 100%; box-sizing: border-box;">
 
-          <!-- KOP SURAT - TANPA BORDER -->
+          <!-- KOP SURAT - SEIMBANG -->
           <table class="kop-surat" style="width: 100%; border-collapse: collapse; margin-bottom: 5px; border: none;">
             <tr>
-              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 10px; border: none; background: #fff;">
-                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 105px; height: auto; display: block;" crossorigin="anonymous" alt="Logo">
+              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 15px; border: none; background: #fff;">
+                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 105px; height: auto; display: block; margin: 0 auto;" crossorigin="anonymous" alt="Logo">
               </td>
-              <td style="text-align: center; vertical-align: middle; padding-right: 130px; border: none; background: #fff;">
+              <td style="text-align: center; vertical-align: middle; border: none; background: #fff;">
                 <div style="font-size: 17px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; color:#000;">PEMERINTAH KOTA TANGERANG SELATAN</div>
                 <div style="font-size: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; margin-top: 2px; color:#000;">DINAS KESEHATAN</div>
                 <div style="font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; margin-top: 2px; color:#000;">UPTD FARMASI</div>
@@ -975,7 +975,7 @@
     };
 
     // ============================================================
-    // FUNGSI DOWNLOAD PDF KELUHAN - TANPA KOTAK DI KOP/TTD
+    // FUNGSI DOWNLOAD PDF KELUHAN - KOP SEIMBANG
     // ============================================================
     window.downloadPDFKeluhan = () => {
       const sourceElement = document.getElementById('printAreaKeluhan');
@@ -986,13 +986,13 @@
       sourceElement.innerHTML = `
         <div style="padding: 20px 30px; font-family: Arial, Helvetica, sans-serif; color: #000; background: #fff; width: 100%; box-sizing: border-box;">
           
-          <!-- KOP SURAT - TANPA BORDER -->
+          <!-- KOP SURAT - SEIMBANG -->
           <table class="kop-surat" style="width: 100%; border-collapse: collapse; margin-bottom: 5px; border: none;">
             <tr>
-              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 10px; border: none; background: #fff;">
-                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 105px; height: auto; display: block;" crossorigin="anonymous" alt="Logo">
+              <td style="width: 130px; vertical-align: middle; text-align: center; padding-right: 15px; border: none; background: #fff;">
+                <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" style="width: 105px; height: auto; display: block; margin: 0 auto;" crossorigin="anonymous" alt="Logo">
               </td>
-              <td style="text-align: center; vertical-align: middle; padding-right: 130px; border: none; background: #fff;">
+              <td style="text-align: center; vertical-align: middle; border: none; background: #fff;">
                 <div style="font-size: 17px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; color:#000;">PEMERINTAH KOTA TANGERANG SELATAN</div>
                 <div style="font-size: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; margin-top: 2px; color:#000;">DINAS KESEHATAN</div>
                 <div style="font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; margin-top: 2px; color:#000;">UPTD FARMASI</div>
