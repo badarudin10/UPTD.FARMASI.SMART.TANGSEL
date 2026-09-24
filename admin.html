@@ -19,7 +19,7 @@
       #printAreaKeluhan { position: absolute; left: 0; top: 0; width: 100%; }
       .no-print { display: none !important; }
     }
-  body { background:#0b1329; }
+    body { background:#0b1329; }
     #dashboardAdmin { max-width:1280px; }
     #dashboardAdmin > div, #dashboardAdmin > section { border-color:rgba(51,65,85,.65); }
     #dashboardAdmin table thead tr { background:rgba(15,23,42,.9); color:#94a3b8; }
@@ -322,46 +322,82 @@
             `;
           }
 
+          // --- PERUBAHAN FORMAT INPUT OBAT JADI VERTIKAL ---
           tabel.innerHTML += `<tr class="border-b text-sm">
-            <td class="p-3 font-bold">${data.nomorAntrian || '-'}</td>
-            <td class="p-3 font-semibold text-slate-100">${data.nama || '-'}</td>
-            <td class="p-3 text-slate-300">${data.instansi || '-'}</td>
-            <td class="p-3 font-bold text-${data.status === 'selesai' ? 'green' : (data.status === 'proses' ? 'blue' : 'yellow')}-600 uppercase text-xs">${data.status || 'menunggu'}</td>
-            <td class="p-3 text-slate-400">${durasi}</td>
+            <td class="p-3 font-bold align-top">${data.nomorAntrian || '-'}</td>
+            <td class="p-3 font-semibold text-slate-100 align-top">${data.nama || '-'}</td>
+            <td class="p-3 text-slate-300 align-top">${data.instansi || '-'}</td>
+            <td class="p-3 font-bold align-top text-${data.status === 'selesai' ? 'green' : (data.status === 'proses' ? 'blue' : 'yellow')}-600 uppercase text-xs">${data.status || 'menunggu'}</td>
+            <td class="p-3 text-slate-400 align-top">${durasi}</td>
             <td class="p-3 align-top">
               ${fileLampiranHtml}
               ${mapButtonHtml}
             </td>
-            <td class="p-3 space-y-3 min-w-[340px]">
+            <td class="p-3 space-y-3 min-w-[340px] align-top">
 
-              <div class="border border-emerald-500/30 rounded-lg p-3 bg-emerald-500/10 space-y-2">
+              <!-- FORM INPUT VERTIKAL -->
+              <div class="border border-emerald-500/30 rounded-lg p-3 bg-emerald-500/10 space-y-3">
+                
+                <!-- Input Petugas -->
                 <div class="text-[11px] font-extrabold text-slate-100 border-b border-emerald-500/30 pb-1">👤 Input Nama Petugas</div>
                 <div class="flex items-center gap-1.5">
                   <input type="text" id="inPetugas_${docSnap.id}" value="${namaPetugasVal}" placeholder="Ketik nama petugas..." class="w-full p-1.5 border rounded text-xs bg-slate-800/80 font-semibold text-slate-100">
                   <button onclick="simpanPetugasAdmin('${docSnap.id}')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[11px] px-3 py-1.5 rounded transition shrink-0 shadow-sm">Simpan</button>
                 </div>
 
-                <div class="text-[11px] font-extrabold text-slate-100 border-b border-emerald-500/30 pt-1 pb-1">➕ Tambah Item Barang/Obat</div>
-                <div class="grid grid-cols-2 gap-1.5">
-                  <input type="text" id="inNama_${docSnap.id}" placeholder="Nama Barang/Obat..." class="p-1 border rounded text-xs col-span-2 bg-slate-800/80">
-                  <input type="text" id="inTahun_${docSnap.id}" placeholder="Tahun (APBD 2025)" value="APBD 2025" class="p-1 border rounded text-xs bg-slate-800/80">
-                  <input type="text" id="inSatuan_${docSnap.id}" placeholder="Satuan (Tablet/Box)" value="Tablet" class="p-1 border rounded text-xs bg-slate-800/80">
-                  <input type="number" id="inVol_${docSnap.id}" placeholder="Volume (Qty)" class="p-1 border rounded text-xs bg-slate-800/80">
-                  <input type="text" id="inED_${docSnap.id}" placeholder="Ed (Okt-27)" class="p-1 border rounded text-xs bg-slate-800/80">
-                  <input type="text" id="inBatch_${docSnap.id}" placeholder="No Batch..." class="p-1 border rounded text-xs uppercase bg-slate-800/80 font-mono col-span-2">
+                <!-- Input Obat Vertikal -->
+                <div class="text-[11px] font-extrabold text-slate-100 border-b border-emerald-500/30 pt-1 pb-1">➕ Tambah Item Barang/Obat (SBBK)</div>
+                <div class="space-y-1.5">
+                  <input type="text" id="inNama_${docSnap.id}" placeholder="Nama Barang/Obat..." class="w-full p-1 border rounded text-xs bg-slate-800/80">
+                  <div class="grid grid-cols-2 gap-1.5">
+                    <input type="text" id="inTahun_${docSnap.id}" placeholder="Tahun (APBD 2025)" value="APBD 2025" class="p-1 border rounded text-xs bg-slate-800/80">
+                    <input type="text" id="inSatuan_${docSnap.id}" placeholder="Satuan (Tablet/Box)" value="Tablet" class="p-1 border rounded text-xs bg-slate-800/80">
+                  </div>
+                  <div class="grid grid-cols-2 gap-1.5">
+                    <input type="number" id="inVol_${docSnap.id}" placeholder="Volume (Qty)" class="p-1 border rounded text-xs bg-slate-800/80">
+                    <input type="text" id="inED_${docSnap.id}" placeholder="Ed (Okt-27)" class="p-1 border rounded text-xs bg-slate-800/80">
+                  </div>
+                  <input type="text" id="inBatch_${docSnap.id}" placeholder="No Batch..." class="w-full p-1 border rounded text-xs uppercase bg-slate-800/80 font-mono">
                 </div>
                 <button onclick="tambahItemObatTamu('${docSnap.id}')" class="w-full bg-emerald-700 text-white py-1.5 rounded text-[11px] font-bold hover:bg-emerald-800 transition shadow-sm">+ Masukkan ke Rincian</button>
               </div>
 
-              <div id="listObatContainer_${docSnap.id}" class="space-y-1 max-h-40 overflow-y-auto">
-                ${(data.itemsObat && data.itemsObat.length > 0) ? data.itemsObat.map((item, idx) => `
-                  <div class="bg-slate-900 border p-1.5 rounded text-[11px] flex justify-between items-center">
-                    <div><b>${idx+1}. ${item.nama}</b> (${item.volume} ${item.satuan}) - ${item.tahun}</div>
-                    <button onclick="hapusItemObatTamu('${docSnap.id}', ${idx})" class="text-red-600 font-bold px-1 hover:bg-red-100 rounded">×</button>
-                  </div>
-                `).join('') : '<div class="text-[10px] text-slate-500 italic">Belum ada item obat dimasukkan.</div>'}
+              <!-- PREVIEW RINCIAN OBAT (TABEL SBBK) -->
+              <div class="mt-2 border border-slate-600 rounded-lg overflow-hidden">
+                <div class="bg-slate-700 text-slate-200 text-[9px] font-bold p-1 text-center">RINCIAN BARANG/OBAT (SBBK)</div>
+                <table class="w-full text-[9px] text-left border-collapse">
+                  <thead class="bg-slate-800 text-slate-300">
+                    <tr>
+                      <th class="border border-slate-600 p-1 text-center w-6">No</th>
+                      <th class="border border-slate-600 p-1">Nama Barang</th>
+                      <th class="border border-slate-600 p-1 w-14">Tahun</th>
+                      <th class="border border-slate-600 p-1 w-10">Satuan</th>
+                      <th class="border border-slate-600 p-1 w-10">Vol</th>
+                      <th class="border border-slate-600 p-1 w-12">Ed</th>
+                      <th class="border border-slate-600 p-1 w-14">Batch</th>
+                      <th class="border border-slate-600 p-1 w-10 text-center">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${(data.itemsObat && data.itemsObat.length > 0) ? data.itemsObat.map((item, idx) => `
+                      <tr class="bg-slate-900 border-b border-slate-700">
+                        <td class="border border-slate-600 p-1 text-center text-slate-400">${idx+1}</td>
+                        <td class="border border-slate-600 p-1 font-bold text-slate-100">${item.nama}</td>
+                        <td class="border border-slate-600 p-1 text-center text-slate-300">${item.tahun}</td>
+                        <td class="border border-slate-600 p-1 text-center text-slate-300">${item.satuan}</td>
+                        <td class="border border-slate-600 p-1 text-center text-slate-100 font-bold">${item.volume}</td>
+                        <td class="border border-slate-600 p-1 text-center text-slate-300">${item.ed}</td>
+                        <td class="border border-slate-600 p-1 text-center text-slate-400 font-mono">${item.batch}</td>
+                        <td class="border border-slate-600 p-1 text-center">
+                          <button onclick="hapusItemObatTamu('${docSnap.id}', ${idx})" class="text-red-500 hover:text-red-400 font-bold px-1">×</button>
+                        </td>
+                      </tr>
+                    `).join('') : '<tr><td colspan="8" class="text-center py-2 text-slate-500 italic">Belum ada item obat dimasukkan.</td></tr>'}
+                  </tbody>
+                </table>
               </div>
 
+              <!-- TOMBOL AKSI -->
               <div class="flex gap-1 flex-wrap pt-1">
                 ${data.status !== 'selesai' && data.status !== 'proses' ? `<button onclick="updateStatusViaAdmin('${docSnap.id}', 'proses', '${data.kontak || data.hp || ''}', '${data.nama || ''}', '${data.nomorAntrian || ''}')" class="bg-amber-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold hover:bg-amber-500">Proses</button>` : ''}
                 <button onclick="updateStatusViaAdmin('${docSnap.id}', 'selesai', '${data.kontak || data.hp || ''}', '${data.nama || ''}', '${data.nomorAntrian || ''}')" class="bg-emerald-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold hover:bg-emerald-500">Simpan & Selesai</button>
@@ -560,6 +596,7 @@
       });
     };
 
+    // --- PERUBAHAN: PDF FORMAT F4/LEGAL ---
     window.downloadPdf = (data) => {
       const inputPetugasElem = document.getElementById(`inPetugas_${data.docId}`);
       const namaPetugasFinal = inputPetugasElem ? inputPetugasElem.value.trim() : (data.petugas || '-');
@@ -691,12 +728,13 @@
       `;
 
       setTimeout(() => {
+        // --- KONFIGURASI F4/LEGAL (215.9mm x 330.2mm) ---
         const opt = {
           margin:       [5, 5, 5, 5],
           filename:     `Bukti_Pengambilan_Obat_${data.nama || 'Tamu'}.pdf`,
           image:        { type: 'jpeg', quality: 0.98 },
           html2canvas:  { scale: 2, useCORS: true, letterRendering: true, scrollX: 0, scrollY: 0 },
-          jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+          jsPDF:        { unit: 'mm', format: [215.9, 330.2], orientation: 'portrait' } // Format F4/Legal
         };
 
         html2pdf().from(areaCetak).set(opt).save().then(() => {
@@ -775,12 +813,13 @@
       sourceElement.style.display = 'block';
       sourceElement.classList.remove('hidden');
 
+      // --- KONFIGURASI F4/LEGAL (215.9mm x 330.2mm) ---
       const opt = {
         margin:       [5, 5, 5, 5],
         filename:     'Laporan_Konsultasi_Dan_Pengaduan_UPTD.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2, useCORS: true, letterRendering: true, scrollX: 0, scrollY: 0 },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        jsPDF:        { unit: 'mm', format: [215.9, 330.2], orientation: 'portrait' } // Format F4/Legal
       };
 
       setTimeout(() => {
