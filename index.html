@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <script src="https://cdn.tailwindcss.com"></script>
+<!-- Font Awesome untuk semua ikon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <!-- Bukti pelayanan hanya dapat diunduh dari dashboard admin -->
 <style>
 .hidden-custom { opacity: 0; visibility: hidden; pointer-events: none; display: none !important; }
@@ -81,12 +83,12 @@ box-sizing: border-box;
   <div class="max-w-md w-full rounded-3xl shadow-2xl border border-slate-700/60 p-8 text-center space-y-6 my-auto bg-slate-900/90 backdrop-blur-md">
     
     <div class="flex justify-center">
-      <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="h-20 w-20 object-contain drop-shadow-md">
+      <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="h-20 w-20 object-contain drop-shadow-md no-zoom">
     </div>
 
     <div class="space-y-2">
       <span class="px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full">
-        Sistem Layanan Digital Terpadu
+        <i class="fas fa-satellite-dish mr-1"></i> Sistem Layanan Digital Terpadu
       </span>
       <h1 class="text-2xl font-black text-slate-100 tracking-tight leading-snug">
         SELAMAT DATANG DI UPTD FARMASI
@@ -101,7 +103,7 @@ box-sizing: border-box;
 
     <div class="bg-slate-800/80 border border-amber-500/30 rounded-2xl p-4 text-left space-y-1">
       <p class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
-        <span>⚠️</span> Survei Kepuasan Masyarakat:
+        <i class="fas fa-triangle-exclamation"></i> Survei Kepuasan Masyarakat:
       </p>
       <p class="text-[11px] text-slate-300 leading-normal">
         Silakan klik tombol <b>Isi Survei</b> terlebih dahulu. Setelah itu, tombol masuk ke menu utama akan aktif dan bisa diklik.
@@ -114,7 +116,7 @@ box-sizing: border-box;
          target="_blank" 
          onclick="mulaiIsiSurvey(event)"
          class="w-full text-white font-extrabold py-3.5 px-6 rounded-2xl transition transform active:scale-95 flex items-center justify-center gap-2.5 text-sm shadow-lg bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600">
-        <i class="fas fa-external-link-alt"></i>
+        <i class="fas fa-clipboard-list"></i>
         <span>ISI SURVEI KEPUASAN</span>
       </a>
 
@@ -123,7 +125,8 @@ box-sizing: border-box;
               onclick="bukaMenuUtamaManual()" 
               disabled
               class="w-full bg-slate-800/50 text-slate-500 border border-slate-700 font-bold py-3.5 px-6 rounded-2xl transition text-xs flex items-center justify-center gap-2 cursor-not-allowed">
-        <span>✓ LANJUT MASUK KE MENU UTAMA</span>
+        <i class="fas fa-check-circle"></i>
+        <span>LANJUT MASUK KE MENU UTAMA</span>
       </button>
     </div>
 
@@ -150,19 +153,19 @@ box-sizing: border-box;
 <div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60">
 <nav class="space-y-1.5">
 <a href="#" onclick="switchTab('index', event)" id="nav-index" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition">
-<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1">🏠</div>
+<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1"><i class="fas fa-house"></i></div>
 <span class="text-xs">Beranda / Dashboard</span>
 </a>
 <a href="#" onclick="switchTab('registrasi', event)" id="nav-registrasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition">
-<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1">📝</div>
+<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1"><i class="fas fa-pen-to-square"></i></div>
 <span class="text-xs">Registrasi</span>
 </a>
 <a href="#" onclick="switchTab('tamu', event)" id="nav-tamu" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition">
-<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1">🎫</div>
+<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1"><i class="fas fa-ticket"></i></div>
 <span class="text-xs">Status Tamu</span>
 </a>
 <a href="#" onclick="switchTab('panduan', event)" id="nav-panduan" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition">
-<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1">📖</div>
+<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1"><i class="fas fa-book-open"></i></div>
 <span class="text-xs">Panduan Sistem</span>
 </a>
 <button onclick="resetAkses()" class="w-full mt-3 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-slate-700/50 hover:bg-slate-700 text-slate-300 font-bold text-xs transition border border-slate-600/40">
@@ -207,7 +210,9 @@ box-sizing: border-box;
     <!-- Baris 1 Kolom 1: Registrasi -->
     <a href="#" onclick="switchTab('registrasi', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
       <div class="shrink-0 flex items-center justify-center">
-        <img src="https://i.ibb.co.com/VYhY2ctH/Picsart-26-07-29-23-12-02-981.png" class="w-12 h-12 sm:w-16 sm:h-16 object-contain no-zoom">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+          <i class="fas fa-pen-to-square text-2xl sm:text-3xl"></i>
+        </div>
       </div>
       <div class="text-center sm:text-left">
         <h3 class="font-black text-xs sm:text-sm text-slate-100 uppercase tracking-wide group-hover:text-emerald-400 transition">Registrasi</h3>
@@ -218,7 +223,9 @@ box-sizing: border-box;
     <!-- Baris 1 Kolom 2: Status Tamu -->
     <a href="#" onclick="switchTab('tamu', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
       <div class="shrink-0 flex items-center justify-center">
-        <img src="https://i.ibb.co.com/F4SBD1L4/Picsart-26-07-30-01-19-44-361.png" class="w-12 h-12 sm:w-16 sm:h-16 object-contain no-zoom">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+          <i class="fas fa-ticket text-2xl sm:text-3xl"></i>
+        </div>
       </div>
       <div class="text-center sm:text-left">
         <h3 class="font-black text-xs sm:text-sm text-slate-100 uppercase tracking-wide group-hover:text-emerald-400 transition">Status Tamu</h3>
@@ -229,7 +236,9 @@ box-sizing: border-box;
     <!-- Baris 2 Kolom 1: Konsultasi -->
     <a href="#" onclick="switchTab('konsultasi', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
       <div class="shrink-0 flex items-center justify-center">
-        <img src="https://i.ibb.co.com/BKZ6mGJ9/Picsart-26-07-29-23-11-15-140.png" class="w-12 h-12 sm:w-16 sm:h-16 object-contain no-zoom">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+          <i class="fas fa-comments text-2xl sm:text-3xl"></i>
+        </div>
       </div>
       <div class="text-center sm:text-left">
         <h3 class="font-black text-xs sm:text-sm text-slate-100 uppercase tracking-wide group-hover:text-emerald-400 transition">Konsultasi</h3>
@@ -240,7 +249,9 @@ box-sizing: border-box;
     <!-- Baris 2 Kolom 2: Survei Kepuasan Masyarakat -->
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
       <div class="flex-shrink-0 flex items-center justify-center">
-        <img src="https://i.ibb.co.com/yFDD7Dcb/Picsart-26-07-29-23-12-41-517.png" class="w-12 h-12 sm:w-16 sm:h-16 object-contain no-zoom">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+          <i class="fas fa-star text-2xl sm:text-3xl"></i>
+        </div>
       </div>
       <div class="text-center sm:text-left">
         <h3 class="font-black text-xs sm:text-sm text-slate-100 uppercase tracking-wide group-hover:text-emerald-400 transition">Survei</h3>
@@ -251,7 +262,9 @@ box-sizing: border-box;
     <!-- Baris 3 (Paling Bawah): Panduan -->
     <a href="#" onclick="switchTab('panduan', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 col-span-2">
       <div class="shrink-0 flex items-center justify-center">
-        <img src="https://i.ibb.co.com/4nyPdc2k/Picsart-26-07-29-23-09-18-170.png" class="w-12 h-12 sm:w-16 sm:h-16 object-contain no-zoom">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+          <i class="fas fa-book-open text-2xl sm:text-3xl"></i>
+        </div>
       </div>
       <div class="text-center sm:text-left">
         <h3 class="font-black text-xs sm:text-sm text-slate-100 uppercase tracking-wide group-hover:text-emerald-400 transition">Panduan</h3>
@@ -264,7 +277,7 @@ box-sizing: border-box;
 
 <div id="page-registrasi" class="page-content space-y-4 hidden-custom">
 <div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1">
-<h2 class="text-sm font-black text-slate-100">📝 Formulir Registrasi Kunjungan</h2>
+<h2 class="text-sm font-black text-slate-100"><i class="fas fa-pen-to-square mr-1"></i> Formulir Registrasi Kunjungan</h2>
 <p class="text-[11px] text-slate-300 font-medium">Silakan lengkapi data kunjungan Anda. Sistem akan memvalidasi posisi GPS.</p>
 </div>
 
@@ -302,25 +315,25 @@ box-sizing: border-box;
 </div>
 
 <div id="gpsStatusBox" class="bg-emerald-500/10 border border-emerald-500/30 p-3 rounded-xl text-[11px] text-emerald-400 font-medium">
-📍 Mendeteksi posisi koordinat GPS perangkat Anda...
+<i class="fas fa-location-dot mr-1"></i> Mendeteksi posisi koordinat GPS perangkat Anda...
 </div>
 
 <button type="submit" id="btnSubmitReg" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 rounded-xl text-xs transition shadow-md">
-Kirim Registrasi Kunjungan
+<i class="fas fa-paper-plane mr-1"></i> Kirim Registrasi Kunjungan
 </button>
 </form>
 </div>
 
 <div class="flex justify-end pt-2">
 <button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5 border border-slate-700">
-← Kembali ke Menu Utama
+<i class="fas fa-arrow-left"></i> Kembali ke Menu Utama
 </button>
 </div>
 </div>
 
 <div id="page-panduan" class="page-content space-y-4 hidden-custom">
 <div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1">
-<h2 class="text-sm font-black text-slate-100">📖 Panduan & Tutorial Layanan</h2>
+<h2 class="text-sm font-black text-slate-100"><i class="fas fa-book-open mr-1"></i> Panduan & Tutorial Layanan</h2>
 <p class="text-[11px] text-slate-300 font-medium leading-relaxed">Pelajari langkah-langkah mudah menggunakan sistem layanan digital UPTD Farmasi Tangsel.</p>
 </div>
 
@@ -335,6 +348,7 @@ Kirim Registrasi Kunjungan
 <li>Sistem akan secara otomatis mendeteksi posisi koordinat GPS perangkat Anda.</li>
 <li>Lampirkan dokumen/surat pendukung dengan ukuran maksimal <b>700 KB</b>.</li>
 <li>Klik tombol kirim untuk mendapatkan nomor antrian secara real-time.</li>
+<li>Notifikasi otomatis akan dikirim ke WhatsApp penanggung jawab sesuai keperluan yang dipilih.</li>
 </ol>
 </div>
 
@@ -350,26 +364,26 @@ Kirim Registrasi Kunjungan
 
 <div class="flex justify-end pt-2">
 <button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5 border border-slate-700">
-← Kembali ke Menu Utama
+<i class="fas fa-arrow-left"></i> Kembali ke Menu Utama
 </button>
 </div>
 </div>
 
 <div id="page-tamu" class="page-content space-y-4 hidden-custom">
 <div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1 mb-5">
-<h2 class="text-sm font-black text-slate-100">Daftar Tamu & Pengambilan Obat</h2>
+<h2 class="text-sm font-black text-slate-100"><i class="fas fa-ticket mr-1"></i> Daftar Tamu & Pengambilan Obat</h2>
 <p class="text-[11px] text-slate-300 font-medium leading-relaxed">Pantau proses pelayanan Anda secara real-time dari registrasi hingga selesai.</p>
 </div>
 
 <div id="containerTamu" class="space-y-3">
 <div class="bg-slate-800/80 p-6 rounded-2xl shadow-sm border border-slate-700/60 text-center text-xs text-slate-300 font-medium">
-Memuat data registrasi dari database...
+<i class="fas fa-spinner fa-spin mr-1"></i> Memuat data registrasi dari database...
 </div>
 </div>
 
 <div class="flex justify-end pt-2">
 <button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5 border border-slate-700">
-← Kembali
+<i class="fas fa-arrow-left"></i> Kembali
 </button>
 </div>
 </div>
@@ -377,7 +391,7 @@ Memuat data registrasi dari database...
 <div id="page-konsultasi" class="page-content space-y-4 hidden-custom">
 <div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 flex items-center gap-4">
 <div class="w-16 h-16 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-2xl p-2 border border-emerald-500/30 overflow-hidden">
-💬
+<i class="fas fa-comments text-2xl"></i>
 </div>
 <div>
 <h2 class="text-sm font-black text-slate-100 uppercase">Layanan Konsultasi & Pengaduan</h2>
@@ -419,7 +433,7 @@ Memuat data registrasi dari database...
 </div>
 
 <button type="submit" id="btnKirimKonsul" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 rounded-xl text-xs transition shadow-md flex items-center justify-center gap-2">
-<span>Kirim Konsultasi ke Sistem & WhatsApp</span>
+<span><i class="fas fa-paper-plane mr-1"></i> Kirim Konsultasi ke Sistem & WhatsApp</span>
 <span>→</span>
 </button>
 </form>
@@ -427,7 +441,7 @@ Memuat data registrasi dari database...
 
 <div class="flex justify-end pt-2">
 <button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md transition inline-flex items-center gap-1.5 border border-slate-700">
-← Kembali
+<i class="fas fa-arrow-left"></i> Kembali
 </button>
 </div>
 </div>
@@ -440,7 +454,7 @@ Memuat data registrasi dari database...
 <div id="modalAntrianSukses" class="hidden-custom fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
   <div class="bg-slate-900 rounded-3xl shadow-2xl border border-slate-700 max-w-sm w-full p-6 text-center space-y-5">
     <div class="w-16 h-16 bg-emerald-600/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner font-black border border-emerald-500/30">
-      ✓
+      <i class="fas fa-check"></i>
     </div>
     <div class="space-y-1">
       <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase rounded-full tracking-wider border border-emerald-500/30">
@@ -456,7 +470,7 @@ Memuat data registrasi dari database...
 
     <div class="space-y-2 pt-2">
       <button onclick="tutupModalAntrianDanKeTamu()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 rounded-xl text-xs transition shadow-lg">
-        Lihat Status & Menu Tamu
+        <i class="fas fa-ticket mr-1"></i> Lihat Status & Menu Tamu
       </button>
     </div>
   </div>
@@ -465,7 +479,7 @@ Memuat data registrasi dari database...
 <div id="imageModal" class="hidden-custom fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onclick="closeImageModal()">
 <div class="relative max-w-4xl max-h-[90vh] overflow-hidden flex items-center justify-center">
 <img id="modalImageSrc" src="" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl transition-transform duration-300 transform scale-100">
-<button onclick="closeImageModal()" class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-900 rounded-full w-8 h-8 font-extrabold flex items-center justify-center shadow">✕</button>
+<button onclick="closeImageModal()" class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-900 rounded-full w-8 h-8 font-extrabold flex items-center justify-center shadow"><i class="fas fa-times"></i></button>
 </div>
 </div>
 
@@ -480,6 +494,20 @@ const db = getFirestore(initializeApp(firebaseConfig));
 const OFFICE_LAT = -6.3275045;
 const OFFICE_LNG = 106.6826802;
 const MAX_RADIUS = 100;
+
+// ============================================================
+// MAPPING NOMOR WHATSAPP PENANGGUNG JAWAB BERDASARKAN KEPERLUAN
+// ============================================================
+const PIC_WA_MAPPING = {
+  "1. Obat PKD": "6281214090200",
+  "2. VAKSIN": "628126449487",
+  "3. REAGEN": "6285695057208",
+  "4. TB DAN KUSTA": "6285311642234",
+  "5. HIV DAN PKG": "628989979798",
+  "6. DBD DAN MALARIA": "628568838556",
+  "7. HEPATITIS - VAKSIN PROGRAM": "6287829700205",
+  "8. LAIN LAIN": "6285716842806"
+};
 
 let userLat = null;
 let userLng = null;
@@ -596,7 +624,7 @@ const statusBox = document.getElementById('gpsStatusBox');
 if (!navigator.geolocation) {
 if(statusBox) {
 statusBox.className = "bg-red-500/10 border border-red-500/30 p-3 rounded-xl text-[11px] text-red-400 font-medium";
-statusBox.innerText = "❌ Geolokasi tidak didukung oleh browser Anda.";
+statusBox.innerHTML = "<i class='fas fa-circle-xmark mr-1'></i> Geolokasi tidak didukung oleh browser Anda.";
 }
 return;
 }
@@ -611,11 +639,11 @@ if(statusBox) {
 if (userDistance <= MAX_RADIUS) {
 isWithinRadius = true;
 statusBox.className = "bg-emerald-500/10 border border-emerald-500/30 p-3 rounded-xl text-[11px] text-emerald-400 font-black";
-statusBox.innerText = `✅ Lokasi Valid! Anda berada dalam radius kantor (${Math.round(userDistance)} meter dari UPTD Farmasi).`;
+statusBox.innerHTML = `<i class="fas fa-circle-check mr-1"></i> Lokasi Valid! Anda berada dalam radius kantor (${Math.round(userDistance)} meter dari UPTD Farmasi).`;
 } else {
     isWithinRadius = false;
     statusBox.className = "bg-red-500/10 border border-red-500/30 p-3 rounded-xl text-[11px] text-red-400 font-black";
-    statusBox.innerText = `❌ Anda berada di luar radius layanan (${Math.round(userDistance)} meter). Maksimal jarak registrasi adalah ${MAX_RADIUS} meter.`;
+    statusBox.innerHTML = `<i class="fas fa-circle-xmark mr-1"></i> Anda berada di luar radius layanan (${Math.round(userDistance)} meter). Maksimal jarak registrasi adalah ${MAX_RADIUS} meter.`;
 }
 }
 },
@@ -623,7 +651,7 @@ statusBox.innerText = `✅ Lokasi Valid! Anda berada dalam radius kantor (${Math
     isWithinRadius = false;
     if(statusBox) {
     statusBox.className = "bg-red-500/10 border border-red-500/30 p-3 rounded-xl text-[11px] text-red-400 font-black";
-    statusBox.innerText = "❌ Lokasi wajib diaktifkan. Registrasi hanya dapat dilakukan dalam radius 100 meter dari UPTD Farmasi.";
+    statusBox.innerHTML = "<i class='fas fa-circle-xmark mr-1'></i> Lokasi wajib diaktifkan. Registrasi hanya dapat dilakukan dalam radius 100 meter dari UPTD Farmasi.";
     }
 },
 { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
@@ -653,7 +681,7 @@ e.preventDefault();
       return;
     }
     btn.disabled = true;
-btn.innerText = "Mengirim Registrasi...";
+btn.innerHTML = "<i class='fas fa-spinner fa-spin mr-1'></i> Mengirim Registrasi...";
 
 const nama = document.getElementById('regNama').value;
 const instansi = document.getElementById('regInstansi').value;
@@ -667,7 +695,7 @@ const file = fileInput.files[0];
 if (file.size > 700 * 1024) {
 alert("Ukuran file terlalu besar! Maksimal 700 KB.");
 btn.disabled = false;
-btn.innerText = "Kirim Registrasi Kunjungan";
+btn.innerHTML = "<i class='fas fa-paper-plane mr-1'></i> Kirim Registrasi Kunjungan";
 return;
 }
 fileUrlVal = await toBase64(file);
@@ -730,12 +758,35 @@ modalSukses.classList.remove('hidden-custom');
 modalSukses.classList.add('visible-custom');
 }
 
+// ============================================================
+// KIRIM NOTIFIKASI WHATSAPP KE PENANGGUNG JAWAB
+// ============================================================
+const picWA = PIC_WA_MAPPING[keperluan];
+
+if (picWA) {
+  const pesanPIC =
+    `*NOTIFIKASI KUNJUNGAN BARU - UPTD FARMASI*\n` +
+    `==================================\n` +
+    `*No. Antrian:* ${antrianNo}\n` +
+    `*Nama Tamu:* ${nama}\n` +
+    `*Instansi:* ${instansi}\n` +
+    `*Keperluan:* ${keperluan}\n` +
+    `*Kontak Tamu:* ${kontak}\n` +
+    `*Waktu:* ${new Date().toLocaleString('id-ID')}\n` +
+    `==================================\n` +
+    `Mohon cek dashboard admin untuk memproses kunjungan ini.\n\n` +
+    `_Pesan otomatis dari Sistem Layanan Digital UPTD Farmasi Tangsel_`;
+
+  const urlWA = `https://wa.me/${picWA}?text=${encodeURIComponent(pesanPIC)}`;
+  window.open(urlWA, '_blank');
+}
+
 } catch (err) {
 console.error("Gagal kirim registrasi:", err);
 alert("Gagal mengirim registrasi ke database. Silakan coba lagi.");
 } finally {
 btn.disabled = false;
-btn.innerText = "Kirim Registrasi Kunjungan";
+btn.innerHTML = "<i class='fas fa-paper-plane mr-1'></i> Kirim Registrasi Kunjungan";
 }
 });
 }
@@ -757,7 +808,7 @@ if (formKonsul) {
 
     if (btnKonsul) {
       btnKonsul.disabled = true;
-      btnKonsul.innerHTML = "⏳ Menyimpan konsultasi...";
+      btnKonsul.innerHTML = "<i class='fas fa-spinner fa-spin mr-1'></i> Menyimpan konsultasi...";
     }
 
     // Ambil data dari form
@@ -847,7 +898,7 @@ if (formKonsul) {
         btnKonsul.disabled = false;
 
         btnKonsul.innerHTML =
-          "<span>Kirim Konsultasi ke Sistem & WhatsApp</span><span>→</span>";
+          "<span><i class='fas fa-paper-plane mr-1'></i> Kirim Konsultasi ke Sistem & WhatsApp</span><span>→</span>";
       }
 
     }
@@ -872,7 +923,7 @@ if(!container) return;
 container.innerHTML = "";
 
 if (snapshot.empty) {
-container.innerHTML = `<div class="bg-slate-800/80 p-6 rounded-2xl shadow-sm border border-slate-700 text-center text-xs text-slate-300 font-medium"> Belum ada riwayat registrasi yang tercatat di sistem. </div>`;
+container.innerHTML = `<div class="bg-slate-800/80 p-6 rounded-2xl shadow-sm border border-slate-700 text-center text-xs text-slate-300 font-medium"><i class="fas fa-inbox mr-1"></i> Belum ada riwayat registrasi yang tercatat di sistem.</div>`;
 return;
 }
 
@@ -938,24 +989,24 @@ let rowsHtml = '';
 normalizedData.itemsObat.forEach((ob, idx) => {
 rowsHtml += `<tr class="border-b border-slate-700 text-[10px] text-slate-200"> <td class="border border-slate-700 p-1 text-center">${idx + 1}</td> <td class="border border-slate-700 p-1 font-bold">${ob.nama || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.tahun || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.satuan || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.volume || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.ed || '-'}</td> <td class="border border-slate-700 p-1 text-center font-mono">${ob.batch || '-'}</td> </tr>`;
 });
-bagianObatHtml = `<div class="border-t border-slate-700 pt-2.5 space-y-1.5"> <p class="text-[11px] text-slate-100 font-black flex items-center gap-1.5"><span>📦</span> Tabel Rincian Obat / Barang:</p> <div class="overflow-x-auto rounded-xl border border-slate-700"> <table class="w-full text-left border-collapse text-[10px] bg-slate-900"> <thead> <tr class="bg-emerald-800 text-center font-bold text-[9px] uppercase text-white"> <th class="border border-slate-700 p-1 w-6">No</th> <th class="border border-slate-700 p-1">Nama Barang</th> <th class="border border-slate-700 p-1 w-12">Tahun</th> <th class="border border-slate-700 p-1 w-12">Satuan</th> <th class="border border-slate-700 p-1 w-10">Vol</th> <th class="border border-slate-700 p-1 w-12">Ed</th> <th class="border border-slate-700 p-1 w-16">No Batch</th> </tr> </thead> <tbody> ${rowsHtml} </tbody> </table> </div> </div>`;
+bagianObatHtml = `<div class="border-t border-slate-700 pt-2.5 space-y-1.5"> <p class="text-[11px] text-slate-100 font-black flex items-center gap-1.5"><i class="fas fa-boxes-stacked"></i> Tabel Rincian Obat / Barang:</p> <div class="overflow-x-auto rounded-xl border border-slate-700"> <table class="w-full text-left border-collapse text-[10px] bg-slate-900"> <thead> <tr class="bg-emerald-800 text-center font-bold text-[9px] uppercase text-white"> <th class="border border-slate-700 p-1 w-6">No</th> <th class="border border-slate-700 p-1">Nama Barang</th> <th class="border border-slate-700 p-1 w-12">Tahun</th> <th class="border border-slate-700 p-1 w-12">Satuan</th> <th class="border border-slate-700 p-1 w-10">Vol</th> <th class="border border-slate-700 p-1 w-12">Ed</th> <th class="border border-slate-700 p-1 w-16">No Batch</th> </tr> </thead> <tbody> ${rowsHtml} </tbody> </table> </div> </div>`;
 } else {
-bagianObatHtml = `<div class="bg-slate-900 p-3 rounded-xl border border-slate-700 text-[10px] space-y-1"> <p class="text-slate-100 font-black flex items-center gap-1.5"><span>💊</span> Obat yang Diterima:</p> <p class="text-slate-300 whitespace-pre-line font-medium">${normalizedData.obatTerimaFormatted}</p> </div>`;
+bagianObatHtml = `<div class="bg-slate-900 p-3 rounded-xl border border-slate-700 text-[10px] space-y-1"> <p class="text-slate-100 font-black flex items-center gap-1.5"><i class="fas fa-pills"></i> Obat yang Diterima:</p> <p class="text-slate-300 whitespace-pre-line font-medium">${normalizedData.obatTerimaFormatted}</p> </div>`;
 }
 
 let fileLampiranHtml = '';
 if (fileLink && fileLink.length > 0) {
-fileLampiranHtml = `<div class="pt-1"> <span class="inline-flex items-center gap-1.5 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-sm">📁 Tamu telah melampirkan surat permintaan</span> </div>`;
+fileLampiranHtml = `<div class="pt-1"> <span class="inline-flex items-center gap-1.5 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-sm"><i class="fas fa-paperclip"></i> Tamu telah melampirkan surat permintaan</span> </div>`;
 }
 
-let downloadBtnHtml = `<span class="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20">Pembaruan realtime aktif</span>`;
+let downloadBtnHtml = `<span class="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20"><i class="fas fa-sync-alt fa-spin mr-1"></i> Pembaruan realtime aktif</span>`;
 
 card.innerHTML = `
 <div class="flex justify-between items-start gap-3 border-b border-slate-700 pb-3">
   <div class="space-y-1">
     <div class="flex items-center gap-2">
       <span class="bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-black px-2.5 py-1 rounded-xl shadow-sm tracking-wider">
-        🎫 ${normalizedData.nomorAntrian || '-'}
+        <i class="fas fa-ticket mr-1"></i> ${normalizedData.nomorAntrian || '-'}
       </span>
       <h3 class="font-black text-sm text-slate-100 uppercase tracking-tight">${normalizedData.nama}</h3>
     </div>
@@ -986,4 +1037,3 @@ container.appendChild(card);
 </script>
 </body>
 </html>
-
