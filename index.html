@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <script src="https://cdn.tailwindcss.com"></script>
-<!-- Font Awesome untuk semua ikon -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<!-- Bukti pelayanan hanya dapat diunduh dari dashboard admin -->
 <style>
 .hidden-custom { opacity: 0; visibility: hidden; pointer-events: none; display: none !important; }
 .visible-custom { opacity: 1; visibility: visible; pointer-events: auto; display: flex !important; }
@@ -111,7 +109,6 @@ box-sizing: border-box;
     </div>
 
     <div class="space-y-3">
-      <!-- Tombol Survei -->
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" 
          target="_blank" 
          onclick="mulaiIsiSurvey(event)"
@@ -120,7 +117,6 @@ box-sizing: border-box;
         <span>ISI SURVEI KEPUASAN</span>
       </a>
 
-      <!-- Tombol Menu Manual -->
       <button id="btnManual" 
               onclick="bukaMenuUtamaManual()" 
               disabled
@@ -204,10 +200,8 @@ box-sizing: border-box;
     </div>
   </div>
 
-  <!-- STRUKTUR MENU UTAMA -->
   <div class="grid grid-cols-2 gap-3">
     
-    <!-- Baris 1 Kolom 1: Registrasi -->
     <a href="#" onclick="switchTab('registrasi', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
       <div class="shrink-0 flex items-center justify-center">
         <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
@@ -220,7 +214,6 @@ box-sizing: border-box;
       </div>
     </a>
 
-    <!-- Baris 1 Kolom 2: Status Tamu -->
     <a href="#" onclick="switchTab('tamu', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
       <div class="shrink-0 flex items-center justify-center">
         <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
@@ -233,7 +226,6 @@ box-sizing: border-box;
       </div>
     </a>
 
-    <!-- Baris 2 Kolom 1: Konsultasi -->
     <a href="#" onclick="switchTab('konsultasi', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
       <div class="shrink-0 flex items-center justify-center">
         <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
@@ -246,7 +238,6 @@ box-sizing: border-box;
       </div>
     </a>
 
-    <!-- Baris 2 Kolom 2: Survei Kepuasan Masyarakat -->
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80">
       <div class="flex-shrink-0 flex items-center justify-center">
         <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
@@ -259,7 +250,6 @@ box-sizing: border-box;
       </div>
     </a>
 
-    <!-- Baris 3 (Paling Bawah): Panduan -->
     <a href="#" onclick="switchTab('panduan', event)" class="group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 hover:border-emerald-500 transition-all flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 col-span-2">
       <div class="shrink-0 flex items-center justify-center">
         <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
@@ -451,6 +441,7 @@ box-sizing: border-box;
 </div>
 </div>
 
+<!-- MODAL NOMOR ANTRIAN SUKSES -->
 <div id="modalAntrianSukses" class="hidden-custom fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
   <div class="bg-slate-900 rounded-3xl shadow-2xl border border-slate-700 max-w-sm w-full p-6 text-center space-y-5">
     <div class="w-16 h-16 bg-emerald-600/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner font-black border border-emerald-500/30">
@@ -476,6 +467,61 @@ box-sizing: border-box;
   </div>
 </div>
 
+<!-- MODAL SUKSES KONSULTASI PROFESIONAL -->
+<div id="modalKonsultasiSukses" class="hidden-custom fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="bg-slate-900 rounded-3xl shadow-2xl border border-slate-700 max-w-md w-full overflow-hidden">
+    
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-emerald-600 to-teal-700 px-6 py-5 text-center">
+      <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-white/40">
+        <i class="fas fa-check text-white text-2xl"></i>
+      </div>
+      <h3 class="text-lg font-black text-white uppercase tracking-wide">Konsultasi Terkirim!</h3>
+      <p class="text-xs text-emerald-100 mt-1 font-medium">Data Anda telah tersimpan di sistem UPTD Farmasi</p>
+    </div>
+
+    <!-- Body -->
+    <div class="p-6 space-y-4">
+      <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 space-y-2.5">
+        <p class="text-[11px] text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+          <i class="fas fa-info-circle text-emerald-400"></i> Ringkasan Pengiriman
+        </p>
+        <div class="space-y-1.5 text-xs">
+          <div class="flex justify-between items-center">
+            <span class="text-slate-400">Nama</span>
+            <span class="text-slate-100 font-bold" id="modalKonsulNama">-</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-slate-400">Instansi</span>
+            <span class="text-slate-100 font-bold text-right" id="modalKonsulInstansi">-</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-slate-400">Kategori</span>
+            <span class="text-emerald-400 font-bold" id="modalKonsulKategori">-</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-3.5">
+        <p class="text-[11px] text-emerald-300 font-medium leading-relaxed text-center">
+          <i class="fas fa-bell mr-1"></i>
+          Sistem akan membuka WhatsApp untuk mengirim detail keluhan ke petugas penanggung jawab.
+        </p>
+      </div>
+
+      <div class="flex gap-2 pt-1">
+        <button onclick="tutupModalKonsultasi()" class="flex-1 bg-slate-700 hover:bg-slate-600 text-slate-100 font-bold py-3 rounded-xl text-xs transition">
+          <i class="fas fa-times mr-1"></i> Tutup
+        </button>
+        <button onclick="kirimKonsultasiKeWA()" class="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-3 rounded-xl text-xs transition shadow-lg">
+          <i class="fab fa-whatsapp mr-1"></i> Kirim ke WhatsApp
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <div id="imageModal" class="hidden-custom fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onclick="closeImageModal()">
 <div class="relative max-w-4xl max-h-[90vh] overflow-hidden flex items-center justify-center">
 <img id="modalImageSrc" src="" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl transition-transform duration-300 transform scale-100">
@@ -490,14 +536,17 @@ import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, onSna
 const firebaseConfig = { apiKey: "AIzaSyA6B5MysWIMi4weR3Wgo3HuaIl-aaZpChw", authDomain: "digital-books-d22c9.firebaseapp.com", projectId: "digital-books-d22c9", storageBucket: "digital-books-d22c9.firebasestorage.app", messagingSenderId: "905407530155", appId: "1:905407530155:web:dd90e18d4158ce42fae3ee", measurementId: "G-LL7GF2RMF8" };
 const db = getFirestore(initializeApp(firebaseConfig));
 
-// Koordinat UPTD Farmasi dari tautan Google Maps pengguna: MMCM+X3F, Ciater
+// Koordinat UPTD Farmasi
 const OFFICE_LAT = -6.3275045;
 const OFFICE_LNG = 106.6826802;
 const MAX_RADIUS = 100;
 
 // ============================================================
-// MAPPING NOMOR WHATSAPP PENANGGUNG JAWAB BERDASARKAN KEPERLUAN
+// NOMOR WA ADMIN KONSULTASI (BARU)
 // ============================================================
+const WA_ADMIN_KONSULTASI = "6282114172761";
+
+// Mapping WA PIC berdasarkan keperluan registrasi
 const PIC_WA_MAPPING = {
   "1. Obat PKD": "6281214090200",
   "2. VAKSIN": "628126449487",
@@ -514,33 +563,32 @@ let userLng = null;
 let userDistance = null;
 let isWithinRadius = false;
 
+// Data konsultasi terakhir (untuk modal & WA)
+let dataKonsultasiTerakhir = {
+  nama: '',
+  instansi: '',
+  kontak: '',
+  kategori: '',
+  isi: ''
+};
+
 window.mulaiIsiSurvey = function(event) {
   sessionStorage.setItem('sedang_isi_survei', 'true');
-  
   const btnManual = document.getElementById('btnManual');
   if (btnManual) {
     btnManual.disabled = false;
     btnManual.classList.remove('bg-slate-800/50', 'text-slate-500', 'border-slate-700', 'cursor-not-allowed');
     btnManual.classList.add('bg-slate-800', 'hover:bg-slate-700', 'text-emerald-400', 'border-emerald-500/40', 'cursor-pointer', 'shadow-md');
   }
-
   window.open("https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform", "_blank");
 };
 
 window.bukaMenuUtamaManual = function() {
   sessionStorage.setItem('survei_terisi_sesi_ini', 'true');
-  
   const gatePage = document.getElementById('gatePage');
-  if (gatePage) {
-    gatePage.style.display = 'none';
-    gatePage.classList.add('hidden-custom');
-  }
-  
+  if (gatePage) { gatePage.style.display = 'none'; gatePage.classList.add('hidden-custom'); }
   const mainMenuContent = document.getElementById('mainMenuContent');
-  if (mainMenuContent) {
-    mainMenuContent.classList.remove('hidden');
-    mainMenuContent.style.display = 'block';
-  }
+  if (mainMenuContent) { mainMenuContent.classList.remove('hidden'); mainMenuContent.style.display = 'block'; }
 };
 
 window.resetAkses = function() {
@@ -551,65 +599,65 @@ window.resetAkses = function() {
 
 window.switchTab = function(tabName, event) {
 if(event) event.preventDefault();
-
-document.querySelectorAll('.page-content').forEach(el => {
-el.classList.add('hidden-custom');
-});
-
+document.querySelectorAll('.page-content').forEach(el => { el.classList.add('hidden-custom'); });
 const targetPage = document.getElementById(`page-${tabName}`);
-if(targetPage) {
-targetPage.classList.remove('hidden-custom');
-}
+if(targetPage) { targetPage.classList.remove('hidden-custom'); }
 
 const mTitle = document.getElementById('mobileHeaderTitle');
 const mSub = document.getElementById('mobileHeaderSub');
 if(mTitle && mSub) {
-if(tabName === 'index') {
-mTitle.innerText = "UPTD FARMASI KOTA TANGERANG SELATAN";
-mSub.innerText = "Sistem Layanan Digital Terpadu";
-} else if(tabName === 'registrasi') {
-mTitle.innerText = "REGISTRASI KUNJUNGAN";
-mSub.innerText = "UPTD Farmasi Tangsel";
-} else if(tabName === 'panduan') {
-mTitle.innerText = "PANDUAN APLIKASI";
-mSub.innerText = "UPTD Farmasi Tangsel";
-} else if(tabName === 'tamu') {
-mTitle.innerText = "STATUS & BUKTI TAMU";
-mSub.innerText = "UPTD Farmasi Tangsel";
-} else if(tabName === 'konsultasi') {
-mTitle.innerText = "KONSULTASI & PENGADUAN";
-mSub.innerText = "UPTD Farmasi Tangsel";
+if(tabName === 'index') { mTitle.innerText = "UPTD FARMASI KOTA TANGERANG SELATAN"; mSub.innerText = "Sistem Layanan Digital Terpadu"; }
+else if(tabName === 'registrasi') { mTitle.innerText = "REGISTRASI KUNJUNGAN"; mSub.innerText = "UPTD Farmasi Tangsel"; }
+else if(tabName === 'panduan') { mTitle.innerText = "PANDUAN APLIKASI"; mSub.innerText = "UPTD Farmasi Tangsel"; }
+else if(tabName === 'tamu') { mTitle.innerText = "STATUS & BUKTI TAMU"; mSub.innerText = "UPTD Farmasi Tangsel"; }
+else if(tabName === 'konsultasi') { mTitle.innerText = "KONSULTASI & PENGADUAN"; mSub.innerText = "UPTD Farmasi Tangsel"; }
 }
-}
-
 window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 window.openImageModal = function(imgSrc) {
 const modal = document.getElementById('imageModal');
 const modalImg = document.getElementById('modalImageSrc');
-if(modal && modalImg) {
-modalImg.src = imgSrc;
-modal.classList.remove('hidden-custom');
-modal.classList.add('visible-custom');
-}
+if(modal && modalImg) { modalImg.src = imgSrc; modal.classList.remove('hidden-custom'); modal.classList.add('visible-custom'); }
 };
 
 window.closeImageModal = function() {
 const modal = document.getElementById('imageModal');
-if(modal) {
-modal.classList.remove('visible-custom');
-modal.classList.add('hidden-custom');
-}
+if(modal) { modal.classList.remove('visible-custom'); modal.classList.add('hidden-custom'); }
 };
 
 window.tutupModalAntrianDanKeTamu = function() {
   const modal = document.getElementById('modalAntrianSukses');
-  if(modal) {
-    modal.classList.remove('visible-custom');
-    modal.classList.add('hidden-custom');
-  }
+  if(modal) { modal.classList.remove('visible-custom'); modal.classList.add('hidden-custom'); }
   switchTab('tamu');
+};
+
+// ============================================================
+// FUNGSI MODAL KONSULTASI SUKSES
+// ============================================================
+window.tutupModalKonsultasi = function() {
+  const modal = document.getElementById('modalKonsultasiSukses');
+  if(modal) { modal.classList.remove('visible-custom'); modal.classList.add('hidden-custom'); }
+  // Reset form
+  const formKonsul = document.getElementById('formKonsultasi');
+  if (formKonsul) formKonsul.reset();
+};
+
+window.kirimKonsultasiKeWA = function() {
+  const pesanWA =
+    `*LAYANAN KONSULTASI & PENGADUAN UPTD FARMASI*\n` +
+    `==================================\n` +
+    `*Nama:* ${dataKonsultasiTerakhir.nama}\n` +
+    `*Instansi:* ${dataKonsultasiTerakhir.instansi}\n` +
+    `*Kontak:* ${dataKonsultasiTerakhir.kontak}\n` +
+    `*Kategori:* ${dataKonsultasiTerakhir.kategori}\n` +
+    `*Pesan:* ${dataKonsultasiTerakhir.isi}\n` +
+    `==================================\n` +
+    `_Pesan otomatis dari Sistem Layanan Digital UPTD Farmasi Tangsel_`;
+
+  const urlWA = `https://wa.me/${WA_ADMIN_KONSULTASI}?text=${encodeURIComponent(pesanWA)}`;
+  window.open(urlWA, '_blank');
+  tutupModalKonsultasi();
 };
 
 document.addEventListener('click', function(e) {
@@ -725,9 +773,7 @@ dDate = d.waktu.toDate().toISOString().split('T')[0];
 } else if (typeof d.waktu === 'string') {
 dDate = d.waktu.split('T')[0];
 }
-if (dDate === todayStr) {
-countHariIni++;
-}
+if (dDate === todayStr) { countHariIni++; }
 }
 });
 const nextNum = countHariIni + 1;
@@ -753,16 +799,10 @@ const txtAntrianModal = document.getElementById('txtNomorAntrianModal');
 if(txtAntrianModal) txtAntrianModal.innerText = antrianNo;
 
 const modalSukses = document.getElementById('modalAntrianSukses');
-if(modalSukses) {
-modalSukses.classList.remove('hidden-custom');
-modalSukses.classList.add('visible-custom');
-}
+if(modalSukses) { modalSukses.classList.remove('hidden-custom'); modalSukses.classList.add('visible-custom'); }
 
-// ============================================================
-// KIRIM NOTIFIKASI WHATSAPP KE PENANGGUNG JAWAB
-// ============================================================
+// KIRIM NOTIFIKASI WHATSAPP KE PIC
 const picWA = PIC_WA_MAPPING[keperluan];
-
 if (picWA) {
   const pesanPIC =
     `*NOTIFIKASI KUNJUNGAN BARU - UPTD FARMASI*\n` +
@@ -776,7 +816,6 @@ if (picWA) {
     `==================================\n` +
     `Mohon cek dashboard admin untuk memproses kunjungan ini.\n\n` +
     `_Pesan otomatis dari Sistem Layanan Digital UPTD Farmasi Tangsel_`;
-
   const urlWA = `https://wa.me/${picWA}?text=${encodeURIComponent(pesanPIC)}`;
   window.open(urlWA, '_blank');
 }
@@ -792,18 +831,13 @@ btn.innerHTML = "<i class='fas fa-paper-plane mr-1'></i> Kirim Registrasi Kunjun
 }
 
 // ============================================================
-// FORM KONSULTASI & PENGADUAN
-// DATA DISIMPAN LANGSUNG KE FIRESTORE
+// FORM KONSULTASI & PENGADUAN - DENGAN MODAL PROFESIONAL
 // ============================================================
-
 const formKonsul = document.getElementById('formKonsultasi');
 
 if (formKonsul) {
-
   formKonsul.addEventListener('submit', async (e) => {
-
     e.preventDefault();
-
     const btnKonsul = document.getElementById('btnKirimKonsul');
 
     if (btnKonsul) {
@@ -811,7 +845,6 @@ if (formKonsul) {
       btnKonsul.innerHTML = "<i class='fas fa-spinner fa-spin mr-1'></i> Menyimpan konsultasi...";
     }
 
-    // Ambil data dari form
     const nama = document.getElementById('namaPengirim').value.trim();
     const instansi = document.getElementById('instansiPengirim').value.trim();
     const kontak = document.getElementById('kontakPengirim').value.trim();
@@ -819,94 +852,45 @@ if (formKonsul) {
     const isi = document.getElementById('isiKonsultasi').value.trim();
 
     try {
-
-      // --------------------------------------------------------
-      // SIMPAN LANGSUNG KE FIRESTORE
-      // Koleksi: Konsultasi
-      // --------------------------------------------------------
-
       const docRef = await addDoc(collection(db, "Konsultasi"), {
-
         nama: nama,
-
         instansi: instansi,
-
         kontak: kontak,
-
         kategori: kategori,
-
         isi: isi,
-
         status: "Menunggu Tanggapan",
-
         waktuInput: serverTimestamp(),
-
-        // waktu tambahan untuk memudahkan admin
         timestamp: serverTimestamp()
-
       });
 
       console.log("Konsultasi berhasil disimpan. ID:", docRef.id);
 
-      // --------------------------------------------------------
-      // KONSULTASI BERHASIL
-      // --------------------------------------------------------
+      // Simpan data terakhir
+      dataKonsultasiTerakhir = { nama, instansi, kontak, kategori, isi };
 
-      alert(
-        "Konsultasi berhasil dikirim.\n\n" +
-        "Data telah tersimpan ke sistem UPTD Farmasi."
-      );
-
-      // Reset form
-      formKonsul.reset();
-
-      // --------------------------------------------------------
-      // KIRIM / BUKA WHATSAPP
-      // --------------------------------------------------------
-
-      const nomorWAAdmin = "6285716842806";
-
-      const pesanWA =
-        `*LAYANAN KONSULTASI & PENGADUAN*\n` +
-        `----------------------------------\n` +
-        `*Nama:* ${nama}\n` +
-        `*Instansi:* ${instansi}\n` +
-        `*Kontak:* ${kontak}\n` +
-        `*Kategori:* ${kategori}\n` +
-        `*Pesan:* ${isi}\n`;
-
-      const urlWA =
-        `https://wa.me/${nomorWAAdmin}?text=${encodeURIComponent(pesanWA)}`;
-
-      window.open(urlWA, '_blank');
-
-    } catch (err) {
-
-      console.error(
-        "Gagal menyimpan konsultasi ke Firestore:",
-        err
-      );
-
-      alert(
-        "Konsultasi gagal dikirim ke sistem.\n\n" +
-        "Silakan periksa koneksi internet dan coba kembali."
-      );
-
-    } finally {
-
-      if (btnKonsul) {
-        btnKonsul.disabled = false;
-
-        btnKonsul.innerHTML =
-          "<span><i class='fas fa-paper-plane mr-1'></i> Kirim Konsultasi ke Sistem & WhatsApp</span><span>→</span>";
+      // Tampilkan modal profesional (bukan alert)
+      const modalKonsul = document.getElementById('modalKonsultasiSukses');
+      if (modalKonsul) {
+        document.getElementById('modalKonsulNama').innerText = nama || '-';
+        document.getElementById('modalKonsulInstansi').innerText = instansi || '-';
+        document.getElementById('modalKonsulKategori').innerText = kategori || '-';
+        modalKonsul.classList.remove('hidden-custom');
+        modalKonsul.classList.add('visible-custom');
       }
 
+    } catch (err) {
+      console.error("Gagal menyimpan konsultasi ke Firestore:", err);
+      alert("Konsultasi gagal dikirim ke sistem. Silakan periksa koneksi internet dan coba kembali.");
+    } finally {
+      if (btnKonsul) {
+        btnKonsul.disabled = false;
+        btnKonsul.innerHTML = "<span><i class='fas fa-paper-plane mr-1'></i> Kirim Konsultasi ke Sistem & WhatsApp</span><span>→</span>";
+      }
     }
-
   });
-
 }
-  function toBase64(file) {
+
+function toBase64(file) {
 return new Promise((resolve, reject) => {
 const reader = new FileReader();
 reader.readAsDataURL(file);
@@ -914,8 +898,6 @@ reader.onload = () => resolve(reader.result);
 reader.onerror = error => reject(error);
 });
 }
-
-
 
 onSnapshot(query(collection(db, "tamu"), orderBy("waktu", "desc")), (snapshot) => {
 const container = document.getElementById("containerTamu");
@@ -933,11 +915,8 @@ const item = docSnap.data();
 
 let waktuStr = '-';
 if (item.waktu) {
-if (typeof item.waktu.toDate === 'function') {
-waktuStr = item.waktu.toDate().toLocaleString('id-ID');
-} else {
-waktuStr = item.waktu;
-}
+if (typeof item.waktu.toDate === 'function') { waktuStr = item.waktu.toDate().toLocaleString('id-ID'); }
+else { waktuStr = item.waktu; }
 }
 
 let durasi = "-";
@@ -950,16 +929,11 @@ if (String(item.status || '').toLowerCase() === 'selesai' && item.waktuSelesai &
 let statusColor = "bg-amber-500/20 text-amber-300 border-amber-500/40";
 let statusText = item.status || "Menunggu";
 const statusLower = String(statusText).toLowerCase();
-if (statusLower.includes("proses")) {
-statusColor = "bg-blue-500/20 text-blue-300 border-blue-500/40";
-} else if (statusLower.includes("selesai")) {
-statusColor = "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
-}
+if (statusLower.includes("proses")) { statusColor = "bg-blue-500/20 text-blue-300 border-blue-500/40"; }
+else if (statusLower.includes("selesai")) { statusColor = "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"; }
 
 let itemsObatArr = [];
-if (Array.isArray(item.itemsObat) && item.itemsObat.length > 0) {
-itemsObatArr = item.itemsObat;
-}
+if (Array.isArray(item.itemsObat) && item.itemsObat.length > 0) { itemsObatArr = item.itemsObat; }
 
 const obatTerima = item.obatDiterima || item.daftarObat || item.obat || item.keteranganObat || '-';
 const namaPetugasVal = item.petugas || item.namaPetugas || '-';
