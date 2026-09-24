@@ -18,9 +18,6 @@ img, video { max-width: 100%; height: auto; cursor: pointer; }
 nav img, header img, aside img, .no-zoom { cursor: default !important; }
 #imageModal { transition: opacity 0.2s ease-in-out; }
 
-/* ============================================ */
-/* ANIMASI BERGERAK TERUS-MENERUS */
-/* ============================================ */
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes popIn { 0% { transform: scale(0); } 70% { transform: scale(1.15); } 100% { transform: scale(1); } }
@@ -35,49 +32,32 @@ nav img, header img, aside img, .no-zoom { cursor: default !important; }
 @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 @keyframes shimmer { 0% { background-position: -1000px 0; } 100% { background-position: 1000px 0; } }
 @keyframes shimmerBtn { 0% { left: -100%; } 100% { left: 200%; } }
-@keyframes slideRight { 0% { transform: translateX(-100%); } 100% { transform: translateX(0); } }
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-@keyframes wave { 0% { transform: translateX(0) translateY(0); } 25% { transform: translateX(10px) translateY(-5px); } 50% { transform: translateX(0) translateY(0); } 75% { transform: translateX(-10px) translateY(5px); } 100% { transform: translateX(0) translateY(0); } }
-@keyframes orbit { 0% { transform: rotate(0deg) translateX(8px) rotate(0deg); } 100% { transform: rotate(360deg) translateX(8px) rotate(-360deg); } }
 @keyframes heartbeat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.15); } 30% { transform: scale(1); } 45% { transform: scale(1.15); } 60% { transform: scale(1); } }
 @keyframes rocketShake { 0%, 100% { transform: translateY(0) rotate(0deg); } 25% { transform: translateY(-4px) rotate(-3deg); } 75% { transform: translateY(-4px) rotate(3deg); } }
 @keyframes tickerBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-@keyframes slideInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
 
 .animasi-masuk { animation: fadeInUp 0.5s ease-out both; }
 .animasi-fade { animation: fadeIn 0.4s ease-out both; }
 .animasi-pop { animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
 .animasi-bounce-in { animation: bounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
 
-/* Gerakan berkelanjutan */
 .bergerak-float { animation: float 3s ease-in-out infinite; }
 .bergerak-bounce { animation: bounceSoft 2s ease-in-out infinite; }
 .bergerak-pulse { animation: pulse 2s ease-in-out infinite; }
 .bergerak-glow { animation: glow 2.5s ease-in-out infinite; }
 .bergerak-spin { animation: spin 20s linear infinite; }
 .bergerak-spin-fast { animation: spin 4s linear infinite; }
-.bergerak-heartbeat { animation: heartbeat 2s ease-in-out infinite; }
 .bergerak-rocket { animation: rocketShake 1.5s ease-in-out infinite; }
 .bergerak-blink { animation: tickerBlink 1.5s ease-in-out infinite; }
-.bergerak-wave { animation: wave 3s ease-in-out infinite; }
-.bergerak-orbit { animation: orbit 4s linear infinite; }
 
-/* Background animasi */
 .bg-animated {
   background: linear-gradient(-45deg, #0f172a, #1e293b, #064e3b, #0f172a);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
-
-/* Card glow (berdenyut hijau) */
 .card-glow-moving { box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); animation: glow 3s ease-in-out infinite; }
 
-/* Ikon menu - bounce terus */
-.icon-bounce-continuous { animation: bounceSoft 2.5s ease-in-out infinite; }
-.icon-bounce-continuous:nth-child(2) { animation-delay: 0.3s; }
-.icon-bounce-continuous:nth-child(3) { animation-delay: 0.6s; }
-
-/* Tombol dengan shimmer */
 .btn-shimmer { position: relative; overflow: hidden; }
 .btn-shimmer::before {
   content: '';
@@ -88,7 +68,6 @@ nav img, header img, aside img, .no-zoom { cursor: default !important; }
   animation: shimmerBtn 3s infinite;
 }
 
-/* Kartu menu - hover float + ikon orbit */
 .menu-card { transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; position: relative; overflow: hidden; }
 .menu-card::before {
   content: '';
@@ -105,40 +84,32 @@ nav img, header img, aside img, .no-zoom { cursor: default !important; }
 .menu-card:hover .menu-icon { transform: scale(1.2) rotate(-10deg); }
 .menu-card .menu-icon { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
-/* Tombol */
 .btn-animasi { transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden; }
 .btn-animasi:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3); filter: brightness(1.15); }
 .btn-animasi:active { transform: translateY(0) scale(0.95); }
 
-/* Kartu tamu */
 .kartu-tamu { transition: all 0.35s ease; }
 .kartu-tamu:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 20px 40px rgba(0,0,0,0.4); border-color: rgba(16, 185, 129, 0.6); }
 
-/* Modal */
 .modal-custom { transition: opacity 0.3s ease, visibility 0.3s ease; }
 .modal-content-custom { transform: scale(0.85) translateY(20px); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
 .modal-custom.visible-custom .modal-content-custom { transform: scale(1) translateY(0); }
 
-/* Loading */
 .btn-loading { pointer-events: none; opacity: 0.8; }
 .btn-loading i { animation: spin 1s linear infinite; }
 
-/* GPS Box */
 .gps-detecting { animation: pulse 1.5s ease-in-out infinite; }
 .gps-valid { animation: pulseRing 2s infinite; }
 .gps-invalid { animation: pulseRingRed 1.5s infinite; }
 
-/* Scrollbar */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: #0f172a; }
 ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-/* Page content */
 .page-content { transition: opacity 0.35s ease, transform 0.35s ease; }
 .page-content:not(.hidden-custom) { animation: fadeInUp 0.5s ease-out both; }
 
-/* Garis berjalan (ticker) */
 .ticker-line {
   height: 2px;
   background: linear-gradient(90deg, transparent, #10b981, transparent);
@@ -146,22 +117,13 @@ nav img, header img, aside img, .no-zoom { cursor: default !important; }
   background-size: 200% auto;
 }
 
-/* Header gradient bergerak */
 .header-gradient {
   background: linear-gradient(-45deg, #0f172a, #064e3b, #0f172a, #1e293b);
   background-size: 400% 400%;
   animation: gradientShift 8s ease infinite;
 }
 
-/* Icon glowing pulse */
 .icon-glow-pulse { animation: glow 2s ease-in-out infinite, pulse 2s ease-in-out infinite; }
-
-/* Baris tabel shimmer */
-.row-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent);
-  background-size: 200% auto;
-  animation: shimmer 3s linear infinite;
-}
 
 @media (min-width: 1024px) {
 .app-layout-wrapper { max-width: 1280px !important; margin-left: auto; margin-right: auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 20px; padding: 20px; }
@@ -665,6 +627,7 @@ let isWithinRadius = false;
 let dataKonsultasiTerakhir = { nama: '', instansi: '', kontak: '', kategori: '', isi: '' };
 
 window.mulaiIsiSurvey = function(event) {
+  event.preventDefault();
   sessionStorage.setItem('sedang_isi_survei', 'true');
   const btnManual = document.getElementById('btnManual');
   if (btnManual) {
@@ -672,7 +635,8 @@ window.mulaiIsiSurvey = function(event) {
     btnManual.classList.remove('bg-slate-800/50', 'text-slate-500', 'border-slate-700', 'cursor-not-allowed');
     btnManual.classList.add('bg-slate-800', 'hover:bg-slate-700', 'text-emerald-400', 'border-emerald-500/40', 'cursor-pointer', 'shadow-md', 'animasi-pop', 'btn-shimmer');
   }
-  window.open("https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform", "_blank");
+  // Ganti window.open dengan location.href agar tidak diblokir pop-up blocker
+  window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform";
 };
 
 window.bukaMenuUtamaManual = function() {
@@ -748,8 +712,8 @@ window.kirimKonsultasiKeWA = function() {
     `==================================\n` +
     `_Pesan otomatis dari Sistem Layanan Digital UPTD Farmasi Tangsel_`;
 
-  const urlWA = `https://wa.me/${WA_ADMIN_KONSULTASI}?text=${encodeURIComponent(pesanWA)}`;
-  window.open(urlWA, '_blank');
+  // Ganti window.open dengan location.href agar tidak diblokir pop-up blocker
+  window.location.href = `https://wa.me/${WA_ADMIN_KONSULTASI}?text=${encodeURIComponent(pesanWA)}`;
   tutupModalKonsultasi();
 };
 
@@ -910,8 +874,8 @@ if(formReg) {
           `==================================\n` +
           `Mohon cek dashboard admin untuk memproses kunjungan ini.\n\n` +
           `_Pesan otomatis dari Sistem Layanan Digital UPTD Farmasi Tangsel_`;
-        const urlWA = `https://wa.me/${picWA}?text=${encodeURIComponent(pesanPIC)}`;
-        window.open(urlWA, '_blank');
+        // Ganti window.open dengan location.href agar tidak diblokir pop-up blocker
+        window.location.href = `https://wa.me/${picWA}?text=${encodeURIComponent(pesanPIC)}`;
       }
 
     } catch (err) {
