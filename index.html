@@ -14,83 +14,82 @@ width: 100%;
 position: relative;
 background-color: #0b1329;
 }
-img, video {
-max-width: 100%;
-height: auto;
-cursor: pointer;
-}
-nav img, header img, aside img, .no-zoom {
-cursor: default !important;
-}
-#imageModal {
-transition: opacity 0.2s ease-in-out;
-}
+img, video { max-width: 100%; height: auto; cursor: pointer; }
+nav img, header img, aside img, .no-zoom { cursor: default !important; }
+#imageModal { transition: opacity 0.2s ease-in-out; }
 
 /* ============================================ */
-/* ANIMASI */
+/* ANIMASI BERGERAK TERUS-MENERUS */
 /* ============================================ */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-20px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-@keyframes popIn {
-  0% { transform: scale(0); }
-  70% { transform: scale(1.15); }
-  100% { transform: scale(1); }
-}
-@keyframes bounceIn {
-  0% { transform: scale(0.3); opacity: 0; }
-  50% { transform: scale(1.1); opacity: 1; }
-  70% { transform: scale(0.95); }
-  100% { transform: scale(1); }
-}
-@keyframes pulseAlert {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
-  50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
-}
-@keyframes pulseGreen {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
-  50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-}
-@keyframes shimmer {
-  0% { background-position: -1000px 0; }
-  100% { background-position: 1000px 0; }
-}
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn { 0% { transform: scale(0); } 70% { transform: scale(1.15); } 100% { transform: scale(1); } }
+@keyframes bounceIn { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.1); opacity: 1; } 70% { transform: scale(0.95); } 100% { transform: scale(1); } }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes pulseSoft {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-@keyframes iconBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-@keyframes glowGreen {
-  0%, 100% { box-shadow: 0 0 5px rgba(16, 185, 129, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.6); }
-}
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes bounceSoft { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-6px) rotate(5deg); } }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.05); } }
+@keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
+@keyframes pulseRingRed { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+@keyframes glow { 0%, 100% { filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.5)); } 50% { filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.9)); } }
+@keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes shimmer { 0% { background-position: -1000px 0; } 100% { background-position: 1000px 0; } }
+@keyframes shimmerBtn { 0% { left: -100%; } 100% { left: 200%; } }
+@keyframes slideRight { 0% { transform: translateX(-100%); } 100% { transform: translateX(0); } }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes wave { 0% { transform: translateX(0) translateY(0); } 25% { transform: translateX(10px) translateY(-5px); } 50% { transform: translateX(0) translateY(0); } 75% { transform: translateX(-10px) translateY(5px); } 100% { transform: translateX(0) translateY(0); } }
+@keyframes orbit { 0% { transform: rotate(0deg) translateX(8px) rotate(0deg); } 100% { transform: rotate(360deg) translateX(8px) rotate(-360deg); } }
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.15); } 30% { transform: scale(1); } 45% { transform: scale(1.15); } 60% { transform: scale(1); } }
+@keyframes rocketShake { 0%, 100% { transform: translateY(0) rotate(0deg); } 25% { transform: translateY(-4px) rotate(-3deg); } 75% { transform: translateY(-4px) rotate(3deg); } }
+@keyframes tickerBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes slideInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
 
 .animasi-masuk { animation: fadeInUp 0.5s ease-out both; }
 .animasi-fade { animation: fadeIn 0.4s ease-out both; }
 .animasi-pop { animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
 .animasi-bounce-in { animation: bounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
-.animasi-slide-left { animation: slideInLeft 0.4s ease-out both; }
 
-/* Kartu menu */
-.menu-card {
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
+/* Gerakan berkelanjutan */
+.bergerak-float { animation: float 3s ease-in-out infinite; }
+.bergerak-bounce { animation: bounceSoft 2s ease-in-out infinite; }
+.bergerak-pulse { animation: pulse 2s ease-in-out infinite; }
+.bergerak-glow { animation: glow 2.5s ease-in-out infinite; }
+.bergerak-spin { animation: spin 20s linear infinite; }
+.bergerak-spin-fast { animation: spin 4s linear infinite; }
+.bergerak-heartbeat { animation: heartbeat 2s ease-in-out infinite; }
+.bergerak-rocket { animation: rocketShake 1.5s ease-in-out infinite; }
+.bergerak-blink { animation: tickerBlink 1.5s ease-in-out infinite; }
+.bergerak-wave { animation: wave 3s ease-in-out infinite; }
+.bergerak-orbit { animation: orbit 4s linear infinite; }
+
+/* Background animasi */
+.bg-animated {
+  background: linear-gradient(-45deg, #0f172a, #1e293b, #064e3b, #0f172a);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
 }
+
+/* Card glow (berdenyut hijau) */
+.card-glow-moving { box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); animation: glow 3s ease-in-out infinite; }
+
+/* Ikon menu - bounce terus */
+.icon-bounce-continuous { animation: bounceSoft 2.5s ease-in-out infinite; }
+.icon-bounce-continuous:nth-child(2) { animation-delay: 0.3s; }
+.icon-bounce-continuous:nth-child(3) { animation-delay: 0.6s; }
+
+/* Tombol dengan shimmer */
+.btn-shimmer { position: relative; overflow: hidden; }
+.btn-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmerBtn 3s infinite;
+}
+
+/* Kartu menu - hover float + ikon orbit */
+.menu-card { transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; position: relative; overflow: hidden; }
 .menu-card::before {
   content: '';
   position: absolute;
@@ -101,67 +100,33 @@ transition: opacity 0.2s ease-in-out;
   transform: translate(-50%, -50%);
   transition: width 0.5s ease, height 0.5s ease;
 }
-.menu-card:hover::before {
-  width: 300px; height: 300px;
-}
-.menu-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 15px 35px rgba(16, 185, 129, 0.2);
-  border-color: rgba(16, 185, 129, 0.6);
-}
-.menu-card .menu-icon {
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.menu-card:hover .menu-icon {
-  transform: scale(1.15) rotate(-5deg);
-  animation: iconBounce 1s ease-in-out infinite;
-}
+.menu-card:hover::before { width: 400px; height: 400px; }
+.menu-card:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3); border-color: rgba(16, 185, 129, 0.8); }
+.menu-card:hover .menu-icon { transform: scale(1.2) rotate(-10deg); }
+.menu-card .menu-icon { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
 /* Tombol */
-.btn-animasi {
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  position: relative;
-  overflow: hidden;
-}
-.btn-animasi:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-  filter: brightness(1.1);
-}
-.btn-animasi:active {
-  transform: translateY(0) scale(0.95);
-}
+.btn-animasi { transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden; }
+.btn-animasi:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3); filter: brightness(1.15); }
+.btn-animasi:active { transform: translateY(0) scale(0.95); }
 
 /* Kartu tamu */
-.kartu-tamu {
-  transition: all 0.3s ease;
-}
-.kartu-tamu:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-  border-color: rgba(16, 185, 129, 0.5);
-}
+.kartu-tamu { transition: all 0.35s ease; }
+.kartu-tamu:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 20px 40px rgba(0,0,0,0.4); border-color: rgba(16, 185, 129, 0.6); }
 
 /* Modal */
-.modal-custom {
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-.modal-content-custom {
-  transform: scale(0.85) translateY(20px);
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.modal-custom.visible-custom .modal-content-custom {
-  transform: scale(1) translateY(0);
-}
+.modal-custom { transition: opacity 0.3s ease, visibility 0.3s ease; }
+.modal-content-custom { transform: scale(0.85) translateY(20px); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.modal-custom.visible-custom .modal-content-custom { transform: scale(1) translateY(0); }
 
 /* Loading */
 .btn-loading { pointer-events: none; opacity: 0.8; }
 .btn-loading i { animation: spin 1s linear infinite; }
 
 /* GPS Box */
-.gps-valid { animation: pulseGreen 2s infinite; }
-.gps-invalid { animation: pulseAlert 1.5s infinite; }
-.gps-detecting { animation: pulseSoft 1.5s infinite; }
+.gps-detecting { animation: pulse 1.5s ease-in-out infinite; }
+.gps-valid { animation: pulseRing 2s infinite; }
+.gps-invalid { animation: pulseRingRed 1.5s infinite; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -169,103 +134,79 @@ transition: opacity 0.2s ease-in-out;
 ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-/* Skeleton loading */
-.skeleton {
-  background: linear-gradient(90deg, #1e293b 0%, #334155 50%, #1e293b 100%);
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite linear;
+/* Page content */
+.page-content { transition: opacity 0.35s ease, transform 0.35s ease; }
+.page-content:not(.hidden-custom) { animation: fadeInUp 0.5s ease-out both; }
+
+/* Garis berjalan (ticker) */
+.ticker-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #10b981, transparent);
+  animation: marquee 3s linear infinite;
+  background-size: 200% auto;
 }
 
-/* Halaman berpindah */
-.page-content {
-  transition: opacity 0.35s ease, transform 0.35s ease;
-}
-.page-content:not(.hidden-custom) {
-  animation: fadeInUp 0.4s ease-out both;
+/* Header gradient bergerak */
+.header-gradient {
+  background: linear-gradient(-45deg, #0f172a, #064e3b, #0f172a, #1e293b);
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
 }
 
-/* Icon glow pada modal */
-.icon-glow {
-  animation: glowGreen 2s ease-in-out infinite;
+/* Icon glowing pulse */
+.icon-glow-pulse { animation: glow 2s ease-in-out infinite, pulse 2s ease-in-out infinite; }
+
+/* Baris tabel shimmer */
+.row-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
 }
 
 @media (min-width: 1024px) {
-.app-layout-wrapper {
-max-width: 1280px !important;
-margin-left: auto;
-margin-right: auto;
-display: grid;
-grid-template-columns: repeat(12, minmax(0, 1fr));
-gap: 20px;
-padding: 20px;
-}
-.pc-sidebar {
-grid-column: span 3 / span 3;
-display: flex !important;
-flex-direction: column;
-gap: 16px;
-}
-.pc-main-content {
-grid-column: span 9 / span 9;
-}
-.pc-header-desktop {
-display: block !important;
-}
-.mobile-header-bar {
-display: none !important;
-}
+.app-layout-wrapper { max-width: 1280px !important; margin-left: auto; margin-right: auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 20px; padding: 20px; }
+.pc-sidebar { grid-column: span 3 / span 3; display: flex !important; flex-direction: column; gap: 16px; }
+.pc-main-content { grid-column: span 9 / span 9; }
+.pc-header-desktop { display: block !important; }
+.mobile-header-bar { display: none !important; }
 }
 @media (max-width: 1023px) {
-.pc-sidebar {
-display: none !important;
-}
-.pc-header-desktop {
-display: none !important;
-}
-.mobile-header-bar {
-display: block !important;
-}
-.main-container {
-max-width: 480px;
-margin-left: auto;
-margin-right: auto;
-width: 100%;
-padding-left: 12px;
-padding-right: 12px;
-box-sizing: border-box;
-}
+.pc-sidebar { display: none !important; }
+.pc-header-desktop { display: none !important; }
+.mobile-header-bar { display: block !important; }
+.main-container { max-width: 480px; margin-left: auto; margin-right: auto; width: 100%; padding-left: 12px; padding-right: 12px; box-sizing: border-box; }
 }
 </style>
 <title>UPTD Farmasi - Kota Tangerang Selatan</title>
 </head>
-<body class="font-sans min-h-screen pb-6 flex items-center justify-center p-0 lg:p-6 text-slate-100">
+<body class="bg-animated font-sans min-h-screen pb-6 flex items-center justify-center p-0 lg:p-6 text-slate-100">
 
 <!-- HALAMAN GERBANG UTAMA (SURVEY) -->
-<div id="gatePage" class="flex items-center justify-center p-4" style="position: fixed; inset: 0; z-index: 9999; overflow-y: auto; background: linear-gradient(135deg, #0f172a, #1e293b);">
-  <div class="max-w-md w-full rounded-3xl shadow-2xl border border-slate-700/60 p-8 text-center space-y-6 my-auto bg-slate-900/90 backdrop-blur-md animasi-masuk">
+<div id="gatePage" class="flex items-center justify-center p-4" style="position: fixed; inset: 0; z-index: 9999; overflow-y: auto;">
+  <div class="max-w-md w-full rounded-3xl shadow-2xl border border-slate-700/60 p-8 text-center space-y-6 my-auto bg-slate-900/95 backdrop-blur-md animasi-masuk card-glow-moving">
     
-    <div class="flex justify-center animasi-pop">
-      <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="h-20 w-20 object-contain drop-shadow-md no-zoom" style="animation: iconBounce 2s ease-in-out infinite;">
+    <div class="flex justify-center">
+      <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="h-24 w-24 object-contain drop-shadow-md no-zoom bergerak-float bergerak-glow">
     </div>
 
     <div class="space-y-2">
-      <span class="px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full">
-        <i class="fas fa-satellite-dish mr-1"></i> Sistem Layanan Digital Terpadu
+      <span class="px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full inline-block bergerak-pulse">
+        <i class="fas fa-satellite-dish mr-1 bergerak-spin-fast"></i> Sistem Layanan Digital Terpadu
       </span>
       <h1 class="text-2xl font-black text-slate-100 tracking-tight leading-snug">
-        SELAMAT DATANG DI UPTD FARMASI
+        SELAMAT DATANG DI <span class="text-emerald-400">UPTD FARMASI</span>
       </h1>
       <p class="text-xs text-emerald-400 font-medium leading-relaxed">
-        Kota Tangerang Selatan
+        <i class="fas fa-map-marker-alt mr-1 bergerak-bounce"></i> Kota Tangerang Selatan
       </p>
       <p class="text-xs text-slate-300 font-medium leading-relaxed">
         Pelayanan Optimal: Menjadi unit penunjang distribusi obat dan perbekalan kesehatan yang efektif, efisien, serta dapat dipertanggungjawabkan.
       </p>
     </div>
 
-    <div class="bg-slate-800/80 border border-amber-500/30 rounded-2xl p-4 text-left space-y-1">
+    <div class="bg-slate-800/80 border border-amber-500/30 rounded-2xl p-4 text-left space-y-1 bergerak-pulse">
       <p class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
-        <i class="fas fa-triangle-exclamation"></i> Survei Kepuasan Masyarakat:
+        <i class="fas fa-triangle-exclamation bergerak-blink"></i> Survei Kepuasan Masyarakat:
       </p>
       <p class="text-[11px] text-slate-300 leading-normal">
         Silakan klik tombol <b>Isi Survei</b> terlebih dahulu. Setelah itu, tombol masuk ke menu utama akan aktif dan bisa diklik.
@@ -276,8 +217,8 @@ box-sizing: border-box;
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" 
          target="_blank" 
          onclick="mulaiIsiSurvey(event)"
-         class="w-full text-white font-extrabold py-3.5 px-6 rounded-2xl flex items-center justify-center gap-2.5 text-sm shadow-lg bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 btn-animasi">
-        <i class="fas fa-clipboard-list"></i>
+         class="w-full text-white font-extrabold py-3.5 px-6 rounded-2xl flex items-center justify-center gap-2.5 text-sm shadow-lg bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 btn-animasi btn-shimmer">
+        <i class="fas fa-clipboard-list bergerak-bounce"></i>
         <span>ISI SURVEI KEPUASAN</span>
       </a>
 
@@ -291,19 +232,19 @@ box-sizing: border-box;
     </div>
 
     <p class="text-[10px] text-slate-400 leading-normal">
-      Tombol masuk menu akan aktif setelah Anda mengklik tautan survei di atas.
+      <i class="fas fa-info-circle mr-1 bergerak-pulse"></i> Tombol masuk menu akan aktif setelah Anda mengklik tautan survei di atas.
     </p>
 
   </div>
 </div>
 
 <!-- KONTEN MENU UTAMA -->
-<div id="mainMenuContent" class="hidden max-w-md w-full bg-slate-900/80 backdrop-blur-md rounded-3xl shadow-2xl border border-slate-800 overflow-hidden my-auto p-3 lg:max-w-5xl lg:p-6">
+<div id="mainMenuContent" class="hidden max-w-md w-full bg-slate-900/85 backdrop-blur-md rounded-3xl shadow-2xl border border-slate-800 overflow-hidden my-auto p-3 lg:max-w-5xl lg:p-6">
 
-<header class="mobile-header-bar bg-slate-800/80 px-3 py-3 mb-3 border border-slate-700/50 text-center rounded-2xl shadow-sm">
+<header class="mobile-header-bar header-gradient px-3 py-3 mb-3 border border-emerald-500/30 text-center rounded-2xl shadow-md">
 <div class="max-w-md mx-auto">
 <h1 id="mobileHeaderTitle" class="font-black text-slate-100 text-xs tracking-wider leading-tight uppercase">UPTD FARMASI KOTA TANGERANG SELATAN</h1>
-<p id="mobileHeaderSub" class="text-[9px] text-emerald-400 font-semibold uppercase tracking-widest mt-0.5">Sistem Layanan Digital Terpadu</p>
+<p id="mobileHeaderSub" class="text-[9px] text-emerald-400 font-semibold uppercase tracking-widest mt-0.5 bergerak-pulse">Sistem Layanan Digital Terpadu</p>
 </div>
 </header>
 
@@ -313,23 +254,23 @@ box-sizing: border-box;
 <div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60">
 <nav class="space-y-1.5">
 <a href="#" onclick="switchTab('index', event)" id="nav-index" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition btn-animasi">
-<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1"><i class="fas fa-house"></i></div>
+<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1 bergerak-bounce"><i class="fas fa-house"></i></div>
 <span class="text-xs">Beranda / Dashboard</span>
 </a>
 <a href="#" onclick="switchTab('registrasi', event)" id="nav-registrasi" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition btn-animasi">
-<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1"><i class="fas fa-pen-to-square"></i></div>
+<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1 bergerak-bounce" style="animation-delay: 0.3s;"><i class="fas fa-pen-to-square"></i></div>
 <span class="text-xs">Registrasi</span>
 </a>
 <a href="#" onclick="switchTab('tamu', event)" id="nav-tamu" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition btn-animasi">
-<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1"><i class="fas fa-ticket"></i></div>
+<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1 bergerak-bounce" style="animation-delay: 0.6s;"><i class="fas fa-ticket"></i></div>
 <span class="text-xs">Status Tamu</span>
 </a>
 <a href="#" onclick="switchTab('panduan', event)" id="nav-panduan" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-700/60 text-slate-200 font-bold text-xs transition btn-animasi">
-<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1"><i class="fas fa-book-open"></i></div>
+<div class="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-lg p-1 bergerak-bounce" style="animation-delay: 0.9s;"><i class="fas fa-book-open"></i></div>
 <span class="text-xs">Panduan Sistem</span>
 </a>
 <button onclick="resetAkses()" class="w-full mt-3 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-slate-700/50 hover:bg-slate-700 text-slate-300 font-bold text-xs transition border border-slate-600/40 btn-animasi">
-<i class="fas fa-lock"></i> <span>Kunci Kembali</span>
+<i class="fas fa-lock bergerak-pulse"></i> <span>Kunci Kembali</span>
 </button>
 </nav>
 </div>
@@ -339,13 +280,13 @@ box-sizing: border-box;
 <main class="main-container lg:max-w-none space-y-4 pt-1 pb-3">
 
 <div id="page-index" class="page-content space-y-3.5">
-  <div class="pc-header-desktop hidden p-4 rounded-2xl shadow-sm border border-slate-700/60 mb-3 bg-slate-800/80 animasi-masuk">
+  <div class="pc-header-desktop hidden p-4 rounded-2xl shadow-sm border border-slate-700/60 mb-3 header-gradient animasi-masuk">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo" class="h-20 w-20 object-contain no-zoom">
+        <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo" class="h-20 w-20 object-contain no-zoom bergerak-float">
         <div>
           <h1 class="font-black text-slate-100 text-base tracking-wide leading-tight">UPTD FARMASI KOTA TANGERANG SELATAN</h1>
-          <p class="text-xs text-emerald-400 font-semibold uppercase tracking-wider">Sistem Layanan Digital Terpadu</p>
+          <p class="text-xs text-emerald-400 font-semibold uppercase tracking-wider bergerak-pulse">Sistem Layanan Digital Terpadu</p>
         </div>
       </div>
       <button onclick="resetAkses()" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-2 rounded-xl transition font-bold flex items-center gap-1.5 shadow-sm border border-slate-600 btn-animasi">
@@ -354,21 +295,22 @@ box-sizing: border-box;
     </div>
   </div>
 
-  <div class="p-4 sm:p-5 rounded-2xl shadow-md border border-emerald-500/30 text-center space-y-2 bg-gradient-to-br from-slate-800 via-teal-950/40 to-emerald-950/40 animasi-masuk" style="animation-delay: 0.05s;">
+  <div class="p-4 sm:p-5 rounded-2xl shadow-md border border-emerald-500/30 text-center space-y-2 bg-gradient-to-br from-slate-800 via-teal-950/40 to-emerald-950/40 animasi-masuk card-glow-moving" style="animation-delay: 0.05s;">
     <div class="mx-auto flex items-center justify-center">
-      <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="w-24 h-24 object-contain no-zoom" style="animation: iconBounce 3s ease-in-out infinite;">
+      <img src="https://i.ibb.co.com/ksp2gP0q/Lambang-Kota-Tangerang-Selatan-1.png" alt="Logo Tangsel" class="w-24 h-24 object-contain no-zoom bergerak-float bergerak-glow">
     </div>
     <div>
-      <h2 class="text-sm sm:text-base font-black text-slate-100 uppercase tracking-wide">Selamat Datang di UPTD Farmasi</h2>
+      <h2 class="text-sm sm:text-base font-black text-slate-100 uppercase tracking-wide">Selamat Datang di <span class="text-emerald-400">UPTD Farmasi</span></h2>
       <p class="text-[11px] sm:text-xs text-slate-300 mt-1 font-medium leading-relaxed max-w-xl mx-auto">Silakan pilih menu layanan di bawah untuk registrasi, informasi, konsultasi, atau memantau status kunjungan Anda.</p>
     </div>
+    <div class="ticker-line rounded-full mx-auto" style="width: 80%;"></div>
   </div>
 
   <div class="grid grid-cols-2 gap-3">
     
     <a href="#" onclick="switchTab('registrasi', event)" class="menu-card group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 animasi-masuk" style="animation-delay: 0.1s;">
       <div class="shrink-0 flex items-center justify-center">
-        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30 bergerak-bounce">
           <i class="fas fa-pen-to-square text-2xl sm:text-3xl"></i>
         </div>
       </div>
@@ -380,7 +322,7 @@ box-sizing: border-box;
 
     <a href="#" onclick="switchTab('tamu', event)" class="menu-card group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 animasi-masuk" style="animation-delay: 0.15s;">
       <div class="shrink-0 flex items-center justify-center">
-        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30 bergerak-bounce" style="animation-delay: 0.4s;">
           <i class="fas fa-ticket text-2xl sm:text-3xl"></i>
         </div>
       </div>
@@ -392,7 +334,7 @@ box-sizing: border-box;
 
     <a href="#" onclick="switchTab('konsultasi', event)" class="menu-card group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 animasi-masuk" style="animation-delay: 0.2s;">
       <div class="shrink-0 flex items-center justify-center">
-        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30 bergerak-bounce" style="animation-delay: 0.8s;">
           <i class="fas fa-comments text-2xl sm:text-3xl"></i>
         </div>
       </div>
@@ -404,7 +346,7 @@ box-sizing: border-box;
 
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform" target="_blank" class="menu-card group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 animasi-masuk" style="animation-delay: 0.25s;">
       <div class="flex-shrink-0 flex items-center justify-center">
-        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30 bergerak-bounce" style="animation-delay: 1.2s;">
           <i class="fas fa-star text-2xl sm:text-3xl"></i>
         </div>
       </div>
@@ -416,7 +358,7 @@ box-sizing: border-box;
 
     <a href="#" onclick="switchTab('panduan', event)" class="menu-card group p-3.5 rounded-2xl shadow-md border border-emerald-600/35 flex flex-col sm:flex-row items-center sm:items-start gap-3 bg-gradient-to-r from-emerald-900/40 via-teal-900/30 to-slate-800/80 col-span-2 animasi-masuk" style="animation-delay: 0.3s;">
       <div class="shrink-0 flex items-center justify-center">
-        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+        <div class="menu-icon w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-emerald-600/20 text-emerald-400 rounded-2xl border border-emerald-500/30 bergerak-bounce" style="animation-delay: 1.6s;">
           <i class="fas fa-book-open text-2xl sm:text-3xl"></i>
         </div>
       </div>
@@ -430,23 +372,23 @@ box-sizing: border-box;
 </div>
 
 <div id="page-registrasi" class="page-content space-y-4 hidden-custom">
-<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1 animasi-masuk">
-<h2 class="text-sm font-black text-slate-100"><i class="fas fa-pen-to-square mr-1"></i> Formulir Registrasi Kunjungan</h2>
+<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1 animasi-masuk card-glow-moving">
+<h2 class="text-sm font-black text-slate-100"><i class="fas fa-pen-to-square mr-1 bergerak-bounce"></i> Formulir Registrasi Kunjungan</h2>
 <p class="text-[11px] text-slate-300 font-medium">Silakan lengkapi data kunjungan Anda. Sistem akan memvalidasi posisi GPS.</p>
 </div>
 
 <div class="bg-slate-800/80 p-5 rounded-2xl shadow-sm border border-slate-700/60 animasi-masuk" style="animation-delay: 0.1s;">
 <form id="formRegistrasi" class="space-y-3">
 <div>
-<label class="block text-xs font-black text-slate-200 mb-1">Nama Lengkap / Tamu</label>
+<label class="block text-xs font-black text-slate-200 mb-1"><i class="fas fa-user text-emerald-400 mr-1"></i> Nama Lengkap / Tamu</label>
 <input type="text" id="regNama" required placeholder="Masukkan nama lengkap..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]">
 </div>
 <div>
-<label class="block text-xs font-black text-slate-200 mb-1">Instansi / Asal Puskesmas</label>
+<label class="block text-xs font-black text-slate-200 mb-1"><i class="fas fa-building text-emerald-400 mr-1"></i> Instansi / Asal Puskesmas</label>
 <input type="text" id="regInstansi" required placeholder="Contoh: Puskesmas Setu / RSUD..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]">
 </div>
 <div>
-<label class="block text-xs font-black text-slate-200 mb-1">Keperluan Kunjungan</label>
+<label class="block text-xs font-black text-slate-200 mb-1"><i class="fas fa-list-check text-emerald-400 mr-1"></i> Keperluan Kunjungan</label>
 <select id="regKeperluan" required class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 font-bold text-slate-100 transition-all duration-200 focus:scale-[1.02]">
 <option value="" disabled selected>-- Pilih Keperluan Kunjungan --</option>
 <option value="1. Obat PKD">1. Obat PKD</option>
@@ -460,40 +402,40 @@ box-sizing: border-box;
 </select>
 </div>
 <div>
-<label class="block text-xs font-black text-slate-200 mb-1">Nomor Kontak / WhatsApp</label>
+<label class="block text-xs font-black text-slate-200 mb-1"><i class="fab fa-whatsapp text-emerald-400 mr-1"></i> Nomor Kontak / WhatsApp</label>
 <input type="tel" id="regKontak" required placeholder="Contoh: 081234567890" class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]">
 </div>
 <div>
-<label class="block text-xs font-black text-slate-200 mb-1">Lampirkan Surat / Dokumen Pendukung (Maks. 700 KB)</label>
+<label class="block text-xs font-black text-slate-200 mb-1"><i class="fas fa-paperclip text-emerald-400 mr-1"></i> Lampirkan Surat / Dokumen Pendukung (Maks. 700 KB)</label>
 <input type="file" id="regFile" accept=".pdf,image/*" class="w-full text-xs text-slate-300 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 transition-all">
 </div>
 
 <div id="gpsStatusBox" class="gps-detecting bg-emerald-500/10 border border-emerald-500/30 p-3 rounded-xl text-[11px] text-emerald-400 font-medium">
-<i class="fas fa-location-dot mr-1"></i> Mendeteksi posisi koordinat GPS perangkat Anda...
+<i class="fas fa-location-dot mr-1 bergerak-bounce"></i> Mendeteksi posisi koordinat GPS perangkat Anda...
 </div>
 
-<button type="submit" id="btnSubmitReg" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 rounded-xl text-xs shadow-md btn-animasi">
-<i class="fas fa-paper-plane mr-1"></i> Kirim Registrasi Kunjungan
+<button type="submit" id="btnSubmitReg" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 rounded-xl text-xs shadow-md btn-animasi btn-shimmer">
+<i class="fas fa-paper-plane mr-1 bergerak-rocket"></i> Kirim Registrasi Kunjungan
 </button>
 </form>
 </div>
 
 <div class="flex justify-end pt-2 animasi-masuk" style="animation-delay: 0.2s;">
 <button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md inline-flex items-center gap-1.5 border border-slate-700 btn-animasi">
-<i class="fas fa-arrow-left"></i> Kembali ke Menu Utama
+<i class="fas fa-arrow-left bergerak-bounce"></i> Kembali ke Menu Utama
 </button>
 </div>
 </div>
 
 <div id="page-panduan" class="page-content space-y-4 hidden-custom">
-<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1 animasi-masuk">
-<h2 class="text-sm font-black text-slate-100"><i class="fas fa-book-open mr-1"></i> Panduan & Tutorial Layanan</h2>
+<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1 animasi-masuk card-glow-moving">
+<h2 class="text-sm font-black text-slate-100"><i class="fas fa-book-open mr-1 bergerak-bounce"></i> Panduan & Tutorial Layanan</h2>
 <p class="text-[11px] text-slate-300 font-medium leading-relaxed">Pelajari langkah-langkah mudah menggunakan sistem layanan digital UPTD Farmasi Tangsel.</p>
 </div>
 
 <div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 space-y-2 animasi-masuk" style="animation-delay: 0.1s;">
 <div class="flex items-center gap-2.5 border-b border-slate-700/50 pb-2">
-<div class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-xs">1</div>
+<div class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-xs bergerak-pulse">1</div>
 <h3 class="font-black text-xs text-slate-100 uppercase">Cara Melakukan Registrasi & Validasi GPS</h3>
 </div>
 <ol class="list-decimal list-inside text-[11px] text-slate-300 font-medium space-y-1.5 leading-relaxed pl-1">
@@ -508,7 +450,7 @@ box-sizing: border-box;
 
 <div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 space-y-2 animasi-masuk" style="animation-delay: 0.15s;">
 <div class="flex items-center gap-2.5 border-b border-slate-700/50 pb-2">
-<div class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-xs">2</div>
+<div class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-xs bergerak-pulse" style="animation-delay: 0.3s;">2</div>
 <h3 class="font-black text-xs text-slate-100 uppercase">Cek Status & Rincian Obat</h3>
 </div>
 <ul class="list-disc list-inside text-[11px] text-slate-300 font-medium space-y-1.5 leading-relaxed pl-1">
@@ -518,33 +460,33 @@ box-sizing: border-box;
 
 <div class="flex justify-end pt-2 animasi-masuk" style="animation-delay: 0.2s;">
 <button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md inline-flex items-center gap-1.5 border border-slate-700 btn-animasi">
-<i class="fas fa-arrow-left"></i> Kembali ke Menu Utama
+<i class="fas fa-arrow-left bergerak-bounce"></i> Kembali ke Menu Utama
 </button>
 </div>
 </div>
 
 <div id="page-tamu" class="page-content space-y-4 hidden-custom">
-<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1 mb-5 animasi-masuk">
-<h2 class="text-sm font-black text-slate-100"><i class="fas fa-ticket mr-1"></i> Daftar Tamu & Pengambilan Obat</h2>
+<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 text-center space-y-1 mb-5 animasi-masuk card-glow-moving">
+<h2 class="text-sm font-black text-slate-100"><i class="fas fa-ticket mr-1 bergerak-bounce"></i> Daftar Tamu & Pengambilan Obat</h2>
 <p class="text-[11px] text-slate-300 font-medium leading-relaxed">Pantau proses pelayanan Anda secara real-time dari registrasi hingga selesai.</p>
 </div>
 
 <div id="containerTamu" class="space-y-3">
 <div class="bg-slate-800/80 p-6 rounded-2xl shadow-sm border border-slate-700/60 text-center text-xs text-slate-300 font-medium">
-<i class="fas fa-spinner fa-spin mr-1"></i> Memuat data registrasi dari database...
+<i class="fas fa-spinner fa-spin mr-1 bergerak-spin-fast"></i> Memuat data registrasi dari database...
 </div>
 </div>
 
 <div class="flex justify-end pt-2 animasi-masuk" style="animation-delay: 0.1s;">
 <button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md inline-flex items-center gap-1.5 border border-slate-700 btn-animasi">
-<i class="fas fa-arrow-left"></i> Kembali
+<i class="fas fa-arrow-left bergerak-bounce"></i> Kembali
 </button>
 </div>
 </div>
 
 <div id="page-konsultasi" class="page-content space-y-4 hidden-custom">
-<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 flex items-center gap-4 animasi-masuk">
-<div class="w-16 h-16 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-2xl p-2 border border-emerald-500/30 overflow-hidden" style="animation: iconBounce 2s ease-in-out infinite;">
+<div class="bg-slate-800/80 p-4 rounded-2xl shadow-sm border border-slate-700/60 flex items-center gap-4 animasi-masuk card-glow-moving">
+<div class="w-16 h-16 flex items-center justify-center flex-shrink-0 bg-emerald-600/20 text-emerald-400 rounded-2xl p-2 border border-emerald-500/30 overflow-hidden bergerak-bounce">
 <i class="fas fa-comments text-2xl"></i>
 </div>
 <div>
@@ -556,19 +498,19 @@ box-sizing: border-box;
 <div class="bg-slate-800/80 p-5 rounded-2xl shadow-sm border border-slate-700/60 animasi-masuk" style="animation-delay: 0.1s;">
 <form id="formKonsultasi" class="space-y-3">
 <div>
-<label class="block text-xs font-black text-slate-200 mb-1">Nama Lengkap</label>
+<label class="block text-xs font-black text-slate-200 mb-1"><i class="fas fa-user text-emerald-400 mr-1"></i> Nama Lengkap</label>
 <input type="text" id="namaPengirim" required placeholder="Masukkan nama lengkap..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]">
 </div>
 <div>
-<label class="block text-xs font-black text-slate-200 mb-1">Asal Instansi / Unit Kerja</label>
+<label class="block text-xs font-black text-slate-200 mb-1"><i class="fas fa-building text-emerald-400 mr-1"></i> Asal Instansi / Unit Kerja</label>
 <input type="text" id="instansiPengirim" required placeholder="Masukkan asal instansi / Puskesmas / RS..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]">
 </div>
 <div>
-<label class="block text-xs font-black text-slate-200 mb-1">Nomor WhatsApp / Kontak</label>
+<label class="block text-xs font-black text-slate-200 mb-1"><i class="fab fa-whatsapp text-emerald-400 mr-1"></i> Nomor WhatsApp / Kontak</label>
 <input type="tel" id="kontakPengirim" required placeholder="Contoh: 081234567890" class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]">
 </div>
 <div>
-<label class="block text-xs font-black text-slate-200 mb-1">Pilih Keperluan</label>
+<label class="block text-xs font-black text-slate-200 mb-1"><i class="fas fa-list-check text-emerald-400 mr-1"></i> Pilih Keperluan</label>
 <select id="kategoriKonsultasi" required class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 font-bold text-slate-100 transition-all duration-200 focus:scale-[1.02]">
 <option value="" disabled selected>Pilih Keperluan:</option>
 <option value="A. OBAT PKD">A. OBAT PKD</option>
@@ -582,20 +524,20 @@ box-sizing: border-box;
 </select>
 </div>
 <div>
-<label class="block text-xs font-black text-slate-200 mb-1">Isi Konsultasi / Keluhan</label>
+<label class="block text-xs font-black text-slate-200 mb-1"><i class="fas fa-comment-dots text-emerald-400 mr-1"></i> Isi Konsultasi / Keluhan</label>
 <textarea id="isiKonsultasi" rows="4" required placeholder="Tuliskan detail pertanyaan atau keluhan Anda..." class="w-full px-3 py-2 text-xs border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-900 text-slate-100 placeholder-slate-500 transition-all duration-200 focus:scale-[1.02]"></textarea>
 </div>
 
-<button type="submit" id="btnKirimKonsul" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 rounded-xl text-xs shadow-md flex items-center justify-center gap-2 btn-animasi">
-<span><i class="fas fa-paper-plane mr-1"></i> Kirim Konsultasi ke Sistem & WhatsApp</span>
-<span>→</span>
+<button type="submit" id="btnKirimKonsul" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 rounded-xl text-xs shadow-md flex items-center justify-center gap-2 btn-animasi btn-shimmer">
+<span><i class="fas fa-paper-plane mr-1 bergerak-rocket"></i> Kirim Konsultasi ke Sistem & WhatsApp</span>
+<span class="bergerak-bounce">→</span>
 </button>
 </form>
 </div>
 
 <div class="flex justify-end pt-2 animasi-masuk" style="animation-delay: 0.2s;">
 <button onclick="switchTab('index', event)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-black text-xs px-5 py-2.5 rounded-xl shadow-md inline-flex items-center gap-1.5 border border-slate-700 btn-animasi">
-<i class="fas fa-arrow-left"></i> Kembali
+<i class="fas fa-arrow-left bergerak-bounce"></i> Kembali
 </button>
 </div>
 </div>
@@ -608,24 +550,24 @@ box-sizing: border-box;
 <!-- MODAL NOMOR ANTRIAN SUKSES -->
 <div id="modalAntrianSukses" class="modal-custom hidden-custom fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
   <div class="modal-content-custom bg-slate-900 rounded-3xl shadow-2xl border border-slate-700 max-w-sm w-full p-6 text-center space-y-5">
-    <div class="w-16 h-16 bg-emerald-600/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner font-black border border-emerald-500/30 animasi-bounce-in icon-glow">
+    <div class="w-16 h-16 bg-emerald-600/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner font-black border border-emerald-500/30 animasi-bounce-in icon-glow-pulse">
       <i class="fas fa-check"></i>
     </div>
     <div class="space-y-1">
-      <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase rounded-full tracking-wider border border-emerald-500/30">
+      <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase rounded-full tracking-wider border border-emerald-500/30 inline-block bergerak-pulse">
         Registrasi Berhasil
       </span>
       <h3 class="text-lg font-black text-slate-100 uppercase tracking-tight mt-1">Nomor Antrian Anda</h3>
       <p class="text-xs text-slate-300 font-medium">Tunjukkan nomor antrian ini kepada petugas UPTD Farmasi.</p>
     </div>
 
-    <div class="bg-slate-800 border border-emerald-500/40 py-4 px-6 rounded-2xl shadow-sm animasi-pop">
+    <div class="bg-slate-800 border border-emerald-500/40 py-4 px-6 rounded-2xl shadow-sm animasi-pop bergerak-glow">
       <span id="txtNomorAntrianModal" class="text-3xl font-black text-emerald-400 tracking-wider">T-001</span>
     </div>
 
     <div class="space-y-2 pt-2">
-      <button onclick="tutupModalAntrianDanKeTamu()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 rounded-xl text-xs shadow-lg btn-animasi">
-        <i class="fas fa-ticket mr-1"></i> Lihat Status & Menu Tamu
+      <button onclick="tutupModalAntrianDanKeTamu()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 rounded-xl text-xs shadow-lg btn-animasi btn-shimmer">
+        <i class="fas fa-ticket mr-1 bergerak-bounce"></i> Lihat Status & Menu Tamu
       </button>
     </div>
   </div>
@@ -635,8 +577,8 @@ box-sizing: border-box;
 <div id="modalKonsultasiSukses" class="modal-custom hidden-custom fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
   <div class="modal-content-custom bg-slate-900 rounded-3xl shadow-2xl border border-slate-700 max-w-md w-full overflow-hidden">
     
-    <div class="bg-gradient-to-r from-emerald-600 to-teal-700 px-6 py-5 text-center">
-      <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-white/40 animasi-bounce-in icon-glow">
+    <div class="bg-gradient-to-r from-emerald-600 to-teal-700 px-6 py-5 text-center header-gradient">
+      <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-white/40 animasi-bounce-in icon-glow-pulse">
         <i class="fas fa-check text-white text-2xl"></i>
       </div>
       <h3 class="text-lg font-black text-white uppercase tracking-wide">Konsultasi Terkirim!</h3>
@@ -646,7 +588,7 @@ box-sizing: border-box;
     <div class="p-6 space-y-4">
       <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 space-y-2.5">
         <p class="text-[11px] text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
-          <i class="fas fa-info-circle text-emerald-400"></i> Ringkasan Pengiriman
+          <i class="fas fa-info-circle text-emerald-400 bergerak-pulse"></i> Ringkasan Pengiriman
         </p>
         <div class="space-y-1.5 text-xs">
           <div class="flex justify-between items-center">
@@ -664,9 +606,9 @@ box-sizing: border-box;
         </div>
       </div>
 
-      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-3.5">
+      <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-3.5 bergerak-pulse">
         <p class="text-[11px] text-emerald-300 font-medium leading-relaxed text-center">
-          <i class="fas fa-bell mr-1"></i>
+          <i class="fas fa-bell mr-1 bergerak-blink"></i>
           Sistem akan membuka WhatsApp untuk mengirim detail keluhan ke petugas penanggung jawab.
         </p>
       </div>
@@ -675,8 +617,8 @@ box-sizing: border-box;
         <button onclick="tutupModalKonsultasi()" class="flex-1 bg-slate-700 hover:bg-slate-600 text-slate-100 font-bold py-3 rounded-xl text-xs btn-animasi">
           <i class="fas fa-times mr-1"></i> Tutup
         </button>
-        <button onclick="kirimKonsultasiKeWA()" class="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-3 rounded-xl text-xs shadow-lg btn-animasi">
-          <i class="fab fa-whatsapp mr-1"></i> Kirim ke WhatsApp
+        <button onclick="kirimKonsultasiKeWA()" class="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-3 rounded-xl text-xs shadow-lg btn-animasi btn-shimmer">
+          <i class="fab fa-whatsapp mr-1 bergerak-bounce"></i> Kirim ke WhatsApp
         </button>
       </div>
     </div>
@@ -720,13 +662,7 @@ let userLng = null;
 let userDistance = null;
 let isWithinRadius = false;
 
-let dataKonsultasiTerakhir = {
-  nama: '',
-  instansi: '',
-  kontak: '',
-  kategori: '',
-  isi: ''
-};
+let dataKonsultasiTerakhir = { nama: '', instansi: '', kontak: '', kategori: '', isi: '' };
 
 window.mulaiIsiSurvey = function(event) {
   sessionStorage.setItem('sedang_isi_survei', 'true');
@@ -734,7 +670,7 @@ window.mulaiIsiSurvey = function(event) {
   if (btnManual) {
     btnManual.disabled = false;
     btnManual.classList.remove('bg-slate-800/50', 'text-slate-500', 'border-slate-700', 'cursor-not-allowed');
-    btnManual.classList.add('bg-slate-800', 'hover:bg-slate-700', 'text-emerald-400', 'border-emerald-500/40', 'cursor-pointer', 'shadow-md', 'animasi-pop');
+    btnManual.classList.add('bg-slate-800', 'hover:bg-slate-700', 'text-emerald-400', 'border-emerald-500/40', 'cursor-pointer', 'shadow-md', 'animasi-pop', 'btn-shimmer');
   }
   window.open("https://docs.google.com/forms/d/e/1FAIpQLSexxMw_FdW-XT6yTyiPUVnpFyKf_j01-4lk-JmiQRrT3IC04A/viewform", "_blank");
 };
@@ -761,7 +697,7 @@ window.switchTab = function(tabName, event) {
     targetPage.classList.remove('hidden-custom');
     targetPage.style.animation = 'none';
     void targetPage.offsetWidth;
-    targetPage.style.animation = 'fadeInUp 0.4s ease-out both';
+    targetPage.style.animation = 'fadeInUp 0.5s ease-out both';
   }
 
   const mTitle = document.getElementById('mobileHeaderTitle');
@@ -844,11 +780,11 @@ function initGPS() {
         if (userDistance <= MAX_RADIUS) {
           isWithinRadius = true;
           statusBox.className = "gps-valid bg-emerald-500/10 border border-emerald-500/30 p-3 rounded-xl text-[11px] text-emerald-400 font-black";
-          statusBox.innerHTML = `<i class="fas fa-circle-check mr-1"></i> Lokasi Valid! Anda berada dalam radius kantor (${Math.round(userDistance)} meter dari UPTD Farmasi).`;
+          statusBox.innerHTML = `<i class="fas fa-circle-check mr-1 bergerak-pulse"></i> Lokasi Valid! Anda berada dalam radius kantor (${Math.round(userDistance)} meter dari UPTD Farmasi).`;
         } else {
           isWithinRadius = false;
           statusBox.className = "gps-invalid bg-red-500/10 border border-red-500/30 p-3 rounded-xl text-[11px] text-red-400 font-black";
-          statusBox.innerHTML = `<i class="fas fa-circle-xmark mr-1"></i> Anda berada di luar radius layanan (${Math.round(userDistance)} meter). Maksimal jarak registrasi adalah ${MAX_RADIUS} meter.`;
+          statusBox.innerHTML = `<i class="fas fa-circle-xmark mr-1 bergerak-pulse"></i> Anda berada di luar radius layanan (${Math.round(userDistance)} meter). Maksimal jarak registrasi adalah ${MAX_RADIUS} meter.`;
         }
       }
     },
@@ -856,7 +792,7 @@ function initGPS() {
       isWithinRadius = false;
       if(statusBox) {
         statusBox.className = "gps-invalid bg-red-500/10 border border-red-500/30 p-3 rounded-xl text-[11px] text-red-400 font-black";
-        statusBox.innerHTML = "<i class='fas fa-circle-xmark mr-1'></i> Lokasi wajib diaktifkan. Registrasi hanya dapat dilakukan dalam radius 100 meter dari UPTD Farmasi.";
+        statusBox.innerHTML = "<i class='fas fa-circle-xmark mr-1 bergerak-pulse'></i> Lokasi wajib diaktifkan. Registrasi hanya dapat dilakukan dalam radius 100 meter dari UPTD Farmasi.";
       }
     },
     { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
@@ -984,7 +920,7 @@ if(formReg) {
     } finally {
       btn.disabled = false;
       btn.classList.remove('btn-loading');
-      btn.innerHTML = "<i class='fas fa-paper-plane mr-1'></i> Kirim Registrasi Kunjungan";
+      btn.innerHTML = "<i class='fas fa-paper-plane mr-1 bergerak-rocket'></i> Kirim Registrasi Kunjungan";
     }
   });
 }
@@ -1038,7 +974,7 @@ if (formKonsul) {
       if (btnKonsul) {
         btnKonsul.disabled = false;
         btnKonsul.classList.remove('btn-loading');
-        btnKonsul.innerHTML = "<span><i class='fas fa-paper-plane mr-1'></i> Kirim Konsultasi ke Sistem & WhatsApp</span><span>→</span>";
+        btnKonsul.innerHTML = "<span><i class='fas fa-paper-plane mr-1 bergerak-rocket'></i> Kirim Konsultasi ke Sistem & WhatsApp</span><span class='bergerak-bounce'>→</span>";
       }
     }
   });
@@ -1059,7 +995,7 @@ onSnapshot(query(collection(db, "tamu"), orderBy("waktu", "desc")), (snapshot) =
   container.innerHTML = "";
 
   if (snapshot.empty) {
-    container.innerHTML = `<div class="bg-slate-800/80 p-6 rounded-2xl shadow-sm border border-slate-700 text-center text-xs text-slate-300 font-medium animasi-fade"><i class="fas fa-inbox mr-1"></i> Belum ada riwayat registrasi yang tercatat di sistem.</div>`;
+    container.innerHTML = `<div class="bg-slate-800/80 p-6 rounded-2xl shadow-sm border border-slate-700 text-center text-xs text-slate-300 font-medium animasi-fade"><i class="fas fa-inbox mr-1 bergerak-bounce"></i> Belum ada riwayat registrasi yang tercatat di sistem.</div>`;
     return;
   }
 
@@ -1081,10 +1017,10 @@ onSnapshot(query(collection(db, "tamu"), orderBy("waktu", "desc")), (snapshot) =
       if (!isNaN(selesai) && !isNaN(proses)) durasi = Math.max(0, Math.round((selesai - proses) / 60000)) + " Menit";
     }
 
-    let statusColor = "bg-amber-500/20 text-amber-300 border-amber-500/40";
+    let statusColor = "bg-amber-500/20 text-amber-300 border-amber-500/40 bergerak-pulse";
     let statusText = item.status || "Menunggu";
     const statusLower = String(statusText).toLowerCase();
-    if (statusLower.includes("proses")) { statusColor = "bg-blue-500/20 text-blue-300 border-blue-500/40"; }
+    if (statusLower.includes("proses")) { statusColor = "bg-blue-500/20 text-blue-300 border-blue-500/40 bergerak-pulse"; }
     else if (statusLower.includes("selesai")) { statusColor = "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"; }
 
     let itemsObatArr = [];
@@ -1110,7 +1046,7 @@ onSnapshot(query(collection(db, "tamu"), orderBy("waktu", "desc")), (snapshot) =
 
     const card = document.createElement("div");
     card.className = "kartu-tamu bg-slate-800/80 p-5 rounded-2xl shadow-md border border-slate-700/60 space-y-3.5 animasi-masuk";
-    card.style.animationDelay = `${cardIndex * 0.08}s`;
+    card.style.animationDelay = `${cardIndex * 0.1}s`;
     card.id = `card-tamu-${docId}`;
 
     let bagianObatHtml = '';
@@ -1119,14 +1055,14 @@ onSnapshot(query(collection(db, "tamu"), orderBy("waktu", "desc")), (snapshot) =
       normalizedData.itemsObat.forEach((ob, idx) => {
         rowsHtml += `<tr class="border-b border-slate-700 text-[10px] text-slate-200 transition-colors hover:bg-slate-800"> <td class="border border-slate-700 p-1 text-center">${idx + 1}</td> <td class="border border-slate-700 p-1 font-bold">${ob.nama || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.tahun || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.satuan || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.volume || '-'}</td> <td class="border border-slate-700 p-1 text-center">${ob.ed || '-'}</td> <td class="border border-slate-700 p-1 text-center font-mono">${ob.batch || '-'}</td> </tr>`;
       });
-      bagianObatHtml = `<div class="border-t border-slate-700 pt-2.5 space-y-1.5"> <p class="text-[11px] text-slate-100 font-black flex items-center gap-1.5"><i class="fas fa-boxes-stacked"></i> Tabel Rincian Obat / Barang:</p> <div class="overflow-x-auto rounded-xl border border-slate-700"> <table class="w-full text-left border-collapse text-[10px] bg-slate-900"> <thead> <tr class="bg-emerald-800 text-center font-bold text-[9px] uppercase text-white"> <th class="border border-slate-700 p-1 w-6">No</th> <th class="border border-slate-700 p-1">Nama Barang</th> <th class="border border-slate-700 p-1 w-12">Tahun</th> <th class="border border-slate-700 p-1 w-12">Satuan</th> <th class="border border-slate-700 p-1 w-10">Vol</th> <th class="border border-slate-700 p-1 w-12">Ed</th> <th class="border border-slate-700 p-1 w-16">No Batch</th> </tr> </thead> <tbody> ${rowsHtml} </tbody> </table> </div> </div>`;
+      bagianObatHtml = `<div class="border-t border-slate-700 pt-2.5 space-y-1.5"> <p class="text-[11px] text-slate-100 font-black flex items-center gap-1.5"><i class="fas fa-boxes-stacked bergerak-bounce"></i> Tabel Rincian Obat / Barang:</p> <div class="overflow-x-auto rounded-xl border border-slate-700"> <table class="w-full text-left border-collapse text-[10px] bg-slate-900"> <thead> <tr class="bg-emerald-800 text-center font-bold text-[9px] uppercase text-white"> <th class="border border-slate-700 p-1 w-6">No</th> <th class="border border-slate-700 p-1">Nama Barang</th> <th class="border border-slate-700 p-1 w-12">Tahun</th> <th class="border border-slate-700 p-1 w-12">Satuan</th> <th class="border border-slate-700 p-1 w-10">Vol</th> <th class="border border-slate-700 p-1 w-12">Ed</th> <th class="border border-slate-700 p-1 w-16">No Batch</th> </tr> </thead> <tbody> ${rowsHtml} </tbody> </table> </div> </div>`;
     } else {
-      bagianObatHtml = `<div class="bg-slate-900 p-3 rounded-xl border border-slate-700 text-[10px] space-y-1"> <p class="text-slate-100 font-black flex items-center gap-1.5"><i class="fas fa-pills"></i> Obat yang Diterima:</p> <p class="text-slate-300 whitespace-pre-line font-medium">${normalizedData.obatTerimaFormatted}</p> </div>`;
+      bagianObatHtml = `<div class="bg-slate-900 p-3 rounded-xl border border-slate-700 text-[10px] space-y-1"> <p class="text-slate-100 font-black flex items-center gap-1.5"><i class="fas fa-pills bergerak-bounce"></i> Obat yang Diterima:</p> <p class="text-slate-300 whitespace-pre-line font-medium">${normalizedData.obatTerimaFormatted}</p> </div>`;
     }
 
     let fileLampiranHtml = '';
     if (fileLink && fileLink.length > 0) {
-      fileLampiranHtml = `<div class="pt-1"> <span class="inline-flex items-center gap-1.5 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-sm"><i class="fas fa-paperclip"></i> Tamu telah melampirkan surat permintaan</span> </div>`;
+      fileLampiranHtml = `<div class="pt-1"> <span class="inline-flex items-center gap-1.5 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-sm"><i class="fas fa-paperclip bergerak-bounce"></i> Tamu telah melampirkan surat permintaan</span> </div>`;
     }
 
     let downloadBtnHtml = `<span class="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20"><i class="fas fa-sync-alt fa-spin mr-1"></i> Pembaruan realtime aktif</span>`;
@@ -1136,7 +1072,7 @@ onSnapshot(query(collection(db, "tamu"), orderBy("waktu", "desc")), (snapshot) =
       <div class="space-y-1">
         <div class="flex items-center gap-2">
           <span class="bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-black px-2.5 py-1 rounded-xl shadow-sm tracking-wider">
-            <i class="fas fa-ticket mr-1"></i> ${normalizedData.nomorAntrian || '-'}
+            <i class="fas fa-ticket mr-1 bergerak-bounce"></i> ${normalizedData.nomorAntrian || '-'}
           </span>
           <h3 class="font-black text-sm text-slate-100 uppercase tracking-tight">${normalizedData.nama}</h3>
         </div>
